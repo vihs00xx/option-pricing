@@ -27,4 +27,4 @@ Close each plot window to let the script continue.
 - Indian market-data case study
 - Multi-asset basket options
 
-Completed experiments and measured results will be added as the project develops.
+
