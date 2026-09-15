@@ -1,0 +1,452 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+
+\setlength{\parindent}{1.5em}
+\setlength{\parskip}{0.25em}
+\emergencystretch=2em
+
+\title{A Comparative Study of Classical Numerical Methods,\\
+Physics-Informed Neural Networks, and DeepONets\\
+for Option Pricing and Sensitivity Analysis}
+
+% Replace these placeholders before submission.
+\author{Student Name\\Department Name\\Institution Name}
+\date{September 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This project proposes a comparative study of classical numerical
+methods, physics-informed neural networks (PINNs), and deep operator
+networks (DeepONets) for option valuation and sensitivity analysis.
+The study combines controlled Black--Scholes benchmarks with an
+empirical case study using Indian equity and derivatives data.
+The first stage considers single-asset European options, comparing
+Monte Carlo simulation, the Crank--Nicolson finite-difference method,
+PINNs, and DeepONets against the analytical solution. Evaluation
+will cover pricing and Greek errors, computational cost, training
+reliability, repeated valuation, and generalisation across
+moneyness, maturity, volatility, and interest rates. Calibration
+experiments will examine parameter recovery from synthetic
+observations and pricing on held-out market observations.
+Model-generated solutions will provide labelled training data
+where required, while physics-informed models will use the
+governing equation, terminal payoff, and boundary conditions as
+training constraints. The second stage considers basket options
+on up to five correlated assets, with historical stock returns
+informing volatility and correlation inputs. Asset dimension,
+correlation structure, and basket weights will also vary.
+Monte Carlo with variance reduction and randomised quasi-Monte
+Carlo will provide numerical baselines. Analytical geometric
+basket values and independent simulation estimates will support
+validation. Training, data-generation, and evaluation costs will
+be reported separately, and numerical approximation error will
+be distinguished from disagreement with observed market prices.
+The objective is to identify when neural methods offer useful
+computational benefits and when established methods remain
+more effective.
+\end{abstract}
+
+\noindent\textbf{Keywords:}
+Black--Scholes equation; option pricing; physics-informed neural
+networks; DeepONet; Monte Carlo; Greeks; basket options;
+parameter calibration.
+
+\section{Introduction}
+
+Option pricing connects financial modelling with numerical
+computation. An option's value depends on its contractual payoff
+and the uncertain evolution of its underlying assets. The
+Black--Scholes framework relates these quantities through
+no-arbitrage and dynamic hedging
+\cite{black1973,merton1973}. Although its assumptions simplify
+market behaviour, the availability of analytical solutions and
+well-established numerical methods makes it a useful setting
+for evaluating alternative computational approaches.
+
+For a European option on a non-dividend-paying asset, the
+price \(V(S,t)\) satisfies
+\begin{equation}
+    \frac{\partial V}{\partial t}
+    + \frac{1}{2}\sigma^2 S^2
+      \frac{\partial^2 V}{\partial S^2}
+    + rS\frac{\partial V}{\partial S}
+    - rV = 0,
+    \label{eq:bs}
+\end{equation}
+where \(S\) is the asset price, \(t\) is time, \(r\) is the
+risk-free interest rate, and \(\sigma\) is volatility.
+For a European call with strike \(K\) and expiry \(T\),
+the terminal condition is
+\begin{equation}
+    V(S,T)=\max(S-K,0).
+    \label{eq:call_payoff}
+\end{equation}
+Under the same assumptions, the option value is the discounted
+expected payoff under the risk-neutral probability measure.
+The PDE and expectation formulations therefore support
+different computational approaches to the same pricing problem.
+
+Finite-difference methods approximate the pricing equation on
+a spatial and temporal grid. Monte Carlo methods instead
+estimate the expectation from simulated asset values
+\cite{glasserman2004}. The analytical Black--Scholes formula
+provides an independent reference for single-asset European
+options, allowing numerical errors to be measured directly.
+An isolated valuation in this setting does not require a neural
+approximation. The motivation for investigating neural methods
+lies in broader tasks, including sensitivity analysis, repeated
+evaluation across related problems, parameter calibration,
+and extensions involving several correlated assets.
+
+A physics-informed neural network approximates the option
+value by \(V_{\theta}(S,t)\), where \(\theta\) denotes its
+trainable parameters. Its loss penalises violations of the
+pricing equation, terminal payoff, and boundary conditions
+\cite{raissi2019}. Points sampled from the input domain,
+known as collocation points, specify where these constraints
+are evaluated. They do not require labelled option prices.
+Automatic differentiation supplies the derivatives needed
+for the PDE residual and the calculation of Greeks.
+
+DeepONets provide an architecture for operator learning.
+Their branch and trunk networks encode an input function
+and the coordinates of the corresponding output function
+\cite{lu2021}. In this study, the architecture will be used
+with suitable representations of payoffs and model parameters
+to approximate families of price functions. A parameter-conditioned
+PINN can also learn across several parameter settings, so
+repeated use is not exclusive to DeepONet. Furthermore,
+physics-informed constraints can be incorporated into
+DeepONet training \cite{wang2021deeponet}. The comparison
+will distinguish the network architecture from its training
+objective and the information supplied during training.
+
+The role of training data consequently differs between
+methods. Classical solvers require model inputs but no
+training dataset. A supervised DeepONet requires examples
+of pricing problems and their solution values, which can
+be generated analytically in one dimension or numerically
+for basket options. Physics-informed training uses the
+equation and its conditions, with observed prices added
+where a data-assisted or calibration experiment requires
+them. Data-generation costs will be included whenever
+numerical solutions are used as training labels.
+
+The project will combine model-generated benchmarks with
+an empirical case study based on Indian market data.
+Historical equity prices and option-contract records will
+be sourced from NSE or BSE, subject to suitable coverage
+and data quality \cite{nseData,bseData}. The initial empirical
+study will focus on one exchange and one underlying with
+adequate option observations across strikes, maturities,
+and dates. Historical stock prices will inform estimates
+of return variability, while actual option observations
+will support calibration and market-price evaluation.
+These data have different roles: a stock-price history
+does not itself provide labelled option values.
+
+The market dataset will require consistent records of
+underlying prices, option prices, strikes, expiries, and
+contract types. Liquidity information will support the
+filtering of unreliable observations. Where bid and ask
+quotes are available, their spread will help assess
+observation quality. End-of-day records will be examined
+for possible timing differences between underlying and
+option prices. Interest rates, dividends, corporate actions,
+and contract specifications will also be considered when
+preparing model inputs.
+
+In particular, the non-dividend assumption in
+Equation~\eqref{eq:bs} will not be applied to empirical
+contracts without examining its suitability. If a constant
+continuous dividend yield \(q\) is used, the drift coefficient
+in the pricing PDE becomes \(r-q\). The same dividend
+treatment and input conventions will be used across the
+compared methods.
+
+Controlled benchmarks and market observations answer
+different questions. Benchmarks establish whether a
+method accurately solves the selected pricing model.
+Market observations assess how well that model, together
+with its estimated parameters, describes traded prices.
+For a numerical estimate \(\widehat{V}\), these differences
+can be written as
+\begin{align}
+    e_{\mathrm{num}}
+    &= \widehat{V}-V_{\mathrm{model}},
+    \label{eq:numerical_error}\\
+    e_{\mathrm{market}}
+    &= \widehat{V}-V_{\mathrm{observed}}.
+    \label{eq:market_error}
+\end{align}
+The market discrepancy includes effects beyond numerical
+approximation, such as model assumptions, parameter
+estimation, and observation quality. A smaller PDE
+residual therefore does not necessarily imply closer
+agreement with market prices.
+
+Calibration will first be tested using synthetic prices
+generated from known parameters. The initial task will
+recover volatility while holding the remaining inputs
+fixed, followed by experiments with perturbed observations.
+The empirical study will then use designated calibration
+observations and evaluate prices on held-out contracts
+or later dates. Parameter estimation will use only
+information available at the relevant evaluation date.
+A quote used to infer its own implied volatility will
+not also be treated as independent evidence of pricing
+accuracy. Historical volatility estimates and option-implied
+volatility will be identified separately.
+
+Sensitivity analysis will accompany the pricing comparison.
+Delta and Gamma describe the first and second derivatives
+with respect to the underlying price, while Vega, Theta,
+and Rho measure dependence on volatility, time, and the
+interest rate. These quantities may be inaccurate even
+when price errors are small. Automatic differentiation
+evaluates derivatives of the learned approximation and
+does not guarantee agreement with the true sensitivities.
+Since market Greeks are not directly observed reference
+values, their accuracy will be assessed primarily using
+analytical or independently validated numerical benchmarks.
+
+Particular attention will be given to the strike region
+near expiry, where the terminal payoff produces sharp
+changes in derivatives. The finite-difference implementation
+will include appropriate treatment of the payoff and
+initial time steps \cite{pooley2003}. Greek evaluation
+will distinguish positive time to expiry from the payoff
+at expiry, where some derivatives are not defined at
+the strike.
+
+For PINNs, controlled experiments will compare uniform
+and concentrated collocation sampling, as well as fixed
+and adaptive loss weighting. These choices are motivated
+by known difficulties in balancing equation and boundary
+losses and in optimising PINN approximations
+\cite{krishnapriyan2021,wang2021gradients}.
+Price errors, Greek errors, and constraint violations
+will be measured on points independent of the training
+samples. Individual training modifications will be tested
+before their combined effect is assessed.
+
+Repeated pricing experiments will investigate whether
+the initial cost of a neural model can be recovered
+through subsequent evaluations. Training and data generation
+will be reported separately from inference, and comparisons
+will account for reuse by classical methods, including
+interpolation from computed price surfaces. Generalisation
+will be measured on parameter combinations excluded from
+training, with interpolation within the training range
+distinguished from extrapolation beyond it. For models
+trained on a fixed parameter setting, the cost of retraining
+will be included when the problem changes.
+
+The multidimensional stage considers European basket
+options on correlated assets. For \(N\) non-dividend-paying
+assets, the pricing equation is
+\begin{equation}
+    \frac{\partial V}{\partial t}
+    + \frac{1}{2}
+      \sum_{i=1}^{N}\sum_{j=1}^{N}
+      \rho_{ij}\sigma_i\sigma_j S_iS_j
+      \frac{\partial^2 V}{\partial S_i\partial S_j}
+    + r\sum_{i=1}^{N}S_i\frac{\partial V}{\partial S_i}
+    - rV = 0,
+    \label{eq:multi_bs}
+\end{equation}
+where \(\sigma_i\) is the volatility of asset \(i\), and
+\(\rho_{ij}\) is the correlation between the Brownian
+drivers of assets \(i\) and \(j\). An arithmetic basket
+call has payoff
+\begin{equation}
+    V(\mathbf{S},T)
+    =
+    \max\left(\sum_{i=1}^{N}w_iS_i(T)-K,0\right),
+    \qquad
+    w_i\geq0,\qquad
+    \sum_{i=1}^{N}w_i=1.
+    \label{eq:basket_payoff}
+\end{equation}
+Dividend adjustments will be incorporated consistently
+when required by the empirical inputs.
+
+The principal basket case will use five stocks, with
+two- and three-asset cases providing intermediate
+comparisons. Aligned, corporate-action-adjusted return
+histories will inform volatility and correlation estimates.
+These estimates provide empirically motivated scenarios;
+they will not be presented as automatically calibrated
+risk-neutral parameters. Unless observations for the exact
+basket contract are available, this experiment represents
+a hypothetical derivative constructed from real underlying
+assets rather than a direct validation against a traded
+basket-option price.
+
+Classical multidimensional pricing methods exist, but
+a full grid with \(m\) points per asset contains \(m^N\)
+spatial points. This limits direct extensions of the
+one-dimensional solver. Monte Carlo with variance reduction
+and randomised quasi-Monte Carlo will therefore provide
+the principal basket baselines. Analytical geometric
+basket values will support validation and control-variate
+construction, while arithmetic basket references will
+be computed independently with statistical uncertainty
+reported \cite{glasserman2004}. Reference sensitivities
+will also require separate error checks.
+
+Neural methods avoid explicitly constructing a full
+spatial grid, but this does not remove all dimensional
+difficulties. Sampling, training, and evaluating the mixed
+derivatives in Equation~\eqref{eq:multi_bs} may still
+become expensive. The experiments will therefore report
+performance over the tested dimensions without assuming
+that results at five assets establish general
+high-dimensional scalability.
+
+The financial inputs will vary across moneyness \(S/K\),
+time to maturity \(\tau=T-t\), volatility \(\sigma\),
+and the risk-free interest rate \(r\). Single-asset tests
+will cover European calls and puts in out-of-the-money,
+at-the-money, and in-the-money regions. Parameter ranges
+for the controlled benchmarks will be specified before
+evaluation and informed by the market-data preparation
+stage. In basket experiments, the number of assets,
+individual volatilities, correlation structure, and
+basket weights will also vary. All correlation matrices
+will be constrained to be valid.
+
+Performance will be assessed using root-mean-square
+and maximum absolute pricing errors, together with
+errors in Delta, Gamma, Vega, Theta, and Rho.
+The basket study will prioritise asset-wise Delta,
+diagonal Gamma, and selected cross-Gamma terms.
+Relative errors will be reported only where reference
+values are sufficiently far from zero. Separate
+measurements will cover training and data-generation
+time, price and Greek evaluation time, memory use,
+and total cost for repeated queries. Calibration will
+be evaluated through parameter recovery, held-out
+pricing error, and sensitivity to observation noise.
+
+Numerical and training settings will be varied
+separately from financial inputs. These include
+grid resolution for Crank--Nicolson, sample count
+for Monte Carlo, and collocation count, sampling
+strategy, loss weighting, and training budget for
+the neural methods. Controlled changes to these
+settings will establish convergence behaviour and
+help identify the source of observed improvements.
+Repeated training runs will measure variability,
+and financial consistency checks will examine
+applicable price bounds, put--call parity,
+monotonicity, and convexity.
+
+The intended contribution is a reproducible comparison
+that connects controlled numerical validation with
+an Indian-market application. Its conclusions will
+address when neural methods justify their training
+costs, how reliably they produce sensitivities and
+calibrated prices, and how their performance changes
+across the tested asset dimensions. The study will
+report both successful approximations and observed
+limitations, with comparisons made at similar accuracy
+wherever possible.
+
+\begin{thebibliography}{99}
+
+\bibitem{black1973}
+F. Black and M. Scholes,
+``The pricing of options and corporate liabilities,''
+\textit{Journal of Political Economy},
+vol.~81, no.~3, pp.~637--654, 1973.
+\url{https://doi.org/10.1086/260062}
+
+\bibitem{merton1973}
+R. C. Merton,
+``Theory of rational option pricing,''
+\textit{The Bell Journal of Economics and Management Science},
+vol.~4, no.~1, pp.~141--183, 1973.
+\url{https://doi.org/10.2307/3003143}
+
+\bibitem{glasserman2004}
+P. Glasserman,
+\textit{Monte Carlo Methods in Financial Engineering}.
+New York: Springer, 2004.
+\url{https://doi.org/10.1007/978-0-387-21617-1}
+
+\bibitem{raissi2019}
+M. Raissi, P. Perdikaris, and G. E. Karniadakis,
+``Physics-informed neural networks: A deep learning framework
+for solving forward and inverse problems involving nonlinear
+partial differential equations,''
+\textit{Journal of Computational Physics},
+vol.~378, pp.~686--707, 2019.
+\url{https://doi.org/10.1016/j.jcp.2018.10.045}
+
+\bibitem{lu2021}
+L. Lu, P. Jin, G. Pang, Z. Zhang, and G. E. Karniadakis,
+``Learning nonlinear operators via DeepONet based on the
+universal approximation theorem of operators,''
+\textit{Nature Machine Intelligence},
+vol.~3, pp.~218--229, 2021.
+\url{https://doi.org/10.1038/s42256-021-00302-5}
+
+\bibitem{wang2021deeponet}
+S. Wang, H. Wang, and P. Perdikaris,
+``Learning the solution operator of parametric partial
+differential equations with physics-informed DeepONets,''
+\textit{Science Advances},
+vol.~7, no.~40, article eabi8605, 2021.
+\url{https://doi.org/10.1126/sciadv.abi8605}
+
+\bibitem{krishnapriyan2021}
+A. S. Krishnapriyan, A. Gholami, S. Zhe,
+R. M. Kirby, and M. W. Mahoney,
+``Characterizing possible failure modes in physics-informed
+neural networks,''
+\textit{Advances in Neural Information Processing Systems},
+vol.~34, pp.~26548--26560, 2021.
+\url{https://arxiv.org/abs/2109.01050}
+
+\bibitem{wang2021gradients}
+S. Wang, Y. Teng, and P. Perdikaris,
+``Understanding and mitigating gradient flow pathologies
+in physics-informed neural networks,''
+\textit{SIAM Journal on Scientific Computing},
+vol.~43, no.~5, pp.~A3055--A3081, 2021.
+\url{https://doi.org/10.1137/20M1318043}
+
+\bibitem{pooley2003}
+D. M. Pooley, K. R. Vetzal, and P. A. Forsyth,
+``Convergence remedies for non-smooth payoffs in option pricing,''
+\textit{Journal of Computational Finance},
+vol.~6, no.~4, pp.~25--40, 2003.
+\url{https://cs.uwaterloo.ca/~paforsyt/report.pdf}
+
+\bibitem{nseData}
+National Stock Exchange of India,
+``Historical reports and equity derivatives reports.''
+Online data resources.
+\url{https://www.nseindia.com/static/resources/historical-reports-capital-market-daily-monthly-archives}
+and
+\url{https://www.nseindia.com/all-reports-derivatives}
+
+\bibitem{bseData}
+BSE Limited,
+``Information products: Domestic tariff sheet.''
+Online information on market-data products.
+\url{https://www.bseindia.com/downloads1/Information_Products_Pricing_Sheet.pdf}
+
+\end{thebibliography}
+\end{document}
