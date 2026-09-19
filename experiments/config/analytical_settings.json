@@ -1,0 +1,22 @@
+{
+  "units": {
+    "time": "years",
+    "rates_and_volatility": "decimal",
+    "vega_and_rho": "per unit change in decimal input",
+    "theta": "per year of calendar time"
+  },
+  "base_case": {
+    "S": 100.0,
+    "K": 100.0,
+    "tau": 1.0,
+    "r": 0.05,
+    "sigma": 0.2,
+    "q": 0.0
+  },
+  "reference_grid": {
+    "S": [80.0, 100.0, 120.0],
+    "tau": [0.1, 0.5, 1.0],
+    "sigma": [0.1, 0.2, 0.4],
+    "option": ["call", "put"]
+  }
+}
