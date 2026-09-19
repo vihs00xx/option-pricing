@@ -1,0 +1,94 @@
+{
+  "settings": {
+    "seed": 42,
+    "units": {
+      "time": "years",
+      "rates_and_volatility": "decimal",
+      "vega_and_rho": "per unit change in decimal input",
+      "theta": "per year of calendar time"
+    },
+    "base_case": {
+      "S": 100.0,
+      "K": 100.0,
+      "tau": 1.0,
+      "r": 0.05,
+      "sigma": 0.2,
+      "q": 0.0
+    },
+    "monte_carlo": {
+      "methods": [
+        "plain",
+        "antithetic",
+        "control",
+        "sobol"
+      ],
+      "budgets": [
+        2048,
+        8192,
+        32768
+      ],
+      "repetitions": 20,
+      "batch_size": 65536,
+      "pilot_budget_divisor": 8,
+      "n_scrambles": 8,
+      "cases": [
+        {
+          "name": "atm_call",
+          "inputs": {
+            "option": "call"
+          }
+        },
+        {
+          "name": "dividend_put",
+          "inputs": {
+            "option": "put",
+            "q": 0.03
+          }
+        },
+        {
+          "name": "otm_short_call",
+          "inputs": {
+            "option": "call",
+            "S": 90.0,
+            "tau": 0.25
+          }
+        }
+      ]
+    },
+    "reference_grid": {
+      "S": [
+        80.0,
+        100.0,
+        120.0
+      ],
+      "tau": [
+        0.1,
+        0.5,
+        1.0
+      ],
+      "sigma": [
+        0.1,
+        0.2,
+        0.4
+      ],
+      "option": [
+        "call",
+        "put"
+      ]
+    }
+  },
+  "total_runs": 720,
+  "versions": {
+    "python": "3.13.3",
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "matplotlib": "3.10.3"
+  },
+  "system": "Windows-11-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+  "timing": "Wall time per pricing call, including validation, RNG setup, pilot, payoff evaluation, and CI; excludes imports, warmup, analytical reference, and file output.",
+  "budget": "Total payoff evaluations, including control pilots, both members of each antithetic pair, and all Sobol scrambles.",
+  "uncertainty": "Approximate normal 95% intervals for pseudorandom estimators; Student-t intervals across independent Sobol scramble means. Coverage estimates from 20 repetitions are noisy.",
+  "memory": "Not measured. Pseudorandom methods batch observations; Sobol stores one scramble at a time.",
+  "scope": "Initial single-asset price experiment. Numerical Greeks, calibration, and basket comparisons are not included."
+}

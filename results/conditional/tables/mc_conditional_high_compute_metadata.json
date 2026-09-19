@@ -1,0 +1,9 @@
+{
+  "settings_sha256": "d7d690fd7fbdd14b5fc1f8a1647a5f2f5431350c8823b1ec658bc03c422f5dad",
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "numpy": "2.2.6",
+  "scipy": "1.15.3",
+  "cases": 12,
+  "repetitions_per_case": 128
+}

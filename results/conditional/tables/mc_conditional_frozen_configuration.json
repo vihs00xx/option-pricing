@@ -1,0 +1,142 @@
+{
+  "settings_sha256": "797de137bf5de618e4e7ffd6bf710ac1dae3971d532b30ce17b4d5c05f672c69",
+  "selection_rule": "Minimum geometric mean of quantity-normalized RMSE; control stage uses RMSE times sqrt(total sample count).",
+  "coverage_requirement": 0.85,
+  "selected": {
+    "conditional_fraction": 0.25,
+    "n_scrambles": 8,
+    "pilot_ratio_to_production": 0.5,
+    "method": "sobol_control"
+  },
+  "eligible": true,
+  "smoothing_scores": [
+    {
+      "score": 0.33755270069414367,
+      "configuration": [
+        0.25,
+        8,
+        0.0
+      ],
+      "eligible": true
+    },
+    {
+      "score": 0.7614673727275721,
+      "configuration": [
+        0.25,
+        16,
+        0.0
+      ],
+      "eligible": true
+    },
+    {
+      "score": 0.8389249158677942,
+      "configuration": [
+        0.5,
+        8,
+        0.0
+      ],
+      "eligible": true
+    },
+    {
+      "score": 1.1436914336974802,
+      "configuration": [
+        0.75,
+        8,
+        0.0
+      ],
+      "eligible": true
+    },
+    {
+      "score": 1.190057472621084,
+      "configuration": [
+        0.25,
+        32,
+        0.0
+      ],
+      "eligible": true
+    },
+    {
+      "score": 1.2631562747683238,
+      "configuration": [
+        0.5,
+        16,
+        0.0
+      ],
+      "eligible": true
+    },
+    {
+      "score": 1.4861627057739994,
+      "configuration": [
+        0.75,
+        16,
+        0.0
+      ],
+      "eligible": true
+    },
+    {
+      "score": 1.7299262180278536,
+      "configuration": [
+        0.5,
+        32,
+        0.0
+      ],
+      "eligible": true
+    },
+    {
+      "score": 2.022769216193493,
+      "configuration": [
+        0.75,
+        32,
+        0.0
+      ],
+      "eligible": true
+    }
+  ],
+  "control_scores": [
+    {
+      "score": 0.061039772968756144,
+      "configuration": [
+        0.25,
+        8,
+        0.5
+      ],
+      "eligible": true
+    },
+    {
+      "score": 0.1132483382613333,
+      "configuration": [
+        0.25,
+        8,
+        0.125
+      ],
+      "eligible": true
+    },
+    {
+      "score": 0.12480580766159492,
+      "configuration": [
+        0.25,
+        8,
+        0.25
+      ],
+      "eligible": true
+    },
+    {
+      "score": 0.2768491742163098,
+      "configuration": [
+        0.25,
+        8,
+        1.0
+      ],
+      "eligible": true
+    },
+    {
+      "score": 1.3683213381072568,
+      "configuration": [
+        0.25,
+        8,
+        0.0
+      ],
+      "eligible": true
+    }
+  ]
+}

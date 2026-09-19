@@ -1,0 +1,7 @@
+config,budget,peak_traced_bytes
+plain,131072,3673944
+antithetic,131072,4198120
+control_p8,131072,3019056
+antithetic_control_p16,131072,3936608
+sobol_r8,131072,923952
+sobol_control_r8,131072,465736

@@ -1,0 +1,14 @@
+{
+  "efficient_r8": {
+    "passed_pre_registered_screen": true,
+    "minimum_observed_coverage": 0.8671875,
+    "maximum_zero_standard_error_rate": 0.0,
+    "failures": []
+  },
+  "high_compute_r64": {
+    "passed_pre_registered_screen": true,
+    "minimum_observed_coverage": 0.8984375,
+    "maximum_zero_standard_error_rate": 0.0,
+    "failures": []
+  }
+}

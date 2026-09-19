@@ -1,0 +1,236 @@
+{
+  "settings": {
+    "seed": 20260916,
+    "budgets": [
+      2048,
+      8192,
+      32768,
+      131072
+    ],
+    "tuning_budgets": [
+      8192,
+      32768
+    ],
+    "tuning_repetitions": 16,
+    "evaluation_repetitions": 64,
+    "pilot_divisors": [
+      16,
+      8,
+      4
+    ],
+    "scramble_counts": [
+      8,
+      16,
+      32
+    ],
+    "absolute_price_targets": [
+      0.01,
+      0.001
+    ],
+    "minimum_coverage": 0.85,
+    "greek_tuning_repetitions": 32,
+    "greek_evaluation_repetitions": 32,
+    "greek_budget": 32768,
+    "greek_bumps": [
+      0.001,
+      0.005,
+      0.01
+    ],
+    "base": {
+      "S": 100.0,
+      "K": 100.0,
+      "tau": 1.0,
+      "r": 0.05,
+      "sigma": 0.2,
+      "q": 0.0,
+      "option": "call"
+    },
+    "tuning_cases": [
+      {
+        "name": "tune_atm",
+        "inputs": {}
+      },
+      {
+        "name": "tune_put",
+        "inputs": {
+          "option": "put",
+          "S": 110,
+          "q": 0.02
+        }
+      },
+      {
+        "name": "tune_short",
+        "inputs": {
+          "S": 95,
+          "tau": 0.08,
+          "sigma": 0.3
+        }
+      },
+      {
+        "name": "tune_low_vol",
+        "inputs": {
+          "S": 102,
+          "sigma": 0.08,
+          "tau": 0.5
+        }
+      },
+      {
+        "name": "tune_high_vol",
+        "inputs": {
+          "sigma": 0.6,
+          "tau": 2
+        }
+      },
+      {
+        "name": "tune_negative_rate",
+        "inputs": {
+          "option": "put",
+          "r": -0.02,
+          "q": 0.04
+        }
+      },
+      {
+        "name": "tune_itm",
+        "inputs": {
+          "S": 140,
+          "q": 0.03
+        }
+      },
+      {
+        "name": "tune_otm",
+        "inputs": {
+          "S": 80,
+          "tau": 0.5,
+          "sigma": 0.25
+        }
+      }
+    ],
+    "evaluation_cases": [
+      {
+        "name": "final_atm",
+        "inputs": {
+          "S": 98,
+          "r": 0.045,
+          "tau": 0.85
+        }
+      },
+      {
+        "name": "final_dividend_put",
+        "inputs": {
+          "option": "put",
+          "q": 0.028,
+          "sigma": 0.22,
+          "tau": 1.1
+        }
+      },
+      {
+        "name": "final_short_call",
+        "inputs": {
+          "S": 96,
+          "tau": 0.05,
+          "sigma": 0.32
+        }
+      },
+      {
+        "name": "final_short_put",
+        "inputs": {
+          "option": "put",
+          "S": 104,
+          "tau": 0.07,
+          "sigma": 0.34
+        }
+      },
+      {
+        "name": "final_low_vol_call",
+        "inputs": {
+          "S": 98,
+          "sigma": 0.07,
+          "tau": 0.55
+        }
+      },
+      {
+        "name": "final_low_vol_put",
+        "inputs": {
+          "option": "put",
+          "S": 102,
+          "sigma": 0.085,
+          "tau": 0.45
+        }
+      },
+      {
+        "name": "final_high_vol",
+        "inputs": {
+          "S": 108,
+          "sigma": 0.5,
+          "tau": 1.7
+        }
+      },
+      {
+        "name": "final_negative_rate",
+        "inputs": {
+          "option": "put",
+          "r": -0.012,
+          "q": 0.032,
+          "tau": 1.4
+        }
+      },
+      {
+        "name": "final_itm_call",
+        "inputs": {
+          "S": 132,
+          "q": 0.022,
+          "tau": 0.8
+        }
+      },
+      {
+        "name": "final_itm_put",
+        "inputs": {
+          "option": "put",
+          "S": 78,
+          "tau": 0.85
+        }
+      },
+      {
+        "name": "final_otm_call",
+        "inputs": {
+          "S": 87,
+          "tau": 0.32,
+          "sigma": 0.27
+        }
+      },
+      {
+        "name": "final_otm_put",
+        "inputs": {
+          "option": "put",
+          "S": 118,
+          "tau": 0.38,
+          "sigma": 0.25
+        }
+      }
+    ]
+  },
+  "python": "3.13.3",
+  "numpy": "2.2.6",
+  "scipy": "1.15.3",
+  "matplotlib": "3.10.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "elapsed_seconds": 199.213199299993,
+  "price_tuning_runs": 3584,
+  "price_evaluation_runs": 18432,
+  "greek_tuning_calls": 3968,
+  "greek_evaluation_calls": 2688,
+  "source_hashes": {
+    "src\\black_scholes.py": "0746033b38cb276d51188c010cd33b814031d8bd91f1336ae4ea8d74af5ced15",
+    "src\\monte_carlo.py": "fba8347db730c42e847f8d8b4e6a0c47a38b1e9ffe2d5a55afac1ccdfeb4ff90",
+    "src\\monte_carlo_greeks.py": "2082dad2c62d6907e70234a4eec73074df985def7a51a4306dd3ab9b696aab6f",
+    "src\\sampling.py": "f160935a718453754f9bf382bcad1725a8c69095e3eeafa01c03f94d2f932e15",
+    "src\\__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "experiments\\run_strong_monte_carlo.py": "e9a4231780c6aab7456b7e370775a952c589d918b1c40ade4a8d4fc1a9af425f"
+  },
+  "timing": "Warmup excluded. Each call includes sampling, pilot, payoff/Greek calculations and confidence intervals. Tuning cost recorded separately. File output and reference evaluation excluded from call timing.",
+  "targets": "Fastest measured budget satisfying observed RMSE, minimum empirical coverage and no zero SEs. Fixed independent repetitions; not adaptive stopping or an accuracy guarantee. Missing targets remain marked unattained.",
+  "memory": "Separate tracemalloc measurement: Python and tracked NumPy allocation peak, not total process RSS or all native allocations.",
+  "greeks": "Hybrid first derivatives are pathwise; Gamma is mixed pathwise/likelihood-ratio. Finite-difference CIs include sampling error only; comparisons against analytical Greeks include bump bias. All six outputs share the reported call time.",
+  "development_archive": "results/monte_carlo_development.zip retains earlier code, tuning and evaluation results. Poor Greek interval coverage motivated adding likelihood-ratio Greeks; the current evaluation uses new parameter cases and a new seed.",
+  "scope": "Single-asset constant-parameter European options only. No universal optimality claim; baskets, importance sampling and learned surrogates are not benchmarked."
+}

@@ -1,0 +1,138 @@
+{
+  "selected": [
+    {
+      "id": "plain",
+      "method": "plain"
+    },
+    {
+      "id": "antithetic",
+      "method": "antithetic"
+    },
+    {
+      "id": "control_p8",
+      "method": "control",
+      "pilot_divisor": 8
+    },
+    {
+      "id": "antithetic_control_p16",
+      "method": "antithetic_control",
+      "pilot_divisor": 16
+    },
+    {
+      "id": "sobol_r8",
+      "method": "sobol",
+      "n_scrambles": 8,
+      "pilot_divisor": 8
+    },
+    {
+      "id": "sobol_control_r8",
+      "method": "sobol_control",
+      "n_scrambles": 8,
+      "pilot_divisor": 2
+    }
+  ],
+  "preferred_by_tuning": {
+    "id": "sobol_control_r8",
+    "method": "sobol_control",
+    "n_scrambles": 8,
+    "pilot_divisor": 2
+  },
+  "selection_rule": "Geometric mean of scaled MSE times median runtime on tuning cases; tenfold penalty for coverage below 80% or any zero standard errors.",
+  "tuning_seconds": 19.18579800002044,
+  "scores": {
+    "plain": 3.1839704804569367e-10,
+    "antithetic": 1.4169594191437405e-10,
+    "control_p16": 6.964729578795781e-11,
+    "control_p8": 6.067501827853273e-11,
+    "control_p4": 7.22313104542792e-11,
+    "antithetic_control_p16": 5.573471243825374e-12,
+    "antithetic_control_p8": 8.02479915798371e-12,
+    "antithetic_control_p4": 7.687839444244493e-12,
+    "sobol_r8": 7.342612282496116e-13,
+    "sobol_r16": 2.227598571674265e-12,
+    "sobol_r32": 8.18977478633679e-12,
+    "sobol_control_r8": 3.701740435498542e-13,
+    "sobol_control_r16": 1.2317807920369422e-12,
+    "sobol_control_r32": 6.302796715963415e-12
+  },
+  "greek_selected": [
+    {
+      "id": "plain_hybrid",
+      "method": "plain",
+      "estimator": "hybrid"
+    },
+    {
+      "id": "antithetic_hybrid",
+      "method": "antithetic",
+      "estimator": "hybrid"
+    },
+    {
+      "id": "control_p16_hybrid",
+      "method": "control",
+      "pilot_divisor": 16,
+      "estimator": "hybrid"
+    },
+    {
+      "id": "antithetic_control_p16_hybrid",
+      "method": "antithetic_control",
+      "pilot_divisor": 16,
+      "estimator": "hybrid"
+    },
+    {
+      "id": "sobol_r8_likelihood_ratio",
+      "method": "sobol",
+      "n_scrambles": 8,
+      "pilot_divisor": 8,
+      "estimator": "likelihood_ratio"
+    },
+    {
+      "id": "sobol_control_r32_hybrid",
+      "method": "sobol_control",
+      "n_scrambles": 32,
+      "pilot_divisor": 2,
+      "estimator": "hybrid"
+    },
+    {
+      "id": "fd_0.005",
+      "method": "sobol_control",
+      "n_scrambles": 8,
+      "pilot_divisor": 2,
+      "estimator": "finite_difference",
+      "relative_bump": 0.005
+    }
+  ],
+  "greek_reliable_on_tuning": [
+    "plain_hybrid",
+    "antithetic_hybrid",
+    "control_p16_hybrid",
+    "control_p8_hybrid",
+    "control_p4_hybrid",
+    "antithetic_control_p16_hybrid",
+    "antithetic_control_p8_hybrid",
+    "antithetic_control_p4_hybrid",
+    "sobol_control_r32_hybrid",
+    "plain_likelihood_ratio",
+    "antithetic_likelihood_ratio",
+    "control_p16_likelihood_ratio",
+    "control_p8_likelihood_ratio",
+    "control_p4_likelihood_ratio",
+    "antithetic_control_p16_likelihood_ratio",
+    "antithetic_control_p8_likelihood_ratio",
+    "antithetic_control_p4_likelihood_ratio",
+    "sobol_r8_likelihood_ratio",
+    "sobol_r16_likelihood_ratio",
+    "sobol_r32_likelihood_ratio",
+    "sobol_control_r8_likelihood_ratio",
+    "sobol_control_r16_likelihood_ratio",
+    "sobol_control_r32_likelihood_ratio"
+  ],
+  "greek_preferred_by_tuning": {
+    "id": "sobol_control_r32_hybrid",
+    "method": "sobol_control",
+    "n_scrambles": 32,
+    "pilot_divisor": 2,
+    "estimator": "hybrid"
+  },
+  "greek_reliability_gate": "At least 75% coverage and no zero standard errors for every tuning case and quantity, before ranking by score. No recommendation if none qualify.",
+  "greek_tuning_seconds": 58.08826129999943
+}

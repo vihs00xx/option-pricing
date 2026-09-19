@@ -1,0 +1,37 @@
+{
+  "price_configuration_selected_on_tuning": "sobol_control_r8",
+  "price_targets_attained": 24,
+  "price_targets_tested": 24,
+  "greek_configuration_selected_on_tuning": "sobol_control_r32_hybrid",
+  "greek_interval_screen_passed": false,
+  "greek_interval_failures": [
+    {
+      "case": "final_itm_put",
+      "config": "sobol_control_r32_hybrid",
+      "quantity": "delta",
+      "coverage": "0.59375",
+      "zero_se_rate": "0.0",
+      "flagged": true,
+      "reason": "observed coverage below 80%"
+    },
+    {
+      "case": "final_itm_put",
+      "config": "sobol_control_r32_hybrid",
+      "quantity": "theta",
+      "coverage": "0.75",
+      "zero_se_rate": "0.0",
+      "flagged": true,
+      "reason": "observed coverage below 80%"
+    },
+    {
+      "case": "final_itm_put",
+      "config": "sobol_control_r32_hybrid",
+      "quantity": "rho",
+      "coverage": "0.375",
+      "zero_se_rate": "0.53125",
+      "flagged": true,
+      "reason": "observed coverage below 80%; some runs reported zero sampling uncertainty"
+    }
+  ],
+  "interpretation": "Empirical screen only, not a guarantee of nominal coverage. Accuracy comparisons remain valid; flagged intervals must not be presented as calibrated. The failed selection is retained, not silently replaced by a winner chosen on evaluation data."
+}

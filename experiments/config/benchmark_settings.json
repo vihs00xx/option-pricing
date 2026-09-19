@@ -1,0 +1,210 @@
+{
+  "seed": 20260916,
+  "budgets": [
+    2048,
+    8192,
+    32768,
+    131072
+  ],
+  "tuning_budgets": [
+    8192,
+    32768
+  ],
+  "tuning_repetitions": 16,
+  "evaluation_repetitions": 64,
+  "pilot_divisors": [
+    16,
+    8,
+    4
+  ],
+  "scramble_counts": [
+    8,
+    16,
+    32
+  ],
+  "absolute_price_targets": [
+    0.01,
+    0.001
+  ],
+  "minimum_coverage": 0.85,
+  "greek_tuning_repetitions": 32,
+  "greek_evaluation_repetitions": 32,
+  "greek_budget": 32768,
+  "greek_bumps": [
+    0.001,
+    0.005,
+    0.01
+  ],
+  "base": {
+    "S": 100.0,
+    "K": 100.0,
+    "tau": 1.0,
+    "r": 0.05,
+    "sigma": 0.2,
+    "q": 0.0,
+    "option": "call"
+  },
+  "tuning_cases": [
+    {
+      "name": "tune_atm",
+      "inputs": {}
+    },
+    {
+      "name": "tune_put",
+      "inputs": {
+        "option": "put",
+        "S": 110,
+        "q": 0.02
+      }
+    },
+    {
+      "name": "tune_short",
+      "inputs": {
+        "S": 95,
+        "tau": 0.08,
+        "sigma": 0.3
+      }
+    },
+    {
+      "name": "tune_low_vol",
+      "inputs": {
+        "S": 102,
+        "sigma": 0.08,
+        "tau": 0.5
+      }
+    },
+    {
+      "name": "tune_high_vol",
+      "inputs": {
+        "sigma": 0.6,
+        "tau": 2
+      }
+    },
+    {
+      "name": "tune_negative_rate",
+      "inputs": {
+        "option": "put",
+        "r": -0.02,
+        "q": 0.04
+      }
+    },
+    {
+      "name": "tune_itm",
+      "inputs": {
+        "S": 140,
+        "q": 0.03
+      }
+    },
+    {
+      "name": "tune_otm",
+      "inputs": {
+        "S": 80,
+        "tau": 0.5,
+        "sigma": 0.25
+      }
+    }
+  ],
+  "evaluation_cases": [
+    {
+      "name": "final_atm",
+      "inputs": {
+        "S": 98,
+        "r": 0.045,
+        "tau": 0.85
+      }
+    },
+    {
+      "name": "final_dividend_put",
+      "inputs": {
+        "option": "put",
+        "q": 0.028,
+        "sigma": 0.22,
+        "tau": 1.1
+      }
+    },
+    {
+      "name": "final_short_call",
+      "inputs": {
+        "S": 96,
+        "tau": 0.05,
+        "sigma": 0.32
+      }
+    },
+    {
+      "name": "final_short_put",
+      "inputs": {
+        "option": "put",
+        "S": 104,
+        "tau": 0.07,
+        "sigma": 0.34
+      }
+    },
+    {
+      "name": "final_low_vol_call",
+      "inputs": {
+        "S": 98,
+        "sigma": 0.07,
+        "tau": 0.55
+      }
+    },
+    {
+      "name": "final_low_vol_put",
+      "inputs": {
+        "option": "put",
+        "S": 102,
+        "sigma": 0.085,
+        "tau": 0.45
+      }
+    },
+    {
+      "name": "final_high_vol",
+      "inputs": {
+        "S": 108,
+        "sigma": 0.5,
+        "tau": 1.7
+      }
+    },
+    {
+      "name": "final_negative_rate",
+      "inputs": {
+        "option": "put",
+        "r": -0.012,
+        "q": 0.032,
+        "tau": 1.4
+      }
+    },
+    {
+      "name": "final_itm_call",
+      "inputs": {
+        "S": 132,
+        "q": 0.022,
+        "tau": 0.8
+      }
+    },
+    {
+      "name": "final_itm_put",
+      "inputs": {
+        "option": "put",
+        "S": 78,
+        "tau": 0.85
+      }
+    },
+    {
+      "name": "final_otm_call",
+      "inputs": {
+        "S": 87,
+        "tau": 0.32,
+        "sigma": 0.27
+      }
+    },
+    {
+      "name": "final_otm_put",
+      "inputs": {
+        "option": "put",
+        "S": 118,
+        "tau": 0.38,
+        "sigma": 0.25
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "seed": 2026091601,
+  "sample_sizes": [1024, 4096, 16384, 65536, 262144, 1048576],
+  "repetitions": 24,
+  "methods": [
+    {"name": "plain", "method": "plain"},
+    {"name": "sobol_r8", "method": "sobol", "n_scrambles": 8},
+    {"name": "sobol_control_r8", "method": "sobol_control", "n_scrambles": 8, "pilot_fraction": 0.5}
+  ],
+  "base": {"S": 100.0, "K": 100.0, "tau": 1.0, "r": 0.05, "sigma": 0.2, "q": 0.0, "option": "call"},
+  "cases": [
+    {"name": "atm_call", "inputs": {}},
+    {"name": "short_otm_call", "inputs": {"S": 92.0, "tau": 0.08, "sigma": 0.3}},
+    {"name": "high_vol_call", "inputs": {"S": 105.0, "tau": 1.8, "sigma": 0.55}},
+    {"name": "itm_put", "inputs": {"option": "put", "S": 78.0, "tau": 0.85}}
+  ]
+}

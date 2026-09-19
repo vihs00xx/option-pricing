@@ -1,0 +1,79 @@
+{
+  "settings": {
+    "seed": 2026091601,
+    "sample_sizes": [
+      1024,
+      4096,
+      16384,
+      65536,
+      262144,
+      1048576
+    ],
+    "repetitions": 24,
+    "methods": [
+      {
+        "name": "plain",
+        "method": "plain"
+      },
+      {
+        "name": "sobol_r8",
+        "method": "sobol",
+        "n_scrambles": 8
+      },
+      {
+        "name": "sobol_control_r8",
+        "method": "sobol_control",
+        "n_scrambles": 8,
+        "pilot_fraction": 0.5
+      }
+    ],
+    "base": {
+      "S": 100.0,
+      "K": 100.0,
+      "tau": 1.0,
+      "r": 0.05,
+      "sigma": 0.2,
+      "q": 0.0,
+      "option": "call"
+    },
+    "cases": [
+      {
+        "name": "atm_call",
+        "inputs": {}
+      },
+      {
+        "name": "short_otm_call",
+        "inputs": {
+          "S": 92.0,
+          "tau": 0.08,
+          "sigma": 0.3
+        }
+      },
+      {
+        "name": "high_vol_call",
+        "inputs": {
+          "S": 105.0,
+          "tau": 1.8,
+          "sigma": 0.55
+        }
+      },
+      {
+        "name": "itm_put",
+        "inputs": {
+          "option": "put",
+          "S": 78.0,
+          "tau": 0.85
+        }
+      }
+    ]
+  },
+  "total_runs": 1728,
+  "python": "3.13.3",
+  "numpy": "2.2.6",
+  "scipy": "1.15.3",
+  "matplotlib": "3.10.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "rate_fit": "OLS of log(RMSE) on log(N). alpha is minus the slope. Tail fit uses the largest four N values. Standard error is the ordinary regression slope SE over six or four aggregate points; it does not include case-selection uncertainty.",
+  "work": "N is total payoff evaluations for prices. Sobol-control includes its 50% independent pilot in N. Each Sobol production or pilot scramble has a power-of-two point count.",
+  "caution": "Twenty-four independent repetitions give noisy RMSE and coverage estimates, especially when QMC errors are very small. Observed alpha is empirical for these four one-dimensional European cases, not a universal QMC convergence theorem."
+}

@@ -1,0 +1,10 @@
+{
+  "budget_per_run": 32768,
+  "repetitions_per_case": 32,
+  "evaluation_cases": 12,
+  "sobol_scrambles": 32,
+  "conditional_fraction": 0.5,
+  "control_pilot_samples": 16384,
+  "seed_design": "The same seed is used across configurations for each case and repetition.",
+  "interpretation": "Conditional smoothing analytically values the second half of the option life."
+}

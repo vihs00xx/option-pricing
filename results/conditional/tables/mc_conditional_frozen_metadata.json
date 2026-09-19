@@ -1,0 +1,16 @@
+{
+  "settings_sha256": "797de137bf5de618e4e7ffd6bf710ac1dae3971d532b30ce17b4d5c05f672c69",
+  "frozen_configuration_sha256": "caa4666e83f0cb9aceab37d350829f77bd56a46c0caae9c92f78c3314c72f68f",
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "numpy": "2.2.6",
+  "scipy": "1.15.3",
+  "selected": {
+    "conditional_fraction": 0.25,
+    "n_scrambles": 8,
+    "pilot_ratio_to_production": 0.5,
+    "method": "sobol_control"
+  },
+  "final_cases": 12,
+  "final_repetitions_per_case": 128
+}
