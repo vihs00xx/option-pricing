@@ -1,6 +1,6 @@
 # Option Pricing
 
-An undergraduate project comparing classical numerical methods, PINNs and DeepONet for European option pricing and Greeks.
+A project comparing classical numerical methods, PINNs and DeepONet for European option pricing and Greeks.
 
 ## Current work
 
