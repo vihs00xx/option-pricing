@@ -1,6 +1,6 @@
 # Option Pricing
 
-An undergraduate project comparing numerical methods for European option pricing and Greeks. The current GitHub baseline contains analytical Black--Scholes, Monte Carlo, randomized quasi-Monte Carlo, and conditional smoothing experiments. Finite-difference and neural methods are planned extensions.
+An project comparing numerical methods for European option pricing and Greeks. The current GitHub baseline contains analytical Black--Scholes, Monte Carlo, randomized quasi-Monte Carlo, and conditional smoothing experiments. Finite-difference and neural methods are planned extensions.
 
 ## Project structure
 
