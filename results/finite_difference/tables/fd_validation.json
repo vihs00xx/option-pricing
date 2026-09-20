@@ -1,0 +1,52 @@
+{
+  "passed_error_limits": true,
+  "passed_shape_checks": true,
+  "error_failures": [],
+  "shape_failures": [],
+  "median_convergence_alpha": 1.9996035308873852,
+  "maximum_errors": {
+    "price": 0.00034840348712172897,
+    "delta": 3.722046026577441e-05,
+    "gamma": 5.06174450227298e-06,
+    "vega": 0.002462132116107796,
+    "theta": 0.0009677205827589574,
+    "rho": 0.00024678205431882816
+  },
+  "mean_runtime_all_outputs": 0.8634982500007027,
+  "richardson": {
+    "base_grid_size": 800,
+    "fine_grid_size": 1600,
+    "mesh": "strike_clustered",
+    "mesh_concentration": 7.0,
+    "median_convergence_alpha": 3.997559963141948,
+    "maximum_errors": {
+      "price": 3.5403751041940268e-09,
+      "delta": 8.94892049352336e-09,
+      "gamma": 6.489258233544071e-07,
+      "vega": 0.00013661975329171128,
+      "theta": 0.0001297850398502831,
+      "rho": 5.334219451924582e-06
+    },
+    "mean_runtime_all_outputs": 0.9322513624974818,
+    "passed_shape_checks": true,
+    "shape_failures": []
+  },
+  "boundary_sensitivity": {
+    "case": "high_vol_put",
+    "automatic_s_max": 4802.694285321511,
+    "multipliers": [
+      0.5,
+      0.75,
+      1.0,
+      1.5,
+      2.0
+    ],
+    "maximum_absolute_error": 1.8272050539280826e-08,
+    "price_range": 4.87493778678072e-09
+  },
+  "versions": {
+    "python": "3.13.3",
+    "numpy": "2.2.6",
+    "scipy": "1.15.3"
+  }
+}

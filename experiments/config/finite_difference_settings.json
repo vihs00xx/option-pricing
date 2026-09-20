@@ -1,0 +1,42 @@
+{
+  "base": {
+    "S": 100.0,
+    "K": 100.0,
+    "tau": 1.0,
+    "r": 0.05,
+    "sigma": 0.2,
+    "q": 0.0,
+    "option": "call"
+  },
+  "grid_sizes": [100, 200, 400, 800, 1600],
+  "greek_grid_size": 1600,
+  "richardson_base_grid_size": 800,
+  "enhanced_mesh": "strike_clustered",
+  "mesh_concentration": 7.0,
+  "boundary_base_grid_size": 400,
+  "boundary_multipliers": [0.5, 0.75, 1.0, 1.5, 2.0],
+  "richardson_min_median_alpha": 3.5,
+  "boundary_price_range_limit": 1e-6,
+  "rannacher_steps": 2,
+  "volatility_bump": 0.005,
+  "rate_bump": 0.0001,
+  "shape_tolerance": 1e-7,
+  "error_limits": {
+    "price": 0.002,
+    "delta": 0.0005,
+    "gamma": 0.00005,
+    "vega": 0.05,
+    "theta": 0.03,
+    "rho": 0.05
+  },
+  "cases": [
+    {"name": "atm_call", "inputs": {}},
+    {"name": "dividend_put", "inputs": {"option": "put", "q": 0.03, "tau": 1.2}},
+    {"name": "short_otm_call", "inputs": {"S": 92.0, "tau": 0.12, "sigma": 0.32}},
+    {"name": "short_itm_put", "inputs": {"option": "put", "S": 92.0, "tau": 0.1, "sigma": 0.28}},
+    {"name": "low_vol_call", "inputs": {"S": 103.0, "tau": 0.6, "sigma": 0.1}},
+    {"name": "high_vol_put", "inputs": {"option": "put", "S": 108.0, "tau": 1.8, "sigma": 0.55}},
+    {"name": "negative_rate_put", "inputs": {"option": "put", "S": 97.0, "r": -0.015, "q": 0.035, "tau": 1.4}},
+    {"name": "deep_itm_call", "inputs": {"S": 135.0, "q": 0.025, "tau": 0.75, "sigma": 0.24}}
+  ]
+}

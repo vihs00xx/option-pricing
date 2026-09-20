@@ -1,0 +1,9 @@
+case,minimum_value,minimum_second_difference,negative_value_count,monotonicity_violation_count,convexity_violation_count
+atm_call,0.0,-5.684341886080801e-13,0,0,0
+dividend_put,0.0,-6.401995733540389e-08,0,0,0
+short_otm_call,0.0,-2.8421709430404007e-13,0,0,0
+short_itm_put,0.0,-4.849596280109836e-10,0,0,0
+low_vol_call,0.0,-5.684341886080801e-13,0,0,0
+high_vol_put,0.0,-9.853705762452591e-08,0,0,0
+negative_rate_put,0.0,-7.814520586180151e-09,0,0,0
+deep_itm_call,0.0,-3.979039320256561e-13,0,0,0

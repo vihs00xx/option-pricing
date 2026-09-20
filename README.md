@@ -1,6 +1,6 @@
 # Option Pricing
 
-An project comparing numerical methods for European option pricing and Greeks. The current GitHub baseline contains analytical Black--Scholes, Monte Carlo, randomized quasi-Monte Carlo, and conditional smoothing experiments. Finite-difference and neural methods are planned extensions.
+A computational study comparing numerical methods for European option pricing and Greeks. The current baseline includes analytical Black--Scholes, Monte Carlo, randomized quasi-Monte Carlo, conditional smoothing, and a Crank--Nicolson finite-difference solver. PINNs and DeepONets are planned extensions.
 
 ## Project structure
 
@@ -31,6 +31,8 @@ python -m venv .venv
 .\.venv\Scripts\python.exe -m experiments.conditional.check_conditional_study
 .\.venv\Scripts\python.exe -m experiments.conditional.run_conditional_high_compute
 .\.venv\Scripts\python.exe -m experiments.conditional.check_conditional_high_compute
+.\.venv\Scripts\python.exe -m experiments.finite_difference.run_crank_nicolson
+.\.venv\Scripts\python.exe -m experiments.finite_difference.check_crank_nicolson
 ```
 
 The full experiments can take substantial time because they include repeated runs and large sample budgets. To run the unit tests:
@@ -59,4 +61,10 @@ The conditional estimator simulates part of the option life and analytically val
 
 The frozen conditional study reports convergence through $2^{20}$, tests a configuration on held-out cases, and compares an efficient run with a higher-compute run using 64 Sobol scrambles. Results and validation files are under `results/conditional/`.
 
-The project will next add and compare Crank--Nicolson finite differences, PINNs, and DeepONets against these classical baselines.
+## Crank--Nicolson finite differences
+
+`src/crank_nicolson.py` solves the Black--Scholes PDE with Crank--Nicolson time stepping and Rannacher startup damping. It supports uniform and strike-clustered spatial grids, computes prices and Greeks, and includes Richardson extrapolation.
+
+The validation study compares prices and Greeks with analytical Black--Scholes values, checks convergence, shape constraints and sensitivity to the far-field boundary. On the configured cases, Richardson extrapolation achieved median observed convergence order 4.00; its maximum absolute errors were $3.54\times10^{-9}$ for price and $6.49\times10^{-7}$ for Gamma. These figures describe this test set and configuration.
+
+Run the solver study and its checks with the commands above. Tables and figures are saved under `results/finite_difference/`. The next neural methods will be compared with these classical baselines.
