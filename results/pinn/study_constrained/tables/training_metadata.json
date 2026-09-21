@@ -1,0 +1,13 @@
+{
+  "variant": "constrained",
+  "seed": 19103026,
+  "adam_epochs_configured": 400,
+  "adam_epochs_completed": 400,
+  "hit_wall_cap": false,
+  "wall_seconds": 388.0803842999958,
+  "parameter_count": 12737,
+  "final_training_loss": 0.4634176479083507,
+  "training_run_id": "constrained_seed_19103026",
+  "settings_sha256": "31e744786c20c8da",
+  "checkpoint": "checkpoints\\pinn\\study_constrained.pt"
+}

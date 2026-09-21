@@ -1,0 +1,28 @@
+{
+  "model": "data_only",
+  "seed": 19102026,
+  "active_terms": [
+    "price",
+    "theta"
+  ],
+  "selected_stage": "polish",
+  "final_validation_loss": 0.006197215072899952,
+  "optimizer_steps": 1824,
+  "wall_seconds": 467.2269990000059,
+  "hit_wall_cap": false,
+  "parameter_count": 12737,
+  "baseline_rss_mb": 213.265625,
+  "peak_rss_mb": 339.98046875,
+  "incremental_peak_mb": 126.71484375,
+  "training_run_id": "data_only_n8192_s19102026_seed_19102026",
+  "anchor_count": 8192,
+  "greek_anchor_count": 2048,
+  "label_scales": {
+    "price": 0.7302352241703812,
+    "delta": 0.6125045411482487,
+    "gamma": 0.02783270948792492,
+    "theta": 0.07236105522968296
+  },
+  "settings_sha256": "bbc6e22884bdce32",
+  "checkpoint": "checkpoints\\pinn\\anchored_study\\data_only_n8192_s19102026.pt"
+}

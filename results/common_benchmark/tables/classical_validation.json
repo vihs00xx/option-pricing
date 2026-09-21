@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "case_count": 68,
+  "method_count": 3,
+  "output_rows": 1224,
+  "monte_carlo_95_percent_coverage": {
+    "price": 0.8823529411764706,
+    "delta": 0.8823529411764706,
+    "gamma": 0.8970588235294118,
+    "vega": 0.9264705882352942,
+    "theta": 0.8970588235294118,
+    "rho": 0.8382352941176471
+  },
+  "timing_protocol": {
+    "case_count": 6,
+    "warmup_batches": 1,
+    "repetitions": 3,
+    "memory_sample_interval_seconds": 0.001
+  },
+  "relative_error_floors": {
+    "price": 0.0001,
+    "delta": 0.0001,
+    "gamma": 1e-07,
+    "vega": 0.0001,
+    "theta": 0.0001,
+    "rho": 0.0001
+  }
+}

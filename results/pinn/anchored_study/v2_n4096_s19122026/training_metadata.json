@@ -1,0 +1,32 @@
+{
+  "model": "v2",
+  "seed": 19122026,
+  "active_terms": [
+    "price",
+    "theta",
+    "delta",
+    "gamma",
+    "pde",
+    "terminal"
+  ],
+  "selected_stage": "physics",
+  "final_validation_loss": 0.0648200506369867,
+  "optimizer_steps": 1855,
+  "wall_seconds": 234.6589604000037,
+  "hit_wall_cap": false,
+  "parameter_count": 12737,
+  "baseline_rss_mb": 405.89453125,
+  "peak_rss_mb": 412.0625,
+  "incremental_peak_mb": 6.16796875,
+  "training_run_id": "v2_n4096_s19122026_seed_19122026",
+  "anchor_count": 4096,
+  "greek_anchor_count": 1024,
+  "label_scales": {
+    "price": 0.726860708955037,
+    "delta": 0.6062403909097824,
+    "gamma": 0.02277910062941078,
+    "theta": 0.06406466163845137
+  },
+  "settings_sha256": "bbc6e22884bdce32",
+  "checkpoint": "checkpoints\\pinn\\anchored_study\\v2_n4096_s19122026.pt"
+}

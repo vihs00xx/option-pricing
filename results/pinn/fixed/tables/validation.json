@@ -1,0 +1,80 @@
+{
+  "passed": false,
+  "accuracy_passed": true,
+  "shape_passed": false,
+  "checks": {
+    "core_price_rmse": true,
+    "core_delta_rmse": true,
+    "core_gamma_rmse": true,
+    "core_theta_rmse": true,
+    "pde_residual_rmse": true,
+    "shape_checks": false
+  },
+  "core_metrics": {
+    "price": {
+      "region": "core",
+      "quantity": "price",
+      "points": 1920,
+      "rmse": 0.00980253434450393,
+      "mae": 0.007108686115400903,
+      "maximum_absolute_error": 0.05483627307687655,
+      "bias": 0.0023531398880274916
+    },
+    "delta": {
+      "region": "core",
+      "quantity": "delta",
+      "points": 1920,
+      "rmse": 0.0024711386363312363,
+      "mae": 0.0014200263383427117,
+      "maximum_absolute_error": 0.02238136308412103,
+      "bias": -1.402952858253171e-05
+    },
+    "gamma": {
+      "region": "core",
+      "quantity": "gamma",
+      "points": 1920,
+      "rmse": 0.0008723260362163696,
+      "mae": 0.00038656055204924197,
+      "maximum_absolute_error": 0.008698620271156046,
+      "bias": -1.4188178684881728e-05
+    },
+    "theta": {
+      "region": "core",
+      "quantity": "theta",
+      "points": 1920,
+      "rmse": 0.08736036134471885,
+      "mae": 0.057535085968199055,
+      "maximum_absolute_error": 0.5948544327351382,
+      "bias": -0.0003293050217198692
+    }
+  },
+  "pde_residual": {
+    "rmse": 0.003328462727520628,
+    "mae": 0.0012604162568922227,
+    "maximum_absolute_residual": 0.05755617512563195
+  },
+  "shape_checks": {
+    "full": {
+      "negative_price_count": 700,
+      "delta_below_zero_count": 609,
+      "delta_above_bound_count": 2925,
+      "negative_gamma_count": 3001
+    },
+    "core": {
+      "negative_price_count": 148,
+      "delta_below_zero_count": 141,
+      "delta_above_bound_count": 33,
+      "negative_gamma_count": 243
+    }
+  },
+  "inference": {
+    "batch_size": 4096,
+    "warmup_batches": 2,
+    "repetitions": 10,
+    "median_batch_seconds": 0.044035599999915576,
+    "q25_batch_seconds": 0.031108399998629466,
+    "q75_batch_seconds": 0.1140386499955639,
+    "median_seconds_per_point": 1.0750878906229389e-05,
+    "median_points_per_second": 93015.65097348175
+  }
+}

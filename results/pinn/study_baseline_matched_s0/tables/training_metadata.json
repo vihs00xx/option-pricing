@@ -1,0 +1,35 @@
+{
+  "variant": "baseline_matched",
+  "seed": 19102026,
+  "adam_epochs_configured": 400,
+  "adam_epochs_completed": 400,
+  "hit_wall_cap": false,
+  "wall_seconds": 95.00295910000568,
+  "parameter_count": 12737,
+  "final_training_loss": 0.24566434349060268,
+  "baseline_rss_mb": 269.9921875,
+  "peak_rss_mb": 310.3125,
+  "incremental_peak_mb": 40.3203125,
+  "training_run_id": "baseline_matched_s0_seed_19102026",
+  "settings_sha256": "c91c83e54b9e49d4",
+  "adam_checkpoint": "checkpoints\\pinn\\study_baseline_matched_s0_adam.pt",
+  "lbfgs": {
+    "optimizer": "lbfgs",
+    "closure_calls": 652,
+    "wall_seconds": 304.21031010000297,
+    "final_loss": 0.00021411686970101626,
+    "final_components": {
+      "pde": 0.0001086466163867855,
+      "terminal": 4.218810132569231e-06
+    },
+    "objective_points": {
+      "pde": 2048,
+      "terminal": 1024
+    },
+    "baseline_rss_mb": 286.91796875,
+    "peak_rss_mb": 347.6640625,
+    "incremental_peak_mb": 60.74609375,
+    "training_run_id": "baseline_matched_s0_seed_19102026_lbfgs"
+  },
+  "checkpoint": "checkpoints\\pinn\\study_baseline_matched_s0.pt"
+}

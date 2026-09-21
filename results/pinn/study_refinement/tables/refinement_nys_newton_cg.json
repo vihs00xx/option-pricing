@@ -1,0 +1,110 @@
+{
+  "optimizer": "nys_newton_cg",
+  "steps_attempted": 11,
+  "steps_accepted": 11,
+  "wall_seconds": 320.5469688999947,
+  "final_loss": 0.0241454250887516,
+  "steps": [
+    {
+      "loss_before": 0.24571951270340564,
+      "loss_after": 0.16709204717970114,
+      "accepted": true,
+      "step_size": 0.03125,
+      "sketch_rank": 32,
+      "elapsed_seconds": 27.440178999997443
+    },
+    {
+      "loss_before": 0.16709204717970114,
+      "loss_after": 0.07754571238718529,
+      "accepted": true,
+      "step_size": 1.0,
+      "sketch_rank": 32,
+      "elapsed_seconds": 73.80155319999903
+    },
+    {
+      "loss_before": 0.07754571238718529,
+      "loss_after": 0.051869808992329375,
+      "accepted": true,
+      "step_size": 1.0,
+      "sketch_rank": 32,
+      "elapsed_seconds": 94.33092110000143
+    },
+    {
+      "loss_before": 0.051869808992329375,
+      "loss_after": 0.04370142356866548,
+      "accepted": true,
+      "step_size": 1.0,
+      "sketch_rank": 32,
+      "elapsed_seconds": 134.95532280000043
+    },
+    {
+      "loss_before": 0.04370142356866548,
+      "loss_after": 0.03421238039678258,
+      "accepted": true,
+      "step_size": 1.0,
+      "sketch_rank": 32,
+      "elapsed_seconds": 170.36686940000072
+    },
+    {
+      "loss_before": 0.03421238039678258,
+      "loss_after": 0.03057266291224177,
+      "accepted": true,
+      "step_size": 1.0,
+      "sketch_rank": 32,
+      "elapsed_seconds": 207.56192480000027
+    },
+    {
+      "loss_before": 0.03057266291224177,
+      "loss_after": 0.028462321869459524,
+      "accepted": true,
+      "step_size": 1.0,
+      "sketch_rank": 32,
+      "elapsed_seconds": 236.56600210000033
+    },
+    {
+      "loss_before": 0.028462321869459524,
+      "loss_after": 0.026770430571083602,
+      "accepted": true,
+      "step_size": 1.0,
+      "sketch_rank": 32,
+      "elapsed_seconds": 260.1218305000002
+    },
+    {
+      "loss_before": 0.026770430571083602,
+      "loss_after": 0.025912038902062687,
+      "accepted": true,
+      "step_size": 1.0,
+      "sketch_rank": 32,
+      "elapsed_seconds": 271.6811444999985
+    },
+    {
+      "loss_before": 0.025912038902062687,
+      "loss_after": 0.02479504567665452,
+      "accepted": true,
+      "step_size": 1.0,
+      "sketch_rank": 32,
+      "elapsed_seconds": 276.57273949999944
+    },
+    {
+      "loss_before": 0.02479504567665452,
+      "loss_after": 0.0241454250887516,
+      "accepted": true,
+      "step_size": 1.0,
+      "sketch_rank": 32,
+      "elapsed_seconds": 320.546911999998
+    }
+  ],
+  "initial_loss": 0.24571951270340564,
+  "baseline_rss_mb": 274.7890625,
+  "peak_rss_mb": 472.4140625,
+  "incremental_peak_mb": 197.625,
+  "start_checkpoint": "checkpoints/pinn/study_baseline_matched_s0_adam.pt",
+  "model": "fixed_black_scholes_pinn",
+  "device": "cpu",
+  "torch_version": "2.8.0+cpu",
+  "objective_points": {
+    "pde": 2048,
+    "terminal": 1024
+  },
+  "checkpoint": "checkpoints\\pinn\\study_refined_nys_newton_cg.pt"
+}

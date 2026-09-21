@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "quantlib_version": "1.43",
+  "cases": 8,
+  "grid": {
+    "time": 1600,
+    "space": 1600,
+    "damping_steps": 2
+  },
+  "maximum_absolute_differences": {
+    "price": 0.00010931023479798796,
+    "delta": 3.824165067833896e-06,
+    "gamma": 3.539849661587935e-06,
+    "vega": 0.0003144470424274459,
+    "theta": 0.0007046987397885118,
+    "rho": 0.0006755424723294823
+  },
+  "failures": []
+}

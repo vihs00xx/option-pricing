@@ -1,0 +1,423 @@
+{
+  "model": "constrained",
+  "errors": {
+    "full": {
+      "price": {
+        "points": 8211,
+        "rmse": 12.098513633537417,
+        "mae": 10.509126764344902,
+        "maximum_absolute_error": 26.032326641406016,
+        "bias": 6.025938491727763
+      },
+      "delta": {
+        "points": 8050,
+        "rmse": 0.860784287360509,
+        "mae": 0.2825203156160718,
+        "maximum_absolute_error": 10.91243894014964,
+        "bias": 0.03556043936735472
+      },
+      "gamma": {
+        "points": 8050,
+        "rmse": 0.4454715818877454,
+        "mae": 0.05670574618066438,
+        "maximum_absolute_error": 6.200577892921842,
+        "bias": -0.04459868385096602
+      },
+      "theta": {
+        "points": 8050,
+        "rmse": 18.701172102547734,
+        "mae": 14.333646086938858,
+        "maximum_absolute_error": 49.06055428762256,
+        "bias": -10.646658458002484
+      }
+    },
+    "core": {
+      "price": {
+        "points": 1920,
+        "rmse": 11.36229657552441,
+        "mae": 9.50064741476598,
+        "maximum_absolute_error": 24.50068972364963,
+        "bias": 0.46964340148653344
+      },
+      "delta": {
+        "points": 1920,
+        "rmse": 0.38988529831541924,
+        "mae": 0.31046525392167346,
+        "maximum_absolute_error": 0.7304927140004855,
+        "bias": 0.307959844123683
+      },
+      "gamma": {
+        "points": 1920,
+        "rmse": 0.016036667884092304,
+        "mae": 0.012093725422043462,
+        "maximum_absolute_error": 0.07400673001353245,
+        "bias": -0.0008643497461147762
+      },
+      "theta": {
+        "points": 1920,
+        "rmse": 25.57412781286018,
+        "mae": 21.70452425867314,
+        "maximum_absolute_error": 46.49224186479492,
+        "bias": -13.61546589219529
+      }
+    },
+    "near_expiry": {
+      "price": {
+        "points": 483,
+        "rmse": 8.390160159027436,
+        "mae": 7.681176995960267,
+        "maximum_absolute_error": 16.977005620559126,
+        "bias": 4.000545898841279
+      },
+      "delta": {
+        "points": 322,
+        "rmse": 0.7178538628277652,
+        "mae": 0.23176292030124668,
+        "maximum_absolute_error": 7.932250406920733,
+        "bias": 0.02958186631956941
+      },
+      "gamma": {
+        "points": 322,
+        "rmse": 0.36822225088156846,
+        "mae": 0.04837274804746258,
+        "maximum_absolute_error": 4.466925478422008,
+        "bias": -0.037082927961340245
+      },
+      "theta": {
+        "points": 322,
+        "rmse": 13.865639376786403,
+        "mae": 9.607993351555749,
+        "maximum_absolute_error": 49.06055428762256,
+        "bias": 9.350511198470688
+      }
+    },
+    "near_strike": {
+      "price": {
+        "points": 1224,
+        "rmse": 8.461799950354356,
+        "mae": 6.972127442219746,
+        "maximum_absolute_error": 22.91388858425396,
+        "bias": 2.911644428716609
+      },
+      "delta": {
+        "points": 1200,
+        "rmse": 0.433626827605588,
+        "mae": 0.3602031894294008,
+        "maximum_absolute_error": 0.7647361559201608,
+        "bias": 0.35384095660837983
+      },
+      "gamma": {
+        "points": 1200,
+        "rmse": 0.016672358186298728,
+        "mae": 0.012379428108233576,
+        "maximum_absolute_error": 0.12584722947136975,
+        "bias": -0.00914108733196257
+      },
+      "theta": {
+        "points": 1200,
+        "rmse": 26.01222077963349,
+        "mae": 22.278231500026873,
+        "maximum_absolute_error": 49.06055428762256,
+        "bias": -11.822677274442645
+      }
+    },
+    "low_tail": {
+      "price": {
+        "points": 1377,
+        "rmse": 14.791887373340112,
+        "mae": 13.360419750652785,
+        "maximum_absolute_error": 22.76165838589689,
+        "bias": -9.763347640728101
+      },
+      "delta": {
+        "points": 1350,
+        "rmse": 2.0537664855518156,
+        "mae": 1.0647627899611396,
+        "maximum_absolute_error": 10.91243894014964,
+        "bias": 0.041667254812062
+      },
+      "gamma": {
+        "points": 1350,
+        "rmse": 1.0876892517360601,
+        "mae": 0.3229641396102977,
+        "maximum_absolute_error": 6.200577892921842,
+        "bias": -0.2543026941245389
+      },
+      "theta": {
+        "points": 1350,
+        "rmse": 15.938780932310058,
+        "mae": 11.899935073657273,
+        "maximum_absolute_error": 45.90755040140323,
+        "bias": -3.3598944769495374
+      }
+    },
+    "high_tail": {
+      "price": {
+        "points": 5610,
+        "rmse": 12.03788399078554,
+        "mae": 10.580972883442092,
+        "maximum_absolute_error": 26.032326641406016,
+        "bias": 10.58097288344209
+      },
+      "delta": {
+        "points": 5500,
+        "rmse": 0.09021577615684873,
+        "mae": 0.07356635399028333,
+        "maximum_absolute_error": 0.24364140820887004,
+        "bias": -0.03538152818529707
+      },
+      "gamma": {
+        "points": 5500,
+        "rmse": 0.0010830407653482802,
+        "mae": 0.0010226099182847382,
+        "maximum_absolute_error": 0.0033677264414331927,
+        "bias": -0.0008620842061443445
+      },
+      "theta": {
+        "points": 5500,
+        "rmse": 17.37518734672692,
+        "mae": 13.197647427343316,
+        "maximum_absolute_error": 44.770497631857694,
+        "bias": -12.178641875219446
+      }
+    }
+  },
+  "violations": {
+    "full": {
+      "price_below_intrinsic": {
+        "points": 8211,
+        "count": 1398,
+        "proportion": 0.17025940811107051,
+        "maximum": 22.761657560589853,
+        "mean_size": 2.2150131483219373
+      },
+      "price_above_discounted_spot": {
+        "points": 8211,
+        "count": 110,
+        "proportion": 0.0133966630130313,
+        "maximum": 6.665770616972896,
+        "mean_size": 0.05443362843625991
+      },
+      "delta_below_zero": {
+        "points": 8211,
+        "count": 786,
+        "proportion": 0.09572524662038728,
+        "maximum": 1.8235929441932308,
+        "mean_size": 0.0854744162569187
+      },
+      "delta_above_discount_factor": {
+        "points": 8211,
+        "count": 2767,
+        "proportion": 0.3369869687005237,
+        "maximum": 9.91243894014964,
+        "mean_size": 0.0726521136854655
+      },
+      "gamma_negative": {
+        "points": 8211,
+        "count": 5195,
+        "proportion": 0.6326878577517964,
+        "maximum": 6.200577892921842,
+        "mean_size": 0.04883789605418372
+      }
+    },
+    "core": {
+      "price_below_intrinsic": {
+        "points": 1920,
+        "count": 694,
+        "proportion": 0.3614583333333333,
+        "maximum": 22.54362726716166,
+        "mean_size": 4.401835465076554
+      },
+      "price_above_discounted_spot": {
+        "points": 1920,
+        "count": 0,
+        "proportion": 0.0,
+        "maximum": 0.0,
+        "mean_size": 0.0
+      },
+      "delta_below_zero": {
+        "points": 1920,
+        "count": 0,
+        "proportion": 0.0,
+        "maximum": 0.0,
+        "mean_size": 0.0
+      },
+      "delta_above_discount_factor": {
+        "points": 1920,
+        "count": 695,
+        "proportion": 0.3619791666666667,
+        "maximum": 0.07687548313245096,
+        "mean_size": 0.016195508801286455
+      },
+      "gamma_negative": {
+        "points": 1920,
+        "count": 44,
+        "proportion": 0.022916666666666665,
+        "maximum": 0.0005185894734547546,
+        "mean_size": 4.7551626016186025e-06
+      }
+    },
+    "near_expiry": {
+      "price_below_intrinsic": {
+        "points": 483,
+        "count": 81,
+        "proportion": 0.16770186335403728,
+        "maximum": 16.977005620559126,
+        "mean_size": 1.840315214754027
+      },
+      "price_above_discounted_spot": {
+        "points": 483,
+        "count": 6,
+        "proportion": 0.012422360248447204,
+        "maximum": 2.923173077208048,
+        "mean_size": 0.02807942521500461
+      },
+      "delta_below_zero": {
+        "points": 483,
+        "count": 48,
+        "proportion": 0.09937888198757763,
+        "maximum": 1.3464213913714862,
+        "mean_size": 0.07120644237285616
+      },
+      "delta_above_discount_factor": {
+        "points": 483,
+        "count": 145,
+        "proportion": 0.3002070393374741,
+        "maximum": 6.932250406920733,
+        "mean_size": 0.053793083126551365
+      },
+      "gamma_negative": {
+        "points": 483,
+        "count": 273,
+        "proportion": 0.5652173913043478,
+        "maximum": 4.466925478422008,
+        "mean_size": 0.040356925628377796
+      }
+    },
+    "near_strike": {
+      "price_below_intrinsic": {
+        "points": 1224,
+        "count": 331,
+        "proportion": 0.2704248366013072,
+        "maximum": 14.914681101369865,
+        "mean_size": 1.8602052470874875
+      },
+      "price_above_discounted_spot": {
+        "points": 1224,
+        "count": 0,
+        "proportion": 0.0,
+        "maximum": 0.0,
+        "mean_size": 0.0
+      },
+      "delta_below_zero": {
+        "points": 1224,
+        "count": 0,
+        "proportion": 0.0,
+        "maximum": 0.0,
+        "mean_size": 0.0
+      },
+      "delta_above_discount_factor": {
+        "points": 1224,
+        "count": 325,
+        "proportion": 0.26552287581699346,
+        "maximum": 0.06354688570130973,
+        "mean_size": 0.009030287890196801
+      },
+      "gamma_negative": {
+        "points": 1224,
+        "count": 0,
+        "proportion": 0.0,
+        "maximum": 0.0,
+        "mean_size": 0.0
+      }
+    },
+    "low_tail": {
+      "price_below_intrinsic": {
+        "points": 1377,
+        "count": 1060,
+        "proportion": 0.7697893972403776,
+        "maximum": 22.761657560589853,
+        "mean_size": 11.554525590730822
+      },
+      "price_above_discounted_spot": {
+        "points": 1377,
+        "count": 110,
+        "proportion": 0.07988380537400146,
+        "maximum": 6.665770616972896,
+        "mean_size": 0.3245857103051054
+      },
+      "delta_below_zero": {
+        "points": 1377,
+        "count": 786,
+        "proportion": 0.5708061002178649,
+        "maximum": 1.8235929441932308,
+        "mean_size": 0.5096807784208857
+      },
+      "delta_above_discount_factor": {
+        "points": 1377,
+        "count": 102,
+        "proportion": 0.07407407407407407,
+        "maximum": 9.91243894014964,
+        "mean_size": 0.351061779711367
+      },
+      "gamma_negative": {
+        "points": 1377,
+        "count": 255,
+        "proportion": 0.18518518518518517,
+        "maximum": 6.200577892921842,
+        "mean_size": 0.28759901108063524
+      }
+    },
+    "high_tail": {
+      "price_below_intrinsic": {
+        "points": 5610,
+        "count": 7,
+        "proportion": 0.0012477718360071302,
+        "maximum": 5.684341886080802e-14,
+        "mean_size": 7.092761711687275e-17
+      },
+      "price_above_discounted_spot": {
+        "points": 5610,
+        "count": 0,
+        "proportion": 0.0,
+        "maximum": 0.0,
+        "mean_size": 0.0
+      },
+      "delta_below_zero": {
+        "points": 5610,
+        "count": 0,
+        "proportion": 0.0,
+        "maximum": 0.0,
+        "mean_size": 0.0
+      },
+      "delta_above_discount_factor": {
+        "points": 5610,
+        "count": 2340,
+        "proportion": 0.41711229946524064,
+        "maximum": 0.07812228589634507,
+        "mean_size": 0.018196321288984667
+      },
+      "gamma_negative": {
+        "points": 5610,
+        "count": 4940,
+        "proportion": 0.8805704099821747,
+        "maximum": 0.001358504519085335,
+        "mean_size": 0.0008884360504220626
+      }
+    }
+  },
+  "acceptance": {
+    "core_price_rmse": false,
+    "core_delta_rmse": false,
+    "core_gamma_rmse": false,
+    "core_theta_rmse": false
+  },
+  "region_points": {
+    "full": 8211,
+    "core": 1920,
+    "near_expiry": 483,
+    "near_strike": 1224,
+    "low_tail": 1377,
+    "high_tail": 5610
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "problem": {
+    "K": 100.0,
+    "T": 1.0,
+    "r": 0.05,
+    "sigma": 0.2,
+    "q": 0.0,
+    "x_min": 0.05,
+    "x_max": 4.0
+  },
+  "network": {
+    "hidden_layers": 4,
+    "hidden_width": 64,
+    "dtype": "float64"
+  },
+  "seed": 19102026,
+  "seeds": [19102026, 19112026, 19122026],
+  "matched_budget": {
+    "adam_epochs": 400,
+    "adam_learning_rate": 0.001,
+    "adam_batch_size": 1024,
+    "terminal_batch_size": 1024,
+    "terminal_loss_weight": 25.0,
+    "near_strike_fraction": 0.25,
+    "near_strike_half_width": 0.3,
+    "minimum_tau": 0.0001,
+    "log_every": 20,
+    "wall_clock_cap_seconds": 1500
+  },
+  "variants": {
+    "baseline_matched": {},
+    "constrained": {},
+    "causal": {}
+  },
+  "constrained": {
+    "constraint_points": 1024,
+    "violation_candidates": 4096,
+    "violation_top_k": 256,
+    "resample_every": 10,
+    "balance_every": 10,
+    "balance_ema": 0.8,
+    "category_weight_min": 1.0,
+    "category_weight_max": 10.0,
+    "point_weight_eta": 1.0,
+    "constraint_weight": 1.0
+  },
+  "causal": {
+    "causal_bins": 20,
+    "epsilon_start": 1.0,
+    "epsilon_final": 20.0,
+    "epsilon_anneal_fraction": 0.75
+  },
+  "refinement": {
+    "wall_clock_seconds": 300,
+    "pde_points": 2048,
+    "terminal_points": 1024,
+    "lbfgs": {
+      "history_size": 50,
+      "max_iter": 20000,
+      "tolerance_grad": 1e-12,
+      "tolerance_change": 1e-14
+    },
+    "nys_newton_cg": {
+      "sketch_rank": 32,
+      "cg_max_steps": 30,
+      "cg_tolerance": 1e-6,
+      "damping": 1e-6,
+      "max_steps": 10000,
+      "seed": 424242
+    }
+  },
+  "evaluation": {
+    "x_points": 161,
+    "tau_points": 51,
+    "core_x_range": [0.5, 1.5],
+    "core_minimum_tau": 0.05,
+    "near_expiry_tau": 0.05,
+    "near_strike_half_width": 0.3,
+    "batch_size": 4096
+  },
+  "acceptance": {
+    "core_price_rmse": 0.02,
+    "core_delta_rmse": 0.01,
+    "core_gamma_rmse": 0.001,
+    "core_theta_rmse": 0.1,
+    "pde_residual_rmse": 0.01
+  }
+}

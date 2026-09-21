@@ -1,0 +1,27 @@
+{
+  "protocol_id": "common_option_benchmark_v1",
+  "protocol_version": 1,
+  "status": "frozen_before_deeponet_training",
+  "settings_sha256": "9a5f198faa7fde326d6c53f08ca6472fe9dc41cef98121dd0515a5ea668483c8",
+  "cases_sha256": "c2d3980e779079dd95e54ed59590ae9011b5e058c38515a0619fef38e1f1f9a5",
+  "references_sha256": "8bae018755f518160ffc17a739c7227841f369185f40bc6cbef0a1857dcc528a",
+  "case_count": 68,
+  "split_counts": {
+    "anchor": 16,
+    "interpolation": 32,
+    "extrapolation": 20
+  },
+  "quantities": [
+    "price",
+    "delta",
+    "gamma",
+    "vega",
+    "theta",
+    "rho"
+  ],
+  "option_types": [
+    "call",
+    "put"
+  ],
+  "created_before_neural_training": true
+}

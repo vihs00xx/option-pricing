@@ -1,0 +1,40 @@
+{
+  "training_cost_required_fields": [
+    "model",
+    "training_run_id",
+    "seed",
+    "parameter_count",
+    "epochs",
+    "optimizer_steps",
+    "wall_seconds",
+    "peak_rss_mb",
+    "device",
+    "final_training_loss",
+    "final_validation_loss"
+  ],
+  "inference_output_required_fields": [
+    "method",
+    "case_id",
+    "split",
+    "quantity",
+    "estimate",
+    "reference",
+    "error",
+    "absolute_error",
+    "relative_error"
+  ],
+  "inference_timing_required_fields": [
+    "method",
+    "batch_size",
+    "warmup_batches",
+    "repetitions",
+    "median_batch_seconds",
+    "q25_batch_seconds",
+    "q75_batch_seconds",
+    "median_seconds_per_option",
+    "median_options_per_second"
+  ],
+  "benchmark_cases": "results/common_benchmark/tables/benchmark_cases.csv",
+  "reference_values": "results/common_benchmark/tables/benchmark_references.csv",
+  "rule": "Training cost and inference cost must be reported in separate tables."
+}

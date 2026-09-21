@@ -1,0 +1,61 @@
+{
+  "dataset_version": 1,
+  "protocol_id": "deeponet_bs_operator_v1",
+  "status": "frozen_before_deeponet_training",
+  "operator": {
+    "description": "Map a European option contract and an evaluation coordinate to the Black-Scholes solution.",
+    "branch_features": ["K", "T", "r", "q", "sigma", "option_type"],
+    "trunk_features": ["S", "tau"],
+    "option_encoding": {"call": 1.0, "put": -1.0},
+    "targets": ["price", "delta", "gamma", "vega", "theta", "rho"],
+    "theta_convention": "calendar-time derivative per year, equal to -dV/dtau"
+  },
+  "training_domain": {
+    "K": [80.0, 120.0],
+    "T": [0.05, 2.0],
+    "moneyness": [0.7, 1.3],
+    "tau_minimum": 0.01,
+    "sigma": [0.1, 0.6],
+    "r": [-0.02, 0.1],
+    "q": [0.0, 0.06]
+  },
+  "sampling": {
+    "method": "LatinHypercube",
+    "seed": 22092026,
+    "train_contracts": 256,
+    "validation_contracts": 64,
+    "coordinates_per_contract": 32,
+    "option_balance": "alternating_equal_counts"
+  },
+  "splits": {
+    "train": "Synthetic contracts and coordinates used for fitting.",
+    "validation": "Independent synthetic contracts used for model selection.",
+    "test": "The frozen common benchmark cases; never used for fitting or model selection."
+  },
+  "benchmark_profiles": {
+    "fixed_surface": {
+      "purpose": "Direct comparison with the frozen anchored PINN",
+      "K": 100.0,
+      "T": 1.0,
+      "r": 0.05,
+      "sigma": 0.2,
+      "q": 0.0,
+      "option": "call"
+    },
+    "parameterized_contracts": {
+      "purpose": "Full comparison of DeepONet with analytical and classical methods",
+      "cases": "results/common_benchmark/tables/benchmark_cases.csv",
+      "includes_calls_and_puts": true,
+      "includes_interpolation_and_extrapolation": true
+    }
+  },
+  "data_policy": {
+    "label_source": "analytical_black_scholes",
+    "real_market_data": "reserved_for_external_case_study_only",
+    "reason": "Market prices include model mismatch, liquidity effects and observation noise and are not exact Black-Scholes solution labels."
+  },
+  "output": {
+    "dataset": "results/deeponet/data/black_scholes_operator_v1.npz",
+    "manifest": "results/deeponet/data/black_scholes_operator_v1_manifest.json"
+  }
+}

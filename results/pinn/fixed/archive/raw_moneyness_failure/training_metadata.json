@@ -1,0 +1,23 @@
+{
+  "model": "fixed_black_scholes_pinn",
+  "training_run_id": "fixed_seed_17092026",
+  "seed": 17092026,
+  "parameter_count": 12737,
+  "epochs": 1600,
+  "optimizer_steps": 1766,
+  "adam_steps": 1600,
+  "lbfgs_closure_calls": 166,
+  "wall_seconds": 599.6951816999936,
+  "baseline_rss_mb": 212.421875,
+  "peak_rss_mb": 354.92578125,
+  "incremental_peak_mb": 142.50390625,
+  "device": "cpu",
+  "torch_version": "2.8.0+cpu",
+  "python": "3.13.3",
+  "threads": 12,
+  "final_training_loss": 0.00037913967304820724,
+  "final_pde_loss": 0.00016058118883441704,
+  "final_terminal_loss": 8.742339368551609e-06,
+  "final_validation_loss": 0.00016042973136739478,
+  "checkpoint": "checkpoints\\pinn\\fixed_black_scholes_pinn.pt"
+}

@@ -1,0 +1,246 @@
+{
+  "study_version": 3,
+  "protocol_id": "pinn_ablation_v3_full_provenance",
+  "protocols": {
+    "pinn_ablation_v3_full_provenance": {
+      "results_dir": "results/pinn/anchored_study_v3",
+      "checkpoint_dir": "checkpoints/pinn/anchored_study_v3",
+      "status": "current",
+      "note": "Complete run identity: effective configuration, variant, seed, architecture, dtype, dataset content hash, exact training subset, normalisation policy and values, selection policy, optimizer tolerances, training-source fingerprint."
+    },
+    "pinn_ablation_v2_partial_provenance": {
+      "results_dir": "results/pinn/anchored_study_v2",
+      "checkpoint_dir": "checkpoints/pinn/anchored_study_v2",
+      "status": "legacy",
+      "note": "Frozen 1200/1800-second sweep. Records the effective settings, dataset content hash and a source fingerprint that covers training AND evaluation files, so the training identity cannot be narrowed retroactively. Never pool with v3."
+    },
+    "pinn_pilot_1200_cap": {
+      "results_dir": "results/pinn/anchored_study_v2",
+      "checkpoint_dir": "checkpoints/pinn/anchored_study_v2_pilot",
+      "status": "legacy",
+      "note": "One-seed pilot under a 1200-second cap; two of its six runs were superseded in place before archiving."
+    }
+  },
+  "problem": {
+    "K": 100.0,
+    "T": 1.0,
+    "r": 0.05,
+    "sigma": 0.2,
+    "q": 0.0,
+    "option": "call",
+    "x_min": 0.05,
+    "x_max": 4.0
+  },
+  "network": {
+    "hidden_layers": 4,
+    "hidden_width": 64,
+    "dtype": "float64"
+  },
+  "output": {
+    "results_dir": "results/pinn/anchored_study_v3",
+    "checkpoint_dir": "checkpoints/pinn/anchored_study_v3"
+  },
+  "seed": 21092026,
+  "seeds": [
+    19102026,
+    19112026,
+    19122026
+  ],
+  "models": [
+    "data_only",
+    "physics_only",
+    "hybrid",
+    "v2"
+  ],
+  "anchor_counts": [
+    512,
+    1024,
+    2048,
+    4096,
+    8192
+  ],
+  "label_efficiency_models": [
+    "data_only",
+    "hybrid",
+    "v2"
+  ],
+  "greek_anchor_divisor": 4,
+  "greek_anchor_max": 2048,
+  "validation_points": 2048,
+  "test_points": 4096,
+  "pde_points": 2048,
+  "terminal_points": 2048,
+  "minimum_tau": 0.01,
+  "density": {
+    "uniform": 0.5,
+    "near_strike": 0.15,
+    "near_expiry": 0.15,
+    "high_gamma": 0.15,
+    "boundaries": 0.05
+  },
+  "greek_density": {
+    "uniform": 0.2,
+    "near_strike": 0.35,
+    "near_expiry": 0.25,
+    "high_gamma": 0.2,
+    "boundaries": 0.0
+  },
+  "near_strike_half_width": 0.3,
+  "near_expiry_tau_span": 0.05,
+  "high_gamma_half_width": 0.15,
+  "high_gamma_tau_span": 0.1,
+  "boundary_fraction_of_domain": 0.1,
+  "scale_epsilon": 1e-12,
+  "weight_min": 0.05,
+  "weight_max": 100.0,
+  "adam_learning_rate": 0.001,
+  "validation_every": 50,
+  "lbfgs_history_size": 75,
+  "lbfgs_tolerance_grad": 1e-12,
+  "lbfgs_tolerance_change": 1e-14,
+  "lbfgs_validation_every": 10,
+  "wall_clock_cap_seconds": 1800,
+  "selection": {
+    "physics_only": {
+      "pde": 1.0,
+      "terminal": 1.0
+    },
+    "data_only": {
+      "price": 1.0,
+      "theta": 1.0
+    },
+    "hybrid": {
+      "price": 1.0,
+      "theta": 1.0
+    },
+    "v2": {
+      "price": 1.0,
+      "theta": 1.0,
+      "delta": 1.0,
+      "gamma": 1.0
+    },
+    "supervised_hybrid_control": {
+      "price": 1.0,
+      "theta": 1.0
+    },
+    "supervised_v2_control": {
+      "price": 1.0,
+      "theta": 1.0,
+      "delta": 1.0,
+      "gamma": 1.0
+    }
+  },
+  "stages": [
+    {
+      "name": "warmup_price_and_payoff",
+      "adam_epochs": 600,
+      "lbfgs_iterations": 0,
+      "weights": {
+        "price": 1.0,
+        "terminal": 1.0,
+        "pde": 0.0,
+        "theta": 0.0,
+        "delta": 0.0,
+        "gamma": 0.0
+      }
+    },
+    {
+      "name": "pde_balance",
+      "adam_epochs": 400,
+      "lbfgs_iterations": 0,
+      "weights": {
+        "price": 1.0,
+        "terminal": 1.0,
+        "pde": 1.0,
+        "theta": 0.0,
+        "delta": 0.0,
+        "gamma": 0.0
+      }
+    },
+    {
+      "name": "greek_supervision",
+      "adam_epochs": 400,
+      "lbfgs_iterations": 0,
+      "weights": {
+        "price": 1.0,
+        "terminal": 1.0,
+        "pde": 1.0,
+        "theta": 0.1,
+        "delta": 0.1,
+        "gamma": 0.1
+      }
+    },
+    {
+      "name": "lbfgs_polish",
+      "adam_epochs": 0,
+      "lbfgs_iterations": 400,
+      "weights": {
+        "price": 1.0,
+        "terminal": 1.0,
+        "pde": 1.0,
+        "theta": 0.1,
+        "delta": 0.1,
+        "gamma": 0.1
+      }
+    }
+  ],
+  "ablation_controls": [
+    {
+      "name": "supervised_hybrid_control",
+      "note": "price/theta + terminal payoff, no PDE (isolates the PDE term)"
+    },
+    {
+      "name": "supervised_v2_control",
+      "note": "price/theta/delta/gamma + terminal payoff, no PDE"
+    }
+  ],
+  "evaluation": {
+    "x_points": 161,
+    "tau_points": 51,
+    "core_x_range": [
+      0.5,
+      1.5
+    ],
+    "core_minimum_tau": 0.05,
+    "near_expiry_tau": 0.05,
+    "near_strike_half_width": 0.3,
+    "batch_size": 4096,
+    "inference_batch_size": 1024,
+    "inference_warmup": 2,
+    "inference_repetitions": 10,
+    "violation_tolerance": 1e-07
+  },
+  "acceptance": {
+    "absolute_core_grid": {
+      "price_rmse": 0.0098,
+      "delta_rmse": 0.00247,
+      "gamma_rmse": 0.000872,
+      "theta_rmse": 0.0874
+    },
+    "improvement_vs_reference_broad_test": {
+      "price_rmse": true,
+      "delta_rmse": true,
+      "gamma_rmse": true,
+      "theta_rmse": true
+    },
+    "financial_categories": {
+      "criterion": "per category, violation proportion AND maximum magnitude must not exceed the reference's on the same grid and tolerance; no cross-category magnitude is combined",
+      "categories": {
+        "price_below_lower_bound": {"units": "price (dollars, K=100)"},
+        "price_above_upper_bound": {"units": "price (dollars, K=100)"},
+        "delta_below_zero": {"units": "delta (dimensionless)"},
+        "delta_above_upper_bound": {"units": "delta (dimensionless)"},
+        "gamma_negative": {"units": "gamma (1/dollars, K=100 scale)"}
+      },
+      "any_constraint": {
+        "criterion": "proportion violating at least one constraint must not exceed the reference's",
+        "note": "proportion only: its magnitude has no single unit"
+      },
+      "legacy_note": "The historical 0.478 / 0.203 values were a maximum per-category proportion and a single raw magnitude on a different grid and tolerance. They are not reused as thresholds."
+    }
+  },
+  "reference": {
+    "checkpoint": "checkpoints/pinn/fixed_black_scholes_pinn.pt",
+    "note": "Historical anchored model. Read-only, never overwritten. Trained with a longer, different recipe, so it is an accuracy reference rather than a compute-matched baseline."
+  }
+}

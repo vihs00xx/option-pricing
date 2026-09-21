@@ -1,0 +1,38 @@
+{
+  "variant": "constrained",
+  "seed": 19112026,
+  "adam_epochs_configured": 400,
+  "adam_epochs_completed": 400,
+  "hit_wall_cap": false,
+  "wall_seconds": 237.55175819999567,
+  "parameter_count": 12737,
+  "final_training_loss": 3.441296242421512,
+  "baseline_rss_mb": 270.22265625,
+  "peak_rss_mb": 405.5625,
+  "incremental_peak_mb": 135.33984375,
+  "training_run_id": "constrained_s1_seed_19112026",
+  "settings_sha256": "c91c83e54b9e49d4",
+  "adam_checkpoint": "checkpoints\\pinn\\study_constrained_s1_adam.pt",
+  "lbfgs": {
+    "optimizer": "lbfgs",
+    "closure_calls": 370,
+    "wall_seconds": 300.62267650000285,
+    "final_loss": 0.0007788038577065837,
+    "final_components": {
+      "pde": 0.00019791939866352793,
+      "terminal": 1.581442088855729e-05,
+      "price_bounds": 1.956525659885614e-06,
+      "delta_bounds": 3.5772420374771765e-05,
+      "gamma": 0.00012511173778494857
+    },
+    "objective_points": {
+      "pde": 2048,
+      "terminal": 1024
+    },
+    "baseline_rss_mb": 363.34375,
+    "peak_rss_mb": 426.56640625,
+    "incremental_peak_mb": 63.22265625,
+    "training_run_id": "constrained_s1_seed_19112026_lbfgs"
+  },
+  "checkpoint": "checkpoints\\pinn\\study_constrained_s1.pt"
+}

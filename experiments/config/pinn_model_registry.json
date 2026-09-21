@@ -1,0 +1,111 @@
+{
+  "registry_version": 1,
+  "status": "frozen_research_milestone",
+  "primary_model": {
+    "name": "anchored_pinn",
+    "role": "primary_1d_pinn_baseline",
+    "status": "frozen",
+    "checkpoint": "checkpoints/pinn/fixed_black_scholes_pinn.pt",
+    "checkpoint_sha256": "8b7fd212d93c2c9a0c99ef5eccb83581c5dd7dd62527ab675489644d5511f7db",
+    "problem": {
+      "option": "call",
+      "K": 100.0,
+      "T": 1.0,
+      "r": 0.05,
+      "sigma": 0.2,
+      "q": 0.0
+    },
+    "uses_analytical_labels": ["price", "theta"],
+    "results": {
+      "training": "results/pinn/fixed/tables/training_metadata.json",
+      "validation": "results/pinn/fixed/tables/validation.json",
+      "diagnostics": "results/pinn/original_fixed_diagnostics/tables/diagnostics.json"
+    },
+    "core_rmse": {
+      "price": 0.00980253434450393,
+      "delta": 0.0024711386363312363,
+      "gamma": 0.0008723260362163696,
+      "theta": 0.08736036134471885
+    },
+    "limitations": [
+      "The model is restricted to one fixed European call contract.",
+      "It is an accuracy reference rather than a compute-matched baseline.",
+      "It passes the recorded accuracy gates but not the recorded shape-constraint gate."
+    ]
+  },
+  "research_variants": [
+    {
+      "name": "baseline_matched",
+      "purpose": "Physics-only matched-budget baseline",
+      "status": "completed",
+      "results": "results/pinn/study/tables/seed_aggregate.csv"
+    },
+    {
+      "name": "constrained",
+      "purpose": "Adaptive derivative and no-arbitrage penalties",
+      "status": "completed_original_and_revised",
+      "results": "results/pinn/study/tables/seed_aggregate.csv"
+    },
+    {
+      "name": "causal",
+      "purpose": "Causal weighting over time to maturity",
+      "status": "completed_original_and_revised",
+      "results": "results/pinn/study/tables/seed_aggregate.csv"
+    },
+    {
+      "name": "optimizer_refinements",
+      "purpose": "L-BFGS and NysNewton-CG refinements from a shared checkpoint",
+      "status": "completed",
+      "results": "results/pinn/study_refinement/tables"
+    },
+    {
+      "name": "anchored_ablation_v2",
+      "purpose": "Data-only, physics-only, hybrid, sparse-Greek and supervised controls",
+      "status": "exploratory_partial_provenance",
+      "results": "results/pinn/anchored_study_v2"
+    },
+    {
+      "name": "gradient_enhanced",
+      "purpose": "Residual-gradient supervision for Greek accuracy",
+      "status": "not_implemented_reserved_for_future_work"
+    }
+  ],
+  "legacy_diagnostic_runs": [
+    {
+      "name": "failed_fixed_pinn_prototypes",
+      "status": "diagnostic_only",
+      "results": "results/pinn/fixed/archive",
+      "reason": "Failed terminal-condition or coordinate formulations"
+    },
+    {
+      "name": "anchored_study_v1",
+      "status": "legacy_do_not_pool",
+      "results": "results/pinn/anchored_study",
+      "reason": "Superseded controller and reporting protocol"
+    },
+    {
+      "name": "anchored_study_v2_runs",
+      "status": "legacy_do_not_pool",
+      "results": "results/pinn/anchored_study_v2",
+      "reason": "Incomplete run identity and mixed training protocols"
+    }
+  ],
+  "reporting_policy": {
+    "main_comparison_model": "anchored_pinn",
+    "exclude_from_main_tables": [
+      "diagnostic_only",
+      "legacy_do_not_pool",
+      "exploratory_partial_provenance",
+      "not_implemented_reserved_for_future_work"
+    ],
+    "research_variants_may_be_reported_as": "ablation_or_negative_results"
+  },
+  "future_work": [
+    "Correct training-subset hashing in run identities.",
+    "Verify checkpoint contents and required checkpoint kinds before reuse.",
+    "Reject protocol and dataset mismatches from official aggregates.",
+    "Preserve selected and last checkpoint entries separately in evaluation manifests.",
+    "Make the staged runner fail immediately after a failed command.",
+    "Revisit gradient-enhanced and structurally constrained formulations only under a new versioned protocol."
+  ]
+}

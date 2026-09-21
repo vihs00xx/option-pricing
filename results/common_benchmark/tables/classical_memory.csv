@@ -1,0 +1,4 @@
+method,baseline_rss_mb,peak_rss_mb,incremental_peak_mb,batch_size
+black_scholes,90.8359375,90.8671875,0.03125,6
+conditional_rqmc,90.93359375,95.75,4.81640625,6
+crank_nicolson,90.8515625,93.2890625,2.4375,6

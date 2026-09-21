@@ -1,0 +1,30 @@
+{
+  "model": "hybrid",
+  "seed": 19112026,
+  "active_terms": [
+    "price",
+    "theta",
+    "pde",
+    "terminal"
+  ],
+  "selected_stage": "physics",
+  "final_validation_loss": 0.13201926159934463,
+  "optimizer_steps": 1864,
+  "wall_seconds": 163.88909889999195,
+  "hit_wall_cap": false,
+  "parameter_count": 12737,
+  "baseline_rss_mb": 371.3203125,
+  "peak_rss_mb": 377.70703125,
+  "incremental_peak_mb": 6.38671875,
+  "training_run_id": "hybrid_n1024_s19112026_seed_19112026",
+  "anchor_count": 1024,
+  "greek_anchor_count": 256,
+  "label_scales": {
+    "price": 0.9680533291485223,
+    "delta": 0.5023753786493692,
+    "gamma": 0.008272361617213899,
+    "theta": 0.030538616471486917
+  },
+  "settings_sha256": "bbc6e22884bdce32",
+  "checkpoint": "checkpoints\\pinn\\anchored_study\\hybrid_n1024_s19112026.pt"
+}

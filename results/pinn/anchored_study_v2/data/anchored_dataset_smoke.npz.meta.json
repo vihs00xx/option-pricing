@@ -1,0 +1,68 @@
+{
+  "component_counts": {
+    "boundaries": 12,
+    "high_gamma": 38,
+    "near_expiry": 38,
+    "near_strike": 38,
+    "uniform": 130
+  },
+  "config_hash": "fe43e3e47493080b",
+  "content_hash": "4e802a9ff0d5626d",
+  "counts": {
+    "greek_anchors": 64,
+    "pde": 256,
+    "price_anchors": 256,
+    "terminal": 256,
+    "test": 256,
+    "validation": 256,
+    "validation_pde": 256,
+    "validation_terminal": 256
+  },
+  "greek_component_counts": {
+    "boundaries": 0,
+    "high_gamma": 12,
+    "near_expiry": 16,
+    "near_strike": 22,
+    "uniform": 14
+  },
+  "label_counts": {
+    "delta": 64,
+    "gamma": 64,
+    "price": 256,
+    "theta": 64,
+    "validation_delta": 256,
+    "validation_gamma": 256,
+    "validation_price": 256,
+    "validation_theta": 256
+  },
+  "problem": {
+    "K": 100.0,
+    "T": 1.0,
+    "q": 0.0,
+    "r": 0.05,
+    "sigma": 0.2,
+    "x_max": 4.0,
+    "x_min": 0.05
+  },
+  "ranges": {
+    "test_y": [
+      -2.9936905702823786,
+      1.378101641335522
+    ],
+    "train_tau": [
+      0.01000508033540911,
+      0.9930581694841385
+    ],
+    "train_y": [
+      -2.9906182881199994,
+      1.369431206612346
+    ]
+  },
+  "scales": {
+    "delta": 0.6135427631430374,
+    "gamma": 0.022832887151616188,
+    "price": 0.7699654452300928,
+    "theta": 0.06510077301613522
+  },
+  "schema_version": 2
+}

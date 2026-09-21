@@ -1,0 +1,14 @@
+model,checkpoint_kind,absolute_core_grid_pass,abs_core_price,abs_core_delta,abs_core_gamma,abs_core_theta,broad_test_improvement_pass,broad_price_better_than_reference,broad_delta_better_than_reference,broad_gamma_better_than_reference,broad_theta_better_than_reference,reference_broad_price_rmse,constraint_any_proportion_le_reference,reference_any_violation_proportion,constraints_pass
+reference_existing_best,reference,False,False,False,False,True,False,False,False,False,False,0.023443719485573725,True,0.8025819023261479,True
+data_only_n8192_s19102026,selected,False,False,False,False,False,False,False,False,False,True,0.023443719485573725,False,0.8025819023261479,False
+data_only_n8192_s19102026,last,False,False,False,False,False,False,False,False,False,True,0.023443719485573725,False,0.8025819023261479,False
+hybrid_n8192_s19102026,selected,False,False,False,False,False,False,False,False,False,True,0.023443719485573725,False,0.8025819023261479,False
+hybrid_n8192_s19102026,last,False,False,False,False,False,False,False,False,False,True,0.023443719485573725,False,0.8025819023261479,False
+physics_only_n8192_s19102026,selected,False,False,False,False,False,False,False,False,False,False,0.023443719485573725,True,0.8025819023261479,True
+physics_only_n8192_s19102026,last,False,False,False,False,False,False,False,False,False,False,0.023443719485573725,True,0.8025819023261479,True
+supervised_hybrid_control_n8192_s19102026,selected,False,False,False,False,False,False,False,False,False,True,0.023443719485573725,False,0.8025819023261479,False
+supervised_hybrid_control_n8192_s19102026,last,False,False,False,False,False,False,False,False,False,True,0.023443719485573725,False,0.8025819023261479,False
+supervised_v2_control_n8192_s19102026,selected,False,False,False,False,False,False,False,False,True,False,0.023443719485573725,False,0.8025819023261479,False
+supervised_v2_control_n8192_s19102026,last,False,False,False,False,False,False,False,False,True,False,0.023443719485573725,False,0.8025819023261479,False
+v2_n8192_s19102026,selected,False,False,False,False,False,False,False,False,False,False,0.023443719485573725,False,0.8025819023261479,False
+v2_n8192_s19102026,last,False,False,False,False,False,False,False,False,False,False,0.023443719485573725,False,0.8025819023261479,False

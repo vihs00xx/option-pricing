@@ -1,0 +1,93 @@
+{
+  "model": "fixed_black_scholes_anchored_pinn",
+  "training_run_id": "fixed_seed_17092026",
+  "seed": 17092026,
+  "parameter_count": 12737,
+  "epochs": 1600,
+  "optimizer_steps": 7936,
+  "adam_steps": 1600,
+  "lbfgs_closure_calls": 168,
+  "wall_seconds": 3002.77494260003,
+  "baseline_rss_mb": 212.72265625,
+  "peak_rss_mb": 347.73828125,
+  "incremental_peak_mb": 135.015625,
+  "device": "cpu",
+  "torch_version": "2.8.0+cpu",
+  "python": "3.13.3",
+  "threads": 12,
+  "final_training_loss": 2.8814005887727652e-05,
+  "final_pde_loss": 1.060946425663787e-05,
+  "final_terminal_loss": 7.281816652435913e-07,
+  "final_validation_loss": 1.1078664128494057e-05,
+  "checkpoint": "checkpoints\\pinn\\fixed_black_scholes_pinn.pt",
+  "lbfgs_refinement_closure_calls": 2659,
+  "refinement_wall_seconds": 1008.3535170000105,
+  "anchored_refinement": {
+    "physics_informed": true,
+    "labelled_price_anchors_used": true,
+    "labelled_greeks_used": true,
+    "labelled_greeks": [
+      "theta"
+    ],
+    "anchor_source": "analytical Black-Scholes prices and Theta",
+    "wall_seconds": 1378.6310412999956,
+    "adam_steps": 1750,
+    "lbfgs_closure_calls": 1759,
+    "settings": {
+      "seed": 19092027,
+      "anchor_points": 8192,
+      "core_anchor_fraction": 0.75,
+      "core_x_range": [
+        0.4,
+        1.6
+      ],
+      "minimum_tau": 0.01,
+      "pde_points": 2048,
+      "terminal_points": 2048,
+      "adam_batch_size": 1024,
+      "adam_learning_rate": 0.0001,
+      "terminal_loss_weight": 25.0,
+      "lbfgs_history_size": 75,
+      "log_every": 20,
+      "stages": [
+        {
+          "name": "price_anchor",
+          "adam_epochs": 1000,
+          "lbfgs_max_iterations": 700,
+          "price_loss_weight": 100.0,
+          "pde_loss_weight": 1.0,
+          "theta_loss_weight": 0.0
+        },
+        {
+          "name": "pde_balance",
+          "adam_epochs": 300,
+          "lbfgs_max_iterations": 400,
+          "price_loss_weight": 100.0,
+          "pde_loss_weight": 5.0,
+          "theta_loss_weight": 0.0
+        },
+        {
+          "name": "pde_polish",
+          "adam_epochs": 150,
+          "lbfgs_max_iterations": 250,
+          "price_loss_weight": 100.0,
+          "pde_loss_weight": 10.0,
+          "theta_loss_weight": 0.0
+        },
+        {
+          "name": "theta_anchor",
+          "adam_epochs": 300,
+          "lbfgs_max_iterations": 300,
+          "price_loss_weight": 100.0,
+          "pde_loss_weight": 5.0,
+          "theta_loss_weight": 100.0
+        }
+      ]
+    },
+    "final_recorded_stage_loss": 0.00032449752150555844,
+    "final_recorded_stage_pde_loss": 1.2718735831830822e-05,
+    "final_recorded_stage_price_loss": 2.0514561808268456e-08,
+    "final_recorded_stage_theta_loss": 2.4725290834004456e-06,
+    "final_recorded_stage_terminal_loss": 4.639791130213183e-07
+  }
+}

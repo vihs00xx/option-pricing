@@ -1,0 +1,14 @@
+{
+  "settings_sha256": "b195493f53d1bdae00d25269dbb246b33bd77df6e51f9079b74744b326e59320",
+  "cases_sha256": "c2d3980e779079dd95e54ed59590ae9011b5e058c38515a0619fef38e1f1f9a5",
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+  "numpy": "2.2.6",
+  "scipy": "1.15.3",
+  "methods": [
+    "black_scholes",
+    "conditional_rqmc",
+    "crank_nicolson"
+  ]
+}

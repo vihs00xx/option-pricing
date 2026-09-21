@@ -1,0 +1,13 @@
+{
+  "variant": "baseline_matched",
+  "seed": 19102026,
+  "adam_epochs_configured": 400,
+  "adam_epochs_completed": 400,
+  "hit_wall_cap": false,
+  "wall_seconds": 219.21189419999428,
+  "parameter_count": 12737,
+  "final_training_loss": 0.24566434349060268,
+  "training_run_id": "baseline_matched_seed_19102026",
+  "settings_sha256": "31e744786c20c8da",
+  "checkpoint": "checkpoints\\pinn\\study_baseline_matched.pt"
+}

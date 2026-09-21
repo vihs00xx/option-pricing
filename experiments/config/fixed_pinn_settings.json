@@ -1,0 +1,76 @@
+{
+  "problem": {
+    "K": 100.0,
+    "T": 1.0,
+    "r": 0.05,
+    "sigma": 0.2,
+    "q": 0.0,
+    "option": "call",
+    "x_min": 0.05,
+    "x_max": 4.0
+  },
+  "network": {
+    "hidden_layers": 4,
+    "hidden_width": 64,
+    "activation": "tanh",
+    "dtype": "float64"
+  },
+  "training": {
+    "seed": 17092026,
+    "adam_epochs": 1600,
+    "adam_learning_rate": 0.001,
+    "adam_batch_size": 1024,
+    "terminal_batch_size": 1024,
+    "terminal_loss_weight": 25.0,
+    "lbfgs_max_iterations": 150,
+    "refinement_max_iterations": 800,
+    "lbfgs_history_size": 50,
+    "lbfgs_points": 2048,
+    "lbfgs_terminal_points": 2048,
+    "near_strike_fraction": 0.25,
+    "near_strike_half_width": 0.3,
+    "minimum_tau": 0.0001,
+    "log_every": 20
+  },
+  "evaluation": {
+    "x_points": 161,
+    "tau_points": 51,
+    "core_x_range": [0.5, 1.5],
+    "core_minimum_tau": 0.05,
+    "residual_points": 8192,
+    "batch_size": 4096,
+    "relative_price_floor": 0.0001,
+    "shape_tolerance": 0.00001
+  },
+  "acceptance": {
+    "core_price_rmse": 0.02,
+    "core_delta_rmse": 0.01,
+    "core_gamma_rmse": 0.001,
+    "core_theta_rmse": 0.1,
+    "pde_residual_rmse": 0.01
+  },
+  "anchored_refinement": {
+    "seed": 19092027,
+    "anchor_points": 8192,
+    "core_anchor_fraction": 0.75,
+    "core_x_range": [0.4, 1.6],
+    "minimum_tau": 0.01,
+    "pde_points": 2048,
+    "terminal_points": 2048,
+    "adam_batch_size": 1024,
+    "adam_learning_rate": 0.0001,
+    "terminal_loss_weight": 25.0,
+    "lbfgs_history_size": 75,
+    "log_every": 20,
+    "stages": [
+      {"name": "price_anchor", "adam_epochs": 1000, "lbfgs_max_iterations": 700,
+       "price_loss_weight": 100.0, "pde_loss_weight": 1.0, "theta_loss_weight": 0.0},
+      {"name": "pde_balance", "adam_epochs": 300, "lbfgs_max_iterations": 400,
+       "price_loss_weight": 100.0, "pde_loss_weight": 5.0, "theta_loss_weight": 0.0},
+      {"name": "pde_polish", "adam_epochs": 150, "lbfgs_max_iterations": 250,
+       "price_loss_weight": 100.0, "pde_loss_weight": 10.0, "theta_loss_weight": 0.0},
+      {"name": "theta_anchor", "adam_epochs": 300, "lbfgs_max_iterations": 300,
+       "price_loss_weight": 100.0, "pde_loss_weight": 5.0, "theta_loss_weight": 100.0}
+    ]
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "dataset_version": 1,
+  "protocol_id": "deeponet_bs_operator_v1",
+  "status": "frozen_before_deeponet_training",
+  "settings_sha256": "e2478865b3670840f027a0c7671ca4f914737bdd2f53dff8c3b4adc97a665a7e",
+  "common_benchmark_settings_sha256": "9a5f198faa7fde326d6c53f08ca6472fe9dc41cef98121dd0515a5ea668483c8",
+  "dataset_sha256": "bb892af8c78df4125346b22aa68945be1a8d10ec570bc1ebb409d75f0ccba6ca",
+  "dataset_content_sha256": "f491f9306080e82f538f36ae1d227cbeaf737e144f0275ecb6655fbd5d97f638",
+  "branch_features": [
+    "K",
+    "T",
+    "r",
+    "q",
+    "sigma",
+    "option_type"
+  ],
+  "trunk_features": [
+    "S",
+    "tau"
+  ],
+  "targets": [
+    "price",
+    "delta",
+    "gamma",
+    "vega",
+    "theta",
+    "rho"
+  ],
+  "split_points": {
+    "train": 8192,
+    "validation": 2048,
+    "test": 68
+  },
+  "split_contracts": {
+    "train": 256,
+    "validation": 64,
+    "test": 68
+  },
+  "test_policy": "Frozen common benchmark; excluded from training and model selection.",
+  "real_market_data_policy": "reserved_for_external_case_study_only"
+}
