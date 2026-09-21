@@ -38,7 +38,7 @@ def fit_rate(rows):
 
 def main():
     project = Path(__file__).resolve().parents[2]
-    settings = json.loads((project / "experiments" / "config" / "convergence_settings.json").read_text())
+    settings = json.loads((project / "experiments" / "config" / "classical" / "convergence_settings.json").read_text())
     tables = project / "results" / "monte_carlo" / "tables"
     figures = project / "results" / "monte_carlo" / "figures"
     tables.mkdir(parents=True, exist_ok=True)

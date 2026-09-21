@@ -17,7 +17,7 @@ def load_csv(path):
 
 def main():
     table_dir = ROOT / "results" / "common_benchmark" / "tables"
-    settings_path = ROOT / "experiments" / "config" / "common_benchmark_settings.json"
+    settings_path = ROOT / "experiments" / "config" / "classical" / "common_benchmark_settings.json"
     settings = json.loads(settings_path.read_text())
     benchmark_metadata = json.loads((table_dir / "benchmark_metadata.json").read_text())
     classical_metadata = json.loads((table_dir / "classical_metadata.json").read_text())

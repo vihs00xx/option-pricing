@@ -2,11 +2,12 @@
 
 Usage:
     python -m experiments.pinn.run_pinn_diagnostics \
-        --checkpoint checkpoints/pinn/fixed_black_scholes_pinn.pt \
+        --checkpoint checkpoints/pinn/primary/anchored/fixed_black_scholes_pinn.pt \
         --name original_fixed
 
 Writes ``diagnostics.json``, ``diagnostics.csv`` and a violation figure
-under ``results/pinn/<name>/tables`` and ``.../figures``. Unlike the
+under ``results/pinn/research_variants/diagnostics/<name>/tables`` and
+``.../figures``. Unlike the
 fixed-PINN evaluation this script never raises on failed acceptance;
 it reports measurements.
 """
@@ -29,7 +30,7 @@ from src.neural.pinn_diagnostics import (
 
 
 ROOT = Path(__file__).resolve().parents[2]
-SETTINGS_PATH = ROOT / "experiments" / "config" / "pinn_study_settings.json"
+SETTINGS_PATH = ROOT / "experiments" / "config" / "neural" / "pinn_study_settings.json"
 
 
 def main():
@@ -61,8 +62,9 @@ def main():
     diagnostics.pop("regions")
     diagnostics.pop("violation_magnitudes")
 
-    table_dir = ROOT / "results" / "pinn" / arguments.name / "tables"
-    figure_dir = ROOT / "results" / "pinn" / arguments.name / "figures"
+    output = ROOT / "results" / "pinn" / "research_variants" / "diagnostics" / arguments.name
+    table_dir = output / "tables"
+    figure_dir = output / "figures"
     table_dir.mkdir(parents=True, exist_ok=True)
     figure_dir.mkdir(parents=True, exist_ok=True)
     (table_dir / "diagnostics.json").write_text(

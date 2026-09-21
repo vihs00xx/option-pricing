@@ -12,7 +12,7 @@ from src.black_scholes import black_scholes_greeks, black_scholes_price
 
 def main():
     project = Path(__file__).resolve().parents[2]
-    settings = json.loads((project / "experiments" / "config" / "analytical_settings.json").read_text())
+    settings = json.loads((project / "experiments" / "config" / "classical" / "analytical_settings.json").read_text())
     base = settings["base_case"]
     grid = settings["reference_grid"]
     rows = []

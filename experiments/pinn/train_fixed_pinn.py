@@ -22,7 +22,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 def main():
-    settings = json.loads((ROOT / "experiments" / "config" / "fixed_pinn_settings.json").read_text())
+    settings = json.loads((ROOT / "experiments" / "config" / "neural" / "fixed_pinn_settings.json").read_text())
     training = settings["training"]
     network = settings["network"]
     dtype = torch.float64 if network["dtype"] == "float64" else torch.float32
@@ -35,9 +35,9 @@ def main():
     model = FixedBlackScholesPINN(
         problem, hidden_layers=network["hidden_layers"], hidden_width=network["hidden_width"]
     )
-    table_dir = ROOT / "results" / "pinn" / "fixed" / "tables"
-    figure_dir = ROOT / "results" / "pinn" / "fixed" / "figures"
-    checkpoint_dir = ROOT / "checkpoints" / "pinn"
+    table_dir = ROOT / "results" / "pinn" / "primary" / "anchored" / "tables"
+    figure_dir = ROOT / "results" / "pinn" / "primary" / "anchored" / "figures"
+    checkpoint_dir = ROOT / "checkpoints" / "pinn" / "primary" / "anchored"
     table_dir.mkdir(parents=True, exist_ok=True)
     figure_dir.mkdir(parents=True, exist_ok=True)
     checkpoint_dir.mkdir(parents=True, exist_ok=True)

@@ -61,7 +61,7 @@ def measure_memory(method):
 
 
 def main():
-    settings_path = ROOT / "experiments" / "config" / "common_benchmark_settings.json"
+    settings_path = ROOT / "experiments" / "config" / "classical" / "common_benchmark_settings.json"
     settings_bytes = settings_path.read_bytes()
     settings = json.loads(settings_bytes)
     table_dir = ROOT / "results" / "common_benchmark" / "tables"

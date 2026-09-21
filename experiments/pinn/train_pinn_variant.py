@@ -7,7 +7,7 @@ Usage:
     python -m experiments.pinn.train_pinn_variant --variant constrained \
         --seed-offset 30000 --epochs 120 --tag short_s2
 
-All variants share ``experiments/config/pinn_study_settings.json`` so
+All variants share ``experiments/config/neural/pinn_study_settings.json`` so
 the epoch budget, batch sizes, and seeds are identical by construction.
 """
 
@@ -26,7 +26,7 @@ from src.neural.pinn_training import VariantTrainer
 
 
 ROOT = Path(__file__).resolve().parents[2]
-SETTINGS_PATH = ROOT / "experiments" / "config" / "pinn_study_settings.json"
+SETTINGS_PATH = ROOT / "experiments" / "config" / "neural" / "pinn_study_settings.json"
 HISTORY_FIELDS = (
     "phase", "step", "loss", "pde_loss", "terminal_loss",
     "category_weight_price_bounds", "category_weight_delta_bounds",
@@ -77,8 +77,9 @@ def main():
         dtype=dtype,
     )
     name = f"{arguments.variant}_{arguments.tag}" if arguments.tag else arguments.variant
-    table_dir = ROOT / "results" / "pinn" / f"study_{name}" / "tables"
-    figure_dir = ROOT / "results" / "pinn" / f"study_{name}" / "figures"
+    output = ROOT / "results" / "pinn" / "research_variants" / f"study_{name}"
+    table_dir = output / "tables"
+    figure_dir = output / "figures"
     table_dir.mkdir(parents=True, exist_ok=True)
     figure_dir.mkdir(parents=True, exist_ok=True)
 
@@ -95,7 +96,8 @@ def main():
 
     # Save the Adam checkpoint before L-BFGS so L-BFGS and NysNewton-CG
     # both start from exactly the same state (fair optimiser comparison).
-    adam_checkpoint_path = ROOT / "checkpoints" / "pinn" / f"study_{name}_adam.pt"
+    checkpoint_dir = ROOT / "checkpoints" / "pinn" / "research_variants" / "matched_study"
+    adam_checkpoint_path = checkpoint_dir / f"study_{name}_adam.pt"
     adam_checkpoint_path.parent.mkdir(parents=True, exist_ok=True)
     torch.save({
         "state_dict": model.state_dict(),
@@ -118,7 +120,7 @@ def main():
         print(json.dumps(refinement_metadata, indent=2))
         metadata["lbfgs"] = refinement_metadata
 
-    checkpoint_path = ROOT / "checkpoints" / "pinn" / f"study_{name}.pt"
+    checkpoint_path = checkpoint_dir / f"study_{name}.pt"
     checkpoint_path.parent.mkdir(parents=True, exist_ok=True)
     torch.save({
         "state_dict": model.state_dict(),

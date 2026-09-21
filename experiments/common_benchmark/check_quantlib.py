@@ -76,7 +76,7 @@ def quantlib_values(inputs, settings):
 
 
 def main():
-    settings = json.loads((ROOT / "experiments" / "config" / "common_benchmark_settings.json").read_text())
+    settings = json.loads((ROOT / "experiments" / "config" / "classical" / "common_benchmark_settings.json").read_text())
     table_dir = ROOT / "results" / "common_benchmark" / "tables"
     with (table_dir / "benchmark_cases.csv").open(newline="") as handle:
         anchors = [row for row in csv.DictReader(handle) if row["split"] == "anchor"]

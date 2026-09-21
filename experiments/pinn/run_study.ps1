@@ -17,11 +17,11 @@ for ($i = 0; $i -lt $seeds.Count; $i++) {
 }
 
 Log "REFINE lbfgs from baseline s0 adam"
-python -m experiments.pinn.refine_pinn_optimizer --optimizer lbfgs --start checkpoints/pinn/study_baseline_matched_s0_adam.pt *>> $log
+python -m experiments.pinn.refine_pinn_optimizer --optimizer lbfgs --start checkpoints/pinn/research_variants/matched_study/study_baseline_matched_s0_adam.pt *>> $log
 Log "REFINE_DONE lbfgs exit=$LASTEXITCODE"
 
 Log "REFINE nys_newton_cg from baseline s0 adam"
-python -m experiments.pinn.refine_pinn_optimizer --optimizer nys_newton_cg --start checkpoints/pinn/study_baseline_matched_s0_adam.pt *>> $log
+python -m experiments.pinn.refine_pinn_optimizer --optimizer nys_newton_cg --start checkpoints/pinn/research_variants/matched_study/study_baseline_matched_s0_adam.pt *>> $log
 Log "REFINE_DONE nys_newton_cg exit=$LASTEXITCODE"
 
 Log "EVALUATE"

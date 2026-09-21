@@ -34,7 +34,6 @@ plt.ylabel("W(t)")
 plt.title("20 Simulated Brownian Motion Paths")
 plt.grid(alpha=0.3)
 plt.show()
-
 empirical_std = W.std(axis=0)
 theoretical_std = np.sqrt(time)
 
@@ -71,4 +70,3 @@ plt.ylabel("S(t)")
 plt.title("20 Simulated Stock Price Paths")
 plt.grid(alpha=0.3)
 plt.show()
-

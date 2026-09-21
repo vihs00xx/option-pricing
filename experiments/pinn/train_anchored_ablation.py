@@ -41,7 +41,7 @@ from src.neural.provenance import (
 
 
 ROOT = Path(__file__).resolve().parents[2]
-SETTINGS_PATH = ROOT / "experiments" / "config" / "anchored_pinn_settings.json"
+SETTINGS_PATH = ROOT / "experiments" / "config" / "neural" / "anchored_pinn_settings.json"
 NORMALIZATION_POLICY = (
     "supervised terms divided by (RMS of the full training labels)^2 + "
     "scale_epsilon; scales computed once from the largest training set so "
@@ -84,7 +84,7 @@ def source_fingerprint():
         "src/neural/pinn_diagnostics.py",
         "experiments/pinn/train_anchored_ablation.py",
         "experiments/pinn/evaluate_anchored_ablation.py",
-        "experiments/config/anchored_pinn_settings.json",
+        "experiments/config/neural/anchored_pinn_settings.json",
     ]
     digest = hashlib.sha256()
     present = []

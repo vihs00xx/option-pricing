@@ -18,7 +18,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("method", choices=METHODS)
     args = parser.parse_args()
-    settings = json.loads((ROOT / "experiments" / "config" / "common_benchmark_settings.json").read_text())
+    settings = json.loads((ROOT / "experiments" / "config" / "classical" / "common_benchmark_settings.json").read_text())
     with (ROOT / "results" / "common_benchmark" / "tables" / "benchmark_cases.csv").open(newline="") as handle:
         cases = list(csv.DictReader(handle))[:settings["timing"]["case_count"]]
     process = psutil.Process()

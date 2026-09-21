@@ -32,7 +32,7 @@ def write_csv(path, rows):
 
 
 def main():
-    settings_path = ROOT / "experiments" / "config" / "conditional_high_compute_settings.json"
+    settings_path = ROOT / "experiments" / "config" / "classical" / "conditional_high_compute_settings.json"
     settings_bytes = settings_path.read_bytes()
     settings = json.loads(settings_bytes)
     table_dir = ROOT / "results" / "conditional" / "tables"

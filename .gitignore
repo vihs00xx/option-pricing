@@ -18,3 +18,9 @@ checkpoints/
 *.out
 *.toc
 *.synctex.gz
+
+# Local documentation
+/docs/
+
+# Local run logs and temporary diagnostics
+/artifacts/

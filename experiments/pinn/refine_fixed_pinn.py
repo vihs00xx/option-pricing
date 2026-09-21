@@ -12,10 +12,10 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 def main():
-    settings = json.loads((ROOT / "experiments" / "config" / "fixed_pinn_settings.json").read_text())
+    settings = json.loads((ROOT / "experiments" / "config" / "neural" / "fixed_pinn_settings.json").read_text())
     training = settings["training"]
-    table_dir = ROOT / "results" / "pinn" / "fixed" / "tables"
-    checkpoint_path = ROOT / "checkpoints" / "pinn" / "fixed_black_scholes_pinn.pt"
+    table_dir = ROOT / "results" / "pinn" / "primary" / "anchored" / "tables"
+    checkpoint_path = ROOT / "checkpoints" / "pinn" / "primary" / "anchored" / "fixed_black_scholes_pinn.pt"
     model = load_fixed_pinn(checkpoint_path)
     dtype = next(model.parameters()).dtype
     problem = model.problem

@@ -32,8 +32,8 @@ def _content_sha256(arrays):
 
 
 def main():
-    settings_path = ROOT / "experiments/config/deeponet_settings.json"
-    benchmark_path = ROOT / "experiments/config/common_benchmark_settings.json"
+    settings_path = ROOT / "experiments/config/neural/deeponet_settings.json"
+    benchmark_path = ROOT / "experiments/config/classical/common_benchmark_settings.json"
     settings = json.loads(settings_path.read_text())
     benchmark_settings = json.loads(benchmark_path.read_text())
     dataset = build_dataset(settings, build_cases(benchmark_settings))

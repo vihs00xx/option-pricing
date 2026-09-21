@@ -7,15 +7,23 @@ methods for European option prices and Greeks.
 ## Project structure
 
 ```text
-src/                         Pricing implementations
-experiments/analytical/      Black--Scholes reference-grid experiment
-experiments/monte_carlo/     Monte Carlo and convergence experiments
-experiments/conditional/     Conditional smoothing studies
-experiments/config/          Experiment configurations
-results/analytical/          Analytical reference outputs
-results/monte_carlo/         Monte Carlo tables, figures, and archive
-results/conditional/         Conditional estimator tables and figures
-tests/                       Unit tests
+foundations/                 Learning exercises and introductory simulations
+src/                         Reusable pricing and neural implementations
+src/neural/                  PINN and DeepONet support code
+experiments/                 Runnable studies, grouped by method
+experiments/config/classical Classical and shared benchmark configurations
+experiments/config/neural/   PINN and DeepONet configurations and registry
+experiments/config/legacy/   Retained superseded configuration
+results/                     Generated tables and figures, grouped by method
+results/pinn/primary/        Frozen reportable PINN result
+results/pinn/research_variants/ PINN ablations and optimizer experiments
+results/pinn/legacy/         Superseded or incomplete-provenance PINN studies
+checkpoints/pinn/primary/    Frozen anchored PINN checkpoint
+checkpoints/pinn/research_variants/ Experimental PINN checkpoints
+checkpoints/pinn/legacy/     Diagnostic and superseded checkpoints
+report/                      LaTeX project report
+tests/                       Automated tests
+artifacts/logs/              Local ignored run logs and diagnostics
 ```
 
 ## Setup
@@ -49,7 +57,7 @@ The full experiments can take substantial time because they include repeated run
 
 `src/black_scholes.py` provides vectorized European call and put prices with continuous dividend yield, plus Delta, Gamma, Vega, Theta, and Rho. Inputs use years and decimal annual rates. Vega and Rho are per unit decimal change; Theta is calendar-time change per year. The implementation covers expiry, zero spot, and zero volatility for prices; Greeks require positive spot, maturity, and volatility.
 
-The analytical experiment uses its own configuration at `experiments/config/analytical_settings.json` and writes the 54-case reference grid to `results/analytical/tables/`.
+The analytical experiment uses its own configuration at `experiments/config/classical/analytical_settings.json` and writes the 54-case reference grid to `results/analytical/tables/`.
 
 ## Monte Carlo methods
 
@@ -82,18 +90,18 @@ The common benchmark is frozen as `common_option_benchmark_v1`. It contains 68
 held-out call and put cases covering standard, difficult, interpolation and
 extrapolation settings, with price and five Greeks, repeated timing and memory
 measurements. Its settings are in
-`experiments/config/common_benchmark_settings.json`.
+`experiments/config/classical/common_benchmark_settings.json`.
 
 The anchored PINN is frozen as the primary one-dimensional PINN result. Other
 PINN configurations are retained as research variants or legacy diagnostics and
 are excluded from main result tables according to
-`experiments/config/pinn_model_registry.json`. Because the anchored model accepts
+`experiments/config/neural/pinn_model_registry.json`. Because the anchored model accepts
 only one fixed call contract, direct comparisons with it use the fixed-surface
 profile; the broader variable-parameter call/put benchmark is used for DeepONet
 and eligible classical methods.
 
 The DeepONet problem and analytical dataset are frozen before model training in
-`experiments/config/deeponet_settings.json`. Contract and market parameters form
+`experiments/config/neural/deeponet_settings.json`. Contract and market parameters form
 the branch input; spot and time to maturity form the trunk input. Black--Scholes
 provides price and Greek labels. Frozen benchmark contracts are used only for
 testing, while real NSE/BSE observations are reserved for a later external case
@@ -104,10 +112,10 @@ study.
 `src/neural/fixed_pinn.py` holds the fixed-parameter Black--Scholes PINN. Its first full-budget training failed the acceptance gates: core price RMSE 0.044 (target 0.02), core Theta RMSE 0.256 (target 0.1), and widespread no-arbitrage violations. `src/neural/pinn_diagnostics.py` extends the violation counts into per-region proportions, maximum sizes, and mean sizes, separating near-expiry, near-strike, low-tail, high-tail, and core regions, and evaluates Greeks only for tau > 0. On the failed checkpoint, 47.8% of grid points priced below the discounted-intrinsic floor (maximum 0.203), 42.3% had negative Gamma, and violations concentrate near expiry and in the tails. Run it with:
 
 ```powershell
-python -m experiments.pinn.run_pinn_diagnostics --checkpoint checkpoints/pinn/fixed_black_scholes_pinn.pt --name original_fixed_diagnostics
+python -m experiments.pinn.run_pinn_diagnostics --checkpoint checkpoints/pinn/primary/anchored/fixed_black_scholes_pinn.pt --name anchored_diagnostics
 ```
 
-`experiments/pinn/train_pinn_variant.py` trains three variants under one shared, frozen budget in `experiments/config/pinn_study_settings.json`, all using the same architecture so only the training method differs:
+`experiments/pinn/train_pinn_variant.py` trains three variants under one shared, frozen budget in `experiments/config/neural/pinn_study_settings.json`, all using the same architecture so only the training method differs:
 
 - `baseline_matched`: the original physics-only recipe at the reduced matched budget.
 - `constrained`: adds one-sided penalties for the price bounds, Delta bounds, and the log-moneyness convexity condition u_yy - u_y >= 0. Category weights are rebalanced by gradient-norm annealing, points are weighted by their violation size, and some constraint batches are drawn where violations were recently largest (Hoshisashi/Phelan/Barucca-style derivative constraints; Wang et al. gradient annealing).
@@ -136,13 +144,13 @@ Three corrections were made after inspecting the first study:
 - **Causal concentration.** The causal weights now use `exp(-epsilon * cumulative / total)`, so `epsilon` is scale-free instead of depending on the raw residual magnitude (which drifts over training). With 20 bins this runs from about 19 effective bins at `epsilon = 1` to about 3.5 at `epsilon = 20`.
 - **Constraint balancing.** Category weights are balanced against the *mean of the constraint losses* (not the PDE loss) and clipped to `[1, 10]` instead of `[0.01, 100]`. The floor stops Delta and Gamma collapsing toward zero; the tighter ceiling stops the price bounds, whose violation loss is tiny next to the Delta violation loss, from being amplified to the old ceiling of ~98 and dominating the constraint budget.
 
-With the pinned-to-earth Adam plateau removed by the L-BFGS stage, all three physics-only variants still fall well short of the anchored model, which additionally uses analytical Black--Scholes price and Theta labels. See `results/pinn/study/tables/seed_aggregate.csv`.
+With the pinned-to-earth Adam plateau removed by the L-BFGS stage, all three physics-only variants still fall well short of the anchored model, which additionally uses analytical Black--Scholes price and Theta labels. See `results/pinn/research_variants/study/tables/seed_aggregate.csv`.
 
 ## Anchored PINN v2 ablation
 
 `experiments/pinn/run_anchored_study.ps1` runs a controlled anchored study that asks whether the PDE term improves accuracy or label efficiency beyond ordinary supervised interpolation.
 
-**One fixed dataset** (`src/neural/anchor_data.py`) is generated once and stored at `results/pinn/anchored_study_v2/data/anchored_dataset.npz`, so every model sees identical points. It keeps *separate* splits for training price anchors, training Greek anchors (independently sampled near the strike and near expiry, so they are not a subset of the price anchors), training PDE collocation, training terminal payoff, validation coordinates and labels, validation PDE collocation, validation terminal payoff, and untouched test coordinates. Subsets for the efficiency sweep are **stratified prefixes** of a component-interleaved ordering, so they are nested and approximately proportional across density components as the anchor count grows. Sampling is dtype-explicit (never the process-wide default), densities must sum to one, near-expiry spans cannot exceed maturity, and the two boundary strips are sampled symmetrically. Each dataset carries a schema version, a data-configuration hash and a content hash; reuse is refused when the configuration does not match, and smoke datasets use a separate path.
+**One fixed dataset** (`src/neural/anchor_data.py`) is generated once and retained at `results/pinn/legacy/anchored_ablation_v2/data/anchored_dataset.npz`, so every model sees identical points. It keeps *separate* splits for training price anchors, training Greek anchors (independently sampled near the strike and near expiry, so they are not a subset of the price anchors), training PDE collocation, training terminal payoff, validation coordinates and labels, validation PDE collocation, validation terminal payoff, and untouched test coordinates. Subsets for the efficiency sweep are **stratified prefixes** of a component-interleaved ordering, so they are nested and approximately proportional across density components as the anchor count grows. Sampling is dtype-explicit (never the process-wide default), densities must sum to one, near-expiry spans cannot exceed maturity, and the two boundary strips are sampled symmetrically. Each dataset carries a schema version, a data-configuration hash and a content hash; reuse is refused when the configuration does not match, and smoke datasets use a separate path.
 
 **Four models** (`src/neural/anchored_pinn.py`) share one architecture, one initialisation seed per run and one budget, and differ only in their loss terms:
 
@@ -157,12 +165,12 @@ Supervised terms are normalised by RMS label scales computed from the *full* tra
 
 Checkpoint selection uses an **immutable per-variant validation objective** declared in the settings (`selection`), evaluated with the same normalisation scales for every candidate, so scores from different stages are comparable. Selection weights are fixed before training; stage losses are logged separately because they are not comparable across stages. The initial model, every stage end and the final model are scored, and both the **selected** and the **last trained** checkpoints are saved. `physics_only` selects on held-out PDE residual and terminal error, so it remains label-free; `data_only` and `hybrid` share the same supervised selection criterion (price + Theta) so that isolating the PDE term is meaningful. Time budgets are enforced inside the L-BFGS loop as well as Adam, checked between completed steps, so an interrupted budget always leaves an accepted parameter state.
 
-**Evaluation** (`experiments/pinn/evaluate_anchored_ablation.py`) reports **two separate metric sets**: the historical 161 x 51 core grid, for comparison with the originally published numbers, and the broad test mixture, which includes harder regions. The reference checkpoint is evaluated with exactly the same evaluator on both. Financial violations are reported **per category** (price lower/upper bound, Delta lower/upper bound, negative Gamma) with tolerance, proportion, maximum and mean magnitude, and the region where the maximum occurs; magnitudes in different units are never combined, and the only unified statistic is the proportion of points violating at least one constraint, named explicitly. Regional errors, maximum absolute errors, the PDE residual (with its normalisation stated), training time, peak memory, and price-only and price+Greeks inference timing (median and IQR after warm-up) are all recorded. Aggregation uses mean and **sample** standard deviation per (model, anchors, checkpoint kind), and the evaluator writes a check confirming that the aggregate table reproduces the per-run rows. Results land in `results/pinn/anchored_study_v2/tables/` and `results/pinn/anchored_study_v2/figures/`; checkpoints are written to `checkpoints/pinn/anchored_study_v2/` (the historical best checkpoint is never overwritten).
+**Evaluation** (`experiments/pinn/evaluate_anchored_ablation.py`) reports **two separate metric sets**: the historical 161 x 51 core grid, for comparison with the originally published numbers, and the broad test mixture, which includes harder regions. The reference checkpoint is evaluated with exactly the same evaluator on both. Financial violations are reported **per category** (price lower/upper bound, Delta lower/upper bound, negative Gamma) with tolerance, proportion, maximum and mean magnitude, and the region where the maximum occurs; magnitudes in different units are never combined, and the only unified statistic is the proportion of points violating at least one constraint, named explicitly. Regional errors, maximum absolute errors, the PDE residual (with its normalisation stated), training time, peak memory, and price-only and price+Greeks inference timing (median and IQR after warm-up) are all recorded. Aggregation uses mean and **sample** standard deviation per (model, anchors, checkpoint kind), and the evaluator writes a check confirming that the aggregate table reproduces the per-run rows. Superseded V2 results are retained under `results/pinn/legacy/anchored_ablation_v2/`; any future versioned ablation belongs under `results/pinn/research_variants/`.
 
 Acceptance is decided in **three separate sections**: absolute core-grid thresholds (the published targets, applied *only* to core-grid metrics), improvement over the reference on the broad test mixture, and financial-constraint criteria. A core-grid threshold is never applied to a broad-test error. Per-seed pass/fail is kept alongside the aggregate summary.
 
 The controls `supervised_hybrid_control` (price/Theta + payoff, no PDE) and `supervised_v2_control` (price/Theta/Delta/Gamma + payoff, no PDE) share their labels and selection policy with `hybrid` and `v2`, so a claim about the PDE term can be isolated from the payoff term and from the added Greek labels.
 
-The earlier study under `results/pinn/anchored_study/` is retained but superseded: its training controller and reporting had the defects listed above, so its runs must not be mixed into corrected aggregates. The historical anchored reference was trained with a longer, different recipe and is treated as an accuracy reference, not a compute-matched baseline.
+The earlier study under `results/pinn/legacy/anchored_ablation_v1/` is retained but superseded: its training controller and reporting had the defects listed above, so its runs must not be mixed into corrected aggregates. The historical anchored reference was trained with a longer, different recipe and is treated as an accuracy reference, not a compute-matched baseline.
 
 Acceptance for Anchored PINN v2 requires beating the reference: price RMSE < 0.0098 while also targetting Delta RMSE < 0.00247, Gamma RMSE < 0.000872, Theta RMSE < 0.0874, and reducing the worst violation proportion (0.478) and magnitude (0.203).

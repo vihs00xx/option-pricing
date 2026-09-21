@@ -34,7 +34,7 @@ TRAINING_SOURCE_FILES = (
     "src/neural/anchored_pinn.py",
     "src/neural/memory.py",
     "experiments/pinn/train_anchored_ablation.py",
-    "experiments/config/anchored_pinn_settings.json",
+    "experiments/config/neural/anchored_pinn_settings.json",
 )
 
 EVALUATION_SOURCE_FILES = (
@@ -43,7 +43,7 @@ EVALUATION_SOURCE_FILES = (
     "src/neural/anchored_pinn.py",
     "src/neural/pinn_diagnostics.py",
     "experiments/pinn/evaluate_anchored_ablation.py",
-    "experiments/config/anchored_pinn_settings.json",
+    "experiments/config/neural/anchored_pinn_settings.json",
 )
 
 

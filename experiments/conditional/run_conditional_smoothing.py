@@ -14,7 +14,7 @@ from src.monte_carlo_greeks import NAMES, monte_carlo_greeks
 
 
 def main():
-    settings = json.loads((ROOT / "experiments" / "config" / "benchmark_settings.json").read_text())
+    settings = json.loads((ROOT / "experiments" / "config" / "classical" / "benchmark_settings.json").read_text())
     budget = settings["greek_budget"]
     repetitions = settings["greek_evaluation_repetitions"]
     scrambles = 32

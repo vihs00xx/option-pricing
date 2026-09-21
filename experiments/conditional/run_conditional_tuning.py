@@ -103,10 +103,10 @@ def write_csv(path, rows):
 
 
 def main():
-    settings_path = ROOT / "experiments" / "config" / "conditional_study_settings.json"
+    settings_path = ROOT / "experiments" / "config" / "classical" / "conditional_study_settings.json"
     settings_bytes = settings_path.read_bytes()
     settings = json.loads(settings_bytes)
-    benchmark = json.loads((ROOT / "experiments" / "config" / "benchmark_settings.json").read_text())
+    benchmark = json.loads((ROOT / "experiments" / "config" / "classical" / "benchmark_settings.json").read_text())
     base = benchmark["base"]
     cases = [{"name": case["name"], "inputs": {**base, **case["inputs"]}}
              for case in benchmark["tuning_cases"]]

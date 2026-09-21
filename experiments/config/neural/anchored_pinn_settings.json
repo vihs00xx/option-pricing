@@ -3,20 +3,20 @@
   "protocol_id": "pinn_ablation_v3_full_provenance",
   "protocols": {
     "pinn_ablation_v3_full_provenance": {
-      "results_dir": "results/pinn/anchored_study_v3",
-      "checkpoint_dir": "checkpoints/pinn/anchored_study_v3",
+      "results_dir": "results/pinn/research_variants/anchored_ablation_v3",
+      "checkpoint_dir": "checkpoints/pinn/research_variants/anchored_ablation_v3",
       "status": "current",
       "note": "Complete run identity: effective configuration, variant, seed, architecture, dtype, dataset content hash, exact training subset, normalisation policy and values, selection policy, optimizer tolerances, training-source fingerprint."
     },
     "pinn_ablation_v2_partial_provenance": {
-      "results_dir": "results/pinn/anchored_study_v2",
-      "checkpoint_dir": "checkpoints/pinn/anchored_study_v2",
+      "results_dir": "results/pinn/legacy/anchored_ablation_v2",
+      "checkpoint_dir": "checkpoints/pinn/legacy/anchored_study_v2",
       "status": "legacy",
       "note": "Frozen 1200/1800-second sweep. Records the effective settings, dataset content hash and a source fingerprint that covers training AND evaluation files, so the training identity cannot be narrowed retroactively. Never pool with v3."
     },
     "pinn_pilot_1200_cap": {
-      "results_dir": "results/pinn/anchored_study_v2",
-      "checkpoint_dir": "checkpoints/pinn/anchored_study_v2_pilot",
+      "results_dir": "results/pinn/legacy/anchored_ablation_v2",
+      "checkpoint_dir": "checkpoints/pinn/legacy/anchored_study_v2_pilot",
       "status": "legacy",
       "note": "One-seed pilot under a 1200-second cap; two of its six runs were superseded in place before archiving."
     }
@@ -37,8 +37,8 @@
     "dtype": "float64"
   },
   "output": {
-    "results_dir": "results/pinn/anchored_study_v3",
-    "checkpoint_dir": "checkpoints/pinn/anchored_study_v3"
+    "results_dir": "results/pinn/research_variants/anchored_ablation_v3",
+    "checkpoint_dir": "checkpoints/pinn/research_variants/anchored_ablation_v3"
   },
   "seed": 21092026,
   "seeds": [
@@ -240,7 +240,7 @@
     }
   },
   "reference": {
-    "checkpoint": "checkpoints/pinn/fixed_black_scholes_pinn.pt",
+    "checkpoint": "checkpoints/pinn/primary/anchored/fixed_black_scholes_pinn.pt",
     "note": "Historical anchored model. Read-only, never overwritten. Trained with a longer, different recipe, so it is an accuracy reference rather than a compute-matched baseline."
   }
 }

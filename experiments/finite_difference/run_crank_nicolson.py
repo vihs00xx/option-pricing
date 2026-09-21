@@ -23,7 +23,7 @@ def write_csv(path, rows):
 
 
 def main():
-    settings = json.loads((ROOT / "experiments" / "config" / "finite_difference_settings.json").read_text())
+    settings = json.loads((ROOT / "experiments" / "config" / "classical" / "finite_difference_settings.json").read_text())
     table_dir = ROOT / "results" / "finite_difference" / "tables"
     figure_dir = ROOT / "results" / "finite_difference" / "figures"
     table_dir.mkdir(parents=True, exist_ok=True)

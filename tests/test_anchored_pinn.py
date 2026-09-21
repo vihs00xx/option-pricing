@@ -25,8 +25,8 @@ SETTINGS = {
                 "x_min": 0.05, "x_max": 4.0},
     "network": {"hidden_layers": 2, "hidden_width": 8, "dtype": "float64"},
     "output": {
-        "results_dir": "results/pinn/anchored_study_v2",
-        "checkpoint_dir": "checkpoints/pinn/anchored_study_v2"
+        "results_dir": "results/pinn/legacy/anchored_ablation_v2",
+        "checkpoint_dir": "checkpoints/pinn/legacy/anchored_study_v2"
     },
     "acceptance": {
         "absolute_core_grid": {

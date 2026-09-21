@@ -24,7 +24,7 @@ def save_csv(path, rows):
 
 def main():
     project = Path(__file__).resolve().parents[2]
-    settings = json.loads((project / "experiments" / "config" / "monte_carlo_settings.json").read_text())
+    settings = json.loads((project / "experiments" / "config" / "classical" / "monte_carlo_settings.json").read_text())
     setup = settings["monte_carlo"]
     methods = setup["methods"]
     tables = project / "results" / "monte_carlo" / "tables"

@@ -14,7 +14,7 @@ def read_csv(name):
 
 
 def main():
-    settings_path = ROOT / "experiments" / "config" / "conditional_study_settings.json"
+    settings_path = ROOT / "experiments" / "config" / "classical" / "conditional_study_settings.json"
     frozen_path = ROOT / "results" / "conditional" / "tables" / "mc_conditional_frozen_configuration.json"
     settings = json.loads(settings_path.read_text())
     frozen = json.loads(frozen_path.read_text())

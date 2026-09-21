@@ -8,7 +8,7 @@ Both refinements start from the same Adam checkpoint, optimise the same
 fixed full-batch physics-only objective, and stop at the same wall-clock
 budget, so the comparison isolates the optimiser. The starting
 checkpoint is never modified; refined models are written to
-``checkpoints/pinn/study_refined_<optimizer>.pt``.
+``checkpoints/pinn/research_variants/matched_study/study_refined_<optimizer>.pt``.
 """
 
 import argparse
@@ -32,7 +32,7 @@ from src.neural.memory import MemoryTracker
 
 
 ROOT = Path(__file__).resolve().parents[2]
-SETTINGS_PATH = ROOT / "experiments" / "config" / "pinn_study_settings.json"
+SETTINGS_PATH = ROOT / "experiments" / "config" / "neural" / "pinn_study_settings.json"
 
 
 class WallClockExceeded(Exception):
@@ -142,7 +142,7 @@ def main():
     parser.add_argument("--optimizer", required=True,
                         choices=("lbfgs", "nys_newton_cg"))
     parser.add_argument("--start",
-                        default="checkpoints/pinn/study_baseline_matched_adam.pt",
+                        default="checkpoints/pinn/research_variants/matched_study/study_baseline_matched_adam.pt",
                         help="Starting Adam checkpoint (never modified)")
     arguments = parser.parse_args()
 
@@ -152,7 +152,7 @@ def main():
     torch.set_default_dtype(dtype)
     model = load_fixed_pinn(arguments.start)
     loss_fn, params = build_objective(model, settings)
-    table_dir = ROOT / "results" / "pinn" / "study_refinement" / "tables"
+    table_dir = ROOT / "results" / "pinn" / "research_variants" / "study_refinement" / "tables"
     table_dir.mkdir(parents=True, exist_ok=True)
 
     initial_loss = float(loss_fn())
@@ -174,7 +174,7 @@ def main():
         "pde": settings["refinement"]["pde_points"],
         "terminal": settings["refinement"]["terminal_points"],
     }
-    checkpoint_path = ROOT / "checkpoints" / "pinn" / (
+    checkpoint_path = ROOT / "checkpoints" / "pinn" / "research_variants" / "matched_study" / (
         f"study_refined_{arguments.optimizer}.pt"
     )
     torch.save({

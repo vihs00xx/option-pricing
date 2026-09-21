@@ -62,9 +62,9 @@ def save_checkpoint(model, settings, path):
 
 
 def main():
-    settings = json.loads((ROOT / "experiments" / "config" / "fixed_pinn_settings.json").read_text())
+    settings = json.loads((ROOT / "experiments" / "config" / "neural" / "fixed_pinn_settings.json").read_text())
     refinement = settings["anchored_refinement"]
-    checkpoint = ROOT / "checkpoints" / "pinn" / "fixed_black_scholes_pinn.pt"
+    checkpoint = ROOT / "checkpoints" / "pinn" / "primary" / "anchored" / "fixed_black_scholes_pinn.pt"
     physics_checkpoint = checkpoint.with_name("fixed_black_scholes_pinn_physics_only.pt")
     if not physics_checkpoint.exists():
         physics_checkpoint.write_bytes(checkpoint.read_bytes())
@@ -170,7 +170,7 @@ def main():
         total_lbfgs_calls += stage_calls
     elapsed = perf_counter() - start
     save_checkpoint(model, settings, checkpoint)
-    table_dir = ROOT / "results" / "pinn" / "fixed" / "tables"
+    table_dir = ROOT / "results" / "pinn" / "primary" / "anchored" / "tables"
     with (table_dir / "anchored_refinement_history.csv").open("w", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=history[0])
         writer.writeheader()

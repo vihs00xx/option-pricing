@@ -27,7 +27,7 @@ from src.neural.pinn_diagnostics import (
 
 
 ROOT = Path(__file__).resolve().parents[2]
-SETTINGS_PATH = ROOT / "experiments" / "config" / "pinn_study_settings.json"
+SETTINGS_PATH = ROOT / "experiments" / "config" / "neural" / "pinn_study_settings.json"
 STUDY_NAMES = (
     "baseline_matched",
     "constrained",
@@ -126,7 +126,7 @@ def run_metadata(name):
         }
     if name in ("refined_lbfgs", "refined_nys_newton_cg"):
         optimiser = name.replace("refined_", "")
-        path = ROOT / "results" / "pinn" / "study_refinement" / "tables" / f"refinement_{optimiser}.json"
+        path = ROOT / "results" / "pinn" / "research_variants" / "study_refinement" / "tables" / f"refinement_{optimiser}.json"
         if not path.exists():
             return {}
         meta = json.loads(path.read_text())
@@ -171,15 +171,15 @@ def run_summary_rows(results):
 
 def main():
     settings = json.loads(SETTINGS_PATH.read_text())
-    table_dir = ROOT / "results" / "pinn" / "study" / "tables"
-    figure_dir = ROOT / "results" / "pinn" / "study" / "figures"
+    table_dir = ROOT / "results" / "pinn" / "research_variants" / "study" / "tables"
+    figure_dir = ROOT / "results" / "pinn" / "research_variants" / "study" / "figures"
     table_dir.mkdir(parents=True, exist_ok=True)
     figure_dir.mkdir(parents=True, exist_ok=True)
 
     results = {}
     grids = {}
     for name in STUDY_NAMES:
-        checkpoint = ROOT / "checkpoints" / "pinn" / f"study_{name}.pt"
+        checkpoint = ROOT / "checkpoints" / "pinn" / "research_variants" / "matched_study" / f"study_{name}.pt"
         if not checkpoint.exists():
             print(f"Skipping '{name}': no checkpoint at {checkpoint}")
             continue

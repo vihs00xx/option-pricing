@@ -46,7 +46,7 @@ from src.neural.provenance import (
 
 
 ROOT = Path(__file__).resolve().parents[2]
-SETTINGS_PATH = ROOT / "experiments" / "config" / "anchored_pinn_settings.json"
+SETTINGS_PATH = ROOT / "experiments" / "config" / "neural" / "anchored_pinn_settings.json"
 QUANTITIES = ("price", "delta", "gamma", "theta")
 VIOLATIONS = ("price_below_lower_bound", "price_above_upper_bound",
               "delta_below_zero", "delta_above_upper_bound", "gamma_negative")

@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 def main():
-    settings_path = ROOT / "experiments" / "config" / "conditional_high_compute_settings.json"
+    settings_path = ROOT / "experiments" / "config" / "classical" / "conditional_high_compute_settings.json"
     table_dir = ROOT / "results" / "conditional" / "tables"
     settings = json.loads(settings_path.read_text())
     metadata = json.loads((table_dir / "mc_conditional_high_compute_metadata.json").read_text())

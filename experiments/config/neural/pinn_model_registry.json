@@ -5,7 +5,7 @@
     "name": "anchored_pinn",
     "role": "primary_1d_pinn_baseline",
     "status": "frozen",
-    "checkpoint": "checkpoints/pinn/fixed_black_scholes_pinn.pt",
+    "checkpoint": "checkpoints/pinn/primary/anchored/fixed_black_scholes_pinn.pt",
     "checkpoint_sha256": "8b7fd212d93c2c9a0c99ef5eccb83581c5dd7dd62527ab675489644d5511f7db",
     "problem": {
       "option": "call",
@@ -17,9 +17,9 @@
     },
     "uses_analytical_labels": ["price", "theta"],
     "results": {
-      "training": "results/pinn/fixed/tables/training_metadata.json",
-      "validation": "results/pinn/fixed/tables/validation.json",
-      "diagnostics": "results/pinn/original_fixed_diagnostics/tables/diagnostics.json"
+      "training": "results/pinn/primary/anchored/tables/training_metadata.json",
+      "validation": "results/pinn/primary/anchored/tables/validation.json",
+      "diagnostics": "results/pinn/primary/anchored_diagnostics/tables/diagnostics.json"
     },
     "core_rmse": {
       "price": 0.00980253434450393,
@@ -38,31 +38,31 @@
       "name": "baseline_matched",
       "purpose": "Physics-only matched-budget baseline",
       "status": "completed",
-      "results": "results/pinn/study/tables/seed_aggregate.csv"
+      "results": "results/pinn/research_variants/study/tables/seed_aggregate.csv"
     },
     {
       "name": "constrained",
       "purpose": "Adaptive derivative and no-arbitrage penalties",
       "status": "completed_original_and_revised",
-      "results": "results/pinn/study/tables/seed_aggregate.csv"
+      "results": "results/pinn/research_variants/study/tables/seed_aggregate.csv"
     },
     {
       "name": "causal",
       "purpose": "Causal weighting over time to maturity",
       "status": "completed_original_and_revised",
-      "results": "results/pinn/study/tables/seed_aggregate.csv"
+      "results": "results/pinn/research_variants/study/tables/seed_aggregate.csv"
     },
     {
       "name": "optimizer_refinements",
       "purpose": "L-BFGS and NysNewton-CG refinements from a shared checkpoint",
       "status": "completed",
-      "results": "results/pinn/study_refinement/tables"
+      "results": "results/pinn/research_variants/study_refinement/tables"
     },
     {
       "name": "anchored_ablation_v2",
       "purpose": "Data-only, physics-only, hybrid, sparse-Greek and supervised controls",
       "status": "exploratory_partial_provenance",
-      "results": "results/pinn/anchored_study_v2"
+      "results": "results/pinn/legacy/anchored_ablation_v2"
     },
     {
       "name": "gradient_enhanced",
@@ -74,19 +74,19 @@
     {
       "name": "failed_fixed_pinn_prototypes",
       "status": "diagnostic_only",
-      "results": "results/pinn/fixed/archive",
+      "results": "results/pinn/primary/anchored/archive",
       "reason": "Failed terminal-condition or coordinate formulations"
     },
     {
       "name": "anchored_study_v1",
       "status": "legacy_do_not_pool",
-      "results": "results/pinn/anchored_study",
+      "results": "results/pinn/legacy/anchored_ablation_v1",
       "reason": "Superseded controller and reporting protocol"
     },
     {
       "name": "anchored_study_v2_runs",
       "status": "legacy_do_not_pool",
-      "results": "results/pinn/anchored_study_v2",
+      "results": "results/pinn/legacy/anchored_ablation_v2",
       "reason": "Incomplete run identity and mixed training protocols"
     }
   ],

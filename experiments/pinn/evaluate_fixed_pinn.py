@@ -37,12 +37,12 @@ def predict(model, y, tau, batch_size):
 
 
 def main():
-    settings = json.loads((ROOT / "experiments" / "config" / "fixed_pinn_settings.json").read_text())
+    settings = json.loads((ROOT / "experiments" / "config" / "neural" / "fixed_pinn_settings.json").read_text())
     evaluation = settings["evaluation"]
     problem = settings["problem"]
-    table_dir = ROOT / "results" / "pinn" / "fixed" / "tables"
-    figure_dir = ROOT / "results" / "pinn" / "fixed" / "figures"
-    checkpoint = ROOT / "checkpoints" / "pinn" / "fixed_black_scholes_pinn.pt"
+    table_dir = ROOT / "results" / "pinn" / "primary" / "anchored" / "tables"
+    figure_dir = ROOT / "results" / "pinn" / "primary" / "anchored" / "figures"
+    checkpoint = ROOT / "checkpoints" / "pinn" / "primary" / "anchored" / "fixed_black_scholes_pinn.pt"
     model = load_fixed_pinn(checkpoint)
     model.eval()
     x_axis = np.linspace(problem["x_min"], problem["x_max"], evaluation["x_points"])

@@ -11,7 +11,7 @@ from experiments.pinn.evaluate_pinn_study import evaluate_model
 
 
 ROOT = Path(__file__).resolve().parents[2]
-SETTINGS_PATH = ROOT / "experiments" / "config" / "pinn_study_settings.json"
+SETTINGS_PATH = ROOT / "experiments" / "config" / "neural" / "pinn_study_settings.json"
 VARIANTS = ("baseline_matched", "constrained", "causal")
 # Tag families: the first physics-only study (original) and the revised
 # study with corrected causal scaling / tuned concentration and rebalanced
@@ -31,7 +31,7 @@ def revision_of(name):
 
 def discover_checkpoints():
     """Return {name: checkpoint_path} for variant seeds and refinements."""
-    checkpoints = ROOT / "checkpoints" / "pinn"
+    checkpoints = ROOT / "checkpoints" / "pinn" / "research_variants" / "matched_study"
     found = {}
     for variant in VARIANTS:
         for family, tags in TAG_FAMILIES.items():
@@ -43,7 +43,8 @@ def discover_checkpoints():
         path = checkpoints / f"study_refined_{optimiser}.pt"
         if path.exists():
             found[f"refined_{optimiser}"] = path
-    anchored = checkpoints / "fixed_black_scholes_pinn.pt"
+    anchored = (ROOT / "checkpoints" / "pinn" / "primary" / "anchored"
+                / "fixed_black_scholes_pinn.pt")
     if anchored.exists():
         found["anchored"] = anchored
     return found
@@ -56,7 +57,7 @@ def model_metadata(name):
         for tag in all_tags:
             if name != f"{variant}_{tag}":
                 continue
-            path = (ROOT / "results" / "pinn" / f"study_{variant}_{tag}"
+            path = (ROOT / "results" / "pinn" / "research_variants" / f"study_{variant}_{tag}"
                     / "tables" / "training_metadata.json")
             if not path.exists():
                 return {}
@@ -71,7 +72,8 @@ def model_metadata(name):
                 "peak_rss_mb": lbfgs.get("peak_rss_mb") or meta.get("peak_rss_mb"),
             }
     if name == "anchored":
-        path = ROOT / "results" / "pinn" / "fixed" / "tables" / "training_metadata.json"
+        path = (ROOT / "results" / "pinn" / "primary" / "anchored"
+                / "tables" / "training_metadata.json")
         if not path.exists():
             return {}
         meta = json.loads(path.read_text())
@@ -82,7 +84,7 @@ def model_metadata(name):
         }
     if name in ("refined_lbfgs", "refined_nys_newton_cg"):
         optimiser = name.replace("refined_", "")
-        path = (ROOT / "results" / "pinn" / "study_refinement" / "tables"
+        path = (ROOT / "results" / "pinn" / "research_variants" / "study_refinement" / "tables"
                 / f"refinement_{optimiser}.json")
         if not path.exists():
             return {}
@@ -167,7 +169,7 @@ def aggregate(rows):
 
 def main():
     settings = json.loads(SETTINGS_PATH.read_text())
-    table_dir = ROOT / "results" / "pinn" / "study" / "tables"
+    table_dir = ROOT / "results" / "pinn" / "research_variants" / "study" / "tables"
     table_dir.mkdir(parents=True, exist_ok=True)
     checkpoints = discover_checkpoints()
 

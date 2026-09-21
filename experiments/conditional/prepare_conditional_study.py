@@ -7,7 +7,7 @@ from scipy.stats import qmc
 
 
 ROOT = Path(__file__).resolve().parents[2]
-OUTPUT = ROOT / "experiments" / "config" / "conditional_study_settings.json"
+OUTPUT = ROOT / "experiments" / "config" / "classical" / "conditional_study_settings.json"
 
 
 def main():

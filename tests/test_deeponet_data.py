@@ -15,10 +15,10 @@ class DeepONetDataTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         settings = json.loads(
-            (ROOT / "experiments/config/deeponet_settings.json").read_text()
+            (ROOT / "experiments/config/neural/deeponet_settings.json").read_text()
         )
         benchmark_settings = json.loads(
-            (ROOT / "experiments/config/common_benchmark_settings.json").read_text()
+            (ROOT / "experiments/config/classical/common_benchmark_settings.json").read_text()
         )
         cls.settings = settings
         cls.cases = build_cases(benchmark_settings)
@@ -56,7 +56,7 @@ class DeepONetDataTests(unittest.TestCase):
 
     def test_generation_is_deterministic(self):
         benchmark_settings = json.loads(
-            (ROOT / "experiments/config/common_benchmark_settings.json").read_text()
+            (ROOT / "experiments/config/classical/common_benchmark_settings.json").read_text()
         )
         repeated = build_dataset(self.settings, build_cases(benchmark_settings))
         for split in self.dataset:

@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 def main():
     tables = ROOT / "results" / "finite_difference" / "tables"
-    settings = json.loads((ROOT / "experiments" / "config" / "finite_difference_settings.json").read_text())
+    settings = json.loads((ROOT / "experiments" / "config" / "classical" / "finite_difference_settings.json").read_text())
     with (tables / "fd_convergence.csv").open(newline="") as handle:
         convergence = list(csv.DictReader(handle))
     with (tables / "fd_greeks.csv").open(newline="") as handle:

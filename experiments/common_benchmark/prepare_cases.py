@@ -17,7 +17,7 @@ def write_csv(path, rows):
 
 
 def main():
-    settings_path = ROOT / "experiments" / "config" / "common_benchmark_settings.json"
+    settings_path = ROOT / "experiments" / "config" / "classical" / "common_benchmark_settings.json"
     settings_bytes = settings_path.read_bytes()
     settings = json.loads(settings_bytes)
     output = ROOT / "results" / "common_benchmark" / "tables"

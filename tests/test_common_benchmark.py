@@ -14,7 +14,8 @@ class CommonBenchmarkTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.settings = json.loads(
-            (ROOT / "experiments" / "config" / "common_benchmark_settings.json").read_text()
+            (ROOT / "experiments" / "config" / "classical"
+             / "common_benchmark_settings.json").read_text()
         )
         cls.cases = build_cases(cls.settings)
 
