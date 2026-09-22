@@ -1,5 +1,8 @@
 \documentclass[11pt,a4paper]{article}
 
+% --------------------------------------------------
+% Packages and formatting
+% --------------------------------------------------
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
@@ -13,17 +16,30 @@
 \setlength{\parskip}{0.25em}
 \emergencystretch=2em
 
-\title{A Comparative Study of Classical Numerical Methods,\\
-Physics-Informed Neural Networks, and DeepONets\\
-for Option Pricing and Sensitivity Analysis}
+% --------------------------------------------------
+% Title information
+% --------------------------------------------------
+\title{
+    A Comparative Study of Classical Numerical Methods,\\
+    Physics-Informed Neural Networks, and DeepONets\\
+    for Option Pricing and Sensitivity Analysis
+}
 
-% Replace these placeholders before submission.
-\author{Student Name\\Department Name\\Institution Name}
+\author{
+    Shivansh Jain\\
+    Computer Science and Engineering\\
+    LNMIIT
+}
+
 \date{September 2026}
 
 \begin{document}
+
 \maketitle
 
+% --------------------------------------------------
+% Abstract
+% --------------------------------------------------
 \begin{abstract}
 This project proposes a comparative study of classical numerical
 methods, physics-informed neural networks (PINNs), and deep operator
@@ -56,313 +72,278 @@ computational benefits and when established methods remain
 more effective.
 \end{abstract}
 
-\noindent\textbf{Keywords:}
+\noindent
+\textbf{Keywords:}
 Black--Scholes equation; option pricing; physics-informed neural
 networks; DeepONet; Monte Carlo; Greeks; basket options;
 parameter calibration.
 
+% --------------------------------------------------
+% Introduction
+% --------------------------------------------------
 \section{Introduction}
 
-Option pricing connects financial modelling with numerical
-computation. An option's value depends on its contractual payoff
-and the uncertain evolution of its underlying assets. The
-Black--Scholes framework relates these quantities through
-no-arbitrage and dynamic hedging
-\cite{black1973,merton1973}. Although its assumptions simplify
-market behaviour, the availability of analytical solutions and
-well-established numerical methods makes it a useful setting
-for evaluating alternative computational approaches.
+Option pricing is an important application of mathematical
+modelling in finance. Besides estimating the value of a
+contract, pricing methods support risk measurement, hedging,
+and calibration to market observations. The Black--Scholes
+framework provides a well-established starting point for
+these tasks and a controlled setting in which different
+computational methods can be evaluated
+\cite{black1973,merton1973}.
 
-For a European option on a non-dividend-paying asset, the
-price \(V(S,t)\) satisfies
+Classical approaches, including finite differences and
+Monte Carlo simulation, remain effective tools for option
+valuation. Neural approaches offer alternative ways to
+approximate pricing functions. Physics-informed neural
+networks (PINNs) incorporate the governing equation into
+training, while deep operator networks (DeepONets) are
+designed to learn mappings between families of input and
+output functions \cite{raissi2019,lu2021}. Their potential
+for repeated evaluation and sensitivity analysis motivates
+further investigation. However, training cost and reliability
+must be considered alongside accuracy, and a neural method
+cannot be assumed to outperform an established solver.
+
+This project compares classical methods, PINNs, and
+DeepONets in two stages. The first considers single-asset
+European options, where the analytical Black--Scholes
+solution provides a reference. The second extends the
+comparison to basket options on up to five correlated
+assets. The assessment goes beyond pricing to include
+Greeks, computational efficiency, generalisation, and
+parameter calibration. Particular interest lies in whether
+a trained model offers useful savings when many related
+valuations are required.
+
+Controlled model-generated benchmarks will be complemented
+by a case study using Indian equity and derivatives data
+from the NSE~\cite{nseData}. This combination allows numerical accuracy
+to be examined separately from agreement with market
+observations. Historical stock data will also inform the
+inputs of the basket experiments.
+
+The objective is to establish the strengths and limitations
+of each approach through a reproducible comparison.
+Rather than assuming a general advantage for neural
+methods, the study will identify the circumstances in
+which their accuracy, reliability, and computational
+requirements make them a useful alternative.
+
+\section{Classical Pricing Methods: Theory and Implementation}
+\label{sec:classical}
+
+This section develops the classical baselines for the comparison with PINNs and DeepONets. The analytical Black--Scholes formula provides reference prices and sensitivities in one dimension. Monte Carlo and randomised quasi-Monte Carlo approximate the risk-neutral expectation, while Crank--Nicolson solves a discretised pricing PDE. The implementation procedures below specify planned experiments; they do not imply that the full comparison has already been completed.
+
+\subsection{Pricing assumptions and terminal simulation}
+
+Consider a European option with strike price \(K\), the contractual exercise price, and current underlying asset price \(S\). Let \(t\) be the current time, \(T\) the expiry time, and \(\tau=T-t\) the time remaining, measured in years. The process \(S_t\) denotes the underlying asset price at time \(t\), with \(S_t=S\) at valuation. The continuously compounded risk-free interest rate \(r\), annualised volatility \(\sigma\), and continuous dividend yield \(q\) are constant; rates are expressed as decimals. Under the risk-neutral measure,
 \begin{equation}
-    \frac{\partial V}{\partial t}
-    + \frac{1}{2}\sigma^2 S^2
-      \frac{\partial^2 V}{\partial S^2}
-    + rS\frac{\partial V}{\partial S}
-    - rV = 0,
-    \label{eq:bs}
+ dS_t=(r-q)S_t\,dt+\sigma S_t\,dW_t^Q.
+ \label{eq:s3_sde}
 \end{equation}
-where \(S\) is the asset price, \(t\) is time, \(r\) is the
-risk-free interest rate, and \(\sigma\) is volatility.
-For a European call with strike \(K\) and expiry \(T\),
-the terminal condition is
+Here \(W_t^Q\) is standard Brownian motion under the risk-neutral probability measure \(Q\), and \(\mathbb E^Q\) denotes expectation under that measure. The initial controlled experiments set \(q=0\). Dividend adjustments, when needed for market observations, will be applied consistently across methods. This treatment is an approximation to dividends and is not an exact model of discrete dividend payments.
+
+Applying It\^o's lemma to \(\log S_t\) and integrating gives
 \begin{equation}
-    V(S,T)=\max(S-K,0).
-    \label{eq:call_payoff}
+ S_T=S\exp\left[\left(r-q-\frac{\sigma^2}{2}\right)\tau
+       +\sigma\sqrt{\tau}\,Z\right],\qquad Z\sim\mathcal N(0,1).
+ \label{eq:s3_terminal}
 \end{equation}
-Under the same assumptions, the option value is the discounted
-expected payoff under the risk-neutral probability measure.
-The PDE and expectation formulations therefore support
-different computational approaches to the same pricing problem.
+For a terminal payoff function \(g\), the option value \(V(S,t)\) is
+\begin{equation}
+ V(S,t)=e^{-r\tau}\mathbb E^Q[g(S_T)\mid S_t=S].
+ \label{eq:s3_expectation}
+\end{equation}
+Calls use \(g(S_T)=(S_T-K)^+\), and puts use \(g(S_T)=(K-S_T)^+\), where \(x^+=\max(x,0)\). The analytical formula, simulation methods, and PDE solver target this same model value.
 
-Finite-difference methods approximate the pricing equation on
-a spatial and temporal grid. Monte Carlo methods instead
-estimate the expectation from simulated asset values
-\cite{glasserman2004}. The analytical Black--Scholes formula
-provides an independent reference for single-asset European
-options, allowing numerical errors to be measured directly.
-An isolated valuation in this setting does not require a neural
-approximation. The motivation for investigating neural methods
-lies in broader tasks, including sensitivity analysis, repeated
-evaluation across related problems, parameter calibration,
-and extensions involving several correlated assets.
+Equation~\eqref{eq:s3_terminal} samples the terminal distribution exactly under the assumptions. European vanilla and basket payoffs depend only on terminal prices, so full time paths are unnecessary for their valuation. Direct terminal sampling avoids time-discretisation error and reduces storage. Full-path simulations can still be used to validate the stochastic model, but are unnecessary for these terminal-payoff pricing experiments.
 
-A physics-informed neural network approximates the option
-value by \(V_{\theta}(S,t)\), where \(\theta\) denotes its
-trainable parameters. Its loss penalises violations of the
-pricing equation, terminal payoff, and boundary conditions
-\cite{raissi2019}. Points sampled from the input domain,
-known as collocation points, specify where these constraints
-are evaluated. They do not require labelled option prices.
-Automatic differentiation supplies the derivatives needed
-for the PDE residual and the calculation of Greeks.
+\subsection{Analytical Black--Scholes benchmark}
 
-DeepONets provide an architecture for operator learning.
-Their branch and trunk networks encode an input function
-and the coordinates of the corresponding output function
-\cite{lu2021}. In this study, the architecture will be used
-with suitable representations of payoffs and model parameters
-to approximate families of price functions. A parameter-conditioned
-PINN can also learn across several parameter settings, so
-repeated use is not exclusive to DeepONet. Furthermore,
-physics-informed constraints can be incorporated into
-DeepONet training \cite{wang2021deeponet}. The comparison
-will distinguish the network architecture from its training
-objective and the information supplied during training.
+\subsubsection{Prices and limiting cases}
 
-The role of training data consequently differs between
-methods. Classical solvers require model inputs but no
-training dataset. A supervised DeepONet requires examples
-of pricing problems and their solution values, which can
-be generated analytically in one dimension or numerically
-for basket options. Physics-informed training uses the
-equation and its conditions, with observed prices added
-where a data-assisted or calibration experiment requires
-them. Data-generation costs will be included whenever
-numerical solutions are used as training labels.
-
-The project will combine model-generated benchmarks with
-an empirical case study based on Indian market data.
-Historical equity prices and option-contract records will
-be sourced from NSE or BSE, subject to suitable coverage
-and data quality \cite{nseData,bseData}. The initial empirical
-study will focus on one exchange and one underlying with
-adequate option observations across strikes, maturities,
-and dates. Historical stock prices will inform estimates
-of return variability, while actual option observations
-will support calibration and market-price evaluation.
-These data have different roles: a stock-price history
-does not itself provide labelled option values.
-
-The market dataset will require consistent records of
-underlying prices, option prices, strikes, expiries, and
-contract types. Liquidity information will support the
-filtering of unreliable observations. Where bid and ask
-quotes are available, their spread will help assess
-observation quality. End-of-day records will be examined
-for possible timing differences between underlying and
-option prices. Interest rates, dividends, corporate actions,
-and contract specifications will also be considered when
-preparing model inputs.
-
-In particular, the non-dividend assumption in
-Equation~\eqref{eq:bs} will not be applied to empirical
-contracts without examining its suitability. If a constant
-continuous dividend yield \(q\) is used, the drift coefficient
-in the pricing PDE becomes \(r-q\). The same dividend
-treatment and input conventions will be used across the
-compared methods.
-
-Controlled benchmarks and market observations answer
-different questions. Benchmarks establish whether a
-method accurately solves the selected pricing model.
-Market observations assess how well that model, together
-with its estimated parameters, describes traded prices.
-For a numerical estimate \(\widehat{V}\), these differences
-can be written as
+For positive \(S,K,\sigma,\tau\), define
+\begin{equation}
+ d_1=\frac{\log(S/K)+(r-q+\sigma^2/2)\tau}{\sigma\sqrt\tau},
+ \qquad d_2=d_1-\sigma\sqrt\tau.
+\end{equation}
+Writing the call payoff as \(S_T\mathbf1_{\{S_T>K\}}-K\mathbf1_{\{S_T>K\}}\) separates the expected asset receipt from the strike payment. Evaluating the two lognormal integrals yields
 \begin{align}
-    e_{\mathrm{num}}
-    &= \widehat{V}-V_{\mathrm{model}},
-    \label{eq:numerical_error}\\
-    e_{\mathrm{market}}
-    &= \widehat{V}-V_{\mathrm{observed}}.
-    \label{eq:market_error}
+ C&=Se^{-q\tau}\Phi(d_1)-Ke^{-r\tau}\Phi(d_2),\\
+ P&=Ke^{-r\tau}\Phi(-d_2)-Se^{-q\tau}\Phi(-d_1),
+ \label{eq:s3_bs}
 \end{align}
-The market discrepancy includes effects beyond numerical
-approximation, such as model assumptions, parameter
-estimation, and observation quality. A smaller PDE
-residual therefore does not necessarily imply closer
-agreement with market prices.
+where \(\Phi\) denotes the standard normal cumulative distribution function \cite{black1973,merton1973}. This is a reference calculation, not a competing numerical PDE solver. It also remains an efficiency baseline for repeated single-asset vanilla pricing.
 
-Calibration will first be tested using synthetic prices
-generated from known parameters. The initial task will
-recover volatility while holding the remaining inputs
-fixed, followed by experiments with perturbed observations.
-The empirical study will then use designated calibration
-observations and evaluate prices on held-out contracts
-or later dates. Parameter estimation will use only
-information available at the relevant evaluation date.
-A quote used to infer its own implied volatility will
-not also be treated as independent evidence of pricing
-accuracy. Historical volatility estimates and option-implied
-volatility will be identified separately.
-
-Sensitivity analysis will accompany the pricing comparison.
-Delta and Gamma describe the first and second derivatives
-with respect to the underlying price, while Vega, Theta,
-and Rho measure dependence on volatility, time, and the
-interest rate. These quantities may be inaccurate even
-when price errors are small. Automatic differentiation
-evaluates derivatives of the learned approximation and
-does not guarantee agreement with the true sensitivities.
-Since market Greeks are not directly observed reference
-values, their accuracy will be assessed primarily using
-analytical or independently validated numerical benchmarks.
-
-Particular attention will be given to the strike region
-near expiry, where the terminal payoff produces sharp
-changes in derivatives. The finite-difference implementation
-will include appropriate treatment of the payoff and
-initial time steps \cite{pooley2003}. Greek evaluation
-will distinguish positive time to expiry from the payoff
-at expiry, where some derivatives are not defined at
-the strike.
-
-For PINNs, controlled experiments will compare uniform
-and concentrated collocation sampling, as well as fixed
-and adaptive loss weighting. These choices are motivated
-by known difficulties in balancing equation and boundary
-losses and in optimising PINN approximations
-\cite{krishnapriyan2021,wang2021gradients}.
-Price errors, Greek errors, and constraint violations
-will be measured on points independent of the training
-samples. Individual training modifications will be tested
-before their combined effect is assessed.
-
-Repeated pricing experiments will investigate whether
-the initial cost of a neural model can be recovered
-through subsequent evaluations. Training and data generation
-will be reported separately from inference, and comparisons
-will account for reuse by classical methods, including
-interpolation from computed price surfaces. Generalisation
-will be measured on parameter combinations excluded from
-training, with interpolation within the training range
-distinguished from extrapolation beyond it. For models
-trained on a fixed parameter setting, the cost of retraining
-will be included when the problem changes.
-
-The multidimensional stage considers European basket
-options on correlated assets. For \(N\) non-dividend-paying
-assets, the pricing equation is
+The implementation will evaluate expiry payoffs directly when \(\tau=0\). At zero volatility, the prices are \(C=(Se^{-q\tau}-Ke^{-r\tau})^+\) and \(P=(Ke^{-r\tau}-Se^{-q\tau})^+\). At \(S=0\), the call is zero and the put is \(Ke^{-r\tau}\). These branches avoid division by zero and undefined logarithms. Reference checks include known prices, limiting cases, and put--call parity:
 \begin{equation}
-    \frac{\partial V}{\partial t}
-    + \frac{1}{2}
-      \sum_{i=1}^{N}\sum_{j=1}^{N}
-      \rho_{ij}\sigma_i\sigma_j S_iS_j
-      \frac{\partial^2 V}{\partial S_i\partial S_j}
-    + r\sum_{i=1}^{N}S_i\frac{\partial V}{\partial S_i}
-    - rV = 0,
-    \label{eq:multi_bs}
+ C-P=Se^{-q\tau}-Ke^{-r\tau}.
 \end{equation}
-where \(\sigma_i\) is the volatility of asset \(i\), and
-\(\rho_{ij}\) is the correlation between the Brownian
-drivers of assets \(i\) and \(j\). An arithmetic basket
-call has payoff
+
+\subsubsection{Reference Greeks}
+
+Delta, \(\Delta=\partial V/\partial S\), measures sensitivity to the underlying price, and Gamma, \(\Gamma=\partial^2V/\partial S^2\), measures how Delta changes with that price. Subscripts \(C\) and \(P\) denote call and put options. With \(\phi\) denoting the standard normal density, the principal sensitivities are
+\begin{align}
+ \Delta_C&=e^{-q\tau}\Phi(d_1), &
+ \Delta_P&=e^{-q\tau}(\Phi(d_1)-1),\\
+ \Gamma_C=\Gamma_P&=\frac{e^{-q\tau}\phi(d_1)}{S\sigma\sqrt\tau}, &
+ \mathcal V_C=\mathcal V_P&=Se^{-q\tau}\phi(d_1)\sqrt\tau.
+\end{align}
+Here \(\mathcal V=\partial V/\partial\sigma\) is Vega. Calendar-time Theta is \(\Theta=\partial V/\partial t=-\partial V/\partial\tau\), giving
+\begin{align}
+ \Theta_C&=-\frac{Se^{-q\tau}\phi(d_1)\sigma}{2\sqrt\tau}
+       +qSe^{-q\tau}\Phi(d_1)-rKe^{-r\tau}\Phi(d_2),\\
+ \Theta_P&=-\frac{Se^{-q\tau}\phi(d_1)\sigma}{2\sqrt\tau}
+       -qSe^{-q\tau}\Phi(-d_1)+rKe^{-r\tau}\Phi(-d_2).
+\end{align}
+The interest-rate sensitivities, \(\mathrm{Rho}=\partial V/\partial r\), are
 \begin{equation}
-    V(\mathbf{S},T)
-    =
-    \max\left(\sum_{i=1}^{N}w_iS_i(T)-K,0\right),
-    \qquad
-    w_i\geq0,\qquad
-    \sum_{i=1}^{N}w_i=1.
-    \label{eq:basket_payoff}
+ \mathrm{Rho}_C=K\tau e^{-r\tau}\Phi(d_2),\qquad
+ \mathrm{Rho}_P=-K\tau e^{-r\tau}\Phi(-d_2).
 \end{equation}
-Dividend adjustments will be incorporated consistently
-when required by the empirical inputs.
+Vega and Rho are measured per unit change in their decimal inputs; values per percentage point are obtained by multiplying by \(0.01\). Theta is measured per year. Analytical Greeks will be checked against numerical derivatives at smooth interior points. Undefined derivatives at expiry kinks will not be assigned arbitrary finite reference values.
 
-The principal basket case will use five stocks, with
-two- and three-asset cases providing intermediate
-comparisons. Aligned, corporate-action-adjusted return
-histories will inform volatility and correlation estimates.
-These estimates provide empirically motivated scenarios;
-they will not be presented as automatically calibrated
-risk-neutral parameters. Unless observations for the exact
-basket contract are available, this experiment represents
-a hypothetical derivative constructed from real underlying
-assets rather than a direct validation against a traded
-basket-option price.
+\subsection{Monte Carlo estimation and uncertainty}
 
-Classical multidimensional pricing methods exist, but
-a full grid with \(m\) points per asset contains \(m^N\)
-spatial points. This limits direct extensions of the
-one-dimensional solver. Monte Carlo with variance reduction
-and randomised quasi-Monte Carlo will therefore provide
-the principal basket baselines. Analytical geometric
-basket values will support validation and control-variate
-construction, while arithmetic basket references will
-be computed independently with statistical uncertainty
-reported \cite{glasserman2004}. Reference sensitivities
-will also require separate error checks.
+Generate \(M\) independent normal samples and terminal prices from Equation~\eqref{eq:s3_terminal}. For discounted payoffs \(Y_m=e^{-r\tau}g(S_T^{(m)})\),
+\begin{equation}
+ \widehat V_M=\frac1M\sum_{m=1}^M Y_m,\qquad
+ s_Y^2=\frac1{M-1}\sum_{m=1}^M(Y_m-\widehat V_M)^2.
+\end{equation}
+For finite payoff variance, independent sampling gives an unbiased price estimator with variance \(\operatorname{Var}(Y)/M\). The estimated standard error and approximate large-sample 95\% interval are
+\begin{equation}
+ \widehat{\mathrm{SE}}=\frac{s_Y}{\sqrt M},\qquad
+ \widehat V_M\pm1.96\widehat{\mathrm{SE}}.
+\end{equation}
+The root-mean-square sampling error decreases at order \(M^{-1/2}\) \cite{glasserman2004}. This does not guarantee that one run improves monotonically when samples are added. Convergence will be assessed over independent repetitions, and interval coverage will be measured over runs rather than requiring every interval to contain the analytical value.
 
-Neural methods avoid explicitly constructing a full
-spatial grid, but this does not remove all dimensional
-difficulties. Sampling, training, and evaluating the mixed
-derivatives in Equation~\eqref{eq:multi_bs} may still
-become expensive. The experiments will therefore report
-performance over the tested dimensions without assuming
-that results at five assets establish general
-high-dimensional scalability.
+The implementation will validate inputs, initialise a recorded seed, generate terminal values, discount the payoffs, and return the price with its uncertainty and sample count. Large simulations will use batches and stable running moment calculations. Tests will check \(\mathbb E^Q[S_T]=Se^{(r-q)\tau}\) and agreement with analytical prices within sampling uncertainty. Runtime will include random-number generation and payoff evaluation. Although the sampling exponent does not explicitly depend on asset dimension, the cost per sample and payoff variance can increase with dimension.
 
-The financial inputs will vary across moneyness \(S/K\),
-time to maturity \(\tau=T-t\), volatility \(\sigma\),
-and the risk-free interest rate \(r\). Single-asset tests
-will cover European calls and puts in out-of-the-money,
-at-the-money, and in-the-money regions. Parameter ranges
-for the controlled benchmarks will be specified before
-evaluation and informed by the market-data preparation
-stage. In basket experiments, the number of assets,
-individual volatilities, correlation structure, and
-basket weights will also vary. All correlation matrices
-will be constrained to be valid.
+\subsection{Variance reduction and randomised quasi-Monte Carlo}
 
-Performance will be assessed using root-mean-square
-and maximum absolute pricing errors, together with
-errors in Delta, Gamma, Vega, Theta, and Rho.
-The basket study will prioritise asset-wise Delta,
-diagonal Gamma, and selected cross-Gamma terms.
-Relative errors will be reported only where reference
-values are sufficiently far from zero. Separate
-measurements will cover training and data-generation
-time, price and Greek evaluation time, memory use,
-and total cost for repeated queries. Calibration will
-be evaluated through parameter recovery, held-out
-pricing error, and sensitivity to observation noise.
+\subsubsection{Antithetic and control-variate estimators}
 
-Numerical and training settings will be varied
-separately from financial inputs. These include
-grid resolution for Crank--Nicolson, sample count
-for Monte Carlo, and collocation count, sampling
-strategy, loss weighting, and training budget for
-the neural methods. Controlled changes to these
-settings will establish convergence behaviour and
-help identify the source of observed improvements.
-Repeated training runs will measure variability,
-and financial consistency checks will examine
-applicable price bounds, put--call parity,
-monotonicity, and convexity.
+Antithetic sampling evaluates each Gaussian draw with both signs and averages the discounted payoffs:
+\begin{equation}
+ A_m=\tfrac12\bigl(Y(Z_m)+Y(-Z_m)\bigr),\qquad
+ \widehat V_{\mathrm{AV}}=\frac1M\sum_{m=1}^M A_m.
+\end{equation}
+Negative covariance between paired payoffs reduces variance. Standard errors must use the independent pair averages, rather than treating all \(2M\) payoffs as independent. Plain Monte Carlo and antithetic estimates will be compared at equal payoff-evaluation budgets, and the benefit will be measured for each payoff.
 
-The intended contribution is a reproducible comparison
-that connects controlled numerical validation with
-an Indian-market application. Its conclusions will
-address when neural methods justify their training
-costs, how reliably they produce sensitivities and
-calibrated prices, and how their performance changes
-across the tested asset dimensions. The study will
-report both successful approximations and observed
-limitations, with comparisons made at similar accuracy
-wherever possible.
+A control variate uses a correlated quantity \(X\) with known expectation:
+\begin{equation}
+ Y_{\mathrm{CV}}=Y-\beta(X-\mathbb E[X]),\qquad
+ \beta^*=\frac{\operatorname{Cov}(Y,X)}{\operatorname{Var}(X)}.
+\end{equation}
+For a single asset, \(X=e^{-r\tau}S_T\) has expectation \(Se^{-q\tau}\). For arithmetic baskets, the discounted geometric basket payoff provides a control. The coefficient will be estimated using an independent pilot sample and fixed for the production sample, keeping pilot costs in the timing budget. Standard errors will use the adjusted observations. Variance-reduction factors will be reported alongside cost, since a lower variance need not imply greater efficiency.
 
+\subsubsection{Scrambled Sobol sampling}
+
+Randomised quasi-Monte Carlo replaces independent uniform draws with scrambled Sobol points \(\mathbf u_m\). The transformation \(z_{m,j}=\Phi^{-1}(u_{m,j})\) produces inputs for terminal simulation. The sampling dimension is one for a vanilla option and \(N\) for an \(N\)-asset terminal basket payoff. Each scramble will use \(M=2^k\) points to preserve the sequence's balance properties. Endpoint handling in the inverse normal transform will be documented.
+
+Uncertainty is calculated from \(R\) independent scrambles, not from the dependent points within each scramble. If their price estimates are \(\widehat V^{(a)}\), then
+\begin{equation}
+ \overline V=\frac1R\sum_{a=1}^R\widehat V^{(a)},\qquad
+ \widehat{\mathrm{SE}}(\overline V)=\frac{s_R}{\sqrt R},
+\end{equation}
+where \(s_R\) is the sample standard deviation of the replicate estimates. A Student-\(t\) interval will be treated as approximate. Total work is \(RM\) payoff evaluations. The method can improve practical convergence, but its benefit depends on the payoff and effective dimension and will not be assumed in advance \cite{glasserman2004}.
+
+\subsection{Crank--Nicolson finite differences}
+
+\subsubsection{Domain and spatial approximation}
+
+Writing \(U(S,\tau)=V(S,T-\tau)\) gives a forward equation in time to expiry:
+\begin{equation}
+ U_\tau=\tfrac12\sigma^2S^2U_{SS}+(r-q)SU_S-rU,
+ \qquad U(S,0)=g(S).
+\end{equation}
+The computational domain is \([0,S_{\max}]\). For a call, \(U(0,\tau)=0\) and \(U(S_{\max},\tau)\approx S_{\max}e^{-q\tau}-Ke^{-r\tau}\). Put boundaries are \(Ke^{-r\tau}\) and approximately zero, respectively. The upper boundaries are asymptotic, so domain enlargement will test their influence on the evaluation region.
+
+Divide the asset-price domain into \(J\) equal intervals of width \(h=S_{\max}/J\), giving grid points \(S_j=jh\) for \(j=0,\ldots,J\). Here \(S_{\max}\) is the chosen upper asset-price boundary, and \(U_j\) approximates \(U(S_j,\tau)\) at a fixed time level. Subscripts \(S\), \(SS\), and \(\tau\) denote partial derivatives. Central differences give
+\begin{equation}
+ U_S\approx\frac{U_{j+1}-U_{j-1}}{2h},\qquad
+ U_{SS}\approx\frac{U_{j+1}-2U_j+U_{j-1}}{h^2}.
+\end{equation}
+Thus the discrete spatial operator has coefficients
+\begin{align}
+ a_j&=\frac{\sigma^2S_j^2}{2h^2}-\frac{(r-q)S_j}{2h},\\
+ b_j&=-\frac{\sigma^2S_j^2}{h^2}-r,\\
+ c_j&=\frac{\sigma^2S_j^2}{2h^2}+\frac{(r-q)S_j}{2h}.
+\end{align}
+For the interior unknowns, this gives \(\mathbf u'=A\mathbf u+\mathbf f(\tau)\), with tridiagonal \(A\). The first and last components of \(\mathbf f\) contain the lower and upper boundary contributions.
+
+\subsubsection{Time stepping and implementation}
+
+Divide the time-to-expiry interval \([0,\tau_{\max}]\) into \(N_t\) steps of size \(\Delta\tau=\tau_{\max}/N_t\), where \(\tau_{\max}\) is the longest maturity being solved. At time level \(\tau_n=n\Delta\tau\), let \(\mathbf u^n\) contain the interior grid values. With \(I\) denoting the identity matrix, the Crank--Nicolson update is
+\begin{equation}
+ (I-\tfrac{\Delta\tau}{2}A)\mathbf u^{n+1}
+ =(I+\tfrac{\Delta\tau}{2}A)\mathbf u^n
+ +\tfrac{\Delta\tau}{2}\bigl(\mathbf f(\tau_n)+\mathbf f(\tau_{n+1})\bigr).
+ \label{eq:s3_cn}
+\end{equation}
+The method is second order in space and time for suitably smooth, resolved solutions. The payoff kink can cause oscillations and degrade Greek convergence. The first two full time intervals will therefore be replaced by four backward-Euler half-steps, followed by Crank--Nicolson. This Rannacher damping suppresses initial oscillations without treating an undamped implementation as the strongest classical baseline \cite{pooley2003}.
+
+Implementation consists of grid construction, payoff initialisation, operator assembly, damped starting steps, and repeated solution of Equation~\eqref{eq:s3_cn}. Boundary values will be updated at each time level. A banded or tridiagonal solver will be used; a dense matrix inverse will not be formed. With \(J\) spatial intervals and \(N_t\) steps, work is \(O(JN_t)\). Working memory is \(O(J)\), or \(O(JN_t)\) if the complete surface is retained for repeated queries.
+
+Spatial and temporal refinement will be tested separately while keeping the other error sources small. An observed spatial order is \(p=\log(E(h)/E(h/2))/\log2\), where \(E(h)\) is the error measured using the same norm and evaluation points for grid spacing \(h\). Domain truncation and off-grid interpolation will receive separate checks. Stability alone does not establish accuracy or monotonicity. Low-volatility cases can also make centred convection unsuitable; any change to the spatial stencil will be identified explicitly and its order rechecked.
+
+\subsection{Numerical Greeks and correlated baskets}
+
+\subsubsection{Sensitivity estimators}
+
+For a price approximation \(\widehat V\) and positive spot-price perturbation \(\varepsilon\), central differences yield
+\begin{align}
+ \widehat\Delta&=\frac{\widehat V(S+\varepsilon)-\widehat V(S-\varepsilon)}{2\varepsilon},\\
+ \widehat\Gamma&=\frac{\widehat V(S+\varepsilon)-2\widehat V(S)+\widehat V(S-\varepsilon)}{\varepsilon^2}.
+\end{align}
+Crank--Nicolson will use grid neighbours for these derivatives. Off-grid interpolation will be documented; differentiating a piecewise-linear interpolant twice is not a suitable Gamma estimator. Monte Carlo bumps will share random samples, with standard errors estimated from the per-sample combined differences. Several perturbation sizes will be used because reducing a bump can amplify solver error, sampling noise, and floating-point cancellation. Vega and Rho use parameter perturbations, and Theta uses the negative maturity derivative, with one-sided treatment where necessary.
+
+A call also admits the pathwise estimator
+\begin{equation}
+ \widehat\Delta_{\mathrm{PW}}=\frac{e^{-r\tau}}{M}
+ \sum_{m=1}^M\mathbf1_{\{S_T^{(m)}>K\}}\frac{S_T^{(m)}}S.
+\end{equation}
+It provides an additional Delta comparison \cite{glasserman2004}. Naively differentiating the indicator again misses the payoff boundary contribution and does not give a valid ordinary pathwise Gamma estimator. The initial Gamma study will therefore use common-random-number finite differences with both bias and uncertainty checks.
+
+\subsubsection{Basket simulation and analytical control}
+
+For baskets of \(N=2,3,5\) assets, let \(\rho_{ij}\) be the correlation between the Brownian increments driving assets \(i\) and \(j\). The positive-definite correlation matrix \(R=(\rho_{ij})\) is factored as \(R=LL^{\mathsf T}\). Here \(L\) is a lower-triangular Cholesky factor. A vector \(\mathbf Z\) of \(N\) independent standard normal variables gives correlated inputs \(\mathbf X=L\mathbf Z\). Each asset uses Equation~\eqref{eq:s3_terminal} with its own current price \(S_i\), dividend yield \(q_i\), volatility \(\sigma_i\), and correlated normal draw \(X_i\). With samples stored as rows, the array operation is \(ZL^{\mathsf T}\). Symmetry, unit diagonal, and positive definiteness will be checked before Cholesky factorisation; singular valid cases require a suitable alternative factorisation.
+
+Let \(S_{i,T}\) denote asset \(i\)\textquotesingle s terminal price and \(w_i\) its fixed basket weight. The arithmetic basket is \(B_T=\sum_iw_iS_{i,T}\), with \(w_i\geq0\) and \(\sum_iw_i=1\). Pricing averages its discounted payoff \((B_T-K)^+\). For the geometric basket \(G_T=\prod_iS_{i,T}^{w_i}\), \(\log G_T\) is normally distributed with mean \(m_G\) and variance \(s_G^2\), given by
+\begin{align}
+ m_G&=\sum_iw_i\log S_i+
+ \left(r-\sum_iw_iq_i-\tfrac12\sum_iw_i\sigma_i^2\right)\tau,\\
+ s_G^2&=\tau\sum_i\sum_jw_iw_j\sigma_i\sigma_j\rho_{ij}.
+\end{align}
+For \(s_G>0\), let \(d_{2,G}=(m_G-\log K)/s_G\) and \(d_{1,G}=d_{2,G}+s_G\). The call reference is
+\begin{equation}
+ C_G=e^{-r\tau}\left[e^{m_G+s_G^2/2}\Phi(d_{1,G})-K\Phi(d_{2,G})\right].
+\end{equation}
+This supplies validation and the known expectation for a geometric-payoff control variate. The arithmetic basket is not generally lognormal, so its independent reference estimates retain statistical uncertainty. The \(N=1\) reduction and the generated Gaussian covariance will be checked.
+
+Basket sensitivities will include asset-wise Delta, diagonal Gamma, and selected cross-Gammas. Here \(\widehat V_{ab}\) denotes the estimated price with \(S_i\) shifted by \(a\varepsilon_i\) and \(S_j\) by \(b\varepsilon_j\), where \(a,b\in\{-1,+1\}\) and \(\varepsilon_i,\varepsilon_j>0\) are the spot perturbation sizes. Perturbing two asset prices gives
+\begin{equation}
+ \widehat\Gamma_{ij}=
+ \frac{\widehat V_{++}-\widehat V_{+-}-\widehat V_{-+}+\widehat V_{--}}
+ {4\varepsilon_i\varepsilon_j},\qquad i\ne j,
+\end{equation}
+using the same Gaussian samples in the four valuations. Correlation and all other parameters remain fixed during these spot perturbations.
+
+\subsection{Validation and comparison protocol}
+
+Each routine will accept explicit financial inputs and return its price, available sensitivities, and diagnostics. Separate experiment scripts will record seeds, grid or sample sizes, software versions, and output tables. Validation will proceed from analytical identities to stochastic estimates and grid convergence, then to basket cases.
+
+Prices and each Greek will be compared through root-mean-square error (RMSE) and maximum absolute error on a common independent evaluation set. Relative errors will be restricted to reference values away from zero. Financial checks will include applicable price bounds, parity, monotonicity, and convexity, with statistical uncertainty considered for simulation estimates.
+
+Cost will include all work needed for the requested output, including variance-reduction pilots. A single price, a complete surface, and Greeks are distinct workloads. Repeated-query comparisons will account for interpolation from an existing classical surface, rather than forcing a full recalculation for every query. Runtime, memory, numerical error, and uncertainty will be reported together. For fixed-model benchmarks, differences from the analytical or high-accuracy numerical reference measure solver error; differences from actual option quotes additionally involve calibration, model assumptions, and data quality.
+
+
+
+
+% --------------------------------------------------
+% References
+% --------------------------------------------------
 \begin{thebibliography}{99}
 
 \bibitem{black1973}
@@ -442,11 +423,6 @@ Online data resources.
 and
 \url{https://www.nseindia.com/all-reports-derivatives}
 
-\bibitem{bseData}
-BSE Limited,
-``Information products: Domestic tariff sheet.''
-Online information on market-data products.
-\url{https://www.bseindia.com/downloads1/Information_Products_Pricing_Sheet.pdf}
-
 \end{thebibliography}
+
 \end{document}
