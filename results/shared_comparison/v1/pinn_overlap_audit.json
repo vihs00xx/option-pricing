@@ -1,0 +1,9 @@
+{
+  "anchored_label_points": 8192,
+  "anchor_overlaps": 0,
+  "earlier_surface_points": 8211,
+  "earlier_surface_overlaps": 0,
+  "metadata_sha256": "24d0dee3886b0a7ed497b6c3601ed9a8426f90a6daf847caa5e289d2a38b353f",
+  "sampler_sha256": "c3c36d754152280b320d0f77bc31a78b7a97876dec4607aa381c36199598d308",
+  "audit_scope": "Post-freeze verification of reconstructed final-stage anchor coordinates and prior saved surface; no case or model changed. Does not reconstruct every historical physics collocation draw."
+}

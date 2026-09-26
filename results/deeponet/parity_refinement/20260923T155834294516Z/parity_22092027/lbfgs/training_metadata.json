@@ -1,0 +1,84 @@
+{
+  "schema": "deeponet_run_metadata_v2",
+  "arm": "parity_22092027/lbfgs",
+  "seed": 23092026,
+  "stage": "refinement",
+  "architecture": {
+    "width": 64,
+    "depth": 3,
+    "rank": 64,
+    "model": "parity"
+  },
+  "effective_settings": {
+    "protocol_id": "deeponet_parity_refinement_v1",
+    "architecture": {
+      "width": 64,
+      "depth": 3,
+      "rank": 64
+    },
+    "seed": 23092026,
+    "epochs": 100000,
+    "batch_size": 8192,
+    "learning_rate": 1.0,
+    "validation_every": 10,
+    "wall_seconds": 180,
+    "threads": 2,
+    "loss": "mean_squared_error_of_price_divided_by_strike",
+    "selection": "minimum_validation_normalized_price_mse",
+    "dataset": "results/deeponet/data/black_scholes_operator_v1.npz",
+    "dataset_manifest": "results/deeponet/data/black_scholes_operator_v1_manifest.json",
+    "output_root": "results/deeponet/training",
+    "note": "Ablation continuation: fixed 800 epochs; training and validation data only",
+    "progress_every_seconds": 45,
+    "optimizer": "lbfgs",
+    "loss_multiplier": 10000.0,
+    "chunk_size": 1024,
+    "history_size": 50,
+    "max_iter": 1,
+    "line_search_fn": "strong_wolfe"
+  },
+  "settings_sha256": "refinement",
+  "dataset": {
+    "path": "results/deeponet/data/black_scholes_operator_v1.npz",
+    "content_sha256": "c79956b52333850f4a39701b9775172b4a46aad798108f78b917848aacddd25c",
+    "content_hash_scope": "all npz arrays whose name starts with 'train_'",
+    "content_hash_scope_prefix": "train_",
+    "content_hash_method": "sha256 over the train-scope arrays sorted by name, each contributing its name, dtype.str, shape and C-order bytes"
+  },
+  "validation_split": {
+    "arrays": [
+      "validation_branch",
+      "validation_trunk",
+      "validation_targets"
+    ],
+    "rows": 2048
+  },
+  "normalization": null,
+  "parent": {
+    "folder": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\arms\\parity_22092027\\selected.pt",
+    "file_sha256": "e2e9e9a29a62965e40b24759232ce7eb5353086a0526c72817b43cc0933a9714"
+  },
+  "checkpoints": {
+    "selected": "e26d31b5104b08ab3b7d78c991e082147b3a483b6daf1dfb998d991f4b6f1691",
+    "last": "2d1522f644ac5892a7d09209073e831b2cfa8625b69825fba3678f99ed7877e6"
+  },
+  "training": {
+    "selected_step": 23,
+    "selected_validation_mse": 4.17446571118724e-07,
+    "optimizer_steps": 190,
+    "closure_calls": 391,
+    "training_wall_seconds": 180.35127959999954,
+    "stop_reason": "wall_budget_checked_between_lbfgs_steps",
+    "arm_wall_seconds": 180.35127959999954
+  },
+  "label_columns_used": [
+    "price",
+    "delta",
+    "gamma",
+    "vega",
+    "theta",
+    "rho"
+  ],
+  "greek_weight": 0.01,
+  "final_test_accessed": false
+}

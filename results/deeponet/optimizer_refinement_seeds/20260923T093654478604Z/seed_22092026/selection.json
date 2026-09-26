@@ -1,0 +1,90 @@
+{
+  "seed": 22092026,
+  "selected": "adam_small_steps",
+  "eligible": [
+    "baseline",
+    "adam_small_steps",
+    "lbfgs"
+  ],
+  "validation": {
+    "baseline": {
+      "price": {
+        "rmse": 0.1826682727305595,
+        "max_absolute_error": 0.8271904575404605
+      },
+      "delta": {
+        "rmse": 0.01638948586407004,
+        "max_absolute_error": 0.10280854126807591
+      },
+      "gamma": {
+        "rmse": 0.0036628374009044142,
+        "max_absolute_error": 0.07237958596295854
+      },
+      "vega": {
+        "rmse": 1.3848346480166969,
+        "max_absolute_error": 15.502302522581406
+      },
+      "theta": {
+        "rmse": 1.9452051659494276,
+        "max_absolute_error": 22.78989474036851
+      },
+      "rho": {
+        "rmse": 1.701212241528156,
+        "max_absolute_error": 13.539888705781067
+      }
+    },
+    "adam_small_steps": {
+      "price": {
+        "rmse": 0.11758606441411533,
+        "max_absolute_error": 0.9316158525686264
+      },
+      "delta": {
+        "rmse": 0.013316720578358546,
+        "max_absolute_error": 0.1163271223132689
+      },
+      "gamma": {
+        "rmse": 0.003247519521117007,
+        "max_absolute_error": 0.06281967434535954
+      },
+      "vega": {
+        "rmse": 1.2861910518916209,
+        "max_absolute_error": 16.340095373732822
+      },
+      "theta": {
+        "rmse": 1.706859854659302,
+        "max_absolute_error": 20.472433344628826
+      },
+      "rho": {
+        "rmse": 1.4668380118439273,
+        "max_absolute_error": 11.055836899451577
+      }
+    },
+    "lbfgs": {
+      "price": {
+        "rmse": 0.12850763831063008,
+        "max_absolute_error": 1.004352342233366
+      },
+      "delta": {
+        "rmse": 0.013372333459639717,
+        "max_absolute_error": 0.10989502906069507
+      },
+      "gamma": {
+        "rmse": 0.002956826276378181,
+        "max_absolute_error": 0.04180403524803611
+      },
+      "vega": {
+        "rmse": 1.3816050869200622,
+        "max_absolute_error": 14.352716926127062
+      },
+      "theta": {
+        "rmse": 1.4185903314572825,
+        "max_absolute_error": 15.966745651918991
+      },
+      "rho": {
+        "rmse": 1.662086325961024,
+        "max_absolute_error": 12.424494125791028
+      }
+    }
+  },
+  "rule": "Each Greek RMSE must remain within 10% of the parent model, then minimize price RMSE among baseline and refined arms."
+}

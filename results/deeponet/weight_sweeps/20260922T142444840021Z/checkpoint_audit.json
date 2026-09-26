@@ -1,0 +1,101 @@
+[
+  {
+    "seed": 22092026,
+    "role": "selection_seed",
+    "selected_epoch": 340,
+    "selected_price_rmse": 0.21137315828843672,
+    "price_gate_passed": true,
+    "last_metrics": {
+      "price": {
+        "rmse": 0.24671659124006864,
+        "max_absolute_error": 1.0009074576556287
+      },
+      "delta": {
+        "rmse": 0.015166249917129474,
+        "max_absolute_error": 0.13605623151627333
+      },
+      "gamma": {
+        "rmse": 0.0030362724443300966,
+        "max_absolute_error": 0.044190880834674706
+      },
+      "vega": {
+        "rmse": 1.3605350731871921,
+        "max_absolute_error": 14.722640493099046
+      },
+      "theta": {
+        "rmse": 1.5378866276311807,
+        "max_absolute_error": 17.694763424320982
+      },
+      "rho": {
+        "rmse": 1.2835078930776478,
+        "max_absolute_error": 10.153288094998373
+      }
+    }
+  },
+  {
+    "seed": 22092027,
+    "role": "fresh_seed",
+    "selected_epoch": 370,
+    "selected_price_rmse": 0.2649410667101282,
+    "price_gate_passed": false,
+    "last_metrics": {
+      "price": {
+        "rmse": 0.32156711601871507,
+        "max_absolute_error": 1.5646627809395497
+      },
+      "delta": {
+        "rmse": 0.01802389851021029,
+        "max_absolute_error": 0.07110634543676397
+      },
+      "gamma": {
+        "rmse": 0.002991880733181679,
+        "max_absolute_error": 0.05613400585107425
+      },
+      "vega": {
+        "rmse": 1.2305746235648143,
+        "max_absolute_error": 14.536823198534051
+      },
+      "theta": {
+        "rmse": 1.4887747882910354,
+        "max_absolute_error": 17.13195116235059
+      },
+      "rho": {
+        "rmse": 1.2903946148152419,
+        "max_absolute_error": 11.30204534976248
+      }
+    }
+  },
+  {
+    "seed": 22092028,
+    "role": "fresh_seed",
+    "selected_epoch": 448,
+    "selected_price_rmse": 0.29626091489762035,
+    "price_gate_passed": false,
+    "last_metrics": {
+      "price": {
+        "rmse": 0.29626091489762035,
+        "max_absolute_error": 1.523800115587246
+      },
+      "delta": {
+        "rmse": 0.019368087813360284,
+        "max_absolute_error": 0.0999234903303628
+      },
+      "gamma": {
+        "rmse": 0.003734684926348212,
+        "max_absolute_error": 0.04782629146520953
+      },
+      "vega": {
+        "rmse": 1.315183022976596,
+        "max_absolute_error": 9.216726978085706
+      },
+      "theta": {
+        "rmse": 1.9417096790025512,
+        "max_absolute_error": 24.03735417586332
+      },
+      "rho": {
+        "rmse": 1.4768927346582088,
+        "max_absolute_error": 13.345391335966113
+      }
+    }
+  }
+]

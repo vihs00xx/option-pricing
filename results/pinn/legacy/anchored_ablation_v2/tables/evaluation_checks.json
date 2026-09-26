@@ -1,6 +1,0 @@
-{
-  "aggregate_reproduces_runs": true,
-  "problems": [],
-  "std_convention": "sample",
-  "pde_residual_units": "RMS of the transformed residual in u = C/K units"
-}

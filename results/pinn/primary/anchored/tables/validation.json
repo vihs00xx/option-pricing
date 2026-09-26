@@ -71,10 +71,10 @@
     "batch_size": 4096,
     "warmup_batches": 2,
     "repetitions": 10,
-    "median_batch_seconds": 0.044035599999915576,
-    "q25_batch_seconds": 0.031108399998629466,
-    "q75_batch_seconds": 0.1140386499955639,
-    "median_seconds_per_point": 1.0750878906229389e-05,
-    "median_points_per_second": 93015.65097348175
+    "median_batch_seconds": 0.08896044998255093,
+    "q25_batch_seconds": 0.07513562500389526,
+    "q75_batch_seconds": 0.12539065001328709,
+    "median_seconds_per_point": 2.1718859859021222e-05,
+    "median_points_per_second": 46042.932570635676
   }
 }

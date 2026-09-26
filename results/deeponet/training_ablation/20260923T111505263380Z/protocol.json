@@ -1,0 +1,151 @@
+{
+  "protocol_id": "deeponet_training_ablation_v2",
+  "factors": {
+    "parity": "architecture: shared midpoint with call-put parity by construction",
+    "penalties": "loss: squared normalized bound violations for price, Delta and negative Gamma",
+    "sampling": "data: equal-sized coordinate sets, uniform versus near-expiry/near-strike concentration"
+  },
+  "arms": {
+    "control": {
+      "arch": "base",
+      "data": "frozen",
+      "penalties": []
+    },
+    "parity": {
+      "arch": "parity",
+      "data": "frozen",
+      "penalties": []
+    },
+    "penalty_price": {
+      "arch": "base",
+      "data": "frozen",
+      "penalties": [
+        "price"
+      ]
+    },
+    "penalty_delta": {
+      "arch": "base",
+      "data": "frozen",
+      "penalties": [
+        "delta"
+      ]
+    },
+    "penalty_gamma": {
+      "arch": "base",
+      "data": "frozen",
+      "penalties": [
+        "gamma"
+      ]
+    },
+    "penalty_all": {
+      "arch": "base",
+      "data": "frozen",
+      "penalties": [
+        "price",
+        "delta",
+        "gamma"
+      ]
+    },
+    "uniform": {
+      "arch": "base",
+      "data": "uniform",
+      "penalties": []
+    },
+    "mixed": {
+      "arch": "base",
+      "data": "mixed",
+      "penalties": []
+    }
+  },
+  "seeds": [
+    22092026,
+    22092027,
+    22092028
+  ],
+  "greek_weight": 0.01,
+  "procedure": {
+    "stage1": "price-only pilot: 500 epochs (8,000 steps), Adam lr 0.001, batch 512",
+    "stage2": "supervised continuation: 800 epochs (12,800 steps), Adam lr 0.0003, batch 512",
+    "selection": "minimum validation price MSE normalized by strike",
+    "threads": 2,
+    "concurrent_jobs": 3,
+    "budget": "compute-matched: optimizer steps fixed per run",
+    "note": "Compute-matched budgets: optimizer steps are fixed per run. Wall-clock budgets proved unstable on this host (a prior campaign measured a 4.8x step-count spread between identical runs), so equality of compute is enforced by steps."
+  },
+  "penalty_weight_candidates": [
+    0.1,
+    1.0,
+    10.0
+  ],
+  "penalty_weight_rule": "Among penalty weights, keep candidates whose validation price RMSE is at most 1.1 times the control and every Greek RMSE at most 1.15 times the control on the same seed; among those minimize the summed validation violation frequencies (price bounds, Delta bounds, negative Gamma), ties to the smaller weight. If none passes, minimize the summed frequencies and mark the gate failed.",
+  "acceptability_rule": "Mean price RMSE at most 1.1 times control mean and every mean Greek RMSE at most 1.15 times control mean across the three seeds.",
+  "sampling": {
+    "contract_seed": 22092030,
+    "coordinate_seeds": {
+      "uniform": 22092031,
+      "mixed": 22092032
+    },
+    "contracts_shared_between_arms": true,
+    "coordinates_per_contract": 32,
+    "train_composition": {
+      "uniform": {
+        "broad": 8192,
+        "near_strike": 0,
+        "near_expiry": 0,
+        "near_strike_and_expiry": 0
+      },
+      "mixed": {
+        "broad": 4096,
+        "near_strike": 2048,
+        "near_expiry": 1024,
+        "near_strike_and_expiry": 1024
+      }
+    },
+    "note": "Equal dataset sizes; only the coordinate distribution differs."
+  },
+  "evaluation": {
+    "status": "fresh_cases_opened_once_after_all_selection_decisions; observed once read",
+    "seeds": {
+      "in_domain": 27092026,
+      "stress": 27093026,
+      "focus_contracts": 27094026,
+      "focus": 27094027
+    },
+    "sets": [
+      "in_domain",
+      "stress",
+      "focus",
+      "pairs"
+    ],
+    "file": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\evaluation.npz",
+    "content_sha256": "7344015be7ad25b8b63ec82d23ffb513218603383d80cc334008c9e6967be4f3",
+    "note": "A later independent assessment needs fresh cases; these are now observed."
+  },
+  "dataset_arrays": {
+    "frozen": {
+      "file": "results/deeponet/data/black_scholes_operator_v1.npz",
+      "content_sha256": "c79956b52333850f4a39701b9775172b4a46aad798108f78b917848aacddd25c"
+    },
+    "uniform": {
+      "file": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_uniform.npz",
+      "content_sha256": "a9b84a96784e294798045647c07ef7060ddd972d3ba18e5c4ac9d502f22e4d5c"
+    },
+    "mixed": {
+      "file": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_mixed.npz",
+      "content_sha256": "06bf6e409ca73509d42a29375a1538e239993ad057c380ad135e53230dfea382"
+    }
+  },
+  "source_sha256": {
+    "experiments\\deeponet\\run_training_ablation.py": "7ac89da597ecd03a0841f7d61cc19e4f343cdc10cdd902486ac37a98bddeb3c9",
+    "experiments\\deeponet\\train.py": "ade588bc01854eef9fb44ecb7f71802510307bf137054a82f96d778b2c77236e",
+    "experiments\\deeponet\\compare_supervision.py": "31d2bd00787e54e80fd3648294f26f32597dd5e1be5fee1fe176b585a2e0a314",
+    "experiments\\deeponet\\refine_optimizer.py": "f56c27323c95388b2d9fb6fdd4958a3be97dcf8219ef607dbddee5d8ebf0176e",
+    "src\\neural\\deeponet.py": "a18cda7c6086fa7b020088537caace2424322021a13d1dcf7c8a930dca0cfd5a",
+    "src\\neural\\deeponet_data.py": "06e0d8d0e55e187759b56023364df105bbdcc81592e7f279cde269a540501588",
+    "src\\black_scholes.py": "0746033b38cb276d51188c010cd33b814031d8bd91f1336ae4ea8d74af5ced15",
+    "experiments\\config\\neural\\deeponet_training.json": "e45b0d0891b026e0b40754016fe4e6916b33a7f32f8d74869accc605428e1c1d"
+  },
+  "final_test_accessed": false,
+  "python": "3.13.3",
+  "torch": "2.8.0+cpu"
+}

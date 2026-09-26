@@ -1,0 +1,53 @@
+{
+  "protocol_id": "deeponet_parity_refinement_v1",
+  "purpose": "Established optimizer-refinement procedure applied to control and parity parents across the same seeds on uniform sampling, to test whether parity improves the strongest current model without another change.",
+  "parent_study": "results\\deeponet\\training_ablation\\20260923T111505263380Z",
+  "family_reference": "results\\deeponet\\optimizer_refinement_seeds\\20260923T093654478604Z",
+  "seeds": [
+    22092026,
+    22092027,
+    22092028
+  ],
+  "architectures": [
+    "control",
+    "parity"
+  ],
+  "arms": [
+    "adam_small_steps",
+    "lbfgs"
+  ],
+  "refinement_seed": 23092026,
+  "greek_scales": [
+    0.5823468873578548,
+    0.018749898002260283,
+    22.560560095970324,
+    11.538700852018152,
+    36.00645780086356
+  ],
+  "greek_weight": 0.01,
+  "wall_seconds_per_arm": 180,
+  "selection_rule": "Each Greek RMSE must remain within 10% of the parent model, then minimize price RMSE among parent and refined arms.",
+  "source_sha256": {
+    "experiments\\deeponet\\refine_parity_seeds.py": "a76725e03193230fabcc8093a20eed9ac7e3a08d4728a48ee2721b352a0ceddc",
+    "experiments\\deeponet\\refine_optimizer.py": "f56c27323c95388b2d9fb6fdd4958a3be97dcf8219ef607dbddee5d8ebf0176e",
+    "experiments\\deeponet\\train.py": "ade588bc01854eef9fb44ecb7f71802510307bf137054a82f96d778b2c77236e",
+    "experiments\\deeponet\\compare_supervision.py": "31d2bd00787e54e80fd3648294f26f32597dd5e1be5fee1fe176b585a2e0a314",
+    "experiments\\deeponet\\evaluate.py": "307fafa2e7806221b91f2bd2731935bdd678e3d365ffd018ee03f955a81d38b4",
+    "src\\neural\\deeponet.py": "a18cda7c6086fa7b020088537caace2424322021a13d1dcf7c8a930dca0cfd5a",
+    "src\\neural\\run_metadata.py": "bda932af05ffa7ce1557790fcdecf7d19d79fc99be7eeab902b4d4f2006faee3",
+    "src\\black_scholes.py": "0746033b38cb276d51188c010cd33b814031d8bd91f1336ae4ea8d74af5ced15"
+  },
+  "fresh_evaluation": {
+    "status": "fresh cases generated before training; opened after all selection decisions; observed once read",
+    "seeds": {
+      "in_domain": 28092026,
+      "stress": 28093026
+    },
+    "files": {
+      "in_domain": "82c4af9bcd067868e8c111d44aa3f118888d03a7aaa66a48144e93be69127c5a",
+      "stress": "6156f3d1239393eca8e65e425be10dbcb322b66ad5d47e1a1d3f6ca54f11f5de"
+    }
+  },
+  "final_benchmark": "observed in an earlier one-time study (results/deeponet/primary/final_test_metrics.json); not accessed again",
+  "final_test_accessed": false
+}

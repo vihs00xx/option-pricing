@@ -1,0 +1,62 @@
+{
+  "selected_epoch": 790,
+  "selected_validation_mse": 2.5876759699177515e-06,
+  "optimizer_steps": 12800,
+  "stop_reason": "epochs_completed",
+  "training_wall_seconds": 879.9444160000021,
+  "peak_sampled_rss_mb": 317.4453125,
+  "settings": {
+    "protocol_id": "deeponet_training_ablation_v2",
+    "architecture": {
+      "width": 64,
+      "depth": 3,
+      "rank": 64
+    },
+    "seed": 22092028,
+    "epochs": 800,
+    "batch_size": 512,
+    "learning_rate": 0.0003,
+    "validation_every": 10,
+    "wall_seconds": 36000,
+    "threads": 2,
+    "loss": "mean_squared_error_of_price_divided_by_strike",
+    "selection": "minimum_validation_normalized_price_mse",
+    "dataset": "results/deeponet/data/black_scholes_operator_v1.npz",
+    "dataset_manifest": "results/deeponet/data/black_scholes_operator_v1_manifest.json",
+    "output_root": "results/deeponet/training",
+    "note": "Ablation continuation: fixed 800 epochs; training and validation data only",
+    "progress_every_seconds": 45
+  },
+  "arm": "uniform/22092028",
+  "seed": 22092028,
+  "stage": "stage2",
+  "arch": "base",
+  "data": "uniform",
+  "dataset": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_uniform.npz",
+  "dataset_content_sha256": "a9b84a96784e294798045647c07ef7060ddd972d3ba18e5c4ac9d502f22e4d5c",
+  "greek_scales": [
+    0.5789003134864943,
+    0.01936112826930163,
+    22.692862367474618,
+    12.118679868289766,
+    36.352640549972946
+  ],
+  "parent_checkpoint": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\pilot\\base_uniform_22092028",
+  "parent_sha256": "f84d666d5cb936fb8bd54dfb1ba880902c7dbd1b41dd5726b9ff2f484bdf713b",
+  "label_columns_used": [
+    "price",
+    "delta",
+    "gamma",
+    "vega",
+    "theta",
+    "rho"
+  ],
+  "greek_weight": 0.01,
+  "penalty_types": [],
+  "penalty_weight": 0.0,
+  "final_test_accessed": false,
+  "checkpoint_sha256": {
+    "selected": "8bb99869abb0f36d3d3be1dd8be0bbdef2b9cb2d3f482cd00193cf632abb7087",
+    "last": "fbbabab2f211fcec28027d49b0ff2d143eeacd742db56b9aa68493141539df23"
+  }
+}

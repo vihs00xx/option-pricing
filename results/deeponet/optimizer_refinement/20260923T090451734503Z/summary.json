@@ -1,0 +1,197 @@
+{
+  "selected": "lbfgs",
+  "selected_checkpoint": "results\\deeponet\\optimizer_refinement\\20260923T090451734503Z\\lbfgs\\selected.pt",
+  "selected_sha256": "79edbd515b5276b9a64ca1063dedd9295378cbd9043152a48d5d971540c0498f",
+  "validation": {
+    "baseline": {
+      "price": {
+        "rmse": 0.08740654569455421,
+        "max_absolute_error": 0.7037730086791143
+      },
+      "delta": {
+        "rmse": 0.008583689115750316,
+        "max_absolute_error": 0.05413665043534055
+      },
+      "gamma": {
+        "rmse": 0.002224759964451508,
+        "max_absolute_error": 0.03262053647131974
+      },
+      "vega": {
+        "rmse": 0.8643474229759406,
+        "max_absolute_error": 9.928767920239487
+      },
+      "theta": {
+        "rmse": 0.9979320682178188,
+        "max_absolute_error": 13.159470215522692
+      },
+      "rho": {
+        "rmse": 0.9474372821050124,
+        "max_absolute_error": 6.956855305729263
+      }
+    },
+    "adam_small_steps": {
+      "price": {
+        "rmse": 0.06286256424125883,
+        "max_absolute_error": 0.586495373904306
+      },
+      "delta": {
+        "rmse": 0.007027046283202029,
+        "max_absolute_error": 0.05394251128175693
+      },
+      "gamma": {
+        "rmse": 0.002091348149392855,
+        "max_absolute_error": 0.03144386983729153
+      },
+      "vega": {
+        "rmse": 0.8395352602947024,
+        "max_absolute_error": 9.47975191196661
+      },
+      "theta": {
+        "rmse": 0.9499570534560622,
+        "max_absolute_error": 12.260638692977373
+      },
+      "rho": {
+        "rmse": 0.8645319220999423,
+        "max_absolute_error": 6.97675357384405
+      }
+    },
+    "lbfgs": {
+      "price": {
+        "rmse": 0.06180398022720165,
+        "max_absolute_error": 0.6207901159298004
+      },
+      "delta": {
+        "rmse": 0.007275154997356265,
+        "max_absolute_error": 0.05358934488882112
+      },
+      "gamma": {
+        "rmse": 0.0021386003658678257,
+        "max_absolute_error": 0.03384726623167239
+      },
+      "vega": {
+        "rmse": 0.857338690391199,
+        "max_absolute_error": 10.06261016540622
+      },
+      "theta": {
+        "rmse": 0.9844737157721499,
+        "max_absolute_error": 12.358115349895204
+      },
+      "rho": {
+        "rmse": 0.8897877076184927,
+        "max_absolute_error": 7.29602815618918
+      }
+    }
+  },
+  "fresh_audit": {
+    "baseline": {
+      "in_domain": {
+        "price": {
+          "rmse": 0.09683278195434263,
+          "max_absolute_error": 0.7304900361732578
+        },
+        "delta": {
+          "rmse": 0.008873904929848513,
+          "max_absolute_error": 0.09075728849729336
+        },
+        "gamma": {
+          "rmse": 0.0017437318385260735,
+          "max_absolute_error": 0.021249114406642584
+        },
+        "vega": {
+          "rmse": 0.7808554163391461,
+          "max_absolute_error": 7.626474870000699
+        },
+        "theta": {
+          "rmse": 0.9652794218416679,
+          "max_absolute_error": 12.464047788005608
+        },
+        "rho": {
+          "rmse": 1.0256740429933433,
+          "max_absolute_error": 13.802068909235317
+        }
+      },
+      "stress": {
+        "price": {
+          "rmse": 0.18825641581249575,
+          "max_absolute_error": 1.329194264994939
+        },
+        "delta": {
+          "rmse": 0.01594919091285531,
+          "max_absolute_error": 0.08827912785954894
+        },
+        "gamma": {
+          "rmse": 0.0036323647455555586,
+          "max_absolute_error": 0.06885762943704296
+        },
+        "vega": {
+          "rmse": 1.5501463529872437,
+          "max_absolute_error": 13.892089624882022
+        },
+        "theta": {
+          "rmse": 1.6650504216381667,
+          "max_absolute_error": 45.02109763141226
+        },
+        "rho": {
+          "rmse": 2.354981772530499,
+          "max_absolute_error": 19.85028667657697
+        }
+      }
+    },
+    "selected": {
+      "in_domain": {
+        "price": {
+          "rmse": 0.06293811144133554,
+          "max_absolute_error": 0.575566278755737
+        },
+        "delta": {
+          "rmse": 0.007556250291356106,
+          "max_absolute_error": 0.08610223387828264
+        },
+        "gamma": {
+          "rmse": 0.001645042681826911,
+          "max_absolute_error": 0.019936870198541207
+        },
+        "vega": {
+          "rmse": 0.7699731601252398,
+          "max_absolute_error": 7.617461283962093
+        },
+        "theta": {
+          "rmse": 0.945287072783919,
+          "max_absolute_error": 13.002797387339527
+        },
+        "rho": {
+          "rmse": 0.9686477091236666,
+          "max_absolute_error": 13.967016449057752
+        }
+      },
+      "stress": {
+        "price": {
+          "rmse": 0.17180335192561091,
+          "max_absolute_error": 1.1457842099737832
+        },
+        "delta": {
+          "rmse": 0.014747106067698176,
+          "max_absolute_error": 0.09555215016886265
+        },
+        "gamma": {
+          "rmse": 0.00361298526691684,
+          "max_absolute_error": 0.07011313508058453
+        },
+        "vega": {
+          "rmse": 1.5491463654633788,
+          "max_absolute_error": 14.025562843739216
+        },
+        "theta": {
+          "rmse": 1.6686409150335029,
+          "max_absolute_error": 45.99801912822272
+        },
+        "rho": {
+          "rmse": 2.3666716942562376,
+          "max_absolute_error": 19.69931324236002
+        }
+      }
+    }
+  },
+  "previous_primary_preserved": true,
+  "old_final_test_reused": false
+}

@@ -1,0 +1,60 @@
+{
+  "settings": {
+    "protocol_id": "deeponet_supervised_price_pilot_v1",
+    "architecture": {
+      "width": 64,
+      "depth": 3,
+      "rank": 64
+    },
+    "seed": 22092026,
+    "epochs": 100000,
+    "batch_size": 512,
+    "learning_rate": 0.0003,
+    "validation_every": 10,
+    "wall_seconds": 300,
+    "threads": 2,
+    "loss": "mean_squared_error_of_price_divided_by_strike",
+    "selection": "minimum_validation_normalized_price_mse",
+    "dataset": "results/deeponet/data/black_scholes_operator_v1.npz",
+    "dataset_manifest": "results/deeponet/data/black_scholes_operator_v1_manifest.json",
+    "output_root": "results/deeponet/training",
+    "note": "Pilot uses training prices and validation prices only. No final benchmark evaluation during training."
+  },
+  "parent_checkpoint": "results\\deeponet\\training\\pilot_20260922T135135187961Z\\selected.pt",
+  "parent_sha256": "4308ac99031bd24a2745f9b0744bd84ab6c1bfc6e9635b9ec92d8772a051e6e4",
+  "dataset_sha256": "bb892af8c78df4125346b22aa68945be1a8d10ec570bc1ebb409d75f0ccba6ca",
+  "greek_scales": [
+    0.5823468873578548,
+    0.018749898002260283,
+    22.560560095970324,
+    11.538700852018152,
+    36.00645780086356
+  ],
+  "greek_weight": 1.0,
+  "final_test_accessed": false,
+  "design": "Same pilot initialization, fresh Adam, same shuffle seed, 300 seconds per arm; price validation selection",
+  "source_sha256": {
+    "experiments\\deeponet\\compare_supervision.py": "91760483e767476ac63f74a5fdbdb58f100de8211e577bf192a7861a77f4076f",
+    "experiments\\deeponet\\train.py": "3392962fa2010c0890063c8bfdb9af535c798a37ce933c003551889cd638b57e",
+    "src\\neural\\deeponet.py": "1bd8c80edaa58d279867e924abfc6b3897c3b328000f2764c4c81c8e4c7b02fa"
+  },
+  "selected_epoch": 340,
+  "selected_validation_mse": 4.4441870839967515e-06,
+  "optimizer_steps": 7410,
+  "stop_reason": "wall_budget",
+  "training_wall_seconds": 300.03511810000055,
+  "peak_sampled_rss_mb": 277.67578125,
+  "arm": "price_and_greeks",
+  "label_columns_used": [
+    "price",
+    "delta",
+    "gamma",
+    "vega",
+    "theta",
+    "rho"
+  ],
+  "checkpoint_sha256": {
+    "selected": "249c0c0a6190fb9793034b5e0abcbc8b8d16b6843fa7d73e83ce4d5754a59a40",
+    "last": "16ce631ac4647f01a593b3ecdf3f3cdcadde7357ea5a1381d0dbd308d1d9f94c"
+  }
+}

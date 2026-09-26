@@ -1,0 +1,133 @@
+{
+  "selected": {
+    "weight": 1.0,
+    "metrics": {
+      "price": {
+        "rmse": 0.21137315828843672,
+        "max_absolute_error": 1.3258562375450893
+      },
+      "delta": {
+        "rmse": 0.018776425769272957,
+        "max_absolute_error": 0.10842075884116317
+      },
+      "gamma": {
+        "rmse": 0.0034327535156606485,
+        "max_absolute_error": 0.06090335568031968
+      },
+      "vega": {
+        "rmse": 1.457312013887315,
+        "max_absolute_error": 19.46189999033686
+      },
+      "theta": {
+        "rmse": 1.764824503066655,
+        "max_absolute_error": 21.596334544605583
+      },
+      "rho": {
+        "rmse": 1.528285446071164,
+        "max_absolute_error": 12.519547407265918
+      }
+    },
+    "checkpoint": "results\\deeponet\\comparisons\\20260922T140050569791Z\\price_and_greeks\\selected.pt",
+    "greek_score": 0.012785126418273684,
+    "price_gate_passed": true
+  },
+  "candidates": [
+    {
+      "weight": 0.01,
+      "metrics": {
+        "price": {
+          "rmse": 0.1826682727305595,
+          "max_absolute_error": 0.8271904575404605
+        },
+        "delta": {
+          "rmse": 0.01638948586407004,
+          "max_absolute_error": 0.10280854126807591
+        },
+        "gamma": {
+          "rmse": 0.0036628374009044142,
+          "max_absolute_error": 0.07237958596295854
+        },
+        "vega": {
+          "rmse": 1.3848346480166969,
+          "max_absolute_error": 15.502302522581406
+        },
+        "theta": {
+          "rmse": 1.9452051659494276,
+          "max_absolute_error": 22.78989474036851
+        },
+        "rho": {
+          "rmse": 1.701212241528156,
+          "max_absolute_error": 13.539888705781067
+        }
+      },
+      "checkpoint": "results\\deeponet\\weight_sweeps\\20260922T142444840021Z\\weight_0.01\\selected.pt",
+      "greek_score": 0.01467487209437263,
+      "price_gate_passed": true
+    },
+    {
+      "weight": 0.1,
+      "metrics": {
+        "price": {
+          "rmse": 0.20936558087385235,
+          "max_absolute_error": 1.3180473672339517
+        },
+        "delta": {
+          "rmse": 0.018231693695043984,
+          "max_absolute_error": 0.09458041135193224
+        },
+        "gamma": {
+          "rmse": 0.0037892526778726186,
+          "max_absolute_error": 0.07318354543014438
+        },
+        "vega": {
+          "rmse": 1.6007965795591101,
+          "max_absolute_error": 13.513362226437454
+        },
+        "theta": {
+          "rmse": 2.0957514266805646,
+          "max_absolute_error": 24.626126020357404
+        },
+        "rho": {
+          "rmse": 1.7424366462068586,
+          "max_absolute_error": 14.104917519854439
+        }
+      },
+      "checkpoint": "results\\deeponet\\weight_sweeps\\20260922T142444840021Z\\weight_0.1\\selected.pt",
+      "greek_score": 0.016437521549920456,
+      "price_gate_passed": true
+    },
+    {
+      "weight": 1.0,
+      "metrics": {
+        "price": {
+          "rmse": 0.21137315828843672,
+          "max_absolute_error": 1.3258562375450893
+        },
+        "delta": {
+          "rmse": 0.018776425769272957,
+          "max_absolute_error": 0.10842075884116317
+        },
+        "gamma": {
+          "rmse": 0.0034327535156606485,
+          "max_absolute_error": 0.06090335568031968
+        },
+        "vega": {
+          "rmse": 1.457312013887315,
+          "max_absolute_error": 19.46189999033686
+        },
+        "theta": {
+          "rmse": 1.764824503066655,
+          "max_absolute_error": 21.596334544605583
+        },
+        "rho": {
+          "rmse": 1.528285446071164,
+          "max_absolute_error": 12.519547407265918
+        }
+      },
+      "checkpoint": "results\\deeponet\\comparisons\\20260922T140050569791Z\\price_and_greeks\\selected.pt",
+      "greek_score": 0.012785126418273684,
+      "price_gate_passed": true
+    }
+  ],
+  "rule": "Among candidates inside the fixed price RMSE limit, minimize mean squared Greek RMSE divided by training-label RMS squared. If none pass, select minimum price RMSE and mark the gate failed."
+}

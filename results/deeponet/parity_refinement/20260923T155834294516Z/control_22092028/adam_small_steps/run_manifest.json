@@ -1,0 +1,65 @@
+{
+  "schema": "deeponet_run_manifest_v2",
+  "status": "complete",
+  "job": "control_22092028/adam_small_steps",
+  "completed_at": "2026-09-23T16:13:49.200540+00:00",
+  "settings": {
+    "protocol_id": "deeponet_parity_refinement_v1",
+    "architecture": {
+      "width": 64,
+      "depth": 3,
+      "rank": 64
+    },
+    "seed": 23092026,
+    "epochs": 100000,
+    "batch_size": 512,
+    "learning_rate": 2e-05,
+    "validation_every": 10,
+    "wall_seconds": 180,
+    "threads": 2,
+    "loss": "mean_squared_error_of_price_divided_by_strike",
+    "selection": "minimum_validation_normalized_price_mse",
+    "dataset": "results/deeponet/data/black_scholes_operator_v1.npz",
+    "dataset_manifest": "results/deeponet/data/black_scholes_operator_v1_manifest.json",
+    "output_root": "results/deeponet/training",
+    "note": "Ablation continuation: fixed 800 epochs; training and validation data only",
+    "progress_every_seconds": 45,
+    "optimizer": "adam_small_steps"
+  },
+  "architecture": {
+    "width": 64,
+    "depth": 3,
+    "rank": 64
+  },
+  "parent": {
+    "folder": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\arms\\control_22092028\\selected.pt",
+    "file_sha256": "04ded34f163104289931c3f1f09976424515a0c22dded63ccec18c5192771eb4"
+  },
+  "dataset": {
+    "path": "results/deeponet/data/black_scholes_operator_v1.npz",
+    "content_sha256": "c79956b52333850f4a39701b9775172b4a46aad798108f78b917848aacddd25c",
+    "content_hash_scope": "all npz arrays whose name starts with 'train_'",
+    "content_hash_scope_prefix": "train_",
+    "content_hash_method": "sha256 over the train-scope arrays sorted by name, each contributing its name, dtype.str, shape and C-order bytes"
+  },
+  "training": {
+    "selected_epoch": 200,
+    "selected_validation_mse": 1.127202069984186e-06,
+    "optimizer_steps": 4928,
+    "stop_reason": "wall_budget",
+    "training_wall_seconds": 180.0676020000028,
+    "peak_sampled_rss_mb": 369.890625,
+    "arm_wall_seconds": 180.0676020000028
+  },
+  "artifacts": {
+    "selected.pt": "7f20f96768bb18e7c6e8abe7b11c6e64382412f364dce599ec11faffdd56b24d",
+    "last.pt": "80420ce3c9049951e8493ccaec608a0cf9d221da249d5861afd325eaade93e47",
+    "history.csv": "0f539f6e6db618a58a92dfc505d1dca01cc53c7250f82ef37b92327a913a59af",
+    "training_metadata.json": "dcac0a83f4d3eba07488d66790c54c8bc55e22f1720e62c812bc2f560f2888ab",
+    "validation_metrics.json": "14f5a89307818cdf96ee76979df46c59848a47dace87b4326fbff1b2a233f7d5",
+    "shape_metrics.json": "b58b75d4469ada363f766a4c9d2f938404d2e31d87acac52b5cbda2472d768bb",
+    "validation_regions.csv": "81439b02069b32dde4d9a608aed6c0d532910d7be84243f036bb0382a3501792",
+    "validation_worst_points.csv": "6c9f0345c3531cb4413cf3b7732317e5eda6495bbb8094d5b4b55ebd96bf48b1"
+  },
+  "metadata_sha256": "dcac0a83f4d3eba07488d66790c54c8bc55e22f1720e62c812bc2f560f2888ab"
+}

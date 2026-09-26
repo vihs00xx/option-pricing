@@ -1,0 +1,778 @@
+{
+  "protocol_id": "deeponet_sampling_correction_v1",
+  "purpose": "Isolate the sampling factor: uniform vs mixed coordinates with shared Greek normalization scales.",
+  "previous_joint_change": "The previous sampling results changed sampling and normalization jointly; this study isolates sampling with shared normalization scales.",
+  "source_study": {
+    "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z",
+    "protocol_sha256": "b1e49128c1e9e626da170b8c06e5b02a84513da013ac9794cca06b5e75c8c767",
+    "evaluation_results_sha256": "572708d4f1274ea44d2f5f18542820487633c125aabda74fc8c586fbc45c0879"
+  },
+  "datasets": {
+    "uniform": {
+      "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_uniform.npz",
+      "file_sha256": "9ab71c8cee9250f9008a3e52ae52a771fc77e9f5745571fec0128122871105c0",
+      "content_sha256": "a9b84a96784e294798045647c07ef7060ddd972d3ba18e5c4ac9d502f22e4d5c",
+      "content_hash_scope": "all npz arrays whose name starts with 'train_'",
+      "content_hash_method": "sha256 over the train-scope arrays sorted by name, each contributing its name, dtype.str, shape and C-order bytes"
+    },
+    "mixed": {
+      "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_mixed.npz",
+      "file_sha256": "0159abef49f2555c16a79c25b1e66468a0ff58dd126d54c1b1d9a9994709d61c",
+      "content_sha256": "06bf6e409ca73509d42a29375a1538e239993ad057c380ad135e53230dfea382",
+      "content_hash_scope": "all npz arrays whose name starts with 'train_'",
+      "content_hash_method": "sha256 over the train-scope arrays sorted by name, each contributing its name, dtype.str, shape and C-order bytes"
+    }
+  },
+  "normalization": {
+    "uniform": {
+      "greek_scales": [
+        0.5789003134864943,
+        0.01936112826930163,
+        22.692862367474618,
+        12.118679868289766,
+        36.352640549972946
+      ],
+      "target_ordering": [
+        "delta",
+        "gamma",
+        "vega",
+        "theta",
+        "rho"
+      ],
+      "method": "per-column root mean square of the training label rows (columns 1..5 of the six target columns: price, delta, gamma, vega, theta, rho)",
+      "source_dataset": {
+        "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_uniform.npz",
+        "file_sha256": "9ab71c8cee9250f9008a3e52ae52a771fc77e9f5745571fec0128122871105c0",
+        "content_sha256": "a9b84a96784e294798045647c07ef7060ddd972d3ba18e5c4ac9d502f22e4d5c",
+        "content_hash_scope": "all npz arrays whose name starts with 'train_'",
+        "content_hash_method": "sha256 over the train-scope arrays sorted by name, each contributing its name, dtype.str, shape and C-order bytes"
+      },
+      "source_dataset_path": "C:\\Users\\shiva\\Documents\\MySpace\\option-pricing\\results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_uniform.npz",
+      "effective_greek_loss_coefficients": [
+        0.029839561069097825,
+        26.677103613201968,
+        1.9418757651629443e-05,
+        6.809094690563822e-05,
+        7.5670756465504875e-06
+      ]
+    },
+    "mixed": {
+      "greek_scales": [
+        0.5789003134864943,
+        0.01936112826930163,
+        22.692862367474618,
+        12.118679868289766,
+        36.352640549972946
+      ],
+      "target_ordering": [
+        "delta",
+        "gamma",
+        "vega",
+        "theta",
+        "rho"
+      ],
+      "method": "per-column root mean square of the training label rows (columns 1..5 of the six target columns: price, delta, gamma, vega, theta, rho)",
+      "source_dataset": {
+        "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_uniform.npz",
+        "file_sha256": "9ab71c8cee9250f9008a3e52ae52a771fc77e9f5745571fec0128122871105c0",
+        "content_sha256": "a9b84a96784e294798045647c07ef7060ddd972d3ba18e5c4ac9d502f22e4d5c",
+        "content_hash_scope": "all npz arrays whose name starts with 'train_'",
+        "content_hash_method": "sha256 over the train-scope arrays sorted by name, each contributing its name, dtype.str, shape and C-order bytes"
+      },
+      "source_dataset_path": "C:\\Users\\shiva\\Documents\\MySpace\\option-pricing\\results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_uniform.npz",
+      "effective_greek_loss_coefficients": [
+        0.029839561069097825,
+        26.677103613201968,
+        1.9418757651629443e-05,
+        6.809094690563822e-05,
+        7.5670756465504875e-06
+      ]
+    }
+  },
+  "pilot_reuse": {
+    "uniform_22092026": {
+      "folder": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\pilot\\base_uniform_22092026",
+      "file_sha256": "38ada74d8aa4305b89a1d93d00bc4264790eb34f4b05057a02856d7aaca4e39a",
+      "training_metadata_sha256": "813037c088c41eb7f49eec2db901fa5f27580002c32b35cf3d17d5ff87def4e9",
+      "dataset": {
+        "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_uniform.npz",
+        "content_sha256": "a9b84a96784e294798045647c07ef7060ddd972d3ba18e5c4ac9d502f22e4d5c",
+        "content_hash_scope": "all npz arrays whose name starts with 'train_'",
+        "content_hash_method": "sha256 over the train-scope arrays sorted by name, each contributing its name, dtype.str, shape and C-order bytes"
+      },
+      "checks": {
+        "dataset_path_matches_source": true,
+        "architecture_matches": true,
+        "seed_matches": true,
+        "price_only_labels": true,
+        "pilot_stage": true,
+        "epochs_500": true
+      }
+    },
+    "uniform_22092027": {
+      "folder": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\pilot\\base_uniform_22092027",
+      "file_sha256": "a2e785474eab5c5af0907242d6249ef064ac263e8b5f496874749020ea5dd535",
+      "training_metadata_sha256": "579567dac45b71e7c6e271ce0931fc7141d16e6237457a2a2fa470e2deaf0dc3",
+      "dataset": {
+        "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_uniform.npz",
+        "content_sha256": "a9b84a96784e294798045647c07ef7060ddd972d3ba18e5c4ac9d502f22e4d5c",
+        "content_hash_scope": "all npz arrays whose name starts with 'train_'",
+        "content_hash_method": "sha256 over the train-scope arrays sorted by name, each contributing its name, dtype.str, shape and C-order bytes"
+      },
+      "checks": {
+        "dataset_path_matches_source": true,
+        "architecture_matches": true,
+        "seed_matches": true,
+        "price_only_labels": true,
+        "pilot_stage": true,
+        "epochs_500": true
+      }
+    },
+    "uniform_22092028": {
+      "folder": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\pilot\\base_uniform_22092028",
+      "file_sha256": "f84d666d5cb936fb8bd54dfb1ba880902c7dbd1b41dd5726b9ff2f484bdf713b",
+      "training_metadata_sha256": "ed4408ce8ba2654b361c0905331f948a23738112151ae49425e777543119d764",
+      "dataset": {
+        "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_uniform.npz",
+        "content_sha256": "a9b84a96784e294798045647c07ef7060ddd972d3ba18e5c4ac9d502f22e4d5c",
+        "content_hash_scope": "all npz arrays whose name starts with 'train_'",
+        "content_hash_method": "sha256 over the train-scope arrays sorted by name, each contributing its name, dtype.str, shape and C-order bytes"
+      },
+      "checks": {
+        "dataset_path_matches_source": true,
+        "architecture_matches": true,
+        "seed_matches": true,
+        "price_only_labels": true,
+        "pilot_stage": true,
+        "epochs_500": true
+      }
+    },
+    "mixed_22092026": {
+      "folder": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\pilot\\base_mixed_22092026",
+      "file_sha256": "44e76cde07b77fac9e5916de5827b0571cc49a71415dc2d3c0097fd29bd51053",
+      "training_metadata_sha256": "7e0079d6c516c36296ac25253324831e689a4a7cd4474fe627bfb69cfeb5541d",
+      "dataset": {
+        "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_mixed.npz",
+        "content_sha256": "06bf6e409ca73509d42a29375a1538e239993ad057c380ad135e53230dfea382",
+        "content_hash_scope": "all npz arrays whose name starts with 'train_'",
+        "content_hash_method": "sha256 over the train-scope arrays sorted by name, each contributing its name, dtype.str, shape and C-order bytes"
+      },
+      "checks": {
+        "dataset_path_matches_source": true,
+        "architecture_matches": true,
+        "seed_matches": true,
+        "price_only_labels": true,
+        "pilot_stage": true,
+        "epochs_500": true
+      }
+    },
+    "mixed_22092027": {
+      "folder": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\pilot\\base_mixed_22092027",
+      "file_sha256": "4b1446454c89706fdef4ba8c71b72b178fef43023140bea61bb3fd636b017b71",
+      "training_metadata_sha256": "c992f9578506c54762e4fe52e6eec8ff0980d5d9c901dd7dbc553da006b2a079",
+      "dataset": {
+        "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_mixed.npz",
+        "content_sha256": "06bf6e409ca73509d42a29375a1538e239993ad057c380ad135e53230dfea382",
+        "content_hash_scope": "all npz arrays whose name starts with 'train_'",
+        "content_hash_method": "sha256 over the train-scope arrays sorted by name, each contributing its name, dtype.str, shape and C-order bytes"
+      },
+      "checks": {
+        "dataset_path_matches_source": true,
+        "architecture_matches": true,
+        "seed_matches": true,
+        "price_only_labels": true,
+        "pilot_stage": true,
+        "epochs_500": true
+      }
+    },
+    "mixed_22092028": {
+      "folder": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\pilot\\base_mixed_22092028",
+      "file_sha256": "4d74234fb708210f721a6939b4c7394a5d31d65005de3b10da029f46d6bc1647",
+      "training_metadata_sha256": "0bc28d837b9743a27379948b4d9133a49587a1f765ff4c7f61a388123445e92a",
+      "dataset": {
+        "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_mixed.npz",
+        "content_sha256": "06bf6e409ca73509d42a29375a1538e239993ad057c380ad135e53230dfea382",
+        "content_hash_scope": "all npz arrays whose name starts with 'train_'",
+        "content_hash_method": "sha256 over the train-scope arrays sorted by name, each contributing its name, dtype.str, shape and C-order bytes"
+      },
+      "checks": {
+        "dataset_path_matches_source": true,
+        "architecture_matches": true,
+        "seed_matches": true,
+        "price_only_labels": true,
+        "pilot_stage": true,
+        "epochs_500": true
+      }
+    }
+  },
+  "jobs": {
+    "uniform/22092026": {
+      "name": "uniform/22092026",
+      "stage": "stage2",
+      "arch": "base",
+      "data": "uniform",
+      "seed": 22092026,
+      "folder": "arms/uniform_22092026",
+      "settings": {
+        "protocol_id": "deeponet_training_ablation_v2",
+        "architecture": {
+          "width": 64,
+          "depth": 3,
+          "rank": 64
+        },
+        "seed": 22092026,
+        "epochs": 800,
+        "batch_size": 512,
+        "learning_rate": 0.0003,
+        "validation_every": 10,
+        "wall_seconds": 36000,
+        "threads": 2,
+        "loss": "mean_squared_error_of_price_divided_by_strike",
+        "selection": "minimum_validation_normalized_price_mse",
+        "dataset": "results/deeponet/data/black_scholes_operator_v1.npz",
+        "dataset_manifest": "results/deeponet/data/black_scholes_operator_v1_manifest.json",
+        "output_root": "results/deeponet/training",
+        "note": "Ablation continuation: fixed 800 epochs (matched update counts); training and validation data only",
+        "progress_every_seconds": 45
+      },
+      "settings_sha256": "f63917e75f0241ceb3c2de2c05ef1e59bd26f9e225bc6d745ab1338bbb837900",
+      "architecture": {
+        "width": 64,
+        "depth": 3,
+        "rank": 64
+      },
+      "dataset": {
+        "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_uniform.npz",
+        "file_sha256": "9ab71c8cee9250f9008a3e52ae52a771fc77e9f5745571fec0128122871105c0",
+        "content_sha256": "a9b84a96784e294798045647c07ef7060ddd972d3ba18e5c4ac9d502f22e4d5c",
+        "content_hash_scope": "all npz arrays whose name starts with 'train_'",
+        "content_hash_method": "sha256 over the train-scope arrays sorted by name, each contributing its name, dtype.str, shape and C-order bytes"
+      },
+      "normalization": {
+        "greek_scales": [
+          0.5789003134864943,
+          0.01936112826930163,
+          22.692862367474618,
+          12.118679868289766,
+          36.352640549972946
+        ],
+        "target_ordering": [
+          "delta",
+          "gamma",
+          "vega",
+          "theta",
+          "rho"
+        ],
+        "method": "per-column root mean square of the training label rows (columns 1..5 of the six target columns: price, delta, gamma, vega, theta, rho)",
+        "source_dataset": {
+          "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_uniform.npz",
+          "file_sha256": "9ab71c8cee9250f9008a3e52ae52a771fc77e9f5745571fec0128122871105c0",
+          "content_sha256": "a9b84a96784e294798045647c07ef7060ddd972d3ba18e5c4ac9d502f22e4d5c",
+          "content_hash_scope": "all npz arrays whose name starts with 'train_'",
+          "content_hash_method": "sha256 over the train-scope arrays sorted by name, each contributing its name, dtype.str, shape and C-order bytes"
+        },
+        "source_dataset_path": "C:\\Users\\shiva\\Documents\\MySpace\\option-pricing\\results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_uniform.npz",
+        "effective_greek_loss_coefficients": [
+          0.029839561069097825,
+          26.677103613201968,
+          1.9418757651629443e-05,
+          6.809094690563822e-05,
+          7.5670756465504875e-06
+        ]
+      },
+      "penalty_types": [],
+      "penalty_weight": 0.0,
+      "parent": {
+        "folder": "C:\\Users\\shiva\\Documents\\MySpace\\option-pricing\\results\\deeponet\\training_ablation\\20260923T111505263380Z\\pilot\\base_uniform_22092026"
+      },
+      "source_sha256": {
+        "experiments\\deeponet\\rerun_sampling_correction.py": "c8e7687f9afdbf206796da8e7d131f8b69196aee6959cf35017c54e15d7acd90",
+        "experiments\\deeponet\\run_training_ablation.py": "02bf7aad61d5c4a41e8a29ac68744ea08e04729085c027f2cc8bbc775ffbe257",
+        "experiments\\deeponet\\train.py": "ade588bc01854eef9fb44ecb7f71802510307bf137054a82f96d778b2c77236e",
+        "experiments\\deeponet\\compare_supervision.py": "31d2bd00787e54e80fd3648294f26f32597dd5e1be5fee1fe176b585a2e0a314",
+        "experiments\\deeponet\\evaluate.py": "09d8e4a0931aaee9b8ccca6115017d4d507ca504319ae43f416cd48e20eca60a",
+        "src\\neural\\deeponet.py": "a18cda7c6086fa7b020088537caace2424322021a13d1dcf7c8a930dca0cfd5a",
+        "src\\neural\\deeponet_data.py": "06e0d8d0e55e187759b56023364df105bbdcc81592e7f279cde269a540501588",
+        "src\\neural\\run_metadata.py": "7c405d1f256c19f1c77af055f095a05d0980e6bee62462f0e9fafd4cb3b1d954"
+      }
+    },
+    "uniform/22092027": {
+      "name": "uniform/22092027",
+      "stage": "stage2",
+      "arch": "base",
+      "data": "uniform",
+      "seed": 22092027,
+      "folder": "arms/uniform_22092027",
+      "settings": {
+        "protocol_id": "deeponet_training_ablation_v2",
+        "architecture": {
+          "width": 64,
+          "depth": 3,
+          "rank": 64
+        },
+        "seed": 22092027,
+        "epochs": 800,
+        "batch_size": 512,
+        "learning_rate": 0.0003,
+        "validation_every": 10,
+        "wall_seconds": 36000,
+        "threads": 2,
+        "loss": "mean_squared_error_of_price_divided_by_strike",
+        "selection": "minimum_validation_normalized_price_mse",
+        "dataset": "results/deeponet/data/black_scholes_operator_v1.npz",
+        "dataset_manifest": "results/deeponet/data/black_scholes_operator_v1_manifest.json",
+        "output_root": "results/deeponet/training",
+        "note": "Ablation continuation: fixed 800 epochs (matched update counts); training and validation data only",
+        "progress_every_seconds": 45
+      },
+      "settings_sha256": "fa0f4a2385f2ea1194e24f93c3f7003cc17d83bda0d62eb618171f52291dce17",
+      "architecture": {
+        "width": 64,
+        "depth": 3,
+        "rank": 64
+      },
+      "dataset": {
+        "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_uniform.npz",
+        "file_sha256": "9ab71c8cee9250f9008a3e52ae52a771fc77e9f5745571fec0128122871105c0",
+        "content_sha256": "a9b84a96784e294798045647c07ef7060ddd972d3ba18e5c4ac9d502f22e4d5c",
+        "content_hash_scope": "all npz arrays whose name starts with 'train_'",
+        "content_hash_method": "sha256 over the train-scope arrays sorted by name, each contributing its name, dtype.str, shape and C-order bytes"
+      },
+      "normalization": {
+        "greek_scales": [
+          0.5789003134864943,
+          0.01936112826930163,
+          22.692862367474618,
+          12.118679868289766,
+          36.352640549972946
+        ],
+        "target_ordering": [
+          "delta",
+          "gamma",
+          "vega",
+          "theta",
+          "rho"
+        ],
+        "method": "per-column root mean square of the training label rows (columns 1..5 of the six target columns: price, delta, gamma, vega, theta, rho)",
+        "source_dataset": {
+          "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_uniform.npz",
+          "file_sha256": "9ab71c8cee9250f9008a3e52ae52a771fc77e9f5745571fec0128122871105c0",
+          "content_sha256": "a9b84a96784e294798045647c07ef7060ddd972d3ba18e5c4ac9d502f22e4d5c",
+          "content_hash_scope": "all npz arrays whose name starts with 'train_'",
+          "content_hash_method": "sha256 over the train-scope arrays sorted by name, each contributing its name, dtype.str, shape and C-order bytes"
+        },
+        "source_dataset_path": "C:\\Users\\shiva\\Documents\\MySpace\\option-pricing\\results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_uniform.npz",
+        "effective_greek_loss_coefficients": [
+          0.029839561069097825,
+          26.677103613201968,
+          1.9418757651629443e-05,
+          6.809094690563822e-05,
+          7.5670756465504875e-06
+        ]
+      },
+      "penalty_types": [],
+      "penalty_weight": 0.0,
+      "parent": {
+        "folder": "C:\\Users\\shiva\\Documents\\MySpace\\option-pricing\\results\\deeponet\\training_ablation\\20260923T111505263380Z\\pilot\\base_uniform_22092027"
+      },
+      "source_sha256": {
+        "experiments\\deeponet\\rerun_sampling_correction.py": "c8e7687f9afdbf206796da8e7d131f8b69196aee6959cf35017c54e15d7acd90",
+        "experiments\\deeponet\\run_training_ablation.py": "02bf7aad61d5c4a41e8a29ac68744ea08e04729085c027f2cc8bbc775ffbe257",
+        "experiments\\deeponet\\train.py": "ade588bc01854eef9fb44ecb7f71802510307bf137054a82f96d778b2c77236e",
+        "experiments\\deeponet\\compare_supervision.py": "31d2bd00787e54e80fd3648294f26f32597dd5e1be5fee1fe176b585a2e0a314",
+        "experiments\\deeponet\\evaluate.py": "09d8e4a0931aaee9b8ccca6115017d4d507ca504319ae43f416cd48e20eca60a",
+        "src\\neural\\deeponet.py": "a18cda7c6086fa7b020088537caace2424322021a13d1dcf7c8a930dca0cfd5a",
+        "src\\neural\\deeponet_data.py": "06e0d8d0e55e187759b56023364df105bbdcc81592e7f279cde269a540501588",
+        "src\\neural\\run_metadata.py": "7c405d1f256c19f1c77af055f095a05d0980e6bee62462f0e9fafd4cb3b1d954"
+      }
+    },
+    "uniform/22092028": {
+      "name": "uniform/22092028",
+      "stage": "stage2",
+      "arch": "base",
+      "data": "uniform",
+      "seed": 22092028,
+      "folder": "arms/uniform_22092028",
+      "settings": {
+        "protocol_id": "deeponet_training_ablation_v2",
+        "architecture": {
+          "width": 64,
+          "depth": 3,
+          "rank": 64
+        },
+        "seed": 22092028,
+        "epochs": 800,
+        "batch_size": 512,
+        "learning_rate": 0.0003,
+        "validation_every": 10,
+        "wall_seconds": 36000,
+        "threads": 2,
+        "loss": "mean_squared_error_of_price_divided_by_strike",
+        "selection": "minimum_validation_normalized_price_mse",
+        "dataset": "results/deeponet/data/black_scholes_operator_v1.npz",
+        "dataset_manifest": "results/deeponet/data/black_scholes_operator_v1_manifest.json",
+        "output_root": "results/deeponet/training",
+        "note": "Ablation continuation: fixed 800 epochs (matched update counts); training and validation data only",
+        "progress_every_seconds": 45
+      },
+      "settings_sha256": "f985ac3f535c08840da86e53ba1c5bbecc890b4a4e8ace299a393a816ca5519d",
+      "architecture": {
+        "width": 64,
+        "depth": 3,
+        "rank": 64
+      },
+      "dataset": {
+        "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_uniform.npz",
+        "file_sha256": "9ab71c8cee9250f9008a3e52ae52a771fc77e9f5745571fec0128122871105c0",
+        "content_sha256": "a9b84a96784e294798045647c07ef7060ddd972d3ba18e5c4ac9d502f22e4d5c",
+        "content_hash_scope": "all npz arrays whose name starts with 'train_'",
+        "content_hash_method": "sha256 over the train-scope arrays sorted by name, each contributing its name, dtype.str, shape and C-order bytes"
+      },
+      "normalization": {
+        "greek_scales": [
+          0.5789003134864943,
+          0.01936112826930163,
+          22.692862367474618,
+          12.118679868289766,
+          36.352640549972946
+        ],
+        "target_ordering": [
+          "delta",
+          "gamma",
+          "vega",
+          "theta",
+          "rho"
+        ],
+        "method": "per-column root mean square of the training label rows (columns 1..5 of the six target columns: price, delta, gamma, vega, theta, rho)",
+        "source_dataset": {
+          "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_uniform.npz",
+          "file_sha256": "9ab71c8cee9250f9008a3e52ae52a771fc77e9f5745571fec0128122871105c0",
+          "content_sha256": "a9b84a96784e294798045647c07ef7060ddd972d3ba18e5c4ac9d502f22e4d5c",
+          "content_hash_scope": "all npz arrays whose name starts with 'train_'",
+          "content_hash_method": "sha256 over the train-scope arrays sorted by name, each contributing its name, dtype.str, shape and C-order bytes"
+        },
+        "source_dataset_path": "C:\\Users\\shiva\\Documents\\MySpace\\option-pricing\\results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_uniform.npz",
+        "effective_greek_loss_coefficients": [
+          0.029839561069097825,
+          26.677103613201968,
+          1.9418757651629443e-05,
+          6.809094690563822e-05,
+          7.5670756465504875e-06
+        ]
+      },
+      "penalty_types": [],
+      "penalty_weight": 0.0,
+      "parent": {
+        "folder": "C:\\Users\\shiva\\Documents\\MySpace\\option-pricing\\results\\deeponet\\training_ablation\\20260923T111505263380Z\\pilot\\base_uniform_22092028"
+      },
+      "source_sha256": {
+        "experiments\\deeponet\\rerun_sampling_correction.py": "c8e7687f9afdbf206796da8e7d131f8b69196aee6959cf35017c54e15d7acd90",
+        "experiments\\deeponet\\run_training_ablation.py": "02bf7aad61d5c4a41e8a29ac68744ea08e04729085c027f2cc8bbc775ffbe257",
+        "experiments\\deeponet\\train.py": "ade588bc01854eef9fb44ecb7f71802510307bf137054a82f96d778b2c77236e",
+        "experiments\\deeponet\\compare_supervision.py": "31d2bd00787e54e80fd3648294f26f32597dd5e1be5fee1fe176b585a2e0a314",
+        "experiments\\deeponet\\evaluate.py": "09d8e4a0931aaee9b8ccca6115017d4d507ca504319ae43f416cd48e20eca60a",
+        "src\\neural\\deeponet.py": "a18cda7c6086fa7b020088537caace2424322021a13d1dcf7c8a930dca0cfd5a",
+        "src\\neural\\deeponet_data.py": "06e0d8d0e55e187759b56023364df105bbdcc81592e7f279cde269a540501588",
+        "src\\neural\\run_metadata.py": "7c405d1f256c19f1c77af055f095a05d0980e6bee62462f0e9fafd4cb3b1d954"
+      }
+    },
+    "mixed/22092026": {
+      "name": "mixed/22092026",
+      "stage": "stage2",
+      "arch": "base",
+      "data": "mixed",
+      "seed": 22092026,
+      "folder": "arms/mixed_22092026",
+      "settings": {
+        "protocol_id": "deeponet_training_ablation_v2",
+        "architecture": {
+          "width": 64,
+          "depth": 3,
+          "rank": 64
+        },
+        "seed": 22092026,
+        "epochs": 800,
+        "batch_size": 512,
+        "learning_rate": 0.0003,
+        "validation_every": 10,
+        "wall_seconds": 36000,
+        "threads": 2,
+        "loss": "mean_squared_error_of_price_divided_by_strike",
+        "selection": "minimum_validation_normalized_price_mse",
+        "dataset": "results/deeponet/data/black_scholes_operator_v1.npz",
+        "dataset_manifest": "results/deeponet/data/black_scholes_operator_v1_manifest.json",
+        "output_root": "results/deeponet/training",
+        "note": "Ablation continuation: fixed 800 epochs (matched update counts); training and validation data only",
+        "progress_every_seconds": 45
+      },
+      "settings_sha256": "f63917e75f0241ceb3c2de2c05ef1e59bd26f9e225bc6d745ab1338bbb837900",
+      "architecture": {
+        "width": 64,
+        "depth": 3,
+        "rank": 64
+      },
+      "dataset": {
+        "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_mixed.npz",
+        "file_sha256": "0159abef49f2555c16a79c25b1e66468a0ff58dd126d54c1b1d9a9994709d61c",
+        "content_sha256": "06bf6e409ca73509d42a29375a1538e239993ad057c380ad135e53230dfea382",
+        "content_hash_scope": "all npz arrays whose name starts with 'train_'",
+        "content_hash_method": "sha256 over the train-scope arrays sorted by name, each contributing its name, dtype.str, shape and C-order bytes"
+      },
+      "normalization": {
+        "greek_scales": [
+          0.5789003134864943,
+          0.01936112826930163,
+          22.692862367474618,
+          12.118679868289766,
+          36.352640549972946
+        ],
+        "target_ordering": [
+          "delta",
+          "gamma",
+          "vega",
+          "theta",
+          "rho"
+        ],
+        "method": "per-column root mean square of the training label rows (columns 1..5 of the six target columns: price, delta, gamma, vega, theta, rho)",
+        "source_dataset": {
+          "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_uniform.npz",
+          "file_sha256": "9ab71c8cee9250f9008a3e52ae52a771fc77e9f5745571fec0128122871105c0",
+          "content_sha256": "a9b84a96784e294798045647c07ef7060ddd972d3ba18e5c4ac9d502f22e4d5c",
+          "content_hash_scope": "all npz arrays whose name starts with 'train_'",
+          "content_hash_method": "sha256 over the train-scope arrays sorted by name, each contributing its name, dtype.str, shape and C-order bytes"
+        },
+        "source_dataset_path": "C:\\Users\\shiva\\Documents\\MySpace\\option-pricing\\results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_uniform.npz",
+        "effective_greek_loss_coefficients": [
+          0.029839561069097825,
+          26.677103613201968,
+          1.9418757651629443e-05,
+          6.809094690563822e-05,
+          7.5670756465504875e-06
+        ]
+      },
+      "penalty_types": [],
+      "penalty_weight": 0.0,
+      "parent": {
+        "folder": "C:\\Users\\shiva\\Documents\\MySpace\\option-pricing\\results\\deeponet\\training_ablation\\20260923T111505263380Z\\pilot\\base_mixed_22092026"
+      },
+      "source_sha256": {
+        "experiments\\deeponet\\rerun_sampling_correction.py": "c8e7687f9afdbf206796da8e7d131f8b69196aee6959cf35017c54e15d7acd90",
+        "experiments\\deeponet\\run_training_ablation.py": "02bf7aad61d5c4a41e8a29ac68744ea08e04729085c027f2cc8bbc775ffbe257",
+        "experiments\\deeponet\\train.py": "ade588bc01854eef9fb44ecb7f71802510307bf137054a82f96d778b2c77236e",
+        "experiments\\deeponet\\compare_supervision.py": "31d2bd00787e54e80fd3648294f26f32597dd5e1be5fee1fe176b585a2e0a314",
+        "experiments\\deeponet\\evaluate.py": "09d8e4a0931aaee9b8ccca6115017d4d507ca504319ae43f416cd48e20eca60a",
+        "src\\neural\\deeponet.py": "a18cda7c6086fa7b020088537caace2424322021a13d1dcf7c8a930dca0cfd5a",
+        "src\\neural\\deeponet_data.py": "06e0d8d0e55e187759b56023364df105bbdcc81592e7f279cde269a540501588",
+        "src\\neural\\run_metadata.py": "7c405d1f256c19f1c77af055f095a05d0980e6bee62462f0e9fafd4cb3b1d954"
+      }
+    },
+    "mixed/22092027": {
+      "name": "mixed/22092027",
+      "stage": "stage2",
+      "arch": "base",
+      "data": "mixed",
+      "seed": 22092027,
+      "folder": "arms/mixed_22092027",
+      "settings": {
+        "protocol_id": "deeponet_training_ablation_v2",
+        "architecture": {
+          "width": 64,
+          "depth": 3,
+          "rank": 64
+        },
+        "seed": 22092027,
+        "epochs": 800,
+        "batch_size": 512,
+        "learning_rate": 0.0003,
+        "validation_every": 10,
+        "wall_seconds": 36000,
+        "threads": 2,
+        "loss": "mean_squared_error_of_price_divided_by_strike",
+        "selection": "minimum_validation_normalized_price_mse",
+        "dataset": "results/deeponet/data/black_scholes_operator_v1.npz",
+        "dataset_manifest": "results/deeponet/data/black_scholes_operator_v1_manifest.json",
+        "output_root": "results/deeponet/training",
+        "note": "Ablation continuation: fixed 800 epochs (matched update counts); training and validation data only",
+        "progress_every_seconds": 45
+      },
+      "settings_sha256": "fa0f4a2385f2ea1194e24f93c3f7003cc17d83bda0d62eb618171f52291dce17",
+      "architecture": {
+        "width": 64,
+        "depth": 3,
+        "rank": 64
+      },
+      "dataset": {
+        "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_mixed.npz",
+        "file_sha256": "0159abef49f2555c16a79c25b1e66468a0ff58dd126d54c1b1d9a9994709d61c",
+        "content_sha256": "06bf6e409ca73509d42a29375a1538e239993ad057c380ad135e53230dfea382",
+        "content_hash_scope": "all npz arrays whose name starts with 'train_'",
+        "content_hash_method": "sha256 over the train-scope arrays sorted by name, each contributing its name, dtype.str, shape and C-order bytes"
+      },
+      "normalization": {
+        "greek_scales": [
+          0.5789003134864943,
+          0.01936112826930163,
+          22.692862367474618,
+          12.118679868289766,
+          36.352640549972946
+        ],
+        "target_ordering": [
+          "delta",
+          "gamma",
+          "vega",
+          "theta",
+          "rho"
+        ],
+        "method": "per-column root mean square of the training label rows (columns 1..5 of the six target columns: price, delta, gamma, vega, theta, rho)",
+        "source_dataset": {
+          "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_uniform.npz",
+          "file_sha256": "9ab71c8cee9250f9008a3e52ae52a771fc77e9f5745571fec0128122871105c0",
+          "content_sha256": "a9b84a96784e294798045647c07ef7060ddd972d3ba18e5c4ac9d502f22e4d5c",
+          "content_hash_scope": "all npz arrays whose name starts with 'train_'",
+          "content_hash_method": "sha256 over the train-scope arrays sorted by name, each contributing its name, dtype.str, shape and C-order bytes"
+        },
+        "source_dataset_path": "C:\\Users\\shiva\\Documents\\MySpace\\option-pricing\\results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_uniform.npz",
+        "effective_greek_loss_coefficients": [
+          0.029839561069097825,
+          26.677103613201968,
+          1.9418757651629443e-05,
+          6.809094690563822e-05,
+          7.5670756465504875e-06
+        ]
+      },
+      "penalty_types": [],
+      "penalty_weight": 0.0,
+      "parent": {
+        "folder": "C:\\Users\\shiva\\Documents\\MySpace\\option-pricing\\results\\deeponet\\training_ablation\\20260923T111505263380Z\\pilot\\base_mixed_22092027"
+      },
+      "source_sha256": {
+        "experiments\\deeponet\\rerun_sampling_correction.py": "c8e7687f9afdbf206796da8e7d131f8b69196aee6959cf35017c54e15d7acd90",
+        "experiments\\deeponet\\run_training_ablation.py": "02bf7aad61d5c4a41e8a29ac68744ea08e04729085c027f2cc8bbc775ffbe257",
+        "experiments\\deeponet\\train.py": "ade588bc01854eef9fb44ecb7f71802510307bf137054a82f96d778b2c77236e",
+        "experiments\\deeponet\\compare_supervision.py": "31d2bd00787e54e80fd3648294f26f32597dd5e1be5fee1fe176b585a2e0a314",
+        "experiments\\deeponet\\evaluate.py": "09d8e4a0931aaee9b8ccca6115017d4d507ca504319ae43f416cd48e20eca60a",
+        "src\\neural\\deeponet.py": "a18cda7c6086fa7b020088537caace2424322021a13d1dcf7c8a930dca0cfd5a",
+        "src\\neural\\deeponet_data.py": "06e0d8d0e55e187759b56023364df105bbdcc81592e7f279cde269a540501588",
+        "src\\neural\\run_metadata.py": "7c405d1f256c19f1c77af055f095a05d0980e6bee62462f0e9fafd4cb3b1d954"
+      }
+    },
+    "mixed/22092028": {
+      "name": "mixed/22092028",
+      "stage": "stage2",
+      "arch": "base",
+      "data": "mixed",
+      "seed": 22092028,
+      "folder": "arms/mixed_22092028",
+      "settings": {
+        "protocol_id": "deeponet_training_ablation_v2",
+        "architecture": {
+          "width": 64,
+          "depth": 3,
+          "rank": 64
+        },
+        "seed": 22092028,
+        "epochs": 800,
+        "batch_size": 512,
+        "learning_rate": 0.0003,
+        "validation_every": 10,
+        "wall_seconds": 36000,
+        "threads": 2,
+        "loss": "mean_squared_error_of_price_divided_by_strike",
+        "selection": "minimum_validation_normalized_price_mse",
+        "dataset": "results/deeponet/data/black_scholes_operator_v1.npz",
+        "dataset_manifest": "results/deeponet/data/black_scholes_operator_v1_manifest.json",
+        "output_root": "results/deeponet/training",
+        "note": "Ablation continuation: fixed 800 epochs (matched update counts); training and validation data only",
+        "progress_every_seconds": 45
+      },
+      "settings_sha256": "f985ac3f535c08840da86e53ba1c5bbecc890b4a4e8ace299a393a816ca5519d",
+      "architecture": {
+        "width": 64,
+        "depth": 3,
+        "rank": 64
+      },
+      "dataset": {
+        "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_mixed.npz",
+        "file_sha256": "0159abef49f2555c16a79c25b1e66468a0ff58dd126d54c1b1d9a9994709d61c",
+        "content_sha256": "06bf6e409ca73509d42a29375a1538e239993ad057c380ad135e53230dfea382",
+        "content_hash_scope": "all npz arrays whose name starts with 'train_'",
+        "content_hash_method": "sha256 over the train-scope arrays sorted by name, each contributing its name, dtype.str, shape and C-order bytes"
+      },
+      "normalization": {
+        "greek_scales": [
+          0.5789003134864943,
+          0.01936112826930163,
+          22.692862367474618,
+          12.118679868289766,
+          36.352640549972946
+        ],
+        "target_ordering": [
+          "delta",
+          "gamma",
+          "vega",
+          "theta",
+          "rho"
+        ],
+        "method": "per-column root mean square of the training label rows (columns 1..5 of the six target columns: price, delta, gamma, vega, theta, rho)",
+        "source_dataset": {
+          "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_uniform.npz",
+          "file_sha256": "9ab71c8cee9250f9008a3e52ae52a771fc77e9f5745571fec0128122871105c0",
+          "content_sha256": "a9b84a96784e294798045647c07ef7060ddd972d3ba18e5c4ac9d502f22e4d5c",
+          "content_hash_scope": "all npz arrays whose name starts with 'train_'",
+          "content_hash_method": "sha256 over the train-scope arrays sorted by name, each contributing its name, dtype.str, shape and C-order bytes"
+        },
+        "source_dataset_path": "C:\\Users\\shiva\\Documents\\MySpace\\option-pricing\\results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_uniform.npz",
+        "effective_greek_loss_coefficients": [
+          0.029839561069097825,
+          26.677103613201968,
+          1.9418757651629443e-05,
+          6.809094690563822e-05,
+          7.5670756465504875e-06
+        ]
+      },
+      "penalty_types": [],
+      "penalty_weight": 0.0,
+      "parent": {
+        "folder": "C:\\Users\\shiva\\Documents\\MySpace\\option-pricing\\results\\deeponet\\training_ablation\\20260923T111505263380Z\\pilot\\base_mixed_22092028"
+      },
+      "source_sha256": {
+        "experiments\\deeponet\\rerun_sampling_correction.py": "c8e7687f9afdbf206796da8e7d131f8b69196aee6959cf35017c54e15d7acd90",
+        "experiments\\deeponet\\run_training_ablation.py": "02bf7aad61d5c4a41e8a29ac68744ea08e04729085c027f2cc8bbc775ffbe257",
+        "experiments\\deeponet\\train.py": "ade588bc01854eef9fb44ecb7f71802510307bf137054a82f96d778b2c77236e",
+        "experiments\\deeponet\\compare_supervision.py": "31d2bd00787e54e80fd3648294f26f32597dd5e1be5fee1fe176b585a2e0a314",
+        "experiments\\deeponet\\evaluate.py": "09d8e4a0931aaee9b8ccca6115017d4d507ca504319ae43f416cd48e20eca60a",
+        "src\\neural\\deeponet.py": "a18cda7c6086fa7b020088537caace2424322021a13d1dcf7c8a930dca0cfd5a",
+        "src\\neural\\deeponet_data.py": "06e0d8d0e55e187759b56023364df105bbdcc81592e7f279cde269a540501588",
+        "src\\neural\\run_metadata.py": "7c405d1f256c19f1c77af055f095a05d0980e6bee62462f0e9fafd4cb3b1d954"
+      }
+    }
+  },
+  "source_sha256": {
+    "experiments\\deeponet\\rerun_sampling_correction.py": "c8e7687f9afdbf206796da8e7d131f8b69196aee6959cf35017c54e15d7acd90",
+    "experiments\\deeponet\\run_training_ablation.py": "02bf7aad61d5c4a41e8a29ac68744ea08e04729085c027f2cc8bbc775ffbe257",
+    "experiments\\deeponet\\train.py": "ade588bc01854eef9fb44ecb7f71802510307bf137054a82f96d778b2c77236e",
+    "experiments\\deeponet\\compare_supervision.py": "31d2bd00787e54e80fd3648294f26f32597dd5e1be5fee1fe176b585a2e0a314",
+    "experiments\\deeponet\\evaluate.py": "09d8e4a0931aaee9b8ccca6115017d4d507ca504319ae43f416cd48e20eca60a",
+    "src\\neural\\deeponet.py": "a18cda7c6086fa7b020088537caace2424322021a13d1dcf7c8a930dca0cfd5a",
+    "src\\neural\\deeponet_data.py": "06e0d8d0e55e187759b56023364df105bbdcc81592e7f279cde269a540501588",
+    "src\\neural\\run_metadata.py": "7c405d1f256c19f1c77af055f095a05d0980e6bee62462f0e9fafd4cb3b1d954"
+  },
+  "procedure": {
+    "stage2": "supervised continuation: 800 epochs (12,800 matched update counts), Adam lr 0.0003, batch 512, Greek-loss weight 0.01",
+    "expected_optimizer_updates": 12800,
+    "selection": "minimum validation price MSE normalized by strike",
+    "budgets": "matched update counts; equal update counts do not imply equal computation or wall time"
+  },
+  "evaluation": {
+    "status": "observed benchmark reused from the source study for direct comparison; not an untouched test",
+    "file": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\evaluation.npz",
+    "file_sha256": "ee2a34db17aa236dfa69d8532696a2ccdb11e68f6b7151ff98b85a2d4e241b82",
+    "sets": [
+      "in_domain",
+      "stress",
+      "focus",
+      "validation"
+    ]
+  },
+  "final_test_accessed": false
+}

@@ -1,0 +1,13 @@
+{
+  "name": "pilot/base_mixed_22092028",
+  "stage": "pilot",
+  "arch": "base",
+  "data": "mixed",
+  "seed": 22092028,
+  "threads": 2,
+  "folder": "pilot/base_mixed_22092028",
+  "arrays": {
+    "file": "results\\deeponet\\training_ablation\\20260923T100456099544Z\\data\\train_mixed.npz",
+    "content_sha256": "06bf6e409ca73509d42a29375a1538e239993ad057c380ad135e53230dfea382"
+  }
+}

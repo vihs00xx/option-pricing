@@ -1,0 +1,14 @@
+{
+  "price_bounds": {
+    "proportion_above_1e_8": 0.140625,
+    "maximum_violation": 0.7091402232560249
+  },
+  "delta_bounds": {
+    "proportion_above_1e_8": 0.0390625,
+    "maximum_violation": 0.030958596111475466
+  },
+  "negative_gamma": {
+    "proportion_above_1e_8": 0.0029296875,
+    "maximum_violation": 0.0013420188477379531
+  }
+}

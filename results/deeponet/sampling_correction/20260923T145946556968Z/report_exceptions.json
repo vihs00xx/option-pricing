@@ -1,0 +1,17 @@
+[
+  "mixed vs uniform price RMSE on focus all: regresses (uniform 0.151818 -> mixed 0.161827, +6.6%)",
+  "mixed vs uniform vega RMSE on focus all: regresses (uniform 1.04065 -> mixed 1.06763, +2.6%)",
+  "mixed vs uniform rho RMSE on focus all: regresses (uniform 1.21335 -> mixed 1.52889, +26.0%)",
+  "mixed vs uniform rho RMSE on focus near_strike: regresses (uniform 1.05844 -> mixed 1.18164, +11.6%)",
+  "mixed vs uniform price RMSE on validation: regresses (uniform 0.139204 -> mixed 0.189199, +35.9%)",
+  "mixed vs uniform delta RMSE on validation: regresses (uniform 0.0126287 -> mixed 0.0154585, +22.4%)",
+  "mixed vs uniform vega RMSE on validation: regresses (uniform 1.07425 -> mixed 1.21394, +13.0%)",
+  "mixed vs uniform rho RMSE on validation: regresses (uniform 1.22683 -> mixed 1.68915, +37.7%)",
+  "mixed vs uniform price_bounds violation frequency on validation: regresses (uniform 0.093099 -> mixed 0.0952148, +2.3%)",
+  "mixed vs uniform price_bounds maximum severity on validation: regresses (uniform 0.416839 -> mixed 0.620744, +48.9%)",
+  "mixed vs uniform negative_gamma violation frequency on validation: regresses (uniform 0.0506185 -> mixed 0.0616862, +21.9%)",
+  "mixed vs uniform negative_gamma maximum severity on validation: regresses (uniform 0.0136558 -> mixed 0.0140169, +2.6%)",
+  "mixed vs uniform price_bounds maximum severity on stress: regresses (uniform 1.63915 -> mixed 2.77241, +69.1%)",
+  "mixed vs uniform negative_gamma violation frequency on stress: regresses (uniform 0.147786 -> mixed 0.181478, +22.8%)",
+  "mixed vs uniform negative_gamma maximum severity on stress: regresses (uniform 0.0132811 -> mixed 0.0219867, +65.5%)"
+]

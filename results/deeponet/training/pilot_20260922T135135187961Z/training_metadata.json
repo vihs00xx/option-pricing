@@ -1,0 +1,48 @@
+{
+  "settings": {
+    "protocol_id": "deeponet_supervised_price_pilot_v1",
+    "architecture": {
+      "width": 64,
+      "depth": 3,
+      "rank": 64
+    },
+    "seed": 22092026,
+    "epochs": 500,
+    "batch_size": 512,
+    "learning_rate": 0.001,
+    "validation_every": 10,
+    "wall_seconds": 180,
+    "threads": 2,
+    "loss": "mean_squared_error_of_price_divided_by_strike",
+    "selection": "minimum_validation_normalized_price_mse",
+    "dataset": "results/deeponet/data/black_scholes_operator_v1.npz",
+    "dataset_manifest": "results/deeponet/data/black_scholes_operator_v1_manifest.json",
+    "output_root": "results/deeponet/training",
+    "note": "Pilot uses training prices and validation prices only. No final benchmark evaluation during training."
+  },
+  "dataset_sha256": "bb892af8c78df4125346b22aa68945be1a8d10ec570bc1ebb409d75f0ccba6ca",
+  "source_sha256": {
+    "experiments\\deeponet\\train.py": "01d68928283dd40496f7ca5957a617f8a1604b8eba383aa05cbd1baf85f65e2c",
+    "src\\neural\\deeponet.py": "c3befa7ae711d103401c05c4273380633ba00d5a87560c5ca68b5a3d52e85e26"
+  },
+  "seed": 22092026,
+  "parameter_count": 25601,
+  "python": "3.13.3",
+  "torch": "2.8.0+cpu",
+  "device": "cpu",
+  "dtype": "float64",
+  "final_test_accessed": false,
+  "label_columns_used": [
+    "price"
+  ],
+  "selected_epoch": 470,
+  "selected_validation_mse": 9.192922384614192e-06,
+  "optimizer_steps": 8000,
+  "stop_reason": "epochs_completed",
+  "training_wall_seconds": 143.31715220000478,
+  "peak_sampled_rss_mb": 256.5625,
+  "checkpoint_sha256": {
+    "selected": "4308ac99031bd24a2745f9b0744bd84ab6c1bfc6e9635b9ec92d8772a051e6e4",
+    "last": "e0638d713a6c07183f08fe1f280e3dac4af2e9cac6ab52af0e3f42a2e9a1110a"
+  }
+}

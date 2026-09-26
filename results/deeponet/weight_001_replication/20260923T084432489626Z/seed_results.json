@@ -1,0 +1,95 @@
+[
+  {
+    "seed": 22092026,
+    "metrics": {
+      "price": {
+        "rmse": 0.1826682727305595,
+        "max_absolute_error": 0.8271904575404605
+      },
+      "delta": {
+        "rmse": 0.01638948586407004,
+        "max_absolute_error": 0.10280854126807591
+      },
+      "gamma": {
+        "rmse": 0.0036628374009044142,
+        "max_absolute_error": 0.07237958596295854
+      },
+      "vega": {
+        "rmse": 1.3848346480166969,
+        "max_absolute_error": 15.502302522581406
+      },
+      "theta": {
+        "rmse": 1.9452051659494276,
+        "max_absolute_error": 22.78989474036851
+      },
+      "rho": {
+        "rmse": 1.701212241528156,
+        "max_absolute_error": 13.539888705781067
+      }
+    },
+    "checkpoint": "results\\deeponet\\weight_sweeps\\20260922T142444840021Z\\weight_0.01\\selected.pt",
+    "role": "selection_seed"
+  },
+  {
+    "seed": 22092027,
+    "metrics": {
+      "price": {
+        "rmse": 0.08740654569455421,
+        "max_absolute_error": 0.7037730086791143
+      },
+      "delta": {
+        "rmse": 0.008583689115750316,
+        "max_absolute_error": 0.05413665043534055
+      },
+      "gamma": {
+        "rmse": 0.002224759964451508,
+        "max_absolute_error": 0.03262053647131974
+      },
+      "vega": {
+        "rmse": 0.8643474229759406,
+        "max_absolute_error": 9.928767920239487
+      },
+      "theta": {
+        "rmse": 0.9979320682178188,
+        "max_absolute_error": 13.159470215522692
+      },
+      "rho": {
+        "rmse": 0.9474372821050124,
+        "max_absolute_error": 6.956855305729263
+      }
+    },
+    "checkpoint": "results\\deeponet\\weight_001_replication\\20260923T084432489626Z\\seed_22092027\\selected.pt",
+    "role": "fresh_seed"
+  },
+  {
+    "seed": 22092028,
+    "metrics": {
+      "price": {
+        "rmse": 0.21411710658358643,
+        "max_absolute_error": 1.1316978308637893
+      },
+      "delta": {
+        "rmse": 0.019268246380970282,
+        "max_absolute_error": 0.11934150573320901
+      },
+      "gamma": {
+        "rmse": 0.004454017479795351,
+        "max_absolute_error": 0.07634551038758125
+      },
+      "vega": {
+        "rmse": 1.3438375121616424,
+        "max_absolute_error": 10.756883780213293
+      },
+      "theta": {
+        "rmse": 2.443478509163883,
+        "max_absolute_error": 30.533408383472484
+      },
+      "rho": {
+        "rmse": 1.6504909844579636,
+        "max_absolute_error": 13.436108431841063
+      }
+    },
+    "checkpoint": "results\\deeponet\\weight_001_replication\\20260923T084432489626Z\\seed_22092028\\selected.pt",
+    "role": "fresh_seed"
+  }
+]

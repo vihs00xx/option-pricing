@@ -1,0 +1,1008 @@
+{
+  "per_seed": [
+    {
+      "seed": 22092026,
+      "selection": "adam_small_steps",
+      "eligible": [
+        "baseline",
+        "adam_small_steps",
+        "lbfgs"
+      ],
+      "validation": {
+        "baseline": {
+          "price": {
+            "rmse": 0.1826682727305595,
+            "max_absolute_error": 0.8271904575404605
+          },
+          "delta": {
+            "rmse": 0.01638948586407004,
+            "max_absolute_error": 0.10280854126807591
+          },
+          "gamma": {
+            "rmse": 0.0036628374009044142,
+            "max_absolute_error": 0.07237958596295854
+          },
+          "vega": {
+            "rmse": 1.3848346480166969,
+            "max_absolute_error": 15.502302522581406
+          },
+          "theta": {
+            "rmse": 1.9452051659494276,
+            "max_absolute_error": 22.78989474036851
+          },
+          "rho": {
+            "rmse": 1.701212241528156,
+            "max_absolute_error": 13.539888705781067
+          }
+        },
+        "adam_small_steps": {
+          "price": {
+            "rmse": 0.11758606441411533,
+            "max_absolute_error": 0.9316158525686264
+          },
+          "delta": {
+            "rmse": 0.013316720578358546,
+            "max_absolute_error": 0.1163271223132689
+          },
+          "gamma": {
+            "rmse": 0.003247519521117007,
+            "max_absolute_error": 0.06281967434535954
+          },
+          "vega": {
+            "rmse": 1.2861910518916209,
+            "max_absolute_error": 16.340095373732822
+          },
+          "theta": {
+            "rmse": 1.706859854659302,
+            "max_absolute_error": 20.472433344628826
+          },
+          "rho": {
+            "rmse": 1.4668380118439273,
+            "max_absolute_error": 11.055836899451577
+          }
+        },
+        "lbfgs": {
+          "price": {
+            "rmse": 0.12850763831063008,
+            "max_absolute_error": 1.004352342233366
+          },
+          "delta": {
+            "rmse": 0.013372333459639717,
+            "max_absolute_error": 0.10989502906069507
+          },
+          "gamma": {
+            "rmse": 0.002956826276378181,
+            "max_absolute_error": 0.04180403524803611
+          },
+          "vega": {
+            "rmse": 1.3816050869200622,
+            "max_absolute_error": 14.352716926127062
+          },
+          "theta": {
+            "rmse": 1.4185903314572825,
+            "max_absolute_error": 15.966745651918991
+          },
+          "rho": {
+            "rmse": 1.662086325961024,
+            "max_absolute_error": 12.424494125791028
+          }
+        }
+      },
+      "shape": {
+        "baseline": {
+          "price_bounds": {
+            "proportion_above_1e_8": 0.13525390625,
+            "maximum_violation": 0.5956369831349555
+          },
+          "delta_bounds": {
+            "proportion_above_1e_8": 0.06005859375,
+            "maximum_violation": 0.10280854125341342
+          },
+          "negative_gamma": {
+            "proportion_above_1e_8": 0.0341796875,
+            "maximum_violation": 0.01281652971195367
+          }
+        },
+        "adam_small_steps": {
+          "price_bounds": {
+            "proportion_above_1e_8": 0.087890625,
+            "maximum_violation": 0.5400392605491382
+          },
+          "delta_bounds": {
+            "proportion_above_1e_8": 0.07177734375,
+            "maximum_violation": 0.11632712229860641
+          },
+          "negative_gamma": {
+            "proportion_above_1e_8": 0.03955078125,
+            "maximum_violation": 0.012380513175395298
+          }
+        },
+        "lbfgs": {
+          "price_bounds": {
+            "proportion_above_1e_8": 0.0771484375,
+            "maximum_violation": 0.43915002668372694
+          },
+          "delta_bounds": {
+            "proportion_above_1e_8": 0.0771484375,
+            "maximum_violation": 0.10989502904603257
+          },
+          "negative_gamma": {
+            "proportion_above_1e_8": 0.05078125,
+            "maximum_violation": 0.020914146793726187
+          }
+        }
+      },
+      "observed_audit": {
+        "baseline": {
+          "in_domain": {
+            "price": {
+              "rmse": 0.18699655206983545,
+              "max_absolute_error": 1.1733308778698621
+            },
+            "delta": {
+              "rmse": 0.015960547740952888,
+              "max_absolute_error": 0.1193092073485762
+            },
+            "gamma": {
+              "rmse": 0.0029698485576897513,
+              "max_absolute_error": 0.03384680179058498
+            },
+            "vega": {
+              "rmse": 1.3645457984815164,
+              "max_absolute_error": 15.841304427957137
+            },
+            "theta": {
+              "rmse": 1.9703013564346132,
+              "max_absolute_error": 22.872737399260288
+            },
+            "rho": {
+              "rmse": 1.7527587921459369,
+              "max_absolute_error": 17.818824482166363
+            }
+          },
+          "stress": {
+            "price": {
+              "rmse": 0.3516461732677793,
+              "max_absolute_error": 2.7027686990939443
+            },
+            "delta": {
+              "rmse": 0.026006099425217446,
+              "max_absolute_error": 0.18299612301372326
+            },
+            "gamma": {
+              "rmse": 0.0057255935285090214,
+              "max_absolute_error": 0.11419503012094973
+            },
+            "vega": {
+              "rmse": 2.186718107039149,
+              "max_absolute_error": 19.655547348772448
+            },
+            "theta": {
+              "rmse": 3.006644192515142,
+              "max_absolute_error": 73.29572292075059
+            },
+            "rho": {
+              "rmse": 4.281323539482943,
+              "max_absolute_error": 43.98044833437348
+            }
+          }
+        },
+        "selected": {
+          "in_domain": {
+            "price": {
+              "rmse": 0.12237222048190592,
+              "max_absolute_error": 1.3723412563755772
+            },
+            "delta": {
+              "rmse": 0.01324234824090697,
+              "max_absolute_error": 0.1105436185440154
+            },
+            "gamma": {
+              "rmse": 0.0026787065966332544,
+              "max_absolute_error": 0.029740230245174575
+            },
+            "vega": {
+              "rmse": 1.2463238760069062,
+              "max_absolute_error": 14.158387958890078
+            },
+            "theta": {
+              "rmse": 1.7218722168017082,
+              "max_absolute_error": 21.42633939455167
+            },
+            "rho": {
+              "rmse": 1.5120073698022738,
+              "max_absolute_error": 16.125108783877053
+            }
+          },
+          "stress": {
+            "price": {
+              "rmse": 0.3107830026528528,
+              "max_absolute_error": 2.5048018638018092
+            },
+            "delta": {
+              "rmse": 0.023084469715080515,
+              "max_absolute_error": 0.18545525964955978
+            },
+            "gamma": {
+              "rmse": 0.0053467735555964395,
+              "max_absolute_error": 0.1053898353791812
+            },
+            "vega": {
+              "rmse": 2.1931182592421914,
+              "max_absolute_error": 17.39559305413865
+            },
+            "theta": {
+              "rmse": 2.8182891110623194,
+              "max_absolute_error": 70.17270166830409
+            },
+            "rho": {
+              "rmse": 3.82447712626747,
+              "max_absolute_error": 35.77019307405001
+            }
+          }
+        }
+      },
+      "audit_shape": {
+        "in_domain": {
+          "baseline": {
+            "price_bounds": {
+              "proportion_above_1e_8": 0.136962890625,
+              "maximum_violation": 0.8405204216456283
+            },
+            "delta_bounds": {
+              "proportion_above_1e_8": 0.0556640625,
+              "maximum_violation": 0.1193092073485762
+            },
+            "negative_gamma": {
+              "proportion_above_1e_8": 0.03759765625,
+              "maximum_violation": 0.022939868959275724
+            }
+          },
+          "selected": {
+            "price_bounds": {
+              "proportion_above_1e_8": 0.091552734375,
+              "maximum_violation": 0.7233156008647015
+            },
+            "delta_bounds": {
+              "proportion_above_1e_8": 0.0673828125,
+              "maximum_violation": 0.1105436185440154
+            },
+            "negative_gamma": {
+              "proportion_above_1e_8": 0.04248046875,
+              "maximum_violation": 0.02972286637000296
+            }
+          }
+        },
+        "stress": {
+          "baseline": {
+            "price_bounds": {
+              "proportion_above_1e_8": 0.17724609375,
+              "maximum_violation": 2.7027686990939443
+            },
+            "delta_bounds": {
+              "proportion_above_1e_8": 0.0810546875,
+              "maximum_violation": 0.13092087299156407
+            },
+            "negative_gamma": {
+              "proportion_above_1e_8": 0.13818359375,
+              "maximum_violation": 0.012113287639444428
+            }
+          },
+          "selected": {
+            "price_bounds": {
+              "proportion_above_1e_8": 0.12109375,
+              "maximum_violation": 2.5048018638018092
+            },
+            "delta_bounds": {
+              "proportion_above_1e_8": 0.09375,
+              "maximum_violation": 0.1288771755965745
+            },
+            "negative_gamma": {
+              "proportion_above_1e_8": 0.1357421875,
+              "maximum_violation": 0.012219491372876973
+            }
+          }
+        }
+      },
+      "selected_checkpoint": "results\\deeponet\\optimizer_refinement_seeds\\20260923T093654478604Z\\seed_22092026\\adam_small_steps\\selected.pt"
+    },
+    {
+      "seed": 22092027,
+      "selection": "lbfgs",
+      "eligible": [
+        "baseline",
+        "adam_small_steps",
+        "lbfgs"
+      ],
+      "validation": {
+        "baseline": {
+          "price": {
+            "rmse": 0.08740654569455421,
+            "max_absolute_error": 0.7037730086791143
+          },
+          "delta": {
+            "rmse": 0.008583689115750316,
+            "max_absolute_error": 0.05413665043534055
+          },
+          "gamma": {
+            "rmse": 0.002224759964451508,
+            "max_absolute_error": 0.03262053647131974
+          },
+          "vega": {
+            "rmse": 0.8643474229759406,
+            "max_absolute_error": 9.928767920239487
+          },
+          "theta": {
+            "rmse": 0.9979320682178188,
+            "max_absolute_error": 13.159470215522692
+          },
+          "rho": {
+            "rmse": 0.9474372821050124,
+            "max_absolute_error": 6.956855305729263
+          }
+        },
+        "adam_small_steps": {
+          "price": {
+            "rmse": 0.06286256424125883,
+            "max_absolute_error": 0.586495373904306
+          },
+          "delta": {
+            "rmse": 0.007027046283202029,
+            "max_absolute_error": 0.05394251128175693
+          },
+          "gamma": {
+            "rmse": 0.002091348149392855,
+            "max_absolute_error": 0.03144386983729153
+          },
+          "vega": {
+            "rmse": 0.8395352602947024,
+            "max_absolute_error": 9.47975191196661
+          },
+          "theta": {
+            "rmse": 0.9499570534560622,
+            "max_absolute_error": 12.260638692977373
+          },
+          "rho": {
+            "rmse": 0.8645319220999423,
+            "max_absolute_error": 6.97675357384405
+          }
+        },
+        "lbfgs": {
+          "price": {
+            "rmse": 0.06180398022720165,
+            "max_absolute_error": 0.6207901159298004
+          },
+          "delta": {
+            "rmse": 0.007275154997356265,
+            "max_absolute_error": 0.05358934488882112
+          },
+          "gamma": {
+            "rmse": 0.0021386003658678257,
+            "max_absolute_error": 0.03384726623167239
+          },
+          "vega": {
+            "rmse": 0.857338690391199,
+            "max_absolute_error": 10.06261016540622
+          },
+          "theta": {
+            "rmse": 0.9844737157721499,
+            "max_absolute_error": 12.358115349895204
+          },
+          "rho": {
+            "rmse": 0.8897877076184927,
+            "max_absolute_error": 7.29602815618918
+          }
+        }
+      },
+      "shape": {
+        "baseline": {
+          "price_bounds": {
+            "proportion_above_1e_8": 0.05859375,
+            "maximum_violation": 0.45415241901834946
+          },
+          "delta_bounds": {
+            "proportion_above_1e_8": 0.07080078125,
+            "maximum_violation": 0.05315675473459937
+          },
+          "negative_gamma": {
+            "proportion_above_1e_8": 0.04638671875,
+            "maximum_violation": 0.021587785450219738
+          }
+        },
+        "adam_small_steps": {
+          "price_bounds": {
+            "proportion_above_1e_8": 0.07177734375,
+            "maximum_violation": 0.41179416074358954
+          },
+          "delta_bounds": {
+            "proportion_above_1e_8": 0.0634765625,
+            "maximum_violation": 0.053942511267094435
+          },
+          "negative_gamma": {
+            "proportion_above_1e_8": 0.048828125,
+            "maximum_violation": 0.02215221726877086
+          }
+        },
+        "lbfgs": {
+          "price_bounds": {
+            "proportion_above_1e_8": 0.068359375,
+            "maximum_violation": 0.41387032472466956
+          },
+          "delta_bounds": {
+            "proportion_above_1e_8": 0.0625,
+            "maximum_violation": 0.053589344874158625
+          },
+          "negative_gamma": {
+            "proportion_above_1e_8": 0.0478515625,
+            "maximum_violation": 0.021984486029227954
+          }
+        }
+      },
+      "observed_audit": {
+        "baseline": {
+          "in_domain": {
+            "price": {
+              "rmse": 0.09683278195434263,
+              "max_absolute_error": 0.7304900361732578
+            },
+            "delta": {
+              "rmse": 0.008873904929848513,
+              "max_absolute_error": 0.09075728849729336
+            },
+            "gamma": {
+              "rmse": 0.0017437318385260735,
+              "max_absolute_error": 0.021249114406642584
+            },
+            "vega": {
+              "rmse": 0.7808554163391461,
+              "max_absolute_error": 7.626474870000699
+            },
+            "theta": {
+              "rmse": 0.9652794218416679,
+              "max_absolute_error": 12.464047788005608
+            },
+            "rho": {
+              "rmse": 1.0256740429933433,
+              "max_absolute_error": 13.802068909235317
+            }
+          },
+          "stress": {
+            "price": {
+              "rmse": 0.18825641581249575,
+              "max_absolute_error": 1.329194264994939
+            },
+            "delta": {
+              "rmse": 0.01594919091285531,
+              "max_absolute_error": 0.08827912785954894
+            },
+            "gamma": {
+              "rmse": 0.0036323647455555586,
+              "max_absolute_error": 0.06885762943704296
+            },
+            "vega": {
+              "rmse": 1.5501463529872437,
+              "max_absolute_error": 13.892089624882022
+            },
+            "theta": {
+              "rmse": 1.6650504216381667,
+              "max_absolute_error": 45.02109763141226
+            },
+            "rho": {
+              "rmse": 2.354981772530499,
+              "max_absolute_error": 19.85028667657697
+            }
+          }
+        },
+        "selected": {
+          "in_domain": {
+            "price": {
+              "rmse": 0.06293811144133554,
+              "max_absolute_error": 0.575566278755737
+            },
+            "delta": {
+              "rmse": 0.007556250291356106,
+              "max_absolute_error": 0.08610223387828264
+            },
+            "gamma": {
+              "rmse": 0.001645042681826911,
+              "max_absolute_error": 0.019936870198541207
+            },
+            "vega": {
+              "rmse": 0.7699731601252398,
+              "max_absolute_error": 7.617461283962093
+            },
+            "theta": {
+              "rmse": 0.945287072783919,
+              "max_absolute_error": 13.002797387339527
+            },
+            "rho": {
+              "rmse": 0.9686477091236666,
+              "max_absolute_error": 13.967016449057752
+            }
+          },
+          "stress": {
+            "price": {
+              "rmse": 0.17180335192561091,
+              "max_absolute_error": 1.1457842099737832
+            },
+            "delta": {
+              "rmse": 0.014747106067698176,
+              "max_absolute_error": 0.09555215016886265
+            },
+            "gamma": {
+              "rmse": 0.00361298526691684,
+              "max_absolute_error": 0.07011313508058453
+            },
+            "vega": {
+              "rmse": 1.5491463654633788,
+              "max_absolute_error": 14.025562843739216
+            },
+            "theta": {
+              "rmse": 1.6686409150335029,
+              "max_absolute_error": 45.99801912822272
+            },
+            "rho": {
+              "rmse": 2.3666716942562376,
+              "max_absolute_error": 19.69931324236002
+            }
+          }
+        }
+      },
+      "audit_shape": {
+        "in_domain": {
+          "baseline": {
+            "price_bounds": {
+              "proportion_above_1e_8": 0.0595703125,
+              "maximum_violation": 0.3284625895141424
+            },
+            "delta_bounds": {
+              "proportion_above_1e_8": 0.0517578125,
+              "maximum_violation": 0.09072800178245599
+            },
+            "negative_gamma": {
+              "proportion_above_1e_8": 0.04345703125,
+              "maximum_violation": 0.021249114406642584
+            }
+          },
+          "selected": {
+            "price_bounds": {
+              "proportion_above_1e_8": 0.076171875,
+              "maximum_violation": 0.33555222561512466
+            },
+            "delta_bounds": {
+              "proportion_above_1e_8": 0.052001953125,
+              "maximum_violation": 0.08607294716344527
+            },
+            "negative_gamma": {
+              "proportion_above_1e_8": 0.045166015625,
+              "maximum_violation": 0.019936870198541207
+            }
+          }
+        },
+        "stress": {
+          "baseline": {
+            "price_bounds": {
+              "proportion_above_1e_8": 0.11474609375,
+              "maximum_violation": 0.9606483461705082
+            },
+            "delta_bounds": {
+              "proportion_above_1e_8": 0.0654296875,
+              "maximum_violation": 0.05679447488802782
+            },
+            "negative_gamma": {
+              "proportion_above_1e_8": 0.13720703125,
+              "maximum_violation": 0.020047490589973783
+            }
+          },
+          "selected": {
+            "price_bounds": {
+              "proportion_above_1e_8": 0.12158203125,
+              "maximum_violation": 0.8834727476655218
+            },
+            "delta_bounds": {
+              "proportion_above_1e_8": 0.07080078125,
+              "maximum_violation": 0.05939379631094527
+            },
+            "negative_gamma": {
+              "proportion_above_1e_8": 0.13818359375,
+              "maximum_violation": 0.020390771315659594
+            }
+          }
+        }
+      }
+    },
+    {
+      "seed": 22092028,
+      "selection": "adam_small_steps",
+      "eligible": [
+        "baseline",
+        "adam_small_steps",
+        "lbfgs"
+      ],
+      "validation": {
+        "baseline": {
+          "price": {
+            "rmse": 0.21411710658358643,
+            "max_absolute_error": 1.1316978308637893
+          },
+          "delta": {
+            "rmse": 0.019268246380970282,
+            "max_absolute_error": 0.11934150573320901
+          },
+          "gamma": {
+            "rmse": 0.004454017479795351,
+            "max_absolute_error": 0.07634551038758125
+          },
+          "vega": {
+            "rmse": 1.3438375121616424,
+            "max_absolute_error": 10.756883780213293
+          },
+          "theta": {
+            "rmse": 2.443478509163883,
+            "max_absolute_error": 30.533408383472484
+          },
+          "rho": {
+            "rmse": 1.6504909844579636,
+            "max_absolute_error": 13.436108431841063
+          }
+        },
+        "adam_small_steps": {
+          "price": {
+            "rmse": 0.14762149697948676,
+            "max_absolute_error": 0.8330689228826529
+          },
+          "delta": {
+            "rmse": 0.017313087971156618,
+            "max_absolute_error": 0.11725721845565729
+          },
+          "gamma": {
+            "rmse": 0.004229423866955295,
+            "max_absolute_error": 0.06946438706315658
+          },
+          "vega": {
+            "rmse": 1.254593648658059,
+            "max_absolute_error": 7.449767687539464
+          },
+          "theta": {
+            "rmse": 2.2747595748399596,
+            "max_absolute_error": 28.823691526286844
+          },
+          "rho": {
+            "rmse": 1.5037252349847212,
+            "max_absolute_error": 12.58149341174429
+          }
+        },
+        "lbfgs": {
+          "price": {
+            "rmse": 0.15288995456566068,
+            "max_absolute_error": 0.8422673689136365
+          },
+          "delta": {
+            "rmse": 0.018149349704977016,
+            "max_absolute_error": 0.12520838914220367
+          },
+          "gamma": {
+            "rmse": 0.004426874665418121,
+            "max_absolute_error": 0.07583490008482094
+          },
+          "vega": {
+            "rmse": 1.302752764061883,
+            "max_absolute_error": 10.018590514563435
+          },
+          "theta": {
+            "rmse": 2.4205647958574876,
+            "max_absolute_error": 30.264780501427904
+          },
+          "rho": {
+            "rmse": 1.571726247087751,
+            "max_absolute_error": 12.471658328942908
+          }
+        }
+      },
+      "shape": {
+        "baseline": {
+          "price_bounds": {
+            "proportion_above_1e_8": 0.087890625,
+            "maximum_violation": 0.47406045153690946
+          },
+          "delta_bounds": {
+            "proportion_above_1e_8": 0.07958984375,
+            "maximum_violation": 0.05928956009075881
+          },
+          "negative_gamma": {
+            "proportion_above_1e_8": 0.05615234375,
+            "maximum_violation": 0.00998331533180402
+          }
+        },
+        "adam_small_steps": {
+          "price_bounds": {
+            "proportion_above_1e_8": 0.10009765625,
+            "maximum_violation": 0.5325308879429471
+          },
+          "delta_bounds": {
+            "proportion_above_1e_8": 0.07666015625,
+            "maximum_violation": 0.0606691050989078
+          },
+          "negative_gamma": {
+            "proportion_above_1e_8": 0.05419921875,
+            "maximum_violation": 0.010198006398366039
+          }
+        },
+        "lbfgs": {
+          "price_bounds": {
+            "proportion_above_1e_8": 0.087890625,
+            "maximum_violation": 0.5107247998441835
+          },
+          "delta_bounds": {
+            "proportion_above_1e_8": 0.0751953125,
+            "maximum_violation": 0.05854349110620548
+          },
+          "negative_gamma": {
+            "proportion_above_1e_8": 0.05615234375,
+            "maximum_violation": 0.009923745640426087
+          }
+        }
+      },
+      "observed_audit": {
+        "baseline": {
+          "in_domain": {
+            "price": {
+              "rmse": 0.19304860822057782,
+              "max_absolute_error": 1.1934503273451895
+            },
+            "delta": {
+              "rmse": 0.01868592818846292,
+              "max_absolute_error": 0.1081206499241579
+            },
+            "gamma": {
+              "rmse": 0.00361454701851045,
+              "max_absolute_error": 0.037697190776401504
+            },
+            "vega": {
+              "rmse": 1.3512389234699496,
+              "max_absolute_error": 15.28742102006679
+            },
+            "theta": {
+              "rmse": 2.433658266239694,
+              "max_absolute_error": 26.694851484906614
+            },
+            "rho": {
+              "rmse": 1.7013646185659723,
+              "max_absolute_error": 18.54637361917503
+            }
+          },
+          "stress": {
+            "price": {
+              "rmse": 0.41232114172919665,
+              "max_absolute_error": 4.2912399375398
+            },
+            "delta": {
+              "rmse": 0.030022980437741577,
+              "max_absolute_error": 0.18565225100987814
+            },
+            "gamma": {
+              "rmse": 0.006066146127959216,
+              "max_absolute_error": 0.13386570451236723
+            },
+            "vega": {
+              "rmse": 2.528592776742043,
+              "max_absolute_error": 28.552777781194077
+            },
+            "theta": {
+              "rmse": 3.4834948331848365,
+              "max_absolute_error": 80.41975173835014
+            },
+            "rho": {
+              "rmse": 4.08428216177752,
+              "max_absolute_error": 26.0102684600173
+            }
+          }
+        },
+        "selected": {
+          "in_domain": {
+            "price": {
+              "rmse": 0.1446585972209908,
+              "max_absolute_error": 1.0531516868198594
+            },
+            "delta": {
+              "rmse": 0.01681790599483694,
+              "max_absolute_error": 0.08987776546764621
+            },
+            "gamma": {
+              "rmse": 0.0034447729680293863,
+              "max_absolute_error": 0.034188618638341495
+            },
+            "vega": {
+              "rmse": 1.2542349474532057,
+              "max_absolute_error": 16.79388033672182
+            },
+            "theta": {
+              "rmse": 2.2836462308974106,
+              "max_absolute_error": 24.969596302792475
+            },
+            "rho": {
+              "rmse": 1.5722953719446715,
+              "max_absolute_error": 19.72126073397169
+            }
+          },
+          "stress": {
+            "price": {
+              "rmse": 0.42085602923671445,
+              "max_absolute_error": 4.455357491303978
+            },
+            "delta": {
+              "rmse": 0.02972748265121008,
+              "max_absolute_error": 0.20770797490500625
+            },
+            "gamma": {
+              "rmse": 0.0058221238487542884,
+              "max_absolute_error": 0.12794566748034442
+            },
+            "vega": {
+              "rmse": 2.4212617670955052,
+              "max_absolute_error": 23.702435041588473
+            },
+            "theta": {
+              "rmse": 3.3222513267044174,
+              "max_absolute_error": 77.84195859371218
+            },
+            "rho": {
+              "rmse": 4.101747629965506,
+              "max_absolute_error": 28.065514118654562
+            }
+          }
+        }
+      },
+      "audit_shape": {
+        "in_domain": {
+          "baseline": {
+            "price_bounds": {
+              "proportion_above_1e_8": 0.0927734375,
+              "maximum_violation": 0.8108789319813603
+            },
+            "delta_bounds": {
+              "proportion_above_1e_8": 0.071533203125,
+              "maximum_violation": 0.0971026078572712
+            },
+            "negative_gamma": {
+              "proportion_above_1e_8": 0.052734375,
+              "maximum_violation": 0.01279099044453489
+            }
+          },
+          "selected": {
+            "price_bounds": {
+              "proportion_above_1e_8": 0.09765625,
+              "maximum_violation": 0.7635195680527929
+            },
+            "delta_bounds": {
+              "proportion_above_1e_8": 0.0673828125,
+              "maximum_violation": 0.08311465893929215
+            },
+            "negative_gamma": {
+              "proportion_above_1e_8": 0.050048828125,
+              "maximum_violation": 0.015853212299048063
+            }
+          }
+        },
+        "stress": {
+          "baseline": {
+            "price_bounds": {
+              "proportion_above_1e_8": 0.12646484375,
+              "maximum_violation": 3.7525842674851617
+            },
+            "delta_bounds": {
+              "proportion_above_1e_8": 0.0849609375,
+              "maximum_violation": 0.08600720006953261
+            },
+            "negative_gamma": {
+              "proportion_above_1e_8": 0.162109375,
+              "maximum_violation": 0.013684877571793723
+            }
+          },
+          "selected": {
+            "price_bounds": {
+              "proportion_above_1e_8": 0.1357421875,
+              "maximum_violation": 3.9167018212493403
+            },
+            "delta_bounds": {
+              "proportion_above_1e_8": 0.0810546875,
+              "maximum_violation": 0.08021439014333526
+            },
+            "negative_gamma": {
+              "proportion_above_1e_8": 0.1611328125,
+              "maximum_violation": 0.013145619244554145
+            }
+          }
+        }
+      },
+      "selected_checkpoint": "results\\deeponet\\optimizer_refinement_seeds\\20260923T093654478604Z\\seed_22092028\\adam_small_steps\\selected.pt"
+    }
+  ],
+  "aggregate": {
+    "price": {
+      "baseline": [
+        0.1826682727305595,
+        0.08740654569455421,
+        0.21411710658358643
+      ],
+      "selected": [
+        0.11758606441411533,
+        0.06180398022720165,
+        0.14762149697948676
+      ]
+    },
+    "delta": {
+      "baseline": [
+        0.01638948586407004,
+        0.008583689115750316,
+        0.019268246380970282
+      ],
+      "selected": [
+        0.013316720578358546,
+        0.007275154997356265,
+        0.017313087971156618
+      ]
+    },
+    "gamma": {
+      "baseline": [
+        0.0036628374009044142,
+        0.002224759964451508,
+        0.004454017479795351
+      ],
+      "selected": [
+        0.003247519521117007,
+        0.0021386003658678257,
+        0.004229423866955295
+      ]
+    },
+    "vega": {
+      "baseline": [
+        1.3848346480166969,
+        0.8643474229759406,
+        1.3438375121616424
+      ],
+      "selected": [
+        1.2861910518916209,
+        0.857338690391199,
+        1.254593648658059
+      ]
+    },
+    "theta": {
+      "baseline": [
+        1.9452051659494276,
+        0.9979320682178188,
+        2.443478509163883
+      ],
+      "selected": [
+        1.706859854659302,
+        0.9844737157721499,
+        2.2747595748399596
+      ]
+    },
+    "rho": {
+      "baseline": [
+        1.701212241528156,
+        0.9474372821050124,
+        1.6504909844579636
+      ],
+      "selected": [
+        1.4668380118439273,
+        0.8897877076184927,
+        1.5037252349847212
+      ]
+    }
+  },
+  "verdict": {
+    "refinement_improves_price": true,
+    "lbfgs_dependable": false,
+    "relative_price_rmse_change": [
+      -0.3562863290027499,
+      -0.2929135943299005,
+      -0.31055720238841034
+    ],
+    "rule": {
+      "refinement_improves_price": "Every seed selects a refined arm with lower price RMSE than its parent.",
+      "lbfgs_dependable": "L-BFGS is the selected arm on at least two of three seeds and lowers price RMSE versus the parent on all three seeds."
+    }
+  }
+}

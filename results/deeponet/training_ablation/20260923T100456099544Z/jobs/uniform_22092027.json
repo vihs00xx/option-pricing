@@ -1,0 +1,16 @@
+{
+  "name": "uniform/22092027",
+  "stage": "stage2",
+  "arch": "base",
+  "data": "uniform",
+  "seed": 22092027,
+  "threads": 2,
+  "penalty_types": [],
+  "penalty_weight": 0.0,
+  "parent": "pilot/base_uniform_22092027",
+  "folder": "arms/uniform_22092027",
+  "arrays": {
+    "file": "results\\deeponet\\training_ablation\\20260923T100456099544Z\\data\\train_uniform.npz",
+    "content_sha256": "a9b84a96784e294798045647c07ef7060ddd972d3ba18e5c4ac9d502f22e4d5c"
+  }
+}

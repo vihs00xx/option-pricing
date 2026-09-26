@@ -1,0 +1,110 @@
+{
+  "schema": "deeponet_run_metadata_v2",
+  "arm": "uniform/22092027",
+  "seed": 22092027,
+  "stage": "stage2",
+  "architecture": {
+    "width": 64,
+    "depth": 3,
+    "rank": 64
+  },
+  "effective_settings": {
+    "protocol_id": "deeponet_training_ablation_v2",
+    "architecture": {
+      "width": 64,
+      "depth": 3,
+      "rank": 64
+    },
+    "seed": 22092027,
+    "epochs": 800,
+    "batch_size": 512,
+    "learning_rate": 0.0003,
+    "validation_every": 10,
+    "wall_seconds": 36000,
+    "threads": 2,
+    "loss": "mean_squared_error_of_price_divided_by_strike",
+    "selection": "minimum_validation_normalized_price_mse",
+    "dataset": "results/deeponet/data/black_scholes_operator_v1.npz",
+    "dataset_manifest": "results/deeponet/data/black_scholes_operator_v1_manifest.json",
+    "output_root": "results/deeponet/training",
+    "note": "Ablation continuation: fixed 800 epochs (matched update counts); training and validation data only",
+    "progress_every_seconds": 45
+  },
+  "settings_sha256": "fa0f4a2385f2ea1194e24f93c3f7003cc17d83bda0d62eb618171f52291dce17",
+  "dataset": {
+    "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_uniform.npz",
+    "file_sha256": "9ab71c8cee9250f9008a3e52ae52a771fc77e9f5745571fec0128122871105c0",
+    "content_sha256": "a9b84a96784e294798045647c07ef7060ddd972d3ba18e5c4ac9d502f22e4d5c",
+    "content_hash_scope": "all npz arrays whose name starts with 'train_'",
+    "content_hash_method": "sha256 over the train-scope arrays sorted by name, each contributing its name, dtype.str, shape and C-order bytes"
+  },
+  "validation_split": {
+    "arrays": [
+      "validation_branch",
+      "validation_trunk",
+      "validation_targets"
+    ],
+    "rows": 2048
+  },
+  "normalization": {
+    "greek_scales": [
+      0.5789003134864943,
+      0.01936112826930163,
+      22.692862367474618,
+      12.118679868289766,
+      36.352640549972946
+    ],
+    "target_ordering": [
+      "delta",
+      "gamma",
+      "vega",
+      "theta",
+      "rho"
+    ],
+    "method": "per-column root mean square of the training label rows (columns 1..5 of the six target columns: price, delta, gamma, vega, theta, rho)",
+    "source_dataset": {
+      "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_uniform.npz",
+      "file_sha256": "9ab71c8cee9250f9008a3e52ae52a771fc77e9f5745571fec0128122871105c0",
+      "content_sha256": "a9b84a96784e294798045647c07ef7060ddd972d3ba18e5c4ac9d502f22e4d5c",
+      "content_hash_scope": "all npz arrays whose name starts with 'train_'",
+      "content_hash_method": "sha256 over the train-scope arrays sorted by name, each contributing its name, dtype.str, shape and C-order bytes"
+    },
+    "source_dataset_path": "C:\\Users\\shiva\\Documents\\MySpace\\option-pricing\\results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_uniform.npz",
+    "effective_greek_loss_coefficients": [
+      0.029839561069097825,
+      26.677103613201968,
+      1.9418757651629443e-05,
+      6.809094690563822e-05,
+      7.5670756465504875e-06
+    ]
+  },
+  "parent": {
+    "folder": "C:\\Users\\shiva\\Documents\\MySpace\\option-pricing\\results\\deeponet\\training_ablation\\20260923T111505263380Z\\pilot\\base_uniform_22092027",
+    "file_sha256": "a2e785474eab5c5af0907242d6249ef064ac263e8b5f496874749020ea5dd535"
+  },
+  "checkpoints": {
+    "selected": "5a8d83e50685cc912c98f1175f6557b222b5894879271631db77337054c387de",
+    "last": "262ed78d980594a31ed25bf6c3a27ac18c8772458a06cb5cfea14e89457335b8"
+  },
+  "training": {
+    "selected_epoch": 680,
+    "selected_validation_mse": 1.2882132968566321e-06,
+    "optimizer_steps": 12800,
+    "stop_reason": "epochs_completed",
+    "training_wall_seconds": 846.9001777000012,
+    "peak_sampled_rss_mb": 316.73828125
+  },
+  "label_columns_used": [
+    "price",
+    "delta",
+    "gamma",
+    "vega",
+    "theta",
+    "rho"
+  ],
+  "greek_weight": 0.01,
+  "penalty_types": [],
+  "penalty_weight": 0.0,
+  "run_protocol_id": "deeponet_training_ablation_v2",
+  "final_test_accessed": false
+}

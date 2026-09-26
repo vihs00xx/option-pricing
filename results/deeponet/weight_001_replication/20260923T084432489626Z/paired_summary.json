@@ -1,0 +1,72 @@
+{
+  "metrics": {
+    "price": {
+      "weight_001_mean": 0.16139730833623336,
+      "weight_001_std": 0.06597902700784396,
+      "weight_1_mean": 0.25752504663206177,
+      "weight_1_std": 0.04292704067232812,
+      "paired_differences": [
+        -0.02870488555787723,
+        -0.177534521015574,
+        -0.08214380831403392
+      ]
+    },
+    "delta": {
+      "weight_001_mean": 0.01474714045359688,
+      "weight_001_std": 0.005528373614718698,
+      "weight_1_mean": 0.018055391637356977,
+      "weight_1_std": 0.0017859339902738637,
+      "paired_differences": [
+        -0.002386939905202917,
+        -0.007437972213687366,
+        -9.98414323900021e-05
+      ]
+    },
+    "gamma": {
+      "weight_001_mean": 0.003447204948383758,
+      "weight_001_std": 0.001130163830320324,
+      "weight_1_mean": 0.0035239392204544167,
+      "weight_1_std": 0.00018306170977903688,
+      "paired_differences": [
+        0.00023008388524376573,
+        -0.001179619254902882,
+        0.0007193325534471393
+      ]
+    },
+    "vega": {
+      "weight_001_mean": 1.1976731943847598,
+      "weight_001_std": 0.2893954797522636,
+      "weight_1_mean": 1.4230356182271793,
+      "weight_1_std": 0.09544765777092105,
+      "paired_differences": [
+        -0.07247736587061815,
+        -0.6322643948416865,
+        0.028654489185046428
+      ]
+    },
+    "theta": {
+      "weight_001_mean": 1.7955385811103763,
+      "weight_001_std": 0.7343032024960785,
+      "weight_1_mean": 1.7681640505067862,
+      "weight_1_std": 0.1719001858280146,
+      "paired_differences": [
+        0.18038066288277266,
+        -0.6000259012333338,
+        0.5017688301613317
+      ]
+    },
+    "rho": {
+      "weight_001_mean": 1.4330468360303774,
+      "weight_001_std": 0.42131418279876254,
+      "weight_1_mean": 1.4858770341920764,
+      "weight_1_std": 0.03870634523102424,
+      "paired_differences": [
+        0.1729267954569922,
+        -0.505015639741844,
+        0.1735982497997548
+      ]
+    }
+  },
+  "selected_family": "weight_0.01",
+  "selection_rule": "Pair each seed with weight 1 at equal budget. Prefer weight 0.01 if mean price RMSE is lower and each of Gamma, Theta and Rho mean RMSE is within 20% of weight 1; otherwise retain weight 1."
+}

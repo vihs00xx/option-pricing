@@ -1,0 +1,349 @@
+{
+  "protocol_id": "deeponet_model_selection_v1",
+  "registry_sha256": "9de910901b8fdf93c5aac27331c0c1ff7479282c5182eaed4dc4a8e1cfb95938",
+  "model_selection_preceded_final_test": true,
+  "models": {
+    "primary": {
+      "checkpoint": "results/deeponet/weight_001_replication/20260923T084432489626Z/seed_22092027/selected.pt",
+      "checkpoint_sha256": "e95693bea39ccfe3469449948f179efa92542a6394327ef84fb92ade66dc4901",
+      "metrics": {
+        "all": {
+          "points": 68,
+          "price": {
+            "rmse": 0.27594408250079466,
+            "max_absolute_error": 1.2984834413998296
+          },
+          "delta": {
+            "rmse": 0.01619988681234515,
+            "max_absolute_error": 0.07950933728515108
+          },
+          "gamma": {
+            "rmse": 0.002324421308472916,
+            "max_absolute_error": 0.008873974742136784
+          },
+          "vega": {
+            "rmse": 2.2431399048019163,
+            "max_absolute_error": 12.345742801562757
+          },
+          "theta": {
+            "rmse": 1.2286038223408766,
+            "max_absolute_error": 6.508652863947891
+          },
+          "rho": {
+            "rmse": 3.2538400538058085,
+            "max_absolute_error": 19.558119533507124
+          }
+        },
+        "anchor": {
+          "points": 16,
+          "price": {
+            "rmse": 0.09329905559239894,
+            "max_absolute_error": 0.18955052925373628
+          },
+          "delta": {
+            "rmse": 0.01227246592393776,
+            "max_absolute_error": 0.029113540859702303
+          },
+          "gamma": {
+            "rmse": 0.0014816929705120188,
+            "max_absolute_error": 0.004225474489622433
+          },
+          "vega": {
+            "rmse": 0.8283875520708563,
+            "max_absolute_error": 2.0595427048350032
+          },
+          "theta": {
+            "rmse": 2.2739018932619373,
+            "max_absolute_error": 6.508652863947891
+          },
+          "rho": {
+            "rmse": 1.263853483265515,
+            "max_absolute_error": 4.065439292308227
+          }
+        },
+        "extrapolation": {
+          "points": 20,
+          "price": {
+            "rmse": 0.472691190021811,
+            "max_absolute_error": 1.2984834413998296
+          },
+          "delta": {
+            "rmse": 0.024636667905401494,
+            "max_absolute_error": 0.07950933728515108
+          },
+          "gamma": {
+            "rmse": 0.0035709384716493204,
+            "max_absolute_error": 0.008873974742136784
+          },
+          "vega": {
+            "rmse": 3.973000084111778,
+            "max_absolute_error": 12.345742801562757
+          },
+          "theta": {
+            "rmse": 0.8997011679890575,
+            "max_absolute_error": 2.1680939066005323
+          },
+          "rho": {
+            "rmse": 5.68707808303867,
+            "max_absolute_error": 19.558119533507124
+          }
+        },
+        "interpolation": {
+          "points": 32,
+          "price": {
+            "rmse": 0.13344646052985917,
+            "max_absolute_error": 0.34238695957302195
+          },
+          "delta": {
+            "rmse": 0.010149734908086575,
+            "max_absolute_error": 0.033124537251455144
+          },
+          "gamma": {
+            "rmse": 0.0015536336863473156,
+            "max_absolute_error": 0.005032569877661857
+          },
+          "vega": {
+            "rmse": 0.6955169538988597,
+            "max_absolute_error": 1.7142499540586194
+          },
+          "theta": {
+            "rmse": 0.34115882472009024,
+            "max_absolute_error": 0.9585731713944208
+          },
+          "rho": {
+            "rmse": 1.2187846664927813,
+            "max_absolute_error": 4.915034802921866
+          }
+        }
+      }
+    },
+    "greek_focused_reference": {
+      "checkpoint": "results/deeponet/comparisons/20260922T140050569791Z/price_and_greeks/selected.pt",
+      "checkpoint_sha256": "249c0c0a6190fb9793034b5e0abcbc8b8d16b6843fa7d73e83ce4d5754a59a40",
+      "metrics": {
+        "all": {
+          "points": 68,
+          "price": {
+            "rmse": 0.47158952301112733,
+            "max_absolute_error": 2.8383885647968423
+          },
+          "delta": {
+            "rmse": 0.0274095151027313,
+            "max_absolute_error": 0.1046708328246807
+          },
+          "gamma": {
+            "rmse": 0.00487964551961127,
+            "max_absolute_error": 0.023582476353909462
+          },
+          "vega": {
+            "rmse": 3.0787871834979414,
+            "max_absolute_error": 20.303728930025724
+          },
+          "theta": {
+            "rmse": 1.8631711521118706,
+            "max_absolute_error": 8.715177905644243
+          },
+          "rho": {
+            "rmse": 4.203913854898954,
+            "max_absolute_error": 26.094400410863514
+          }
+        },
+        "anchor": {
+          "points": 16,
+          "price": {
+            "rmse": 0.29507078458595526,
+            "max_absolute_error": 0.8629895404751124
+          },
+          "delta": {
+            "rmse": 0.020886171512625312,
+            "max_absolute_error": 0.03721998091940423
+          },
+          "gamma": {
+            "rmse": 0.00803051789057476,
+            "max_absolute_error": 0.023582476353909462
+          },
+          "vega": {
+            "rmse": 1.6060892951137462,
+            "max_absolute_error": 2.975722278587373
+          },
+          "theta": {
+            "rmse": 3.1627699609648965,
+            "max_absolute_error": 8.715177905644243
+          },
+          "rho": {
+            "rmse": 2.3324401413854363,
+            "max_absolute_error": 5.842128380394399
+          }
+        },
+        "extrapolation": {
+          "points": 20,
+          "price": {
+            "rmse": 0.7744915982483995,
+            "max_absolute_error": 2.8383885647968423
+          },
+          "delta": {
+            "rmse": 0.04118025380940268,
+            "max_absolute_error": 0.1046708328246807
+          },
+          "gamma": {
+            "rmse": 0.0044063734059450604,
+            "max_absolute_error": 0.013601512349392155
+          },
+          "vega": {
+            "rmse": 5.213555250582823,
+            "max_absolute_error": 20.303728930025724
+          },
+          "theta": {
+            "rmse": 1.6052060451626184,
+            "max_absolute_error": 4.707723112976912
+          },
+          "rho": {
+            "rmse": 6.878348946026285,
+            "max_absolute_error": 26.094400410863514
+          }
+        },
+        "interpolation": {
+          "points": 32,
+          "price": {
+            "rmse": 0.23272577188189175,
+            "max_absolute_error": 0.5343856550058419
+          },
+          "delta": {
+            "rmse": 0.017845835116292594,
+            "max_absolute_error": 0.03626887467645368
+          },
+          "gamma": {
+            "rmse": 0.002493704158064745,
+            "max_absolute_error": 0.005538723380613592
+          },
+          "vega": {
+            "rmse": 1.3655555559778458,
+            "max_absolute_error": 4.22994431279681
+          },
+          "theta": {
+            "rmse": 0.8745017920215508,
+            "max_absolute_error": 2.652386179560282
+          },
+          "rho": {
+            "rmse": 2.294548695302211,
+            "max_absolute_error": 9.007264022338035
+          }
+        }
+      }
+    },
+    "price_only_reference": {
+      "checkpoint": "results/deeponet/comparisons/20260922T140050569791Z/price_only/selected.pt",
+      "checkpoint_sha256": "833ef6522c4c0d7a3ccca81569ac0fe543f8ec3b819d24e5169a8193107396c5",
+      "metrics": {
+        "all": {
+          "points": 68,
+          "price": {
+            "rmse": 0.5445770905873105,
+            "max_absolute_error": 1.8398819029401068
+          },
+          "delta": {
+            "rmse": 0.06100216545547325,
+            "max_absolute_error": 0.23068802390192167
+          },
+          "gamma": {
+            "rmse": 0.014888305725175015,
+            "max_absolute_error": 0.07626147471791757
+          },
+          "vega": {
+            "rmse": 3.532391815638186,
+            "max_absolute_error": 14.918463145705188
+          },
+          "theta": {
+            "rmse": 3.2309052043898245,
+            "max_absolute_error": 16.70706261419657
+          },
+          "rho": {
+            "rmse": 9.582224074349408,
+            "max_absolute_error": 50.02270397661541
+          }
+        },
+        "anchor": {
+          "points": 16,
+          "price": {
+            "rmse": 0.29984885088124624,
+            "max_absolute_error": 0.6338987557778275
+          },
+          "delta": {
+            "rmse": 0.04257882616306864,
+            "max_absolute_error": 0.11983271198378309
+          },
+          "gamma": {
+            "rmse": 0.027634332758833393,
+            "max_absolute_error": 0.07626147471791757
+          },
+          "vega": {
+            "rmse": 1.9165374523368883,
+            "max_absolute_error": 5.387401995680875
+          },
+          "theta": {
+            "rmse": 5.841074606017001,
+            "max_absolute_error": 16.70706261419657
+          },
+          "rho": {
+            "rmse": 4.4192182621348195,
+            "max_absolute_error": 9.930875216940578
+          }
+        },
+        "extrapolation": {
+          "points": 20,
+          "price": {
+            "rmse": 0.9211219134824911,
+            "max_absolute_error": 1.8398819029401068
+          },
+          "delta": {
+            "rmse": 0.102565375534172,
+            "max_absolute_error": 0.23068802390192167
+          },
+          "gamma": {
+            "rmse": 0.009916517462534923,
+            "max_absolute_error": 0.01942755379093513
+          },
+          "vega": {
+            "rmse": 5.642783304451166,
+            "max_absolute_error": 14.918463145705188
+          },
+          "theta": {
+            "rmse": 2.502797106700551,
+            "max_absolute_error": 9.040382155305187
+          },
+          "rho": {
+            "rmse": 16.02575468899482,
+            "max_absolute_error": 50.02270397661541
+          }
+        },
+        "interpolation": {
+          "points": 32,
+          "price": {
+            "rmse": 0.23442117494099457,
+            "max_absolute_error": 1.0811748134874293
+          },
+          "delta": {
+            "rmse": 0.020650012688676486,
+            "max_absolute_error": 0.04791889091986257
+          },
+          "gamma": {
+            "rmse": 0.005267067782448016,
+            "max_absolute_error": 0.017865888392042173
+          },
+          "vega": {
+            "rmse": 2.1858917698614984,
+            "max_absolute_error": 4.893751711488497
+          },
+          "theta": {
+            "rmse": 1.0992125861858715,
+            "max_absolute_error": 3.322770901669646
+          },
+          "rho": {
+            "rmse": 4.983488770868294,
+            "max_absolute_error": 16.363165294911568
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "parent_checkpoint": "results\\deeponet\\weight_001_replication\\20260923T084432489626Z\\seed_22092027\\selected.pt",
+  "parent_sha256": "e95693bea39ccfe3469449948f179efa92542a6394327ef84fb92ade66dc4901",
+  "dataset_sha256": "bb892af8c78df4125346b22aa68945be1a8d10ec570bc1ebb409d75f0ccba6ca",
+  "source_sha256": {
+    "experiments\\deeponet\\refine_optimizer.py": "f56c27323c95388b2d9fb6fdd4958a3be97dcf8219ef607dbddee5d8ebf0176e",
+    "experiments\\deeponet\\train.py": "ade588bc01854eef9fb44ecb7f71802510307bf137054a82f96d778b2c77236e",
+    "experiments\\deeponet\\compare_supervision.py": "24b295cd9257697333f5787b13ed23cae4784251a3b713c789d4db2b22ea22df",
+    "src\\neural\\deeponet.py": "1bd8c80edaa58d279867e924abfc6b3897c3b328000f2764c4c81c8e4c7b02fa",
+    "src\\neural\\deeponet_data.py": "aa33e26d53db6b5b80450c667edf9c70201cb9b396db330f2c671daa7787ec7d",
+    "src\\black_scholes.py": "0746033b38cb276d51188c010cd33b814031d8bd91f1336ae4ea8d74af5ced15"
+  },
+  "greek_scales": [
+    0.5823468873578548,
+    0.018749898002260283,
+    22.560560095970324,
+    11.538700852018152,
+    36.00645780086356
+  ],
+  "wall_seconds_per_arm": 180,
+  "seed": 23092026,
+  "greek_weight": 0.01,
+  "fresh_audit_sha256": "eb1fa413e1bf575501c06ec6667640cdec90aec652da7f6cc1fc2f5b41e9b07a",
+  "audit_seeds": [
+    25092026,
+    25093026
+  ],
+  "in_domain": {
+    "K": [
+      80.0,
+      120.0
+    ],
+    "T": [
+      0.05,
+      2.0
+    ],
+    "moneyness": [
+      0.7,
+      1.3
+    ],
+    "tau_minimum": 0.01,
+    "sigma": [
+      0.1,
+      0.6
+    ],
+    "r": [
+      -0.02,
+      0.1
+    ],
+    "q": [
+      0.0,
+      0.06
+    ]
+  },
+  "stress_domain": {
+    "K": [
+      75.0,
+      125.0
+    ],
+    "T": [
+      0.03,
+      2.5
+    ],
+    "moneyness": [
+      0.6,
+      1.4
+    ],
+    "tau_minimum": 0.005,
+    "sigma": [
+      0.08,
+      0.65
+    ],
+    "r": [
+      -0.03,
+      0.12
+    ],
+    "q": [
+      0.0,
+      0.08
+    ]
+  },
+  "old_test_accessed": false,
+  "selection": "Lowest validation price RMSE among baseline and candidates with every Greek RMSE <= 1.1 times baseline. Fresh audit evaluated only after selection.",
+  "lbfgs_loss_multiplier": 10000,
+  "lbfgs_chunk_size": 1024,
+  "selected_step": 28,
+  "selected_validation_mse": 3.743676172473483e-07,
+  "optimizer_steps": 205,
+  "closure_calls": 426,
+  "training_wall_seconds": 181.63358710000102,
+  "stop_reason": "wall_budget_checked_between_lbfgs_steps",
+  "settings": {
+    "protocol_id": "deeponet_optimizer_refinement_v1",
+    "architecture": {
+      "width": 64,
+      "depth": 3,
+      "rank": 64
+    },
+    "seed": 23092026,
+    "epochs": 100000,
+    "batch_size": 8192,
+    "learning_rate": 1.0,
+    "validation_every": 10,
+    "wall_seconds": 180,
+    "threads": 2,
+    "loss": "price_mse_over_strike_squared_plus_weighted_training_rms_greek_mse",
+    "selection": "minimum_validation_normalized_price_mse",
+    "dataset": "results/deeponet/data/black_scholes_operator_v1.npz",
+    "dataset_manifest": "results/deeponet/data/black_scholes_operator_v1_manifest.json",
+    "output_root": "results/deeponet/training",
+    "note": "Validation-only development; final test excluded",
+    "progress_every_seconds": 45,
+    "greek_weight": 0.01,
+    "optimizer": "lbfgs",
+    "loss_multiplier": 10000.0,
+    "chunk_size": 1024,
+    "history_size": 50,
+    "max_iter": 1,
+    "line_search_fn": "strong_wolfe"
+  },
+  "label_columns_used": [
+    "price",
+    "delta",
+    "gamma",
+    "vega",
+    "theta",
+    "rho"
+  ],
+  "final_test_accessed": false,
+  "checkpoint_sha256": {
+    "selected": "79edbd515b5276b9a64ca1063dedd9295378cbd9043152a48d5d971540c0498f",
+    "last": "8bd2f040ade0dba3c92413a1f4498bfa8ca4a8f1c038442b3a2ee625a7b4579b"
+  }
+}

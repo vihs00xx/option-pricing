@@ -1,0 +1,872 @@
+[
+  {
+    "architecture": "control",
+    "seed": 22092026,
+    "selected": "lbfgs",
+    "eligible": [
+      "baseline",
+      "adam_small_steps",
+      "lbfgs"
+    ],
+    "validation": {
+      "baseline": {
+        "price": {
+          "rmse": 0.14426723343594539,
+          "max_absolute_error": 0.799534256743601
+        },
+        "delta": {
+          "rmse": 0.01190711908138674,
+          "max_absolute_error": 0.10743877549640134
+        },
+        "gamma": {
+          "rmse": 0.0026312951832098723,
+          "max_absolute_error": 0.04580074205269549
+        },
+        "vega": {
+          "rmse": 1.1023532627055501,
+          "max_absolute_error": 8.907043364172324
+        },
+        "theta": {
+          "rmse": 1.3216567988380545,
+          "max_absolute_error": 14.768389527280782
+        },
+        "rho": {
+          "rmse": 1.223134099765711,
+          "max_absolute_error": 9.49109120823529
+        }
+      },
+      "adam_small_steps": {
+        "price": {
+          "rmse": 0.0931228847027658,
+          "max_absolute_error": 0.7664990703570496
+        },
+        "delta": {
+          "rmse": 0.01018120431802078,
+          "max_absolute_error": 0.10448868523932053
+        },
+        "gamma": {
+          "rmse": 0.0025380847216548204,
+          "max_absolute_error": 0.04648215750989948
+        },
+        "vega": {
+          "rmse": 0.979733570008078,
+          "max_absolute_error": 8.228465382625437
+        },
+        "theta": {
+          "rmse": 1.2685835875373608,
+          "max_absolute_error": 14.150672643779558
+        },
+        "rho": {
+          "rmse": 1.1655013430495595,
+          "max_absolute_error": 10.32540352953498
+        }
+      },
+      "lbfgs": {
+        "price": {
+          "rmse": 0.09191434350981392,
+          "max_absolute_error": 0.7329039725935189
+        },
+        "delta": {
+          "rmse": 0.010310009835985111,
+          "max_absolute_error": 0.10562765729815328
+        },
+        "gamma": {
+          "rmse": 0.0026042353901634036,
+          "max_absolute_error": 0.04828498321376992
+        },
+        "vega": {
+          "rmse": 1.0202830854142053,
+          "max_absolute_error": 9.376126162292909
+        },
+        "theta": {
+          "rmse": 1.310813705132846,
+          "max_absolute_error": 14.965311688669829
+        },
+        "rho": {
+          "rmse": 1.1984194616477033,
+          "max_absolute_error": 10.470294698780535
+        }
+      }
+    },
+    "fresh": {
+      "in_domain": {
+        "price": {
+          "rmse": 0.09088007509969903,
+          "max_absolute_error": 0.6426937479482389
+        },
+        "delta": {
+          "rmse": 0.010266824248550655,
+          "max_absolute_error": 0.12932834625765544
+        },
+        "gamma": {
+          "rmse": 0.002530878545994283,
+          "max_absolute_error": 0.0516365108770066
+        },
+        "vega": {
+          "rmse": 0.9469586218771197,
+          "max_absolute_error": 10.392304768841704
+        },
+        "theta": {
+          "rmse": 1.4547839092360781,
+          "max_absolute_error": 31.02713020714085
+        },
+        "rho": {
+          "rmse": 1.1857824948594788,
+          "max_absolute_error": 14.444752278156816
+        }
+      },
+      "stress": {
+        "price": {
+          "rmse": 0.23847278805361086,
+          "max_absolute_error": 2.877389721524265
+        },
+        "delta": {
+          "rmse": 0.01975055887799954,
+          "max_absolute_error": 0.1354346783624418
+        },
+        "gamma": {
+          "rmse": 0.0036979734484262733,
+          "max_absolute_error": 0.08923816652513011
+        },
+        "vega": {
+          "rmse": 1.9220782888167367,
+          "max_absolute_error": 23.45567994976461
+        },
+        "theta": {
+          "rmse": 1.9742438668629687,
+          "max_absolute_error": 52.61572648326596
+        },
+        "rho": {
+          "rmse": 3.130348553917474,
+          "max_absolute_error": 31.042406793430075
+        }
+      }
+    },
+    "parent": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\arms\\control_22092026\\selected.pt"
+  },
+  {
+    "architecture": "control",
+    "seed": 22092027,
+    "selected": "adam_small_steps",
+    "eligible": [
+      "baseline",
+      "adam_small_steps",
+      "lbfgs"
+    ],
+    "validation": {
+      "baseline": {
+        "price": {
+          "rmse": 0.14283310644255665,
+          "max_absolute_error": 0.7744881698840391
+        },
+        "delta": {
+          "rmse": 0.010800222525561586,
+          "max_absolute_error": 0.06968531811059091
+        },
+        "gamma": {
+          "rmse": 0.002522674199509836,
+          "max_absolute_error": 0.038866771985803183
+        },
+        "vega": {
+          "rmse": 1.1380292575283972,
+          "max_absolute_error": 14.944530048152686
+        },
+        "theta": {
+          "rmse": 1.2272935723963034,
+          "max_absolute_error": 14.389604701589423
+        },
+        "rho": {
+          "rmse": 1.1001582659789115,
+          "max_absolute_error": 10.189103159674431
+        }
+      },
+      "adam_small_steps": {
+        "price": {
+          "rmse": 0.07793496163448536,
+          "max_absolute_error": 0.6154857908272646
+        },
+        "delta": {
+          "rmse": 0.009020503256194523,
+          "max_absolute_error": 0.06704222220678153
+        },
+        "gamma": {
+          "rmse": 0.002430957746918125,
+          "max_absolute_error": 0.04090820742770637
+        },
+        "vega": {
+          "rmse": 0.9596815248532019,
+          "max_absolute_error": 13.142338365436231
+        },
+        "theta": {
+          "rmse": 1.158035007216825,
+          "max_absolute_error": 13.482611171497894
+        },
+        "rho": {
+          "rmse": 0.9820750588036878,
+          "max_absolute_error": 8.466325182684884
+        }
+      },
+      "lbfgs": {
+        "price": {
+          "rmse": 0.07840528865135443,
+          "max_absolute_error": 0.5904615954628438
+        },
+        "delta": {
+          "rmse": 0.009315280106956392,
+          "max_absolute_error": 0.06654413190564647
+        },
+        "gamma": {
+          "rmse": 0.002481849460951191,
+          "max_absolute_error": 0.0436663901991437
+        },
+        "vega": {
+          "rmse": 0.982285133068667,
+          "max_absolute_error": 13.33292713564996
+        },
+        "theta": {
+          "rmse": 1.200065792597127,
+          "max_absolute_error": 13.695651457647166
+        },
+        "rho": {
+          "rmse": 1.0073462013740482,
+          "max_absolute_error": 8.753632539627063
+        }
+      }
+    },
+    "fresh": {
+      "in_domain": {
+        "price": {
+          "rmse": 0.08338959233706213,
+          "max_absolute_error": 0.5758859548372044
+        },
+        "delta": {
+          "rmse": 0.009388398625739196,
+          "max_absolute_error": 0.15839567983115
+        },
+        "gamma": {
+          "rmse": 0.002207410727187915,
+          "max_absolute_error": 0.04207894880684282
+        },
+        "vega": {
+          "rmse": 0.8759284228804793,
+          "max_absolute_error": 9.052702377067682
+        },
+        "theta": {
+          "rmse": 1.24740873081259,
+          "max_absolute_error": 25.874114904335613
+        },
+        "rho": {
+          "rmse": 1.0013618181673059,
+          "max_absolute_error": 13.4988502264988
+        }
+      },
+      "stress": {
+        "price": {
+          "rmse": 0.22178037866676542,
+          "max_absolute_error": 3.5597909045547524
+        },
+        "delta": {
+          "rmse": 0.01625768890047261,
+          "max_absolute_error": 0.10675920531378391
+        },
+        "gamma": {
+          "rmse": 0.0033410120202418286,
+          "max_absolute_error": 0.08881790279105595
+        },
+        "vega": {
+          "rmse": 1.977049700574922,
+          "max_absolute_error": 27.970995564149714
+        },
+        "theta": {
+          "rmse": 1.7196367494622171,
+          "max_absolute_error": 43.47499759148516
+        },
+        "rho": {
+          "rmse": 2.54126972601817,
+          "max_absolute_error": 23.952847638716918
+        }
+      }
+    },
+    "parent": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\arms\\control_22092027\\selected.pt"
+  },
+  {
+    "architecture": "control",
+    "seed": 22092028,
+    "selected": "lbfgs",
+    "eligible": [
+      "baseline",
+      "adam_small_steps",
+      "lbfgs"
+    ],
+    "validation": {
+      "baseline": {
+        "price": {
+          "rmse": 0.14726528067744227,
+          "max_absolute_error": 0.7182870820097165
+        },
+        "delta": {
+          "rmse": 0.012895156559103713,
+          "max_absolute_error": 0.07349795702830364
+        },
+        "gamma": {
+          "rmse": 0.0031171834541082774,
+          "max_absolute_error": 0.0570676818538455
+        },
+        "vega": {
+          "rmse": 1.0721248970403083,
+          "max_absolute_error": 8.331931344541065
+        },
+        "theta": {
+          "rmse": 1.6067857860193338,
+          "max_absolute_error": 20.737712099071885
+        },
+        "rho": {
+          "rmse": 1.3318065150569152,
+          "max_absolute_error": 12.159420075836493
+        }
+      },
+      "adam_small_steps": {
+        "price": {
+          "rmse": 0.10602993228462723,
+          "max_absolute_error": 0.6992184498843201
+        },
+        "delta": {
+          "rmse": 0.012328618895259321,
+          "max_absolute_error": 0.07134705314053194
+        },
+        "gamma": {
+          "rmse": 0.003053633773831356,
+          "max_absolute_error": 0.05169099230725149
+        },
+        "vega": {
+          "rmse": 0.9896760839342518,
+          "max_absolute_error": 6.953588138475006
+        },
+        "theta": {
+          "rmse": 1.5299416801602475,
+          "max_absolute_error": 19.461274526781345
+        },
+        "rho": {
+          "rmse": 1.2466191280449805,
+          "max_absolute_error": 12.471217801369306
+        }
+      },
+      "lbfgs": {
+        "price": {
+          "rmse": 0.10396240937639781,
+          "max_absolute_error": 0.956366282623442
+        },
+        "delta": {
+          "rmse": 0.012553185977619105,
+          "max_absolute_error": 0.08091792328847569
+        },
+        "gamma": {
+          "rmse": 0.003129682702987048,
+          "max_absolute_error": 0.053380881976460515
+        },
+        "vega": {
+          "rmse": 1.0193098515276393,
+          "max_absolute_error": 8.027234408758886
+        },
+        "theta": {
+          "rmse": 1.5843362584518248,
+          "max_absolute_error": 20.642483398370523
+        },
+        "rho": {
+          "rmse": 1.255671688231934,
+          "max_absolute_error": 11.753837214425374
+        }
+      }
+    },
+    "fresh": {
+      "in_domain": {
+        "price": {
+          "rmse": 0.10223122369302326,
+          "max_absolute_error": 0.9021575514106317
+        },
+        "delta": {
+          "rmse": 0.01239277193255929,
+          "max_absolute_error": 0.15705692662759574
+        },
+        "gamma": {
+          "rmse": 0.0027293142053285164,
+          "max_absolute_error": 0.042762485354395585
+        },
+        "vega": {
+          "rmse": 1.0047180179834125,
+          "max_absolute_error": 9.988420002619137
+        },
+        "theta": {
+          "rmse": 1.7909423910813034,
+          "max_absolute_error": 36.00825015682529
+        },
+        "rho": {
+          "rmse": 1.2092606243075286,
+          "max_absolute_error": 11.1979439212109
+        }
+      },
+      "stress": {
+        "price": {
+          "rmse": 0.2513000456519574,
+          "max_absolute_error": 2.423716293084169
+        },
+        "delta": {
+          "rmse": 0.02112002125741603,
+          "max_absolute_error": 0.17763204004484034
+        },
+        "gamma": {
+          "rmse": 0.003833335619053385,
+          "max_absolute_error": 0.09901817273731803
+        },
+        "vega": {
+          "rmse": 1.9422330120112763,
+          "max_absolute_error": 16.517721383224114
+        },
+        "theta": {
+          "rmse": 2.2621089149007925,
+          "max_absolute_error": 59.53846225169242
+        },
+        "rho": {
+          "rmse": 3.558089040511522,
+          "max_absolute_error": 35.76649412085709
+        }
+      }
+    },
+    "parent": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\arms\\control_22092028\\selected.pt"
+  },
+  {
+    "architecture": "parity",
+    "seed": 22092026,
+    "selected": "adam_small_steps",
+    "eligible": [
+      "baseline",
+      "adam_small_steps",
+      "lbfgs"
+    ],
+    "validation": {
+      "baseline": {
+        "price": {
+          "rmse": 0.10581909499178034,
+          "max_absolute_error": 0.7448112239425573
+        },
+        "delta": {
+          "rmse": 0.009105036492299507,
+          "max_absolute_error": 0.06825467104080829
+        },
+        "gamma": {
+          "rmse": 0.002573546082114819,
+          "max_absolute_error": 0.04877671194366942
+        },
+        "vega": {
+          "rmse": 0.8945888729306977,
+          "max_absolute_error": 8.82365824704063
+        },
+        "theta": {
+          "rmse": 1.1285961424761444,
+          "max_absolute_error": 11.612067648471296
+        },
+        "rho": {
+          "rmse": 1.04552831205036,
+          "max_absolute_error": 10.162989321801717
+        }
+      },
+      "adam_small_steps": {
+        "price": {
+          "rmse": 0.06647122451405701,
+          "max_absolute_error": 0.4206016990340018
+        },
+        "delta": {
+          "rmse": 0.007917373970502063,
+          "max_absolute_error": 0.06037252905750112
+        },
+        "gamma": {
+          "rmse": 0.002412529398265428,
+          "max_absolute_error": 0.04829653981954635
+        },
+        "vega": {
+          "rmse": 0.8170553764538766,
+          "max_absolute_error": 7.671533903408395
+        },
+        "theta": {
+          "rmse": 1.0676305380017908,
+          "max_absolute_error": 11.460177482705124
+        },
+        "rho": {
+          "rmse": 1.010752176370242,
+          "max_absolute_error": 10.156494593877028
+        }
+      },
+      "lbfgs": {
+        "price": {
+          "rmse": 0.06721450868152429,
+          "max_absolute_error": 0.5530099200660334
+        },
+        "delta": {
+          "rmse": 0.008211764793657797,
+          "max_absolute_error": 0.06049431447472464
+        },
+        "gamma": {
+          "rmse": 0.0024996642642559565,
+          "max_absolute_error": 0.05056906015725887
+        },
+        "vega": {
+          "rmse": 0.8601715150204117,
+          "max_absolute_error": 8.696481052029249
+        },
+        "theta": {
+          "rmse": 1.120368914721388,
+          "max_absolute_error": 11.684722282017862
+        },
+        "rho": {
+          "rmse": 1.0336103917038229,
+          "max_absolute_error": 9.957088748987019
+        }
+      }
+    },
+    "fresh": {
+      "in_domain": {
+        "price": {
+          "rmse": 0.07018242522017085,
+          "max_absolute_error": 0.7656928854742855
+        },
+        "delta": {
+          "rmse": 0.008307773555621017,
+          "max_absolute_error": 0.1300955424004019
+        },
+        "gamma": {
+          "rmse": 0.0021070512809779423,
+          "max_absolute_error": 0.04500926027903507
+        },
+        "vega": {
+          "rmse": 0.8335979900298881,
+          "max_absolute_error": 11.011266805321231
+        },
+        "theta": {
+          "rmse": 1.0931170284108336,
+          "max_absolute_error": 21.383197330934706
+        },
+        "rho": {
+          "rmse": 0.9806350630392734,
+          "max_absolute_error": 17.95177164560243
+        }
+      },
+      "stress": {
+        "price": {
+          "rmse": 0.2337498959832021,
+          "max_absolute_error": 2.105396706785527
+        },
+        "delta": {
+          "rmse": 0.016413972978070863,
+          "max_absolute_error": 0.14570361233366705
+        },
+        "gamma": {
+          "rmse": 0.0031212611719326523,
+          "max_absolute_error": 0.08567487860042441
+        },
+        "vega": {
+          "rmse": 1.8837816252230173,
+          "max_absolute_error": 26.672152585443754
+        },
+        "theta": {
+          "rmse": 1.6132132189771549,
+          "max_absolute_error": 42.563192852737416
+        },
+        "rho": {
+          "rmse": 2.4905270173838505,
+          "max_absolute_error": 30.257777582926582
+        }
+      }
+    },
+    "parent": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\arms\\parity_22092026\\selected.pt"
+  },
+  {
+    "architecture": "parity",
+    "seed": 22092027,
+    "selected": "lbfgs",
+    "eligible": [
+      "baseline",
+      "adam_small_steps",
+      "lbfgs"
+    ],
+    "validation": {
+      "baseline": {
+        "price": {
+          "rmse": 0.10648404067106933,
+          "max_absolute_error": 0.41789443844593777
+        },
+        "delta": {
+          "rmse": 0.009569536515017976,
+          "max_absolute_error": 0.07440956317820291
+        },
+        "gamma": {
+          "rmse": 0.002507773654766929,
+          "max_absolute_error": 0.04665484558781105
+        },
+        "vega": {
+          "rmse": 0.9045536746911474,
+          "max_absolute_error": 7.841858125738003
+        },
+        "theta": {
+          "rmse": 1.0937218325750067,
+          "max_absolute_error": 14.825619411763459
+        },
+        "rho": {
+          "rmse": 1.065175398006334,
+          "max_absolute_error": 8.587299546686012
+        }
+      },
+      "adam_small_steps": {
+        "price": {
+          "rmse": 0.06589412861202686,
+          "max_absolute_error": 0.3000376480130136
+        },
+        "delta": {
+          "rmse": 0.007972341492608016,
+          "max_absolute_error": 0.06742758589821773
+        },
+        "gamma": {
+          "rmse": 0.0023614160460725224,
+          "max_absolute_error": 0.04508700280445174
+        },
+        "vega": {
+          "rmse": 0.8421342602627289,
+          "max_absolute_error": 7.290960624396696
+        },
+        "theta": {
+          "rmse": 1.0512373424188441,
+          "max_absolute_error": 13.942970090238102
+        },
+        "rho": {
+          "rmse": 1.0020086688084335,
+          "max_absolute_error": 8.554527984927319
+        }
+      },
+      "lbfgs": {
+        "price": {
+          "rmse": 0.0651152576084175,
+          "max_absolute_error": 0.32731815593869484
+        },
+        "delta": {
+          "rmse": 0.008107691839797327,
+          "max_absolute_error": 0.06965799079922852
+        },
+        "gamma": {
+          "rmse": 0.002432029718700813,
+          "max_absolute_error": 0.04704749976924735
+        },
+        "vega": {
+          "rmse": 0.8728319707764662,
+          "max_absolute_error": 7.526236896805823
+        },
+        "theta": {
+          "rmse": 1.0830994825289346,
+          "max_absolute_error": 14.443348462896267
+        },
+        "rho": {
+          "rmse": 1.0439480709318105,
+          "max_absolute_error": 8.963353227769218
+        }
+      }
+    },
+    "fresh": {
+      "in_domain": {
+        "price": {
+          "rmse": 0.06506043518139278,
+          "max_absolute_error": 0.3722692365997702
+        },
+        "delta": {
+          "rmse": 0.008459489653678435,
+          "max_absolute_error": 0.13911429985489776
+        },
+        "gamma": {
+          "rmse": 0.002203424730318007,
+          "max_absolute_error": 0.04641666927557846
+        },
+        "vega": {
+          "rmse": 0.8296919008213106,
+          "max_absolute_error": 7.9954886669575025
+        },
+        "theta": {
+          "rmse": 1.1933988537160052,
+          "max_absolute_error": 24.90572310868282
+        },
+        "rho": {
+          "rmse": 1.0652216690020437,
+          "max_absolute_error": 19.68273104809609
+        }
+      },
+      "stress": {
+        "price": {
+          "rmse": 0.19081369286525504,
+          "max_absolute_error": 2.00083741703153
+        },
+        "delta": {
+          "rmse": 0.016631775456731092,
+          "max_absolute_error": 0.11480157881488473
+        },
+        "gamma": {
+          "rmse": 0.0033448381624111745,
+          "max_absolute_error": 0.09331425088394943
+        },
+        "vega": {
+          "rmse": 1.8266854241591748,
+          "max_absolute_error": 30.809655303326984
+        },
+        "theta": {
+          "rmse": 1.6648449614768333,
+          "max_absolute_error": 43.678209874026905
+        },
+        "rho": {
+          "rmse": 2.9071986416239155,
+          "max_absolute_error": 36.27476499798689
+        }
+      }
+    },
+    "parent": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\arms\\parity_22092027\\selected.pt"
+  },
+  {
+    "architecture": "parity",
+    "seed": 22092028,
+    "selected": "lbfgs",
+    "eligible": [
+      "baseline",
+      "adam_small_steps",
+      "lbfgs"
+    ],
+    "validation": {
+      "baseline": {
+        "price": {
+          "rmse": 0.1003456132189736,
+          "max_absolute_error": 0.8620548411329807
+        },
+        "delta": {
+          "rmse": 0.00960907691921067,
+          "max_absolute_error": 0.0772569822064969
+        },
+        "gamma": {
+          "rmse": 0.0025956606761909132,
+          "max_absolute_error": 0.05297050786317284
+        },
+        "vega": {
+          "rmse": 0.8378553517052136,
+          "max_absolute_error": 6.557645933123418
+        },
+        "theta": {
+          "rmse": 1.2468945172346366,
+          "max_absolute_error": 13.689364675318323
+        },
+        "rho": {
+          "rmse": 1.0561211396161927,
+          "max_absolute_error": 9.08507436166046
+        }
+      },
+      "adam_small_steps": {
+        "price": {
+          "rmse": 0.06721603309502952,
+          "max_absolute_error": 0.5390844233840468
+        },
+        "delta": {
+          "rmse": 0.008706890885085486,
+          "max_absolute_error": 0.07970355767794457
+        },
+        "gamma": {
+          "rmse": 0.0024811367603395098,
+          "max_absolute_error": 0.048105802622394084
+        },
+        "vega": {
+          "rmse": 0.777885749777261,
+          "max_absolute_error": 7.428353468191389
+        },
+        "theta": {
+          "rmse": 1.162892535947746,
+          "max_absolute_error": 12.291889161735533
+        },
+        "rho": {
+          "rmse": 1.0153793091217358,
+          "max_absolute_error": 8.669208099031408
+        }
+      },
+      "lbfgs": {
+        "price": {
+          "rmse": 0.06634375419927396,
+          "max_absolute_error": 0.5596522635620076
+        },
+        "delta": {
+          "rmse": 0.009117481660443086,
+          "max_absolute_error": 0.08253932151163812
+        },
+        "gamma": {
+          "rmse": 0.002523839436007992,
+          "max_absolute_error": 0.04872607736964482
+        },
+        "vega": {
+          "rmse": 0.7864176661596997,
+          "max_absolute_error": 7.414156392417276
+        },
+        "theta": {
+          "rmse": 1.1989675295941047,
+          "max_absolute_error": 12.925473827252532
+        },
+        "rho": {
+          "rmse": 1.0357996396117768,
+          "max_absolute_error": 8.631141057078224
+        }
+      }
+    },
+    "fresh": {
+      "in_domain": {
+        "price": {
+          "rmse": 0.07102402136418506,
+          "max_absolute_error": 0.7152038484938075
+        },
+        "delta": {
+          "rmse": 0.009288180799924297,
+          "max_absolute_error": 0.15995768700831026
+        },
+        "gamma": {
+          "rmse": 0.0023044374859058584,
+          "max_absolute_error": 0.05161168530484547
+        },
+        "vega": {
+          "rmse": 0.8453071547356905,
+          "max_absolute_error": 12.550702135395124
+        },
+        "theta": {
+          "rmse": 1.3134716186206492,
+          "max_absolute_error": 28.10789366380027
+        },
+        "rho": {
+          "rmse": 1.0124906033407832,
+          "max_absolute_error": 13.580469089260763
+        }
+      },
+      "stress": {
+        "price": {
+          "rmse": 0.19909451363065503,
+          "max_absolute_error": 1.5389623770955634
+        },
+        "delta": {
+          "rmse": 0.019947575050482665,
+          "max_absolute_error": 0.1716847896817436
+        },
+        "gamma": {
+          "rmse": 0.0036000043115914583,
+          "max_absolute_error": 0.08888116262669898
+        },
+        "vega": {
+          "rmse": 1.977375883031399,
+          "max_absolute_error": 26.26474376779678
+        },
+        "theta": {
+          "rmse": 1.9858638136759306,
+          "max_absolute_error": 52.560749980486364
+        },
+        "rho": {
+          "rmse": 2.985192289756841,
+          "max_absolute_error": 35.070205489969226
+        }
+      }
+    },
+    "parent": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\arms\\parity_22092028\\selected.pt"
+  }
+]

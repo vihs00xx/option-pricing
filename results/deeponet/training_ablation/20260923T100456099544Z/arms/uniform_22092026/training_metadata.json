@@ -1,0 +1,62 @@
+{
+  "selected_epoch": 930,
+  "selected_validation_mse": 1.3441269516407334e-06,
+  "optimizer_steps": 16483,
+  "stop_reason": "wall_budget",
+  "training_wall_seconds": 300.0104181000006,
+  "peak_sampled_rss_mb": 317.09375,
+  "settings": {
+    "protocol_id": "deeponet_training_ablation_v1",
+    "architecture": {
+      "width": 64,
+      "depth": 3,
+      "rank": 64
+    },
+    "seed": 22092026,
+    "epochs": 100000,
+    "batch_size": 512,
+    "learning_rate": 0.0003,
+    "validation_every": 10,
+    "wall_seconds": 300,
+    "threads": 2,
+    "loss": "mean_squared_error_of_price_divided_by_strike",
+    "selection": "minimum_validation_normalized_price_mse",
+    "dataset": "results/deeponet/data/black_scholes_operator_v1.npz",
+    "dataset_manifest": "results/deeponet/data/black_scholes_operator_v1_manifest.json",
+    "output_root": "results/deeponet/training",
+    "note": "Ablation continuation; training and validation data only",
+    "progress_every_seconds": 45
+  },
+  "arm": "uniform/22092026",
+  "seed": 22092026,
+  "stage": "stage2",
+  "arch": "base",
+  "data": "uniform",
+  "dataset": "results\\deeponet\\training_ablation\\20260923T100456099544Z\\data\\train_uniform.npz",
+  "dataset_content_sha256": "a9b84a96784e294798045647c07ef7060ddd972d3ba18e5c4ac9d502f22e4d5c",
+  "greek_scales": [
+    0.5789003134864943,
+    0.01936112826930163,
+    22.692862367474618,
+    12.118679868289766,
+    36.352640549972946
+  ],
+  "parent_checkpoint": "results\\deeponet\\training_ablation\\20260923T100456099544Z\\pilot\\base_uniform_22092026",
+  "parent_sha256": "5d3abe4e7051670e9ec9f66ee80b1311cb662c4c0306c6fbba36390bca18b718",
+  "label_columns_used": [
+    "price",
+    "delta",
+    "gamma",
+    "vega",
+    "theta",
+    "rho"
+  ],
+  "greek_weight": 0.01,
+  "penalty_types": [],
+  "penalty_weight": 0.0,
+  "final_test_accessed": false,
+  "checkpoint_sha256": {
+    "selected": "f9ff455c185bf6c886d895aaa9abe0df122b99ce91e26256c056737c08bae85e",
+    "last": "73d94d864dddb6a25b88cf97a7e7eff8b5d7a6ee5bbb9f889ee3beb0682ea508"
+  }
+}

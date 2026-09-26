@@ -1,0 +1,70 @@
+{
+  "schema": "deeponet_run_manifest_v2",
+  "status": "complete",
+  "job": "control_22092028/lbfgs",
+  "completed_at": "2026-09-23T16:16:50.229718+00:00",
+  "settings": {
+    "protocol_id": "deeponet_parity_refinement_v1",
+    "architecture": {
+      "width": 64,
+      "depth": 3,
+      "rank": 64
+    },
+    "seed": 23092026,
+    "epochs": 100000,
+    "batch_size": 8192,
+    "learning_rate": 1.0,
+    "validation_every": 10,
+    "wall_seconds": 180,
+    "threads": 2,
+    "loss": "mean_squared_error_of_price_divided_by_strike",
+    "selection": "minimum_validation_normalized_price_mse",
+    "dataset": "results/deeponet/data/black_scholes_operator_v1.npz",
+    "dataset_manifest": "results/deeponet/data/black_scholes_operator_v1_manifest.json",
+    "output_root": "results/deeponet/training",
+    "note": "Ablation continuation: fixed 800 epochs; training and validation data only",
+    "progress_every_seconds": 45,
+    "optimizer": "lbfgs",
+    "loss_multiplier": 10000.0,
+    "chunk_size": 1024,
+    "history_size": 50,
+    "max_iter": 1,
+    "line_search_fn": "strong_wolfe"
+  },
+  "architecture": {
+    "width": 64,
+    "depth": 3,
+    "rank": 64
+  },
+  "parent": {
+    "folder": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\arms\\control_22092028\\selected.pt",
+    "file_sha256": "04ded34f163104289931c3f1f09976424515a0c22dded63ccec18c5192771eb4"
+  },
+  "dataset": {
+    "path": "results/deeponet/data/black_scholes_operator_v1.npz",
+    "content_sha256": "c79956b52333850f4a39701b9775172b4a46aad798108f78b917848aacddd25c",
+    "content_hash_scope": "all npz arrays whose name starts with 'train_'",
+    "content_hash_scope_prefix": "train_",
+    "content_hash_method": "sha256 over the train-scope arrays sorted by name, each contributing its name, dtype.str, shape and C-order bytes"
+  },
+  "training": {
+    "selected_step": 13,
+    "selected_validation_mse": 1.1170448168052505e-06,
+    "optimizer_steps": 155,
+    "closure_calls": 316,
+    "training_wall_seconds": 180.6343448999978,
+    "stop_reason": "wall_budget_checked_between_lbfgs_steps",
+    "arm_wall_seconds": 180.6343448999978
+  },
+  "artifacts": {
+    "selected.pt": "7c484fe087bc18f127c676a4fc4940a37b6f66b9b308478ba4c475007dbd1231",
+    "last.pt": "4cd6370ea8806d8c43eb3204f60b0f2446f3b1b2d87604a00d90754d51183ac0",
+    "history.csv": "d0582e1534a1e418f57fc3a0f525d5961f1164859b3b9293a6e1fe2c97f76d51",
+    "training_metadata.json": "0bf1027e1c07c818c908b54da7819cd535263d9f1a8ffe42bb7195171fb20c7a",
+    "validation_metrics.json": "a3f0e46cacdbc18813a06fad7bd8fc7cf09a55b2d151830871282e4e60673421",
+    "shape_metrics.json": "97f8d74f794d52d9a3b916ae77f628a5267a5f49311d312b3cb285ee6341de7f",
+    "validation_regions.csv": "cb865f898967c9f85cb3a94613e8e37a704ec40c302f9e513daed082ae3d13cc",
+    "validation_worst_points.csv": "0008334dbd9b3a70ae9e36fed41cf07aadf7f67211de8df73623ad92c474976d"
+  },
+  "metadata_sha256": "0bf1027e1c07c818c908b54da7819cd535263d9f1a8ffe42bb7195171fb20c7a"
+}

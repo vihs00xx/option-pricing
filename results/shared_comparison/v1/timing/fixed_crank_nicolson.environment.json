@@ -1,0 +1,11 @@
+{
+  "python": "3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]",
+  "numpy": "2.2.6",
+  "scipy": "1.15.3",
+  "torch": "2.8.0+cpu",
+  "executable": "C:\\Users\\shiva\\Documents\\MySpace\\option-pricing\\.venv-benchmark\\Scripts\\python.exe",
+  "numpy_file": "C:\\Users\\shiva\\Documents\\MySpace\\option-pricing\\.venv-benchmark\\Lib\\site-packages\\numpy\\__init__.py",
+  "scipy_file": "C:\\tools\\Manim\\Lib\\site-packages\\scipy\\__init__.py",
+  "torch_file": "C:\\Users\\shiva\\AppData\\Roaming\\Python\\Python313\\site-packages\\torch\\__init__.py",
+  "recorded_at": "2026-09-26T13:01:26.288387+00:00"
+}

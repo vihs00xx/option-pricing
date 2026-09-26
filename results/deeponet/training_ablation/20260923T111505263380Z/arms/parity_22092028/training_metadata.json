@@ -1,0 +1,62 @@
+{
+  "selected_epoch": 660,
+  "selected_validation_mse": 1.0716144899200876e-06,
+  "optimizer_steps": 12800,
+  "stop_reason": "epochs_completed",
+  "training_wall_seconds": 1378.3357666999982,
+  "peak_sampled_rss_mb": 315.59375,
+  "settings": {
+    "protocol_id": "deeponet_training_ablation_v2",
+    "architecture": {
+      "width": 64,
+      "depth": 3,
+      "rank": 64
+    },
+    "seed": 22092028,
+    "epochs": 800,
+    "batch_size": 512,
+    "learning_rate": 0.0003,
+    "validation_every": 10,
+    "wall_seconds": 36000,
+    "threads": 2,
+    "loss": "mean_squared_error_of_price_divided_by_strike",
+    "selection": "minimum_validation_normalized_price_mse",
+    "dataset": "results/deeponet/data/black_scholes_operator_v1.npz",
+    "dataset_manifest": "results/deeponet/data/black_scholes_operator_v1_manifest.json",
+    "output_root": "results/deeponet/training",
+    "note": "Ablation continuation: fixed 800 epochs; training and validation data only",
+    "progress_every_seconds": 45
+  },
+  "arm": "parity/22092028",
+  "seed": 22092028,
+  "stage": "stage2",
+  "arch": "parity",
+  "data": "frozen",
+  "dataset": "results/deeponet/data/black_scholes_operator_v1.npz",
+  "dataset_content_sha256": "c79956b52333850f4a39701b9775172b4a46aad798108f78b917848aacddd25c",
+  "greek_scales": [
+    0.5823468873578548,
+    0.018749898002260283,
+    22.560560095970324,
+    11.538700852018152,
+    36.00645780086356
+  ],
+  "parent_checkpoint": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\pilot\\parity_frozen_22092028",
+  "parent_sha256": "f8fa97f33fc36951d8d1d54ab3cf502140677536152a70606fc7070d9895b083",
+  "label_columns_used": [
+    "price",
+    "delta",
+    "gamma",
+    "vega",
+    "theta",
+    "rho"
+  ],
+  "greek_weight": 0.01,
+  "penalty_types": [],
+  "penalty_weight": 0.0,
+  "final_test_accessed": false,
+  "checkpoint_sha256": {
+    "selected": "a853cbfc41c32f17fdf875e7dd8fdacfd3ba4be0ec471c9a4f96fb75ab0dc097",
+    "last": "e9c79498fbc25835d581f7c28f1d6a75ff571fbfd81e1e619cd79f24bebef1e1"
+  }
+}

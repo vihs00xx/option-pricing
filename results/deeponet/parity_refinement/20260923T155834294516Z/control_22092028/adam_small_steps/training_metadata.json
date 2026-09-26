@@ -1,0 +1,78 @@
+{
+  "schema": "deeponet_run_metadata_v2",
+  "arm": "control_22092028/adam_small_steps",
+  "seed": 23092026,
+  "stage": "refinement",
+  "architecture": {
+    "width": 64,
+    "depth": 3,
+    "rank": 64
+  },
+  "effective_settings": {
+    "protocol_id": "deeponet_parity_refinement_v1",
+    "architecture": {
+      "width": 64,
+      "depth": 3,
+      "rank": 64
+    },
+    "seed": 23092026,
+    "epochs": 100000,
+    "batch_size": 512,
+    "learning_rate": 2e-05,
+    "validation_every": 10,
+    "wall_seconds": 180,
+    "threads": 2,
+    "loss": "mean_squared_error_of_price_divided_by_strike",
+    "selection": "minimum_validation_normalized_price_mse",
+    "dataset": "results/deeponet/data/black_scholes_operator_v1.npz",
+    "dataset_manifest": "results/deeponet/data/black_scholes_operator_v1_manifest.json",
+    "output_root": "results/deeponet/training",
+    "note": "Ablation continuation: fixed 800 epochs; training and validation data only",
+    "progress_every_seconds": 45,
+    "optimizer": "adam_small_steps"
+  },
+  "settings_sha256": "refinement",
+  "dataset": {
+    "path": "results/deeponet/data/black_scholes_operator_v1.npz",
+    "content_sha256": "c79956b52333850f4a39701b9775172b4a46aad798108f78b917848aacddd25c",
+    "content_hash_scope": "all npz arrays whose name starts with 'train_'",
+    "content_hash_scope_prefix": "train_",
+    "content_hash_method": "sha256 over the train-scope arrays sorted by name, each contributing its name, dtype.str, shape and C-order bytes"
+  },
+  "validation_split": {
+    "arrays": [
+      "validation_branch",
+      "validation_trunk",
+      "validation_targets"
+    ],
+    "rows": 2048
+  },
+  "normalization": null,
+  "parent": {
+    "folder": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\arms\\control_22092028\\selected.pt",
+    "file_sha256": "04ded34f163104289931c3f1f09976424515a0c22dded63ccec18c5192771eb4"
+  },
+  "checkpoints": {
+    "selected": "7f20f96768bb18e7c6e8abe7b11c6e64382412f364dce599ec11faffdd56b24d",
+    "last": "80420ce3c9049951e8493ccaec608a0cf9d221da249d5861afd325eaade93e47"
+  },
+  "training": {
+    "selected_epoch": 200,
+    "selected_validation_mse": 1.127202069984186e-06,
+    "optimizer_steps": 4928,
+    "stop_reason": "wall_budget",
+    "training_wall_seconds": 180.0676020000028,
+    "peak_sampled_rss_mb": 369.890625,
+    "arm_wall_seconds": 180.0676020000028
+  },
+  "label_columns_used": [
+    "price",
+    "delta",
+    "gamma",
+    "vega",
+    "theta",
+    "rho"
+  ],
+  "greek_weight": 0.01,
+  "final_test_accessed": false
+}

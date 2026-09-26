@@ -1,0 +1,35 @@
+{
+  "primary": {
+    "path": "results/deeponet/weight_001_replication/20260923T084432489626Z/seed_22092027/selected.pt",
+    "file_sha256": "e95693bea39ccfe3469449948f179efa92542a6394327ef84fb92ade66dc4901",
+    "training_metadata_sha256": "b5667987a39c612f3aea4c44e432b32bfe7e28f2eec9f4ab1c05ddfd09fbc9a7"
+  },
+  "greek_focused_reference": {
+    "path": "results/deeponet/comparisons/20260922T140050569791Z/price_and_greeks/selected.pt",
+    "file_sha256": "249c0c0a6190fb9793034b5e0abcbc8b8d16b6843fa7d73e83ce4d5754a59a40",
+    "training_metadata_sha256": "dfda24cca5eb897e3168952f8e630845ed7f2cc15856aea2046d50617667856f"
+  },
+  "price_only_reference": {
+    "path": "results/deeponet/comparisons/20260922T140050569791Z/price_only/selected.pt",
+    "file_sha256": "833ef6522c4c0d7a3ccca81569ac0fe543f8ec3b819d24e5169a8193107396c5",
+    "training_metadata_sha256": "2603703bb506c2ed0476340184a4a1451ba8abce92bdb69f7ec3cdcf16d8dfeb"
+  },
+  "refined_candidate": {
+    "path": "results/deeponet/optimizer_refinement/20260923T090451734503Z/lbfgs/selected.pt",
+    "file_sha256": "79edbd515b5276b9a64ca1063dedd9295378cbd9043152a48d5d971540c0498f",
+    "training_metadata_sha256": "ae9d9627c8a56b286db778e45a79bb6066f7bba61b5ec7fac7a3b69374ff97f5"
+  },
+  "frozen_dataset": {
+    "path": "results/deeponet/data/black_scholes_operator_v1.npz",
+    "file_sha256": "bb892af8c78df4125346b22aa68945be1a8d10ec570bc1ebb409d75f0ccba6ca"
+  },
+  "frozen_dataset_manifest": {
+    "path": "results/deeponet/data/black_scholes_operator_v1_manifest.json",
+    "file_sha256": "ec77a1c71ea4932e2aea3b5f9bc10bde70e2badbd1e0652dd95697be2959de6e"
+  },
+  "registry": {
+    "path": "experiments/config/neural/deeponet_model_registry.json",
+    "file_sha256": "a055b9c1b4f2e7e52019fa53751d45efd988ef8505ac3ca43789d37a89dace2a"
+  },
+  "recorded_at": "2026-09-23T14:31:01.759329+00:00"
+}

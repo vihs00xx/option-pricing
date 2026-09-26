@@ -1,0 +1,412 @@
+{
+  "protocol": "fresh_shared_comparison_v1",
+  "frozen_at": "2026-09-26T11:24:00.043762+00:00",
+  "status": "frozen_before_prediction",
+  "cases_sha256": "48762e69c6062dd9d7c6caa730fae6e57290ab0d988f2793b0d6f735f65f6cba",
+  "models": {
+    "anchored_pinn": {
+      "checkpoint": "checkpoints/pinn/primary/anchored/fixed_black_scholes_pinn.pt",
+      "sha256": "8b7fd212d93c2c9a0c99ef5eccb83581c5dd7dd62527ab675489644d5511f7db"
+    },
+    "parity_22092026": {
+      "checkpoint": "results\\deeponet\\parity_refinement\\20260923T155834294516Z\\parity_22092026\\adam_small_steps\\selected.pt",
+      "sha256": "013627898aebd097fa0b494587d03ff2b85fa832e31734626cb64b36db876026",
+      "seed": 22092026,
+      "selected_arm": "adam_small_steps",
+      "validation_price_rmse": 0.06647122451405701
+    },
+    "parity_22092027": {
+      "checkpoint": "results\\deeponet\\parity_refinement\\20260923T155834294516Z\\parity_22092027\\lbfgs\\selected.pt",
+      "sha256": "e26d31b5104b08ab3b7d78c991e082147b3a483b6daf1dfb998d991f4b6f1691",
+      "seed": 22092027,
+      "selected_arm": "lbfgs",
+      "validation_price_rmse": 0.0651152576084175
+    },
+    "parity_22092028": {
+      "checkpoint": "results\\deeponet\\parity_refinement\\20260923T155834294516Z\\parity_22092028\\lbfgs\\selected.pt",
+      "sha256": "7f8a69c2a0789b1f7f04377fe29ffb5db543fd6b4d10f66c23dedd7c2c7ad524",
+      "seed": 22092028,
+      "selected_arm": "lbfgs",
+      "validation_price_rmse": 0.06634375419927396
+    }
+  },
+  "primary_parity": "parity_22092027",
+  "settings": {
+    "protocol_id": "common_option_benchmark_v1",
+    "protocol_version": 1,
+    "status": "frozen_before_deeponet_training",
+    "created_before_neural_training": true,
+    "option_types": [
+      "call",
+      "put"
+    ],
+    "reported_quantities": [
+      "price",
+      "delta",
+      "gamma",
+      "vega",
+      "theta",
+      "rho"
+    ],
+    "strike": 100.0,
+    "training_domain": {
+      "moneyness": [
+        0.7,
+        1.3
+      ],
+      "tau": [
+        0.05,
+        2.0
+      ],
+      "sigma": [
+        0.1,
+        0.6
+      ],
+      "r": [
+        -0.02,
+        0.1
+      ],
+      "q": [
+        0.0,
+        0.06
+      ]
+    },
+    "case_generation": {
+      "method": "LatinHypercube",
+      "seed": 16092026,
+      "interpolation_cases": 32,
+      "extrapolation_values": {
+        "moneyness": [
+          0.55,
+          0.65,
+          1.4,
+          1.55
+        ],
+        "tau": [
+          0.01,
+          0.03,
+          2.5,
+          3.0
+        ],
+        "sigma": [
+          0.05,
+          0.08,
+          0.7,
+          0.85
+        ],
+        "r": [
+          -0.05,
+          -0.03,
+          0.12,
+          0.15
+        ],
+        "q": [
+          0.07,
+          0.08,
+          0.09,
+          0.1
+        ]
+      }
+    },
+    "monte_carlo": {
+      "method": "sobol_control",
+      "estimator": "conditional",
+      "n_scrambles": 64,
+      "production_points_per_scramble": 4096,
+      "pilot_points_per_scramble": 2048,
+      "conditional_fraction": 0.25,
+      "seed_root": 926260000
+    },
+    "crank_nicolson": {
+      "base_grid_size": 800,
+      "rannacher_steps": 2,
+      "mesh": "strike_clustered",
+      "mesh_concentration": 7.0,
+      "volatility_bump": 0.005,
+      "rate_bump": 0.0001,
+      "richardson": true
+    },
+    "timing": {
+      "case_count": 6,
+      "warmup_batches": 1,
+      "repetitions": 3,
+      "memory_sample_interval_seconds": 0.001
+    },
+    "relative_error_floors": {
+      "price": 0.0001,
+      "delta": 0.0001,
+      "gamma": 1e-07,
+      "vega": 0.0001,
+      "theta": 0.0001,
+      "rho": 0.0001
+    },
+    "quantlib": {
+      "case_count": 8,
+      "time_grid": 1600,
+      "space_grid": 1600,
+      "damping_steps": 2,
+      "price_tolerance": 0.001,
+      "delta_tolerance": 0.0005,
+      "gamma_tolerance": 5e-05,
+      "vega_tolerance": 0.05,
+      "theta_tolerance": 0.03,
+      "rho_tolerance": 0.05
+    }
+  },
+  "source_sha256": {
+    "src\\black_scholes.py": "0746033b38cb276d51188c010cd33b814031d8bd91f1336ae4ea8d74af5ced15",
+    "src\\classical_benchmark.py": "54e3fd889eca0dbf259168845ed468d115f321d5cd2a9fe8e69ddac95e1a20e0",
+    "src\\common_benchmark.py": "47fd08347a98e44ae102f967a86e84d569a078bd190f610709788d14b5824e79",
+    "src\\crank_nicolson.py": "3cd04f5c37daec76c39a84fdad14bd393896ac8c1025fa90cc0d256f0d41b3a0",
+    "src\\monte_carlo.py": "fba8347db730c42e847f8d8b4e6a0c47a38b1e9ffe2d5a55afac1ccdfeb4ff90",
+    "src\\monte_carlo_greeks.py": "a1d62eab61ac1dbe62c79bba91337396254a082d2d219ec0f859e83f8e65eb1f",
+    "src\\sampling.py": "f160935a718453754f9bf382bcad1725a8c69095e3eeafa01c03f94d2f932e15",
+    "src\\__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src\\neural\\anchored_pinn.py": "d405543043b86768f54a39fe55b65e6d8b0379b0d81e050132843bf42a892437",
+    "src\\neural\\anchor_data.py": "fe1cf57332aa4a0799bbf490bcb736029de3ab0977e27d8668026d82b35045dc",
+    "src\\neural\\deeponet.py": "a18cda7c6086fa7b020088537caace2424322021a13d1dcf7c8a930dca0cfd5a",
+    "src\\neural\\deeponet_data.py": "06e0d8d0e55e187759b56023364df105bbdcc81592e7f279cde269a540501588",
+    "src\\neural\\fixed_pinn.py": "845c53e7f289377127699914d52d618f257973f2ec38ec92e345e51a2c716c0e",
+    "src\\neural\\memory.py": "769c45c73fdeb45356a9db2975b4b80e24e3184520df528225ff11e14cd5ca90",
+    "src\\neural\\nys_newton_cg.py": "244e6c7a3f49835db401dcf1d8c4110abf23fd3e1beeb08fcf97d90a7b4d4deb",
+    "src\\neural\\pinn_diagnostics.py": "d856e505a53ff165d238bdecc74cb6a101aba3fa54798f0b3ef2a79bb8ed4198",
+    "src\\neural\\pinn_training.py": "5b8f40e77b90a972f380c5a6f927bc2a49c7c96b98da8dc9a1a017d7172ca840",
+    "src\\neural\\provenance.py": "45708beba18b3d1bd48b9fa44f55966bc28b140e388addf2ac8d343add08760b",
+    "src\\neural\\run_metadata.py": "e17069880d0a267c5240b75a7a9bb9607fddc7b3bb0323b20a9c4e2dcf6ef868",
+    "src\\neural\\__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "experiments\\comparison\\shared_evaluation.py": "e9830f512e4b69aaf61b03632e766dc8af138fafe03c29990372116df38be7c8"
+  },
+  "selection": "Minimum existing validation price RMSE across the three already-selected parity seeds; no fresh labels used.",
+  "panels": {
+    "fixed": "256 calls, K=100,T=1,r=.05,q=0,sigma=.2; four outputs. Regions reported separately.",
+    "varying": "256 calls/puts in 128 paired states; six outputs; PINN excluded. Maturity extrapolation moves tau and T together."
+  },
+  "scope": "Independent fresh query assessment of already-developed models, not a claim that the whole research programme was prospectively specified.",
+  "timing": {
+    "batch_sizes": [
+      1,
+      8,
+      32
+    ],
+    "warmups": 1,
+    "repetitions": 5,
+    "threads": 2,
+    "device": "cpu",
+    "population": "first 32 shared-domain fixed cases or interpolation varying cases",
+    "includes": "input conversion, solver, Greeks and host output conversion; excludes checkpoint loading",
+    "workload": "independent queries; no cached CN surface. Native RQMC internally computes six outputs even for the four-output panel.",
+    "memory": "Separate fresh subprocess per panel/method; sampled RSS at 1ms during each measured call, with pre-call RSS and peak increment."
+  },
+  "metrics": {
+    "absolute": [
+      "rmse",
+      "mae",
+      "maximum_absolute_error",
+      "bias"
+    ],
+    "relative_floors": {
+      "price": 0.0001,
+      "delta": 0.0001,
+      "gamma": 1e-07,
+      "vega": 0.0001,
+      "theta": 0.0001,
+      "rho": 0.0001
+    },
+    "shape_tolerance": 1e-05,
+    "groups": [
+      "panel",
+      "region",
+      "option",
+      "moneyness_band",
+      "maturity_band"
+    ],
+    "uncertainty": "RQMC scramble standard errors retained; one randomized estimate per case does not measure repeated-trial coverage."
+  },
+  "collision_audit": [
+    {
+      "path": "results\\deeponet\\data\\black_scholes_operator_v1.npz",
+      "split": "train_branch",
+      "rows": 8192,
+      "file_sha256": "bb892af8c78df4125346b22aa68945be1a8d10ec570bc1ebb409d75f0ccba6ca",
+      "overlaps": 0
+    },
+    {
+      "path": "results\\deeponet\\data\\black_scholes_operator_v1.npz",
+      "split": "validation_branch",
+      "rows": 2048,
+      "file_sha256": "bb892af8c78df4125346b22aa68945be1a8d10ec570bc1ebb409d75f0ccba6ca",
+      "overlaps": 0
+    },
+    {
+      "path": "results\\deeponet\\data\\black_scholes_operator_v1.npz",
+      "split": "test_branch",
+      "rows": 68,
+      "file_sha256": "bb892af8c78df4125346b22aa68945be1a8d10ec570bc1ebb409d75f0ccba6ca",
+      "overlaps": 0
+    },
+    {
+      "path": "results\\deeponet\\optimizer_refinement\\20260923T090451734503Z\\fresh_audit.npz",
+      "split": "in_domain_branch",
+      "rows": 4096,
+      "file_sha256": "eb1fa413e1bf575501c06ec6667640cdec90aec652da7f6cc1fc2f5b41e9b07a",
+      "overlaps": 0
+    },
+    {
+      "path": "results\\deeponet\\optimizer_refinement\\20260923T090451734503Z\\fresh_audit.npz",
+      "split": "stress_branch",
+      "rows": 2048,
+      "file_sha256": "eb1fa413e1bf575501c06ec6667640cdec90aec652da7f6cc1fc2f5b41e9b07a",
+      "overlaps": 0
+    },
+    {
+      "path": "results\\deeponet\\parity_refinement\\20260923T155834294516Z\\fresh_in_domain.npz",
+      "split": "branch",
+      "rows": 4096,
+      "file_sha256": "82c4af9bcd067868e8c111d44aa3f118888d03a7aaa66a48144e93be69127c5a",
+      "overlaps": 0
+    },
+    {
+      "path": "results\\deeponet\\parity_refinement\\20260923T155834294516Z\\fresh_stress.npz",
+      "split": "branch",
+      "rows": 2048,
+      "file_sha256": "6156f3d1239393eca8e65e425be10dbcb322b66ad5d47e1a1d3f6ca54f11f5de",
+      "overlaps": 0
+    },
+    {
+      "path": "results\\deeponet\\training_ablation\\20260923T100456099544Z\\data\\evaluation.npz",
+      "split": "in_domain_branch",
+      "rows": 4096,
+      "file_sha256": "f1c35644c709b2edbfd688cf199e71d8679d1fc01bfa631849427016f0831dab",
+      "overlaps": 0
+    },
+    {
+      "path": "results\\deeponet\\training_ablation\\20260923T100456099544Z\\data\\evaluation.npz",
+      "split": "stress_branch",
+      "rows": 2048,
+      "file_sha256": "f1c35644c709b2edbfd688cf199e71d8679d1fc01bfa631849427016f0831dab",
+      "overlaps": 0
+    },
+    {
+      "path": "results\\deeponet\\training_ablation\\20260923T100456099544Z\\data\\evaluation.npz",
+      "split": "focus_branch",
+      "rows": 2048,
+      "file_sha256": "f1c35644c709b2edbfd688cf199e71d8679d1fc01bfa631849427016f0831dab",
+      "overlaps": 0
+    },
+    {
+      "path": "results\\deeponet\\training_ablation\\20260923T100456099544Z\\data\\evaluation.npz",
+      "split": "pairs_call_branch",
+      "rows": 4096,
+      "file_sha256": "f1c35644c709b2edbfd688cf199e71d8679d1fc01bfa631849427016f0831dab",
+      "overlaps": 0
+    },
+    {
+      "path": "results\\deeponet\\training_ablation\\20260923T100456099544Z\\data\\evaluation.npz",
+      "split": "pairs_put_branch",
+      "rows": 4096,
+      "file_sha256": "f1c35644c709b2edbfd688cf199e71d8679d1fc01bfa631849427016f0831dab",
+      "overlaps": 0
+    },
+    {
+      "path": "results\\deeponet\\training_ablation\\20260923T100456099544Z\\data\\train_mixed.npz",
+      "split": "train_branch",
+      "rows": 8192,
+      "file_sha256": "0159abef49f2555c16a79c25b1e66468a0ff58dd126d54c1b1d9a9994709d61c",
+      "overlaps": 0
+    },
+    {
+      "path": "results\\deeponet\\training_ablation\\20260923T100456099544Z\\data\\train_mixed.npz",
+      "split": "validation_branch",
+      "rows": 2048,
+      "file_sha256": "0159abef49f2555c16a79c25b1e66468a0ff58dd126d54c1b1d9a9994709d61c",
+      "overlaps": 0
+    },
+    {
+      "path": "results\\deeponet\\training_ablation\\20260923T100456099544Z\\data\\train_uniform.npz",
+      "split": "train_branch",
+      "rows": 8192,
+      "file_sha256": "9ab71c8cee9250f9008a3e52ae52a771fc77e9f5745571fec0128122871105c0",
+      "overlaps": 0
+    },
+    {
+      "path": "results\\deeponet\\training_ablation\\20260923T100456099544Z\\data\\train_uniform.npz",
+      "split": "validation_branch",
+      "rows": 2048,
+      "file_sha256": "9ab71c8cee9250f9008a3e52ae52a771fc77e9f5745571fec0128122871105c0",
+      "overlaps": 0
+    },
+    {
+      "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\evaluation.npz",
+      "split": "in_domain_branch",
+      "rows": 4096,
+      "file_sha256": "ee2a34db17aa236dfa69d8532696a2ccdb11e68f6b7151ff98b85a2d4e241b82",
+      "overlaps": 0
+    },
+    {
+      "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\evaluation.npz",
+      "split": "stress_branch",
+      "rows": 2048,
+      "file_sha256": "ee2a34db17aa236dfa69d8532696a2ccdb11e68f6b7151ff98b85a2d4e241b82",
+      "overlaps": 0
+    },
+    {
+      "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\evaluation.npz",
+      "split": "focus_branch",
+      "rows": 2048,
+      "file_sha256": "ee2a34db17aa236dfa69d8532696a2ccdb11e68f6b7151ff98b85a2d4e241b82",
+      "overlaps": 0
+    },
+    {
+      "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\evaluation.npz",
+      "split": "pairs_call_branch",
+      "rows": 4096,
+      "file_sha256": "ee2a34db17aa236dfa69d8532696a2ccdb11e68f6b7151ff98b85a2d4e241b82",
+      "overlaps": 0
+    },
+    {
+      "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\evaluation.npz",
+      "split": "pairs_put_branch",
+      "rows": 4096,
+      "file_sha256": "ee2a34db17aa236dfa69d8532696a2ccdb11e68f6b7151ff98b85a2d4e241b82",
+      "overlaps": 0
+    },
+    {
+      "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_mixed.npz",
+      "split": "train_branch",
+      "rows": 8192,
+      "file_sha256": "0159abef49f2555c16a79c25b1e66468a0ff58dd126d54c1b1d9a9994709d61c",
+      "overlaps": 0
+    },
+    {
+      "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_mixed.npz",
+      "split": "validation_branch",
+      "rows": 2048,
+      "file_sha256": "0159abef49f2555c16a79c25b1e66468a0ff58dd126d54c1b1d9a9994709d61c",
+      "overlaps": 0
+    },
+    {
+      "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_uniform.npz",
+      "split": "train_branch",
+      "rows": 8192,
+      "file_sha256": "9ab71c8cee9250f9008a3e52ae52a771fc77e9f5745571fec0128122871105c0",
+      "overlaps": 0
+    },
+    {
+      "path": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_uniform.npz",
+      "split": "validation_branch",
+      "rows": 2048,
+      "file_sha256": "9ab71c8cee9250f9008a3e52ae52a771fc77e9f5745571fec0128122871105c0",
+      "overlaps": 0
+    }
+  ],
+  "freshness": "Novel deterministic LHS seeds; zero rounded financial-query overlap with available DeepONet NPZ splits. No claim of statistical independence of paired calls and puts.",
+  "environment": {
+    "python": "3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]",
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "torch": "2.8.0+cpu",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "cpu_count": 16
+  }
+}

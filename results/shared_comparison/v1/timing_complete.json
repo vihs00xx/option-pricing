@@ -1,0 +1,35 @@
+{
+  "completed_at": "2026-09-26T13:07:52.506602+00:00",
+  "environment": {
+    "python": "3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]",
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "torch": "2.8.0+cpu",
+    "executable": "C:\\Users\\shiva\\Documents\\MySpace\\option-pricing\\.venv-benchmark\\Scripts\\python.exe",
+    "numpy_file": "C:\\Users\\shiva\\Documents\\MySpace\\option-pricing\\.venv-benchmark\\Lib\\site-packages\\numpy\\__init__.py",
+    "scipy_file": "C:\\tools\\Manim\\Lib\\site-packages\\scipy\\__init__.py",
+    "torch_file": "C:\\Users\\shiva\\AppData\\Roaming\\Python\\Python313\\site-packages\\torch\\__init__.py",
+    "recorded_at": "2026-09-26T12:58:50.391552+00:00"
+  },
+  "wrapper_sha256": "299b292ccbad06f933ecef409ca836353a0a486420d9a9b5c14bc9d5094e1776",
+  "files_sha256": {
+    "fixed_anchored_pinn.environment.json": "225a7a10a5cf5ec302441a54993cac7a559e70c71271731e30e8ab1ab14f283b",
+    "fixed_anchored_pinn.json": "35f702b96f40a10764abbb7c3e02b169700afb04f25f2b2eecf941ab7fcc0ef4",
+    "fixed_black_scholes.environment.json": "467b319ded243c7fbf67ae174159ceecec7aeef508122bd38d1cd0dec0d9f8ac",
+    "fixed_black_scholes.json": "cc6cbd0db60319261553b1ca7135b6efe17dd4d533aef9c51ba05d1dc6117f20",
+    "fixed_conditional_rqmc.environment.json": "b2faa2b558428540dba29901967d4ccc44980290d12223ecade5530e4a997b16",
+    "fixed_conditional_rqmc.json": "fd14c49345fa6c645d979131cf1a000deacb674fc14f77d44c1579f214ee0fec",
+    "fixed_crank_nicolson.environment.json": "e693576d901e320652359d03dea1b734d321e1c5e0bb474c1e3b27fdb17133ec",
+    "fixed_crank_nicolson.json": "7e88c6768e5b513ba797c21a10a12f19cfeff6268d43611a5bc5d1bdaafbbafb",
+    "fixed_parity_22092027.environment.json": "49895331b12c91df59b45eb1e67a44b45b3305217ce8d4e2ead413b70964c6cf",
+    "fixed_parity_22092027.json": "33963f64524c8b483afffcfcff3639bc411316c3b7b88e4afb26186fa0dc5208",
+    "varying_black_scholes.environment.json": "c95c42c522d71f424ed69993cc8c7b2570fb9cc7c6050f97612773dac6c1bb76",
+    "varying_black_scholes.json": "b27d8ea8b13a5cf4efd8216407ba3dbe7ec5f18c6eba0cdb8a719e267da3aa28",
+    "varying_conditional_rqmc.environment.json": "50113b632d0b094b07ef4dda03933e77e230f76f5f2cb58df1223c36cce127fc",
+    "varying_conditional_rqmc.json": "a67200e26ef2f16f6b535bcf7bf9a2fd31200a4980ee1eb88fd7066c27eaf1f9",
+    "varying_crank_nicolson.environment.json": "ef438289645773aa986ec2311ea7c992837ca0d9c86ff421eecb496b8c4c3e71",
+    "varying_crank_nicolson.json": "7e06ae4f7841b4b9500fc01f31de7d75d244c8063ab3d63c51fe969131231007",
+    "varying_parity_22092027.environment.json": "c9f87bd7797c1f8c312f7a4ed5c05aa97e844ff22611d6ed84911955a036d699",
+    "varying_parity_22092027.json": "c04fa3ab11e18bca09f421b531ad3f0d3c5ce20cbc4223d17c8bca9b9727e214"
+  }
+}

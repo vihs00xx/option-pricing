@@ -1,0 +1,56 @@
+{
+  "selected_epoch": 470,
+  "selected_validation_mse": 9.192922384614192e-06,
+  "optimizer_steps": 8000,
+  "stop_reason": "epochs_completed",
+  "training_wall_seconds": 311.38985110000067,
+  "peak_sampled_rss_mb": 306.6796875,
+  "settings": {
+    "protocol_id": "deeponet_training_ablation_v2",
+    "architecture": {
+      "width": 64,
+      "depth": 3,
+      "rank": 64
+    },
+    "seed": 22092026,
+    "epochs": 500,
+    "batch_size": 512,
+    "learning_rate": 0.001,
+    "validation_every": 10,
+    "wall_seconds": 36000,
+    "threads": 2,
+    "loss": "mean_squared_error_of_price_divided_by_strike",
+    "selection": "minimum_validation_normalized_price_mse",
+    "dataset": "results/deeponet/data/black_scholes_operator_v1.npz",
+    "dataset_manifest": "results/deeponet/data/black_scholes_operator_v1_manifest.json",
+    "output_root": "results/deeponet/training",
+    "note": "Ablation pilot: fixed 500 epochs; training and validation data only"
+  },
+  "arm": "pilot/base_frozen_22092026",
+  "seed": 22092026,
+  "stage": "pilot",
+  "arch": "base",
+  "data": "frozen",
+  "dataset": "results/deeponet/data/black_scholes_operator_v1.npz",
+  "dataset_content_sha256": "c79956b52333850f4a39701b9775172b4a46aad798108f78b917848aacddd25c",
+  "greek_scales": [
+    0.5823468873578548,
+    0.018749898002260283,
+    22.560560095970324,
+    11.538700852018152,
+    36.00645780086356
+  ],
+  "parent_checkpoint": null,
+  "parent_sha256": null,
+  "label_columns_used": [
+    "price"
+  ],
+  "greek_weight": null,
+  "penalty_types": [],
+  "penalty_weight": 0.0,
+  "final_test_accessed": false,
+  "checkpoint_sha256": {
+    "selected": "a690d304fcdb86961b6a477f2bbecb3ff19787f3fdc58bc8ee9a6e4e9b6cdbb6",
+    "last": "d8147424f34b0b3cf5c2ef367678dd0da7cd88f35ba05754376a9fb6fbaee95c"
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "config": {
+    "protocol_id": "deeponet_greek_weight_sweep_v1",
+    "reference_comparison": "results/deeponet/comparisons/20260922T140050569791Z",
+    "pilot": "results/deeponet/training/pilot_20260922T135135187961Z",
+    "weights": [
+      0.01,
+      0.1,
+      1.0
+    ],
+    "reuse_weight_one_reference": true,
+    "continuation_seconds": 300,
+    "learning_rate": 0.0003,
+    "replication_seeds": [
+      22092027,
+      22092028
+    ],
+    "price_rmse_limit_relative_to_price_only": 1.1,
+    "selection": "Among candidates inside the fixed price RMSE limit, minimize mean squared Greek RMSE divided by training-label RMS squared. If none pass, select minimum price RMSE and mark the gate failed.",
+    "checkpoint_selection": "Minimum validation price MSE normalized by strike, unchanged from comparison.",
+    "replication": "Retrain the full price-only pilot from each fresh seed before the selected weighted continuation. Include selection seed separately and report all three, with sample standard deviation. No retuning after replication.",
+    "final_test_accessed": false
+  },
+  "price_rmse_limit": 0.2156826722532658,
+  "greek_scales": [
+    0.5823468873578548,
+    0.018749898002260283,
+    22.560560095970324,
+    11.538700852018152,
+    36.00645780086356
+  ],
+  "retained_checkpoints": {
+    "results\\deeponet\\training\\pilot_20260922T135135187961Z\\selected.pt": "4308ac99031bd24a2745f9b0744bd84ab6c1bfc6e9635b9ec92d8772a051e6e4",
+    "results\\deeponet\\training\\pilot_20260922T135135187961Z\\last.pt": "e0638d713a6c07183f08fe1f280e3dac4af2e9cac6ab52af0e3f42a2e9a1110a",
+    "results\\deeponet\\comparisons\\20260922T140050569791Z\\price_only\\selected.pt": "833ef6522c4c0d7a3ccca81569ac0fe543f8ec3b819d24e5169a8193107396c5",
+    "results\\deeponet\\comparisons\\20260922T140050569791Z\\price_only\\last.pt": "205026bdc62b2dd0414dda6d0634ea6186f99d2ecb816d1bbaf93a65975a6fd3",
+    "results\\deeponet\\comparisons\\20260922T140050569791Z\\price_and_greeks\\selected.pt": "249c0c0a6190fb9793034b5e0abcbc8b8d16b6843fa7d73e83ce4d5754a59a40",
+    "results\\deeponet\\comparisons\\20260922T140050569791Z\\price_and_greeks\\last.pt": "16ce631ac4647f01a593b3ecdf3f3cdcadde7357ea5a1381d0dbd308d1d9f94c"
+  },
+  "dataset_sha256": "bb892af8c78df4125346b22aa68945be1a8d10ec570bc1ebb409d75f0ccba6ca",
+  "source_sha256": {
+    "experiments\\deeponet\\sweep_greek_weight.py": "181944dbd48b491f0dff0b92bbe481790ccfa4f96432637bfa2bdb81b862a32e",
+    "experiments\\deeponet\\train.py": "ade588bc01854eef9fb44ecb7f71802510307bf137054a82f96d778b2c77236e",
+    "experiments\\deeponet\\compare_supervision.py": "24b295cd9257697333f5787b13ed23cae4784251a3b713c789d4db2b22ea22df",
+    "src\\neural\\deeponet.py": "1bd8c80edaa58d279867e924abfc6b3897c3b328000f2764c4c81c8e4c7b02fa",
+    "experiments\\config\\neural\\deeponet_weight_sweep.json": "dd419864f99f538fb752e8d28cb644de0bc30434410cf252ca3494df91d7871a"
+  },
+  "final_test_accessed": false,
+  "python": "3.13.3",
+  "torch": "2.8.0+cpu",
+  "device": "cpu",
+  "dtype": "float64",
+  "selected_epoch": 448,
+  "selected_validation_mse": 8.751862714623814e-06,
+  "optimizer_steps": 7161,
+  "stop_reason": "wall_budget",
+  "training_wall_seconds": 300.0171212000132,
+  "peak_sampled_rss_mb": 281.734375,
+  "settings": {
+    "protocol_id": "deeponet_greek_weight_sweep_v1",
+    "architecture": {
+      "width": 64,
+      "depth": 3,
+      "rank": 64
+    },
+    "seed": 22092028,
+    "epochs": 100000,
+    "batch_size": 512,
+    "learning_rate": 0.0003,
+    "validation_every": 10,
+    "wall_seconds": 300,
+    "threads": 2,
+    "loss": "price_mse_over_strike_squared_plus_weighted_training_rms_greek_mse",
+    "selection": "minimum_validation_normalized_price_mse",
+    "dataset": "results/deeponet/data/black_scholes_operator_v1.npz",
+    "dataset_manifest": "results/deeponet/data/black_scholes_operator_v1_manifest.json",
+    "output_root": "results/deeponet/training",
+    "note": "Validation-only development; final test excluded",
+    "progress_every_seconds": 45,
+    "greek_weight": 1.0
+  },
+  "parent_checkpoint": "results\\deeponet\\weight_sweeps\\20260922T142444840021Z\\seed_22092028\\pilot\\selected.pt",
+  "parent_sha256": "e29a28aafe0c629514c8e51b4696a7d66bd8f5e42ee990e8273d9633cb5f0007",
+  "label_columns_used": [
+    "price",
+    "delta",
+    "gamma",
+    "vega",
+    "theta",
+    "rho"
+  ],
+  "checkpoint_sha256": {
+    "selected": "0b533b7d29b1c6f51bc899e917205fea9eab0f5d2b8eb3cc1e7fe2e2b98e0ff3",
+    "last": "f9ea93984f6b569807dae781e37e9569452fba164fafc42b6385f0ecd5b57bba"
+  }
+}

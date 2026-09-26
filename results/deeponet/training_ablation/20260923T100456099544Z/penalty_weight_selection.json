@@ -1,0 +1,71 @@
+{
+  "weight": 0.1,
+  "folder": "results\\deeponet\\training_ablation\\20260923T100456099544Z\\lambda_sweep\\weight_0.1_22092026",
+  "gate_failed": false,
+  "rule": "Among penalty weights, keep candidates whose validation price RMSE is at most 1.1 times the control and every Greek RMSE at most 1.15 times the control on the same seed; among those minimize the summed validation violation frequencies (price bounds, Delta bounds, negative Gamma), ties to the smaller weight. If none passes, minimize the summed frequencies and mark the gate failed.",
+  "candidates": [
+    {
+      "weight": 0.1,
+      "folder": "results\\deeponet\\training_ablation\\20260923T100456099544Z\\lambda_sweep\\weight_0.1_22092026",
+      "gate_passed": true,
+      "summed_violation_frequency": 0.1611328125,
+      "validation_price_rmse": 0.19686188488537168,
+      "shape": {
+        "price_bounds": {
+          "proportion_above_1e_8": 0.078125,
+          "maximum_violation": 0.48139120284709597
+        },
+        "delta_bounds": {
+          "proportion_above_1e_8": 0.07177734375,
+          "maximum_violation": 0.03297995995116734
+        },
+        "negative_gamma": {
+          "proportion_above_1e_8": 0.01123046875,
+          "maximum_violation": 0.007394103143950543
+        }
+      }
+    },
+    {
+      "weight": 1.0,
+      "folder": "results\\deeponet\\training_ablation\\20260923T100456099544Z\\lambda_sweep\\weight_1.0_22092026",
+      "gate_passed": true,
+      "summed_violation_frequency": 0.1748046875,
+      "validation_price_rmse": 0.2320816029831921,
+      "shape": {
+        "price_bounds": {
+          "proportion_above_1e_8": 0.1328125,
+          "maximum_violation": 0.8904704866059724
+        },
+        "delta_bounds": {
+          "proportion_above_1e_8": 0.03759765625,
+          "maximum_violation": 0.030237055915037336
+        },
+        "negative_gamma": {
+          "proportion_above_1e_8": 0.00439453125,
+          "maximum_violation": 0.0025256141987168414
+        }
+      }
+    },
+    {
+      "weight": 10.0,
+      "folder": "results\\deeponet\\training_ablation\\20260923T100456099544Z\\lambda_sweep\\weight_10.0_22092026",
+      "gate_passed": false,
+      "summed_violation_frequency": 0.11181640625,
+      "validation_price_rmse": 0.4092291769719206,
+      "shape": {
+        "price_bounds": {
+          "proportion_above_1e_8": 0.0986328125,
+          "maximum_violation": 0.8706161830269146
+        },
+        "delta_bounds": {
+          "proportion_above_1e_8": 0.01220703125,
+          "maximum_violation": 0.021445445405039898
+        },
+        "negative_gamma": {
+          "proportion_above_1e_8": 0.0009765625,
+          "maximum_violation": 0.0009045375722979335
+        }
+      }
+    }
+  ]
+}

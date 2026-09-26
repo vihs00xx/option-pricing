@@ -1,0 +1,62 @@
+{
+  "selected_epoch": 710,
+  "selected_validation_mse": 3.3422810590998344e-06,
+  "optimizer_steps": 12800,
+  "stop_reason": "epochs_completed",
+  "training_wall_seconds": 845.7851315000007,
+  "peak_sampled_rss_mb": 315.015625,
+  "settings": {
+    "protocol_id": "deeponet_training_ablation_v2",
+    "architecture": {
+      "width": 64,
+      "depth": 3,
+      "rank": 64
+    },
+    "seed": 22092028,
+    "epochs": 800,
+    "batch_size": 512,
+    "learning_rate": 0.0003,
+    "validation_every": 10,
+    "wall_seconds": 36000,
+    "threads": 2,
+    "loss": "mean_squared_error_of_price_divided_by_strike",
+    "selection": "minimum_validation_normalized_price_mse",
+    "dataset": "results/deeponet/data/black_scholes_operator_v1.npz",
+    "dataset_manifest": "results/deeponet/data/black_scholes_operator_v1_manifest.json",
+    "output_root": "results/deeponet/training",
+    "note": "Ablation continuation: fixed 800 epochs; training and validation data only",
+    "progress_every_seconds": 45
+  },
+  "arm": "mixed/22092028",
+  "seed": 22092028,
+  "stage": "stage2",
+  "arch": "base",
+  "data": "mixed",
+  "dataset": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\data\\train_mixed.npz",
+  "dataset_content_sha256": "06bf6e409ca73509d42a29375a1538e239993ad057c380ad135e53230dfea382",
+  "greek_scales": [
+    0.5694888625071021,
+    0.036622112143209616,
+    21.026978215283545,
+    21.562669012831506,
+    30.748459910596832
+  ],
+  "parent_checkpoint": "results\\deeponet\\training_ablation\\20260923T111505263380Z\\pilot\\base_mixed_22092028",
+  "parent_sha256": "4d74234fb708210f721a6939b4c7394a5d31d65005de3b10da029f46d6bc1647",
+  "label_columns_used": [
+    "price",
+    "delta",
+    "gamma",
+    "vega",
+    "theta",
+    "rho"
+  ],
+  "greek_weight": 0.01,
+  "penalty_types": [],
+  "penalty_weight": 0.0,
+  "final_test_accessed": false,
+  "checkpoint_sha256": {
+    "selected": "04bd35fab5ab6a3cacda8ee40a573d17a62949111c7df35b4b7d870e871ee130",
+    "last": "854c2bd07ad7e4472fc3eb0bf296186c3198ab3273066912dc07e067fae9a3e2"
+  }
+}

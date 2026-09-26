@@ -1,0 +1,80 @@
+{
+  "pilot": {
+    "price": {
+      "rmse": 0.30335269476497967,
+      "max_absolute_error": 2.167348766689855
+    },
+    "delta": {
+      "rmse": 0.04340446878668649,
+      "max_absolute_error": 0.26039780505731425
+    },
+    "gamma": {
+      "rmse": 0.010584816027161837,
+      "max_absolute_error": 0.16599552366459822
+    },
+    "vega": {
+      "rmse": 2.6618928011429532,
+      "max_absolute_error": 17.043805629612457
+    },
+    "theta": {
+      "rmse": 4.086440669407162,
+      "max_absolute_error": 41.099180222555134
+    },
+    "rho": {
+      "rmse": 5.884738960388184,
+      "max_absolute_error": 28.81865305640818
+    }
+  },
+  "price_only": {
+    "price": {
+      "rmse": 0.19607515659387798,
+      "max_absolute_error": 1.206990336468892
+    },
+    "delta": {
+      "rmse": 0.030066052926045073,
+      "max_absolute_error": 0.22100926762709885
+    },
+    "gamma": {
+      "rmse": 0.008631488695776271,
+      "max_absolute_error": 0.14923458517907318
+    },
+    "vega": {
+      "rmse": 2.132937705497531,
+      "max_absolute_error": 17.374667345631998
+    },
+    "theta": {
+      "rmse": 3.3375241179622024,
+      "max_absolute_error": 36.56196239490916
+    },
+    "rho": {
+      "rmse": 3.406806340891084,
+      "max_absolute_error": 18.57073977504499
+    }
+  },
+  "price_and_greeks": {
+    "price": {
+      "rmse": 0.21137315828843672,
+      "max_absolute_error": 1.3258562375450893
+    },
+    "delta": {
+      "rmse": 0.018776425769272957,
+      "max_absolute_error": 0.10842075884116317
+    },
+    "gamma": {
+      "rmse": 0.0034327535156606485,
+      "max_absolute_error": 0.06090335568031968
+    },
+    "vega": {
+      "rmse": 1.457312013887315,
+      "max_absolute_error": 19.46189999033686
+    },
+    "theta": {
+      "rmse": 1.764824503066655,
+      "max_absolute_error": 21.596334544605583
+    },
+    "rho": {
+      "rmse": 1.528285446071164,
+      "max_absolute_error": 12.519547407265918
+    }
+  }
+}

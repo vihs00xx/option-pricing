@@ -1,0 +1,23 @@
+{
+  "status": "complete",
+  "seeds": [
+    22092026,
+    22092027,
+    22092028
+  ],
+  "observed_audit_reused": true,
+  "final_test_accessed": false,
+  "verdict": {
+    "refinement_improves_price": true,
+    "lbfgs_dependable": false,
+    "relative_price_rmse_change": [
+      -0.3562863290027499,
+      -0.2929135943299005,
+      -0.31055720238841034
+    ],
+    "rule": {
+      "refinement_improves_price": "Every seed selects a refined arm with lower price RMSE than its parent.",
+      "lbfgs_dependable": "L-BFGS is the selected arm on at least two of three seeds and lowers price RMSE versus the parent on all three seeds."
+    }
+  }
+}

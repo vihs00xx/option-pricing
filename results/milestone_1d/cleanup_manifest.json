@@ -1,0 +1,2425 @@
+{
+  "created_at": "2026-09-26T13:24:57.233760+00:00",
+  "archive": "C:\\Users\\shiva\\Documents\\MySpace\\option-pricing-archive\\milestone-20260926\\before_cleanup.zip",
+  "archive_sha256": "55242283c764a2754e897bef59c57896db1719704b272e95caa391b8be6fac6a",
+  "archived_files": 2504,
+  "removed": {
+    "build/main.aux": {
+      "sha256": "2d084f439ae331a5cf966a890208c82ad763089b209ff77c96ef582537dbfe03",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "build/main.log": {
+      "sha256": "3a202d78a5fbfd97e6e164bfa60c5e5856fb5431d8b551f32a17ff2c7a634b32",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "build/main.out": {
+      "sha256": "7208f1a4b0e159758c86513a6efb5c105f3991fea1af09da25b0a81a8191a961",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "build/main.pdf": {
+      "sha256": "9b265d37c860940ea8815724b6d3f50b0a41ee8cea84b939443b8754726d34fd",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report_review_data_audit.json": {
+      "sha256": "ff76d586951cc37204e5d35f880d98f96c7292d743d3c4393b28569015cb01cb",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/reviewed_report_text.txt": {
+      "sha256": "d6250049ed806258d35a5adba762a12c11de1e0cbf65d9f0ce25e3ad211d2879",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/review_figures.pyc": {
+      "sha256": "58cc00c571337bd42598fda28e3ffad21455ea7f4d1016dbe4a7b1789134f258",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "foundations/brownian.py": {
+      "sha256": "3727a4fd53c3d3745f200f177e405faf6bd3f4da3c9432bae88f7f0656994cbc",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "foundations/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "report/assemble_current_report.py": {
+      "sha256": "a1988df903c36e01c3a515675a15ed0cdfb22ce1466dc817cc2a4aae53b68ff3",
+      "reason": "Superseded authoring or dormant study runner"
+    },
+    "report/main.aux": {
+      "sha256": "fd989edaaee4229e3a79b0c525fa5d07a9160b9277f1ff377a1b9b3b5d679865",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "report/main.log": {
+      "sha256": "6246615f8fc0e3d2b3937b424a45c6f7b671cc93f87044b4b5de59404997599e",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "report/main.out": {
+      "sha256": "2d133d157e4d72a1968d1000165177be83ab29be80ecc83f9a27aad493c5ba3b",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "report/main_v2.aux": {
+      "sha256": "181636d7062f567e721a6275a8e8752b3fc9825d96272d3fe81655648c13458b",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "report/main_v2.log": {
+      "sha256": "bfd506333589122ffd41a40d3cec60f1621fae5e627b9a04f9310e5d648176b8",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "report/main_v2.out": {
+      "sha256": "beb719bc803082ef644332b9d4d17437a4740279383f5c3b13260510a8fe3f3e",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "report/main_v2.pdf": {
+      "sha256": "49f5faccdcd37471c81eda28c9266143df658d4eb2d1085118be0fd1d528b136",
+      "reason": "Superseded authoring or dormant study runner"
+    },
+    "report/main_v2.tex": {
+      "sha256": "df68da4450d91608819615903534336829c999bbf99a81cea21315d42ef50834",
+      "reason": "Superseded authoring or dormant study runner"
+    },
+    "report/_build2.log": {
+      "sha256": "1e87fe446c170302fe27e7e455d8c7555810af303ea68b854ce754f0d36d3f8c",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "report/_build3.log": {
+      "sha256": "1e87fe446c170302fe27e7e455d8c7555810af303ea68b854ce754f0d36d3f8c",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/shared_comparison/v1/evaluation.log": {
+      "sha256": "05f9da6b73b398b05839faeb9b47e1dcf727d51fe0c49a00a1b077dbd390a4a7",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/shared_comparison/v1/timing.log": {
+      "sha256": "c424937a83408c3dab93bd2d9c293448f168d95a0d9c716822d4745de3eb9a9f",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/shared_comparison/v1/timing_pinned.log": {
+      "sha256": "819e4bb62f509ee8f9acfbd67df4edb818d923dfdca8e63ef9ec406d18a289a8",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/shared_comparison/v1/archive/timing_before_environment_recovery/fixed_anchored_pinn.json": {
+      "sha256": "26a9db0c022abba3b77e654309c407c504f80005900bc9107b355cd89c0f081f",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/shared_comparison/v1/archive/timing_before_environment_recovery/fixed_black_scholes.json": {
+      "sha256": "d7e637840e6ad85b9e2f24d18fa903dcbc80686a8b52dbcfe63191892422282b",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/shared_comparison/v1/archive/timing_before_environment_recovery/fixed_conditional_rqmc.json": {
+      "sha256": "4d64746f192fe4bb669eba6a376a87e8325007b91f6b94c63bc819ee20c1074a",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/shared_comparison/v1/archive/timing_before_environment_recovery/fixed_crank_nicolson.json": {
+      "sha256": "c57e7a516b2129e5a3f5274b11849d8c3e87246ffeb8459e3ec17d19d544a640",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/shared_comparison/v1/archive/timing_before_environment_recovery/fixed_parity_22092027.json": {
+      "sha256": "2cf92c1506eb696254c4e067f2f3cc39ab4a516cc8c175f1d3c2c2ff65856b49",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/shared_comparison/v1/archive/timing_before_environment_recovery/varying_black_scholes.json": {
+      "sha256": "52aa9855b0d1864f57f4c08153ea93d03c2ea16cc8ab6517f77ab7c73bb51f1b",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/data/anchored_dataset.npz": {
+      "sha256": "fc5a605814fb476365bdab27dc18aa5f44e3c6e6f373fd9b92e3de4b1aa45ab3",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/data/anchored_dataset.npz.meta.json": {
+      "sha256": "0386e68a64617c0d61117a0e9210d70d0a7272af2dbeed60b09480cf16338a2e",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/data/anchored_dataset_smoke.npz": {
+      "sha256": "cb3701a8cf984864de77f98a48040a959d73705d8913c13cd2014ecdcd904c9d",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/data/anchored_dataset_smoke.npz.meta.json": {
+      "sha256": "235e56894443e6320d5739bc4cdf4abb3f2702b437a7247fa2cae99eb38b3a2f",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/data_only_n8192_s19102026/training_history.csv": {
+      "sha256": "f8bd09c70e3bc9f0d7ef24c2a69263e4064a58a3c7681ecaed07889e66e9073c",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/data_only_n8192_s19102026/training_metadata.json": {
+      "sha256": "5c81291c05160d8ffe67b20bbcce03875e8b0efe6b961cc7d6d2a13e6c895ad0",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/data_only_n8192_s19112026/training_history.csv": {
+      "sha256": "a101ecb5adb52ca1243c1f5f4fef80bdcf3a5ea9fd19b4e9ecce0186a957ecba",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/data_only_n8192_s19112026/training_metadata.json": {
+      "sha256": "66c2cc6f81c673d228026a9ad68ec30eaa1a570d42ee3ecb4d7933d810a7078a",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/data_only_n8192_s19122026/training_history.csv": {
+      "sha256": "5359bedac707a4886c583eaf062f3c1a2089149b865c059eb6647d6febeb6462",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/data_only_n8192_s19122026/training_metadata.json": {
+      "sha256": "650493cfcf12b619d6392407d14958c7106166d0f78792acf249558e1eb852bf",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/figures/label_efficiency.png": {
+      "sha256": "45d42ec1f58b396c37a1e2df948848714da07c7383c9dc91d731c7ce93cfdd31",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/figures/model_comparison.png": {
+      "sha256": "c267a2d0c5a3750760257b0dd79603712415f9b03691bcd415370db5d0b1614f",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/hybrid_n8192_s19102026/training_history.csv": {
+      "sha256": "3b17462f783018823745b3a86f70d7e2e0bc77ad7c0c188a0426f877b568c4ef",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/hybrid_n8192_s19102026/training_metadata.json": {
+      "sha256": "bd228112228ecc9ded111ff4727a35d16012b5c203c68362bbb289764b44fbe0",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/hybrid_n8192_s19112026/training_history.csv": {
+      "sha256": "f3b18b2e9be009ccbec840898f483438265dd166be1f74c9e8b533a3b7b1c978",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/hybrid_n8192_s19112026/training_metadata.json": {
+      "sha256": "1f1409d8b77b5df7bef7be6896d798d68d983a60510093cf8441825e6626199b",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/hybrid_n8192_s19122026/training_history.csv": {
+      "sha256": "5c74691c07a5b86bd146ea71c418f742763b11349c6c65242f1df0d59e531c19",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/hybrid_n8192_s19122026/training_metadata.json": {
+      "sha256": "a2cd5b0840ed3fa452d13789d1195a68879e633f7862d1a09b735c212553c66e",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/physics_only_n8192_s19102026/training_history.csv": {
+      "sha256": "d31928965ff53d4d40793dbadd7080693d4ed912dcb7baa53e810b18fc4351a0",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/physics_only_n8192_s19102026/training_metadata.json": {
+      "sha256": "b201aa48d8b2119ef84ba14f3dd94ecc8c8b6398d3bef8521345c5555759b2a2",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/physics_only_n8192_s19112026/training_history.csv": {
+      "sha256": "f58336d82b3dc720089dbc333e1f3321ae368970e6648309dcd917f6ea7852cf",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/physics_only_n8192_s19112026/training_metadata.json": {
+      "sha256": "720b247cdf8e956d5f0595cfe0073b40f6a6565f50b6ccac7ff0fe0b73230deb",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/physics_only_n8192_s19122026/training_history.csv": {
+      "sha256": "2f4e8d9960d1e86fb5f2da29de776cd31d9cca739b2adff49a51c8953f361633",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/physics_only_n8192_s19122026/training_metadata.json": {
+      "sha256": "219b5c51235891f8776497bf96a0bab476f352092b750096842bcbd5b409eada",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/supervised_hybrid_control_n8192_s19102026/training_history.csv": {
+      "sha256": "621649b2adfeab8a4d1f2687fb25a5cf2ee025a47dba00b879b35cef10a6b32d",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/supervised_hybrid_control_n8192_s19102026/training_metadata.json": {
+      "sha256": "013ce58535ee72ad2e2bfcc61704f67ce2fa4022cef541d11cf621a5e3989bc8",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/supervised_v2_control_n8192_s19102026/training_history.csv": {
+      "sha256": "ea3c110c2c68b9b7eb99cc77b93fc8d4d2edc1af98179136af31d1dc86f647a6",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/supervised_v2_control_n8192_s19102026/training_metadata.json": {
+      "sha256": "acfdf3334fbf262d6e0684fb45cdbdcef397bad8d6210d687d8441197de4a5e3",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/tables/acceptance.csv": {
+      "sha256": "750f4db5ae091cadf3bc1aebe73fe740edf63547b292a2aa7d8433a384d437a2",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/tables/acceptance_summary.csv": {
+      "sha256": "37ac1d1405b9397b69dac539b0c1619ca590085b984c5708b9c16688f5fa89e6",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/tables/aggregate.csv": {
+      "sha256": "fec6fb8eddd0b2d035f6fdf69c116a2a8e76d7ae5d83e906f91532dca849fbcb",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/tables/evaluation_checks.json": {
+      "sha256": "f7b091ac564fd0dda89fb6b017a55511f00d4f502bf6ce8a3828b0dc893ce4e8",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/tables/reference_metrics.json": {
+      "sha256": "1f992875efa6ef0231a54979ace92e6c10ce236729d0fa7f43ddf4c87a1d69b1",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/tables/regional_errors.csv": {
+      "sha256": "b987031ea1eff403b080dc9924bffe4c2bfc2fdf9f8663ed31433ad794e526f2",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/tables/run_metrics.csv": {
+      "sha256": "0c1e327bc4cab2db03969caa8ab06f33d857eb17ed0a6a532fc2cc9bc766bcfa",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/tables/violations.csv": {
+      "sha256": "61596578fbab80efef4f764abe21549258f8e6de101d0e18a20030a8224f171a",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/tables_pilot/acceptance.csv": {
+      "sha256": "750f4db5ae091cadf3bc1aebe73fe740edf63547b292a2aa7d8433a384d437a2",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/tables_pilot/acceptance_summary.csv": {
+      "sha256": "37ac1d1405b9397b69dac539b0c1619ca590085b984c5708b9c16688f5fa89e6",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/tables_pilot/aggregate.csv": {
+      "sha256": "fec6fb8eddd0b2d035f6fdf69c116a2a8e76d7ae5d83e906f91532dca849fbcb",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/tables_pilot/evaluation_checks.json": {
+      "sha256": "f7b091ac564fd0dda89fb6b017a55511f00d4f502bf6ce8a3828b0dc893ce4e8",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/tables_pilot/reference_metrics.json": {
+      "sha256": "1f992875efa6ef0231a54979ace92e6c10ce236729d0fa7f43ddf4c87a1d69b1",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/tables_pilot/regional_errors.csv": {
+      "sha256": "b987031ea1eff403b080dc9924bffe4c2bfc2fdf9f8663ed31433ad794e526f2",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/tables_pilot/run_metrics.csv": {
+      "sha256": "0c1e327bc4cab2db03969caa8ab06f33d857eb17ed0a6a532fc2cc9bc766bcfa",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/tables_pilot/violations.csv": {
+      "sha256": "61596578fbab80efef4f764abe21549258f8e6de101d0e18a20030a8224f171a",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/v2_n8192_s19102026/training_history.csv": {
+      "sha256": "b192758a6d69f9b7dbac1634ce9ee9772f1f73aab437cd58886beb5fd3138b7e",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/v2_n8192_s19102026/training_metadata.json": {
+      "sha256": "1bb5c76bcec69b8fd2b009d349e56c8d9fec64ff09259f27bf900e6830a95a14",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/tables/v2_partial_provenance/acceptance.csv": {
+      "sha256": "4c3f1488f44d00ec6768b863555bed26a0bf81992574431030b68861fd8bdbaa",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/tables/v2_partial_provenance/acceptance_summary.csv": {
+      "sha256": "2bbd79b8bb6a2184976ff49c4cf8f4c4285fc8ba0ca839c91a4baaa92a0703ba",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/tables/v2_partial_provenance/aggregate.csv": {
+      "sha256": "a624c6312a21fb194eb40c5750909dd4c0d15cd8d705d7a22b032971f936ce43",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/tables/v2_partial_provenance/evaluation_manifest.json": {
+      "sha256": "a93521b2e88dd56c3bebcceccdf3de949fab831a1b4af3196a2347c47d202c36",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/tables/v2_partial_provenance/reference_metrics.json": {
+      "sha256": "9ec4a9c383c3d8e8f2aa51df6fe6eebcd0aaf352410ec7f72945fcad977bff6b",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/tables/v2_partial_provenance/regional_errors.csv": {
+      "sha256": "531e4e5483226e89256b6139a51dd007e23136c103ed187f99902d91a33ac89c",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/tables/v2_partial_provenance/run_inventory.csv": {
+      "sha256": "8ae3a4a291606e2f521e45b78bc2eb61345557eb88709ce9477d24349b8457fc",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/tables/v2_partial_provenance/run_metrics.csv": {
+      "sha256": "f7fa4904c500eb20a08543986f841135ae15c5bec496d28b8908bb6b6bedae1c",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/tables/v2_partial_provenance/violations.csv": {
+      "sha256": "7ef99cf188c575da6c2a44cf50536b17f3d0807eb99286899242bbc7c47bf24a",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/pilot_archive/data_only_n8192_s19102026/training_history.csv": {
+      "sha256": "f8bd09c70e3bc9f0d7ef24c2a69263e4064a58a3c7681ecaed07889e66e9073c",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/pilot_archive/data_only_n8192_s19102026/training_metadata.json": {
+      "sha256": "5c81291c05160d8ffe67b20bbcce03875e8b0efe6b961cc7d6d2a13e6c895ad0",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/pilot_archive/hybrid_n8192_s19102026/training_history.csv": {
+      "sha256": "109f79ae7c61f08402fc0381a81c5cf90d76cec90922b92383e61db8d5d669e7",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/pilot_archive/hybrid_n8192_s19102026/training_metadata.json": {
+      "sha256": "736664f33b9a07aad6a68ff9fd4a1f9782f606725615446b4bb979c2fb382e07",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/pilot_archive/physics_only_n8192_s19102026/training_history.csv": {
+      "sha256": "d31928965ff53d4d40793dbadd7080693d4ed912dcb7baa53e810b18fc4351a0",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/pilot_archive/physics_only_n8192_s19102026/training_metadata.json": {
+      "sha256": "b201aa48d8b2119ef84ba14f3dd94ecc8c8b6398d3bef8521345c5555759b2a2",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/pilot_archive/supervised_hybrid_control_n8192_s19102026/training_history.csv": {
+      "sha256": "621649b2adfeab8a4d1f2687fb25a5cf2ee025a47dba00b879b35cef10a6b32d",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/pilot_archive/supervised_hybrid_control_n8192_s19102026/training_metadata.json": {
+      "sha256": "013ce58535ee72ad2e2bfcc61704f67ce2fa4022cef541d11cf621a5e3989bc8",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/pilot_archive/supervised_v2_control_n8192_s19102026/training_history.csv": {
+      "sha256": "ea3c110c2c68b9b7eb99cc77b93fc8d4d2edc1af98179136af31d1dc86f647a6",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/pilot_archive/supervised_v2_control_n8192_s19102026/training_metadata.json": {
+      "sha256": "acfdf3334fbf262d6e0684fb45cdbdcef397bad8d6210d687d8441197de4a5e3",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/pilot_archive/v2_n8192_s19102026/training_history.csv": {
+      "sha256": "b192758a6d69f9b7dbac1634ce9ee9772f1f73aab437cd58886beb5fd3138b7e",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/pilot_archive/v2_n8192_s19102026/training_metadata.json": {
+      "sha256": "1bb5c76bcec69b8fd2b009d349e56c8d9fec64ff09259f27bf900e6830a95a14",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/figures/v2_partial_provenance/label_efficiency.png": {
+      "sha256": "c9c82d705aa49b36e650bff264d19b08165c28f8853ce006536895e7b05e6fa9",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v2/figures/v2_partial_provenance/model_comparison.png": {
+      "sha256": "7c77e13e49b9f9a16af3955769f504e4651cb838cadebda62c63d2030cb155e7",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data/anchored_dataset.npz": {
+      "sha256": "5da70079a39cc9926a05ca42c011315b58c49fec24a63312650299a2541f7f72",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data_only_n1024_s19102026/training_history.csv": {
+      "sha256": "5c6b23345974415d7ed4283d4148abe23afc6623bafd1939085d4a293599f4f4",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data_only_n1024_s19102026/training_metadata.json": {
+      "sha256": "b2833afb9eec8a1e6ed073266d3413ca7baaccf8879997fdb62a2d37ae4f4cf8",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data_only_n1024_s19112026/training_history.csv": {
+      "sha256": "7d7aa5b57c6806ae44ce185f04b7dc3220f4c79a2a96e0c337e10d52962ff15e",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data_only_n1024_s19112026/training_metadata.json": {
+      "sha256": "f83737215efb3a9181713c927e1729e68c9a90f53051d6f2f8ecad7e320ff1ef",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data_only_n1024_s19122026/training_history.csv": {
+      "sha256": "8a22bd646d082bab91e540abe281dfc3adc5fed33a105cfb435e505ef139fa70",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data_only_n1024_s19122026/training_metadata.json": {
+      "sha256": "de6d6734b1689baf1681dd3158f63932669672984372456d6fe8473f7dfc1cac",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data_only_n2048_s19102026/training_history.csv": {
+      "sha256": "23d4738689d80629be4d6d5c362317c666ff78fc58b3a96fe74f0ad85f101c25",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data_only_n2048_s19102026/training_metadata.json": {
+      "sha256": "4320bfa8b0e626a9c6aaf40f875c96fc4f4e6fa19addfb2f6d3a9ee0ff6ec6f4",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data_only_n2048_s19112026/training_history.csv": {
+      "sha256": "cfa88cc1e7b35f13b8dfe8c6b446a118b8791ec7f61b4d6f067ef0dd76f3a246",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data_only_n2048_s19112026/training_metadata.json": {
+      "sha256": "aae0f6d313b9c99de25c7cf82e0f23d866149e65411ee317d509ad0788b355b6",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data_only_n2048_s19122026/training_history.csv": {
+      "sha256": "1d8f024db7832a8ddbd342c4d1238cc9a922f645dfb98a61f043e31123859f67",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data_only_n2048_s19122026/training_metadata.json": {
+      "sha256": "09d369df784cfa10eab3fcc7c1be9366e7f02c8f5040127202740dfb06ea66fb",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data_only_n4096_s19102026/training_history.csv": {
+      "sha256": "68ecc7e912347622704b7af30b45d8db5bec77ffc0e951a40e4d318be0cef57a",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data_only_n4096_s19102026/training_metadata.json": {
+      "sha256": "fdf86776ef79233971ae4ff393c237e19e60594dc4923c817de3014caa838fe9",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data_only_n4096_s19112026/training_history.csv": {
+      "sha256": "0d1d8cf47a16ff8b5d7f1fa12878a72329f588408e39aec39229dbdacf6612f3",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data_only_n4096_s19112026/training_metadata.json": {
+      "sha256": "0f70e64ef61dca973a1e166b624267db2ae5a42f46daeed9f777a36c8dfc91c0",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data_only_n4096_s19122026/training_history.csv": {
+      "sha256": "d95a71dbcb3f267895db0ed7303a67a709018847f94f3df57ce3111003812600",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data_only_n4096_s19122026/training_metadata.json": {
+      "sha256": "766bf4ddee6d0ea0dca65e373671a8d364b8ba0a07b3914dfa7b029ed9e8a2e8",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data_only_n512_s19102026/training_history.csv": {
+      "sha256": "682ed8a4fed0cb682b6867a701282189c7c79d3bf6b21315269cd2c22c6da612",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data_only_n512_s19102026/training_metadata.json": {
+      "sha256": "094934a0c652ca110252e4ccc59f968d8f44098f354d24a8c7de6c9e4fa839d9",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data_only_n512_s19112026/training_history.csv": {
+      "sha256": "5d6a2e19803b08332ed40a6a1390e14265159c8227e1fab9b3a8365254f37c1e",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data_only_n512_s19112026/training_metadata.json": {
+      "sha256": "c8979ada262924d77dcbc49a9232f94ab3d2a99ba82675d218b803bbf2af2ab8",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data_only_n512_s19122026/training_history.csv": {
+      "sha256": "e29131787d27cc8a424029499234b38b046be1d5c7f76dddce375187f8ad131c",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data_only_n512_s19122026/training_metadata.json": {
+      "sha256": "c40d74d79efd751b0be635e037d3cfd8d9548b5e1db9d0f458d21cd24344bfd9",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data_only_n8192_s19102026/training_history.csv": {
+      "sha256": "ab36266614cad3cb3faf1c48111789a0225a781da9fecc1b18e774780c53bcc9",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data_only_n8192_s19102026/training_metadata.json": {
+      "sha256": "f5ce1938c4e57a911c2a05ba88b33ce5ac3388bf3efc84c6aaad475cef167647",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data_only_n8192_s19112026/training_history.csv": {
+      "sha256": "ee3346155f023c5193aee5cce1e1e74eb251e26862172c94bbd77913910b08da",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data_only_n8192_s19112026/training_metadata.json": {
+      "sha256": "3e827ec136d56df1c4391b64a46f6791eb56f81597ebe0994d586e2561be4b8f",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data_only_n8192_s19122026/training_history.csv": {
+      "sha256": "53e6cafa7a305ea55738ee3a2929c956c921c032300a4fd2103ae24a9d81b57c",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/data_only_n8192_s19122026/training_metadata.json": {
+      "sha256": "cfa180a6b43c0e99b1aae3bd491bc3c955058715583fdb0d6d5591ab645efaf0",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/figures/label_efficiency.png": {
+      "sha256": "a3398a097047f2cebbcd2f787ef348f53044fed7f69e652cd932b0a39949f62e",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/figures/model_comparison.png": {
+      "sha256": "a0340cfd8e39590f12753f1d3e14489f533f30b8a478f561c0f969a8e0280ef5",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/hybrid_n1024_s19102026/training_history.csv": {
+      "sha256": "ae8019548e59f6f943ff4e73d0817bb01ceb96a531f529ce6176ecb577022698",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/hybrid_n1024_s19102026/training_metadata.json": {
+      "sha256": "47e1e2c808d264c570fc33ab4807f4630b658499c91717d2dcf27d9c7bfadee7",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/hybrid_n1024_s19112026/training_history.csv": {
+      "sha256": "5b1215a179e2a155c76cbdd772824ed45a93a4cf9a687924188e790120156b90",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/hybrid_n1024_s19112026/training_metadata.json": {
+      "sha256": "d1c5f456a4e92036d7ca8e432575a5d81b358bf0fb975df87f1ca9bdd7ca5dae",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/hybrid_n1024_s19122026/training_history.csv": {
+      "sha256": "315c08bc5384239b38aadf0714089ec1b936b67794eebcbd406a3000d5d8c09c",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/hybrid_n1024_s19122026/training_metadata.json": {
+      "sha256": "1e8a961fec7de9976524815eb220cdfb380d79f409c7b5fc2ae74c94fe29ef0f",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/hybrid_n2048_s19102026/training_history.csv": {
+      "sha256": "192e3ba02a927be6bc438a61025ab7afd3cdba121bc0e2659fd1d98c05e5655f",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/hybrid_n2048_s19102026/training_metadata.json": {
+      "sha256": "d91114b7ee7d11e4d66c4d315cd0f3c84b6c12e7119231ba48509fc075c1c9e8",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/hybrid_n2048_s19112026/training_history.csv": {
+      "sha256": "88abb207db3cc1c6a59fccf09d48b7da54a6f8012b823769a536a584421176f4",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/hybrid_n2048_s19112026/training_metadata.json": {
+      "sha256": "ce054ba8cb35583ee7b270e9c4947c8874659fdc79dbbfcf861543cb74a0aa45",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/hybrid_n2048_s19122026/training_history.csv": {
+      "sha256": "40caa217d60fa01bf3d1ef2d2a12dfe03092a95ab989cfc0458709df541488a2",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/hybrid_n2048_s19122026/training_metadata.json": {
+      "sha256": "b79ea02484de3acdd646e031b0efc0273f433da75f9581d0cadd3fb08c5e46db",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/hybrid_n4096_s19102026/training_history.csv": {
+      "sha256": "982bd39acb2a4b05439614440f5946c6e1ae2294e98ef8cb3323091b758f0806",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/hybrid_n4096_s19102026/training_metadata.json": {
+      "sha256": "270cfd8c9439addd9815b2b0ac956c420a06eb39a6a2605e4a8e8d6aab0a4303",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/hybrid_n4096_s19112026/training_history.csv": {
+      "sha256": "df98edec775ee84a2129eeeb4fa51988a549499dcfd6358874b6c55ec12dfc22",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/hybrid_n4096_s19112026/training_metadata.json": {
+      "sha256": "2e34aad40c00c835cc4934da11d358704e86bc92e661f6cd94b3b8e86fc07b46",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/hybrid_n4096_s19122026/training_history.csv": {
+      "sha256": "9cef269680ec179b14c40ad4d38c9e9968bcd60e802441a059ce3d40d8903953",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/hybrid_n4096_s19122026/training_metadata.json": {
+      "sha256": "5dc9c8da51abd0b5be02c49e7c91cebab3b8295da12dfa565e9d71fbce036999",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/hybrid_n512_s19102026/training_history.csv": {
+      "sha256": "69b781bb5a95952764f83246ac354ea1f90c3a467da07199c82d3f6d859b8151",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/hybrid_n512_s19102026/training_metadata.json": {
+      "sha256": "f7ecf62844cd7225a82f8253026afa082eda19812b91600ce634346781cd88ef",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/hybrid_n512_s19112026/training_history.csv": {
+      "sha256": "56341c86b3121cf5dbe27c789910ad385dde17a4ca2c3aaead074f8e206cce62",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/hybrid_n512_s19112026/training_metadata.json": {
+      "sha256": "fc64ef29c77d3bb6e4ce04e2dd6438460f1c3bf172592e1d536ffec2c4705fae",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/hybrid_n512_s19122026/training_history.csv": {
+      "sha256": "7f020d7f72810c9b3148d4c32a5d952c49eaabadcf4df1da11174dfc583cdbdd",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/hybrid_n512_s19122026/training_metadata.json": {
+      "sha256": "a65591413d7785022dfb79a3497f13651055f5f04809812b1372fc139ba56a3c",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/hybrid_n8192_s19102026/training_history.csv": {
+      "sha256": "e0c495ae56caa6b2ea5ac7d3d28766cfd3e4337cfa8fb9a2a56210c8186cf386",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/hybrid_n8192_s19102026/training_metadata.json": {
+      "sha256": "787fa97951e1e98f818300cb4f2f3935ebc9e86a7591248c62e354f610ab5cf6",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/hybrid_n8192_s19112026/training_history.csv": {
+      "sha256": "e9e076698c6466d839f2665d454dd8d370a87436633a9c629b0f1cb12e312840",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/hybrid_n8192_s19112026/training_metadata.json": {
+      "sha256": "417e67d238e8dae57b868ab9ca17e06de0a0c2ab8f4504512f1e0c85ff9b658e",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/hybrid_n8192_s19122026/training_history.csv": {
+      "sha256": "075c4c7b621d2d1123273bd3867eb15c316c74fbb4cf9adebcbedea2bce95591",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/hybrid_n8192_s19122026/training_metadata.json": {
+      "sha256": "921ca032a8fd239ab76d46e0c50f0e5e48143260ddb73245946653c82f0c2e26",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/physics_only_n8192_s19102026/training_history.csv": {
+      "sha256": "40e40d39fa4117ce0861d7d6c042e8ec602884a0c6555597d87030bac9e463e6",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/physics_only_n8192_s19102026/training_metadata.json": {
+      "sha256": "908ed59ecce55d601253d23c4a1779f6d296bab02d1b2363291a14f17657e758",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/physics_only_n8192_s19112026/training_history.csv": {
+      "sha256": "041e998f02c277040b0755436ba8e0f96f22d6ea3c1d6a9cefaf87046e4f29a9",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/physics_only_n8192_s19112026/training_metadata.json": {
+      "sha256": "8e39bdf13330b574fe1f2df28ce1238392ee78bf0937c5073f2821b6fa3cf0cf",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/physics_only_n8192_s19122026/training_history.csv": {
+      "sha256": "508463f2c586a1325c0dac21184fac32dab6b7f058ee04ccca6214adc34ccf07",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/physics_only_n8192_s19122026/training_metadata.json": {
+      "sha256": "200d046ceebdf6d8668e446d3dc5e82b03efdf2e1498ae36beaf08662e3176a7",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/tables/acceptance.csv": {
+      "sha256": "a1b9233fa9594af7615215f58e2bb114c83ba4389cc534fe43911817ed8095b0",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/tables/aggregate.csv": {
+      "sha256": "41f4814ccd89c4563c7529f334dd7caaf0f488968244e11dedb9b6898d743b2e",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/tables/run_metrics.csv": {
+      "sha256": "87397f134ff58a7b9a2557f5b7cdf118bdd17f427db443aea30c3b505bbde6cb",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/v2_n1024_s19102026/training_history.csv": {
+      "sha256": "4b8846e43a9560833986b4c1c3ac05072f51d14f8a43bf36e53321e6f7e47236",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/v2_n1024_s19102026/training_metadata.json": {
+      "sha256": "77622ad4dc9072f3ae30a004cc8ad7f95660fb43e2200549c88f6fe3df0df99b",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/v2_n1024_s19112026/training_history.csv": {
+      "sha256": "28a9e68f039fdf2ba8c51669abf9e50078245eb7c12b564f909a10c6f7f4b030",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/v2_n1024_s19112026/training_metadata.json": {
+      "sha256": "04a9f2c795db3815b717960aa573dfc91d00fc9ccf96631344290604810fc18c",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/v2_n1024_s19122026/training_history.csv": {
+      "sha256": "76c9fb40a82c873462283d6e9aa259ce35a77cab8b1238304eea0e801ff48223",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/v2_n1024_s19122026/training_metadata.json": {
+      "sha256": "cb394c7a3cf8563711d9849c83f8bb6302d7a26e276c664d6e2260b6b9300147",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/v2_n2048_s19102026/training_history.csv": {
+      "sha256": "74715ac727b2b2c037056e5beb31d50e5e48bd2ca95119ada49877f596e46d69",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/v2_n2048_s19102026/training_metadata.json": {
+      "sha256": "de5f40562f09ad3f81a2c86314f48068fd580fbd3449143753406d658583a6be",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/v2_n2048_s19112026/training_history.csv": {
+      "sha256": "499a7416ef78c9bcfd13709be9958ccf3efbd046485ce24fe6b580f7598afa58",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/v2_n2048_s19112026/training_metadata.json": {
+      "sha256": "8f841a0f118cebe555dad9f919e880296becca9d968bf0d3526990ecba2ba013",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/v2_n2048_s19122026/training_history.csv": {
+      "sha256": "24f145e7e2f9a7df79e1cfdcf84a640653d442c6f87891b4c2b37486b6833bea",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/v2_n2048_s19122026/training_metadata.json": {
+      "sha256": "71ad633afea744e93cccfec05a69832032f8a5472879d79b06259fbfd5f172c1",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/v2_n4096_s19102026/training_history.csv": {
+      "sha256": "415cea9bc127e0e4bbab3597e2c9c6413ec6d7fcf8ac94ca26a3ae63981814e0",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/v2_n4096_s19102026/training_metadata.json": {
+      "sha256": "9f045d04abfc9cb2390906471a85e7189b3f8d9ea9251823f535ff2f3095d724",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/v2_n4096_s19112026/training_history.csv": {
+      "sha256": "de82abdabbe28bb6b00ed594e765eeb5b7c82a48bb9b4a4689d4bb1b535310da",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/v2_n4096_s19112026/training_metadata.json": {
+      "sha256": "36143cfd44b36f4ae5365b6613e3f90c7119bbdd2def82f774e40b120ac482aa",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/v2_n4096_s19122026/training_history.csv": {
+      "sha256": "88295f930108431243889e1a6b034512e0790396b4884544dec025daf0061271",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/v2_n4096_s19122026/training_metadata.json": {
+      "sha256": "360185cbafe40b08596a9c2ceb9fd9acdcbc15ca0077c4a979a663d5ce5cca4c",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/v2_n512_s19102026/training_history.csv": {
+      "sha256": "ce3574f223ea82ed81454f27c7546b50ff0bd76dcbe5c4ab59ff9df90ac7202b",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/v2_n512_s19102026/training_metadata.json": {
+      "sha256": "f8f3850363ecfc2b337307d6dcfaf7da4c39436fa79d23acec3232e9cf11e931",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/v2_n512_s19112026/training_history.csv": {
+      "sha256": "4e23e7cd85126dfd30c40072c939f03cd43cd935944ca87d022a732a37d9748d",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/v2_n512_s19112026/training_metadata.json": {
+      "sha256": "b6b085174fc99538217db0f1bfac77c0a178d5280f9981555709b6b3d359a478",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/v2_n512_s19122026/training_history.csv": {
+      "sha256": "63bc78ee2a8592c078c4f899ba5c1b3948ef1bd0575cbac7e36d7553c92750f1",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/v2_n512_s19122026/training_metadata.json": {
+      "sha256": "c21090e8afc5a6287c6fb09d3c6b9970fcf34ad44bde54b9b2f597030772c933",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/v2_n8192_s19102026/training_history.csv": {
+      "sha256": "006b8802a1ff676b52afee11293273c05ea150379d732c76a8eb962cea43608b",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/v2_n8192_s19102026/training_metadata.json": {
+      "sha256": "8a8c538feb2f2bace61c8f154dacf7bf28a2db3431448bb7c67ef0eb111896bc",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/v2_n8192_s19112026/training_history.csv": {
+      "sha256": "2084196182d5e6e7fb764be197ef74b868fe74ab4229c5a2cc5b4ef51ff24f97",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/v2_n8192_s19112026/training_metadata.json": {
+      "sha256": "2bdc825aaacf4fca35bb4ca3aa551114d3f4fda4086a89d9c4dbfdaddce20312",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/v2_n8192_s19122026/training_history.csv": {
+      "sha256": "70c5702ce1f3d2e9ddc428709e38f4240668467047e74f16e63684c3328f78dd",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/pinn/legacy/anchored_ablation_v1/v2_n8192_s19122026/training_metadata.json": {
+      "sha256": "b7d3ae8916ec35588de1cdc82a40e83bfac18b132d6065bd00ea74bb2247aff6",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "results/deeponet/weight_sweeps/20260922T142444840021Z/weight_0.01/last.pt": {
+      "sha256": "2d2be6cd04a5c6313e3446050fad49b7fa267c167bc9244d391d9c099716c231",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/weight_sweeps/20260922T142444840021Z/weight_0.1/last.pt": {
+      "sha256": "79701c4a86e3a841c4d8cd3ffaf329387cca4d777af10934044196b4bf89c763",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/weight_sweeps/20260922T142444840021Z/seed_22092028/pilot/last.pt": {
+      "sha256": "3ccbd242899866b910cc0d8ea30f76816043b27393bfe3fdfc57d135b19a9623",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/weight_sweeps/20260922T142444840021Z/seed_22092028/weighted/last.pt": {
+      "sha256": "f9ea93984f6b569807dae781e37e9569452fba164fafc42b6385f0ecd5b57bba",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/weight_sweeps/20260922T142444840021Z/seed_22092027/pilot/last.pt": {
+      "sha256": "77b4b3ed0e7d24a9fdc57d0f67b7f6a8fb87539a51bcc1d3ef84e5090626ddea",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/weight_sweeps/20260922T142444840021Z/seed_22092027/weighted/last.pt": {
+      "sha256": "750d37aa0b4f46980686011cb7f0fd60143c197f5787313d09b976611f221830",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/weight_001_replication/20260923T084432489626Z/seed_22092027/last.pt": {
+      "sha256": "410e2f537f12647e6b306413d13d81ea8a9ae3c321800e1a34f81f8e06bc7207",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/weight_001_replication/20260923T084432489626Z/seed_22092028/last.pt": {
+      "sha256": "c6e42c2885e274e0d459434d8eeb7cbb27829d823ac629f0731f6590b06c4e04",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/control_22092026.log": {
+      "sha256": "1375db8578d070120073042211fecad6f6c3dede60d95f151514298940755920",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/control_22092027.log": {
+      "sha256": "ef757640c2b61188d5a5a53056d7c67c5c94cb1ebfe84db5228ca3b1034e5c09",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/control_22092028.log": {
+      "sha256": "8be6bccb84a03fe18f9beedbf736131765ad8cc72e5a82e3b4ed9e7ddacb81e2",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/lambda_sweep_weight_0.1_22092026.log": {
+      "sha256": "788ff4646521b24ea51acbd1a05ba98221fd26a860157f8ae3e7fc3c43cab627",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/lambda_sweep_weight_1.0_22092026.log": {
+      "sha256": "b67f442a3f09cd7ac4c3f9e17517f8407d2a6214e940e88ef571b00ebd36f631",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/lambda_sweep_weight_10.0_22092026.log": {
+      "sha256": "faf6f3cc9ef1bd69110b5512841b9a7b60f032e524dd111cb412b972e57f36d8",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/mixed_22092026.log": {
+      "sha256": "aaf36566750f5289e9ca4d32f0589f1994ef54ee5f4b45f9c784d4cddca3853e",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/mixed_22092027.log": {
+      "sha256": "dbd4dad775261394c88273ceced58e85e63ee89e9e7cd5d1e36b12904886828b",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/mixed_22092028.log": {
+      "sha256": "c01f84bb91edc89bbb13171f4b6fe8a20b2f5313a91b5a6f9ea92b3624193214",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/parity_22092026.log": {
+      "sha256": "5c55c7b40b24c7677be724a4ac4be6675492c32100d1e536feb72cc5126d2413",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/parity_22092027.log": {
+      "sha256": "d2e4e9f9f97a68a749b7309124d098f24304307003895621b095c568d9369d6f",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/parity_22092028.log": {
+      "sha256": "2ba965b8925e084225a4560e2bfd7bd4f987e03c2efabcb96bc3d8c25e89eda2",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/penalty_all_22092027.log": {
+      "sha256": "862998283723c539560adeceecc897aeb38ad2a5b76c112bc150bdee328104c7",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/penalty_all_22092028.log": {
+      "sha256": "544d0f3cf60209e7dd945259a6dd2057a038a9f15d04b7a7e73fbacf34a3d350",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/penalty_delta_22092026.log": {
+      "sha256": "40fc3bdd586ed1daadf6ad594f29c7e403a19181a12bc4dabfd07c62965ad235",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/penalty_delta_22092027.log": {
+      "sha256": "e85f9ea770a76cd11e97e8a88bbca2cb486e03e1cf1dd3f34d6ac35db0fb94f4",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/penalty_delta_22092028.log": {
+      "sha256": "baf7a60cc5229bda7278d26e06b7ef1ed8f9d2d3f85135745cdc20423ae8dc4a",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/penalty_gamma_22092026.log": {
+      "sha256": "63530ffc67a88a9226c5de6fb6ffa8eda98013eec05d1fbc071501ad73592549",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/penalty_gamma_22092027.log": {
+      "sha256": "98f91ba55d1da904db97791fb0c3a6f11d886fd4f2543931f20a68f7c3bfcff0",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/penalty_gamma_22092028.log": {
+      "sha256": "76d925ff5230d37594b890263b99ced42d607626aa901513062848b1977aeaac",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/penalty_price_22092026.log": {
+      "sha256": "f87f31b197cd9aa77e69890dc3394c1f3a87d751b059f949542d1b872b3a0a80",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/penalty_price_22092027.log": {
+      "sha256": "2535a477389ca5e797250e7930db964a7d40eedd32a879480b05eddcf53342d2",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/penalty_price_22092028.log": {
+      "sha256": "ce35decbe5f243afaae99928802538f2a390908ab4f5616f4831ca6ee14a5eac",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/pilot_base_frozen_22092026.log": {
+      "sha256": "0ee4a54da954296e93fe403e0b4b9af04d021f4253e361cc041defb77d4bf5fc",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/pilot_base_frozen_22092027.log": {
+      "sha256": "0daa50026651a598da258a09288fd852e78d043acf3dce151217117fefc4d599",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/pilot_base_frozen_22092028.log": {
+      "sha256": "5b4d5183be87ed44056cf4afe00baa1f171c81852227f5d16126ba40d74e2b8b",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/pilot_base_mixed_22092026.log": {
+      "sha256": "92339916f3f936be72f8519185570c64d8c504c0d5d057dcedc9cb6c9c4418c8",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/pilot_base_mixed_22092027.log": {
+      "sha256": "38592572d5fdc94f5a3b19ae92b9c25441254ec643b8d0a1839ec48ca7a5dbd2",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/pilot_base_mixed_22092028.log": {
+      "sha256": "ff550aecfd7ee982c0d502f0156d7a432883f562e2fa84459b5ca77d91f24a77",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/pilot_base_uniform_22092026.log": {
+      "sha256": "4b320778fbdd17d0bde64e42855dc8e446c87217fd4d7bf913d9324226ed26b8",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/pilot_base_uniform_22092027.log": {
+      "sha256": "de1a48be2b415534f5076f12252cf030f2dc5bd19ce7061710718047f0d37548",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/pilot_base_uniform_22092028.log": {
+      "sha256": "27b725e2b2850fd6295ac75749bd77f1cf701178be2433ccef8868d45a40ee6e",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/pilot_parity_frozen_22092026.log": {
+      "sha256": "2980cbd438c43da6884fbde2a9188bdb1e6cb095629aacbaf8fa15e25a67dcfb",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/pilot_parity_frozen_22092027.log": {
+      "sha256": "dae6ab113a3b86925c5798bb93421f5e43d45d7e4a2f6a1f9900f641cb1b8787",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/pilot_parity_frozen_22092028.log": {
+      "sha256": "68cd278eba8b89ca82f7033a427f89c9984b4d4285ba1a65e9c58605510163ea",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/uniform_22092026.log": {
+      "sha256": "317dcd67d2875fd8bc2b8aad9b357c15562243ab7cc9a3313098b38ca865f0a9",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/uniform_22092027.log": {
+      "sha256": "3650a489ad940344dea2a391d6fc734ed25d18dbc1056d6b070edb9882cb5c1c",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/jobs/uniform_22092028.log": {
+      "sha256": "0a717225d05aed45671391a24a1595a7ecf3658d14e9e70f3f90590e87fd8ce1",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/pilot/base_frozen_22092026/last.pt": {
+      "sha256": "d8147424f34b0b3cf5c2ef367678dd0da7cd88f35ba05754376a9fb6fbaee95c",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/pilot/base_frozen_22092027/last.pt": {
+      "sha256": "9ca1f3fa6673d25d16c51e5bffa2328351aff6a95c8575b7b32906aa131d248d",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/pilot/base_frozen_22092028/last.pt": {
+      "sha256": "998e71910b5866759ec1e20fa2f3f39729c731fa0673e9fda85dc50c2d90d7f5",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/pilot/base_mixed_22092026/last.pt": {
+      "sha256": "3340188039d78f8749839ce9ec025b8ecd49033f99e047049f511f6bfbbefc5d",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/pilot/base_mixed_22092027/last.pt": {
+      "sha256": "ad7ba8004da216f6897b17ca825db0b5fad0064db16193232bde53ac8071a313",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/pilot/base_mixed_22092028/last.pt": {
+      "sha256": "a8624b420b5fb494266bba24cfb74d892e734134526b304a4b8f3084f72f284c",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/pilot/base_uniform_22092026/last.pt": {
+      "sha256": "fa463c428d9d6214531f12dfc791e209e6e4799bded9921f6a1b3188d12ad6e3",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/pilot/base_uniform_22092027/last.pt": {
+      "sha256": "a444257170423550c845f66a6353aafc0a8ab28ff06cc49ca520ad8239631c81",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/pilot/base_uniform_22092028/last.pt": {
+      "sha256": "f2700aa15970531e6fe60f8b297b758f366d364f29208d44675715bf290a027f",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/pilot/parity_frozen_22092026/last.pt": {
+      "sha256": "a365450f78bf0930959d52a55bc120c423e2f5010f0b520575808d48cd506ec8",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/pilot/parity_frozen_22092027/last.pt": {
+      "sha256": "c1428f2c72567223d1947638aefd9a45f57b55a0e0aed016eb17b5c4e1662be5",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/pilot/parity_frozen_22092028/last.pt": {
+      "sha256": "4022a997957fa1ab1263a81b87866a617215533d7e46bf7c3b7d8e9099695502",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/lambda_sweep/weight_0.1_22092026/last.pt": {
+      "sha256": "ece29326dd6168085ef1b373060e9be7d2df2ce9bd2c9f90d0a7a6e1a2cc6d72",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/lambda_sweep/weight_1.0_22092026/last.pt": {
+      "sha256": "0099d27465ecd2a8acfa11e426d928050797c29622c068f8ccbc7095b3252963",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/lambda_sweep/weight_10.0_22092026/last.pt": {
+      "sha256": "190b0699a72b6acbb97fbd9a0c1a49b280a53dae7ddf530a4a22e6e01a537bfb",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/arms/control_22092026/last.pt": {
+      "sha256": "678704f27484ea9f0220f0b91399d3acad03449de0e441159d8efce209b0fd06",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/arms/control_22092027/last.pt": {
+      "sha256": "6ad10c579ca6fdf7a1465c4072529226aab5bd09c8663e1202cda1960132f7fe",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/arms/control_22092028/last.pt": {
+      "sha256": "0e7675df1dfa286c174c14de68abcec58a923230a3bac92579b00cc2eb4a896e",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/arms/mixed_22092026/last.pt": {
+      "sha256": "b908bcfc818875e91c3312648bfba2c1b0809838c9a46a011883eec1f79e7a3d",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/arms/mixed_22092027/last.pt": {
+      "sha256": "cd2bbd965170c36695ba3782299ba8d68d14f438dfa21cc51615b8a463ca20c1",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/arms/mixed_22092028/last.pt": {
+      "sha256": "854c2bd07ad7e4472fc3eb0bf296186c3198ab3273066912dc07e067fae9a3e2",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/arms/parity_22092026/last.pt": {
+      "sha256": "f3e28dacf6d93eff00ae65b4c11c184f071ee0c96c69a6d7d51458333ce78ead",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/arms/parity_22092027/last.pt": {
+      "sha256": "df18c600df603ec912d9ac14aa5f13b752e6365063fcdf3c3d04aeacc9db9acb",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/arms/parity_22092028/last.pt": {
+      "sha256": "e9c79498fbc25835d581f7c28f1d6a75ff571fbfd81e1e619cd79f24bebef1e1",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/arms/penalty_all_22092027/last.pt": {
+      "sha256": "24c15f425e47cff95e839dc6f39d50808662a38568e032d7eb8cebc8370fd269",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/arms/penalty_all_22092028/last.pt": {
+      "sha256": "513d4a487d1680c0f5888dd779e6e985794258a42e9634747fcfba174ef759bc",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/arms/penalty_delta_22092026/last.pt": {
+      "sha256": "7247d9ddec33760684d30baf9cd7a8888688bee13a4a921892eadc430e06172e",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/arms/penalty_delta_22092027/last.pt": {
+      "sha256": "d38fd3f2a40315266a96ac6872495f6249bf80fbf83c6121c93722c2992fc0cb",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/arms/penalty_delta_22092028/last.pt": {
+      "sha256": "f62a2ee92b66d855d585cfcea096682118cb812e771586fea36f98e148cef2cf",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/arms/penalty_gamma_22092026/last.pt": {
+      "sha256": "0d520204a0656acdf0729ddc0097f67a96c1763be823d5cc2a70dce646bb7f35",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/arms/penalty_gamma_22092027/last.pt": {
+      "sha256": "9ba48830ecbc94ef253bba299039ff3bad0623ecf0bd23f46a04427c9deee8e9",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/arms/penalty_gamma_22092028/last.pt": {
+      "sha256": "3c1b0760b58df839f71b9f4c1e5cd283b377ff2c613f7eb36a032a8449e9e249",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/arms/penalty_price_22092026/last.pt": {
+      "sha256": "9c83a99249f4e64558d4ea04280d2f272935400e29db867efe34d24a23ede29f",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/arms/penalty_price_22092027/last.pt": {
+      "sha256": "98213446474a02202c33318ad26e2871af868442a96affd169d51a27e11e22d3",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/arms/penalty_price_22092028/last.pt": {
+      "sha256": "ecad42d8c0b3ffd5948af3cbf41abe597b933e24ba393920c29d363371d5c636",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/arms/uniform_22092026/last.pt": {
+      "sha256": "dee47348275f98b5ddfebfd89ea140f10a8ccadc9dd6f4284a7c91b502d28a61",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/arms/uniform_22092027/last.pt": {
+      "sha256": "e4c0bb05282738192d94da6b2cd9f17984684c5faab960d6b9c9805b6e873e29",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T111505263380Z/arms/uniform_22092028/last.pt": {
+      "sha256": "fbbabab2f211fcec28027d49b0ff2d143eeacd742db56b9aa68493141539df23",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/control_22092026.log": {
+      "sha256": "782129f0c201e51f50dae9ae1ca642fc7f1307098438942568e095b7f769181c",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/control_22092027.log": {
+      "sha256": "59890c68f01905f3cc132ea87e5b2ce47cdbbdefabd2ab9c6fc88c1c34c5af45",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/control_22092028.log": {
+      "sha256": "0342563f56e9c8a2fe194bf5ea8b7a4fe3b79b51d146ffc7cc922433b2e43d96",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/lambda_sweep_weight_0.1_22092026.log": {
+      "sha256": "ec9a8a76308e265594770e4413d3edf17d5931d09ed7bd61afa2c3531c9b9062",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/lambda_sweep_weight_1.0_22092026.log": {
+      "sha256": "60d8e3122e8c413336167ed62543bbd66aa86f5e18536d5df93355aed24aa150",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/lambda_sweep_weight_10.0_22092026.log": {
+      "sha256": "4600c6d74659127bc976293d34ae584727f7575600b36fb508db6e76e604af60",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/mixed_22092026.log": {
+      "sha256": "394ff925760b1df96b8c8ce1c084de6110940e00f204c947fed51787602699d1",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/mixed_22092027.log": {
+      "sha256": "a95e6de3c21abd8193fa3e449eb5081f7f797f5f6da0b4b4ed986b21fb4b109a",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/mixed_22092028.log": {
+      "sha256": "a7aa229e4031824abd3ea0a9cf92d2e2d3e0c831ce96ed9dcb7b7deac891fc54",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/parity_22092026.log": {
+      "sha256": "8c23f28d8a22aad528bbe8632a46ad3273ee4a1695087c02859ff422847f69a1",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/parity_22092027.log": {
+      "sha256": "d45608c5f447ed48b22e4774b0d85fc95ce557940e122ca8d0a8ea884f866be1",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/parity_22092028.log": {
+      "sha256": "bc7b3448d67da4758593c13f44724feb14cd05f290ae2b8eeeb77e2eb2ca2cef",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/penalty_all_22092027.log": {
+      "sha256": "104c6a14370f67ef9b3675d614b2c2996a7f6c923880e13e71570f68c6ee027c",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/penalty_all_22092028.log": {
+      "sha256": "3c7051259e079a1c4528f4063d9f3fcf47a2fb780259db67c1097503462784e1",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/penalty_delta_22092026.log": {
+      "sha256": "73ad756e287ec5c05888ba301314b45b6b0f3f5fbbc8e938455e8940cf4cfd1c",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/penalty_delta_22092027.log": {
+      "sha256": "f6d2a3aff3fa346d07512be9dd5a9f7a4bcb873921c83d9e1cd01386ab59ebd2",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/penalty_delta_22092028.log": {
+      "sha256": "95c5ca41379ffaa566566c6e83e0b6712bb1d636f5078c3b6d74e1e36b318184",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/penalty_gamma_22092026.log": {
+      "sha256": "7d76cf368c88664290cfe5486d1fdb193515bd5c0af640bbb9d110f87549193b",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/penalty_gamma_22092027.log": {
+      "sha256": "538b1c2c907d28c240663ca09b7189f190a4d9cf13f91a8747d1c70f5fd1cae1",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/penalty_gamma_22092028.log": {
+      "sha256": "72e3f29dceebd5c08cf7b90995e6b9a3cf4c2cc076cc97fec21c95d1f0dd1e34",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/penalty_price_22092026.log": {
+      "sha256": "86a68f41c2a216bbef20fc2b0f041203044fea2809cd63d5c6da8b09f4702588",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/penalty_price_22092027.log": {
+      "sha256": "9cf45bccb8b611e324891f05533471b659204052626469253f457855f8c54c92",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/penalty_price_22092028.log": {
+      "sha256": "d64c85e99ec7956d732f9e27a415212ddff311b1a0924c9ad9753a811d1d7f0c",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/pilot_base_frozen_22092026.log": {
+      "sha256": "f5b362f6788b05ca6ba546e2e463170f208f2d58d5e4478c5b0101711c86af4f",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/pilot_base_frozen_22092027.log": {
+      "sha256": "2c83ea3d54c0d6aa29fc475c88faea30d04a1d625cec6e68de65c2c4903a433f",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/pilot_base_frozen_22092028.log": {
+      "sha256": "06bcac3effde1d0a2805068f8da9faef136e7a52aa723d473b819ef6ec857e82",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/pilot_base_mixed_22092026.log": {
+      "sha256": "4ae038f68c5cb9ceb6dd11135f79a29ab28a5aefd72db7928edbddec46e3d1eb",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/pilot_base_mixed_22092027.log": {
+      "sha256": "90fb86c397c962283d2e829b1e2e8dfde8bcbd2df2eda2c9eded4a54620c2aeb",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/pilot_base_mixed_22092028.log": {
+      "sha256": "ff550aecfd7ee982c0d502f0156d7a432883f562e2fa84459b5ca77d91f24a77",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/pilot_base_uniform_22092026.log": {
+      "sha256": "4b320778fbdd17d0bde64e42855dc8e446c87217fd4d7bf913d9324226ed26b8",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/pilot_base_uniform_22092027.log": {
+      "sha256": "de1a48be2b415534f5076f12252cf030f2dc5bd19ce7061710718047f0d37548",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/pilot_base_uniform_22092028.log": {
+      "sha256": "27b725e2b2850fd6295ac75749bd77f1cf701178be2433ccef8868d45a40ee6e",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/pilot_parity_frozen_22092026.log": {
+      "sha256": "2980cbd438c43da6884fbde2a9188bdb1e6cb095629aacbaf8fa15e25a67dcfb",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/pilot_parity_frozen_22092027.log": {
+      "sha256": "1a0166bafc8c95b239cde8accb5b2ce2a2b811a0b3bac808c0ccc54cb4cfb1d8",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/pilot_parity_frozen_22092028.log": {
+      "sha256": "2846a3f8376e5d41c627319b74dd7721e01241c8779472e50ae69299ebfc0450",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/uniform_22092026.log": {
+      "sha256": "a6f5304a8f0dd32fa24c60edc71ff264531fffeae979aee798109bc252ef4eed",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/uniform_22092027.log": {
+      "sha256": "e36de6e7998fc4f3186f35e2f4d7ffae6c0767169e627988b5fb7494754b2620",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/jobs/uniform_22092028.log": {
+      "sha256": "4e51cae7a862597ddb79e9da59513fd812d0a839a34d815e6e7065cbe9c7e56b",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/pilot/base_frozen_22092026/last.pt": {
+      "sha256": "2fb6159c9f3446a736e8a56a30ba4afcc402dbc62d3a3c421cc97607604e47b6",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/pilot/base_frozen_22092027/last.pt": {
+      "sha256": "160a3932e1d7e9082bf6dd19fd701ac6c15dda4791aeb06c3803113f8a1ba54c",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/pilot/base_frozen_22092028/last.pt": {
+      "sha256": "f371a77ff8933c1ed3cf7f29d17424dce3e09b2a28e5a553eeaab6fbf53bc2f5",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/pilot/base_mixed_22092026/last.pt": {
+      "sha256": "dcf5d8b05ef118e197569198e31ce7e3ab446380d4a07884a46552d4dd9252c0",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/pilot/base_mixed_22092027/last.pt": {
+      "sha256": "b47b23da6eaf6faf04ac54bc37d7ce0ef4376be197c2a0e45129a52ac51772b1",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/pilot/base_mixed_22092028/last.pt": {
+      "sha256": "a84c2e1b27b5b67f5c3333cd4b65b702fd85dbe81f7a7e155030558132a6d851",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/pilot/base_uniform_22092026/last.pt": {
+      "sha256": "11107dd9fca82e79930b0a645e518f8acb54e577f8811b7cda77b13bd50bf771",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/pilot/base_uniform_22092027/last.pt": {
+      "sha256": "b517db0fd9e605194bd35eeac668df1c1ca5910df1855722658a270fe4281f45",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/pilot/base_uniform_22092028/last.pt": {
+      "sha256": "3341309c861bd1a03257d466bee6a0e538a46654c006f52181236bafcbddfd6d",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/pilot/parity_frozen_22092026/last.pt": {
+      "sha256": "24d4e905ade5edd902e3db213432f2bb079478f10ce8369df86fa9a2c86e1e76",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/pilot/parity_frozen_22092027/last.pt": {
+      "sha256": "71d12129d2e85d8fcd4004ce2f41c9e210bd6f4749473c441b348d9a6c6e846a",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/pilot/parity_frozen_22092028/last.pt": {
+      "sha256": "d823cf8c14a1a2f4de826eb3af7f5ce597e3e11875d96486292a097eea0465a6",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/lambda_sweep/weight_0.1_22092026/last.pt": {
+      "sha256": "c7293b67be26a145432f3f4159e8d1133529455a67af642a6861e80cfd2dcf75",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/lambda_sweep/weight_1.0_22092026/last.pt": {
+      "sha256": "7f7375fb1fcfa8db184afe63163c580802897888d4ab209786462f5d248d9781",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/lambda_sweep/weight_10.0_22092026/last.pt": {
+      "sha256": "61528239f009674da664aa0fc867be0023a1c1c96b6ce8ee6bee2aa9c18056d3",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/arms/control_22092026/last.pt": {
+      "sha256": "b65c1aec6223028589c3e4f1315a53e05b3a26efdfe225142961f5b162221b0f",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/arms/control_22092027/last.pt": {
+      "sha256": "8063019370dc2a0876747e3e662a59ce87c59d5737040274e1f4a7071ee0cae1",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/arms/control_22092028/last.pt": {
+      "sha256": "fbee2dc25eb884707b9ce4363a2528f88aed36215706b4f36eb371752ab7483f",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/arms/mixed_22092026/last.pt": {
+      "sha256": "180cdb7f7dc2b5a1538af4121cbd708e0dc81de9146f336380d0c62f899a88dd",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/arms/mixed_22092027/last.pt": {
+      "sha256": "8276ba772d16d31f4df8c7f168c88c0182e2d429e10e0d9b672c279464edd989",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/arms/mixed_22092028/last.pt": {
+      "sha256": "9261b21ebf8b134fcc55a3ef247e60f386f0300f54b4249a365928d745448897",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/arms/parity_22092026/last.pt": {
+      "sha256": "05e790e6d9b06ffac712478bf9d6622160e9cf3070414b0251ee6b04e9b19f3a",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/arms/parity_22092027/last.pt": {
+      "sha256": "901c0ca533c8739cea4b091b20db3e76cd0104b266032a7be70bf1e68da29e00",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/arms/parity_22092028/last.pt": {
+      "sha256": "52116be5fedeb8685d576ef40857917035adcb028702d09771c5c753ec19bdf4",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/arms/penalty_all_22092027/last.pt": {
+      "sha256": "6f41d8931b7d4173d8a7547591f257fe45e259c41886db0c908d259832c21e27",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/arms/penalty_all_22092028/last.pt": {
+      "sha256": "44b66be4b8b1b0717d953917f503bde601dcc95568c6a6137d89a54642ae3957",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/arms/penalty_delta_22092026/last.pt": {
+      "sha256": "90fbcd4faf2546b4699a61f4f7bad2dca59f404eb2915bfa9c7d443b301352ef",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/arms/penalty_delta_22092027/last.pt": {
+      "sha256": "aed23a5e1b06059a7533cfe03915b93cceb6b588accbffeeb43934cb8f8ed2f4",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/arms/penalty_delta_22092028/last.pt": {
+      "sha256": "0f1d6348a0f5812da61cf017900a85ff4545ca36d266c7996a8ee302f1b2fde3",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/arms/penalty_gamma_22092026/last.pt": {
+      "sha256": "d4d2358b38b41cfd7fea076e07c9fc3423de3175fe029d461c1bcc8355716cbe",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/arms/penalty_gamma_22092027/last.pt": {
+      "sha256": "4f1662d41ab3c9ef12270b24f16e30d982500d31c5a7591819081ad8316244f5",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/arms/penalty_gamma_22092028/last.pt": {
+      "sha256": "171f5737ba3326ac6182931c143be4d0268350fd1de9acbe1652974a3844ec77",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/arms/penalty_price_22092026/last.pt": {
+      "sha256": "b7766ec3636ab2956b9ad5d9c71351f8c7ec126503e199e12e53de2dbc0fa10f",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/arms/penalty_price_22092027/last.pt": {
+      "sha256": "b881509e03f733373cd3ca915a61afd0184d3b9db98a5997c20032fd1133e3fb",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/arms/penalty_price_22092028/last.pt": {
+      "sha256": "729444f5aed03b9cc4935d581667abd3bf4c471ad77aa38b62aba0fb3ef3552e",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/arms/uniform_22092026/last.pt": {
+      "sha256": "73d94d864dddb6a25b88cf97a7e7eff8b5d7a6ee5bbb9f889ee3beb0682ea508",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/arms/uniform_22092027/last.pt": {
+      "sha256": "e20fb145d55b5b86da0dd244ec1b4f9931bcffe564497c1b3bcdfe362081f074",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training_ablation/20260923T100456099544Z/arms/uniform_22092028/last.pt": {
+      "sha256": "f519ef8a26a8b1ba73e78421eb6bbb69b2ede4570ec09ec5459ca35757bdb9b0",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/training/pilot_20260922T135135187961Z/last.pt": {
+      "sha256": "e0638d713a6c07183f08fe1f280e3dac4af2e9cac6ab52af0e3f42a2e9a1110a",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/sampling_correction/20260923T145946556968Z/jobs/mixed_22092026.log": {
+      "sha256": "96f42f3312491444e06a79b25405871ab190041693cbe4e5d97f1b3cad268036",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/sampling_correction/20260923T145946556968Z/jobs/mixed_22092027.log": {
+      "sha256": "24fb5e7c391db648c5191a750465816d6639a5dad138e6f15f592d61738cf68c",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/sampling_correction/20260923T145946556968Z/jobs/mixed_22092028.log": {
+      "sha256": "3d4270c90495ac55132a5ea1b43f90d078a5ec1f0635f34b38f46d3ad7580932",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/sampling_correction/20260923T145946556968Z/jobs/uniform_22092026.log": {
+      "sha256": "683ee3b1b0c34cc37f5e542520cd2a5ea62c07f264ff2e0bc7f0a5c6b1707918",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/sampling_correction/20260923T145946556968Z/jobs/uniform_22092027.log": {
+      "sha256": "065fe6fcbf6489f1b35a34a6a45e195de0ca29cafb04a4dfdddcf08170910a06",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/sampling_correction/20260923T145946556968Z/jobs/uniform_22092028.log": {
+      "sha256": "16963ee8786caf2172b79ba15eca94747069158720f553372ff9620bc95c9fbf",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "results/deeponet/sampling_correction/20260923T145946556968Z/arms/mixed_22092026/last.pt": {
+      "sha256": "4f876e9e6343cb8b2c7322470214654dc7fa8434c954c61c67fcabdb2cd3b6b9",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/sampling_correction/20260923T145946556968Z/arms/mixed_22092027/last.pt": {
+      "sha256": "552d62812968c04d80e7a01a49ff4ad8598c1eccba3a3f5ace0d989732c04b83",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/sampling_correction/20260923T145946556968Z/arms/mixed_22092028/last.pt": {
+      "sha256": "d47553480d31e54b362158147b852248db973f89dc7315393c836f4f9f4be898",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/sampling_correction/20260923T145946556968Z/arms/uniform_22092026/last.pt": {
+      "sha256": "672934288162d8fca176bdc28185a5aa428d880be54ba2a7e40cfce259016fe1",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/sampling_correction/20260923T145946556968Z/arms/uniform_22092027/last.pt": {
+      "sha256": "262ed78d980594a31ed25bf6c3a27ac18c8772458a06cb5cfea14e89457335b8",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/sampling_correction/20260923T145946556968Z/arms/uniform_22092028/last.pt": {
+      "sha256": "6db1b4a662ce02ef0158e7a01919e48a4073325ddcc3c54fa5405d68d5055154",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/parity_refinement/20260923T155834294516Z/parity_22092028/adam_small_steps/last.pt": {
+      "sha256": "a3d6fae01d38577a4db869318291fc86df0c4c6b36bd8482396d48edaf0b6fd4",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/parity_refinement/20260923T155834294516Z/parity_22092028/lbfgs/last.pt": {
+      "sha256": "ddec8367af604aa5f8b3d60ac083947189fd2c6c67d67acc0daa96fce828e110",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/parity_refinement/20260923T155834294516Z/parity_22092027/adam_small_steps/last.pt": {
+      "sha256": "8916be1032e721591d8b284c042b9a40fbe91768fbfde327db9c3f7032a8f74e",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/parity_refinement/20260923T155834294516Z/parity_22092027/lbfgs/last.pt": {
+      "sha256": "2d1522f644ac5892a7d09209073e831b2cfa8625b69825fba3678f99ed7877e6",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/parity_refinement/20260923T155834294516Z/parity_22092026/adam_small_steps/last.pt": {
+      "sha256": "5bbf10402d2bee36453afd37479c8e0f929ef0f1a34e99fe641c4bc7d9dc706a",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/parity_refinement/20260923T155834294516Z/parity_22092026/lbfgs/last.pt": {
+      "sha256": "a789423cfc17d4ad8eed3b40d7a4c4703c7c7165436a7eab844d38f5edc73922",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/parity_refinement/20260923T155834294516Z/control_22092028/adam_small_steps/last.pt": {
+      "sha256": "80420ce3c9049951e8493ccaec608a0cf9d221da249d5861afd325eaade93e47",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/parity_refinement/20260923T155834294516Z/control_22092028/lbfgs/last.pt": {
+      "sha256": "4cd6370ea8806d8c43eb3204f60b0f2446f3b1b2d87604a00d90754d51183ac0",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/parity_refinement/20260923T155834294516Z/control_22092027/adam_small_steps/last.pt": {
+      "sha256": "af6e2915ef06be9931e368d2f0057b7595ce6f58cb128cf8cd273df72bd372f0",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/parity_refinement/20260923T155834294516Z/control_22092027/lbfgs/last.pt": {
+      "sha256": "245e89e07a0c25c4b02149de3b4390a74f8b16cf354b03d7ac201d4d531f1bc2",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/parity_refinement/20260923T155834294516Z/control_22092026/adam_small_steps/last.pt": {
+      "sha256": "4c2131ab7fd0f5136233f29b974aca9364c36ab2ba50680f68c0fc27206aaf74",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/parity_refinement/20260923T155834294516Z/control_22092026/lbfgs/last.pt": {
+      "sha256": "bcff1f316d7180b82a2f99d47062730031fd51aeae392e52c8a8febf89dec12f",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/optimizer_refinement_seeds/20260923T093654478604Z/seed_22092028/adam_small_steps/last.pt": {
+      "sha256": "4fa1f6c4e5791b322b9721f004427c1604dad5ee5cc1698082ecaeb2e8620314",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/optimizer_refinement_seeds/20260923T093654478604Z/seed_22092028/lbfgs/last.pt": {
+      "sha256": "4dcff58dc7eb2e8d5d5be0ca05d649c841a770e1da22eb4d82bd39c3d0dcac0a",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/optimizer_refinement_seeds/20260923T093654478604Z/seed_22092026/adam_small_steps/last.pt": {
+      "sha256": "4f6fa7c02f9fb7d104ae8dba05b6aa593908b834ee414f83d03da85aadeb4b1a",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/optimizer_refinement_seeds/20260923T093654478604Z/seed_22092026/lbfgs/last.pt": {
+      "sha256": "beb72cb952677923b7801e672c816fe2a3a2f3ce197a3f720fbb50e12c90dc91",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/optimizer_refinement/20260923T090451734503Z/adam_small_steps/last.pt": {
+      "sha256": "667bbc60cac1da3d099a371276b107f3d04a677033e22587e8d239da080b3133",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/optimizer_refinement/20260923T090451734503Z/lbfgs/last.pt": {
+      "sha256": "8bd2f040ade0dba3c92413a1f4498bfa8ca4a8f1c038442b3a2ee625a7b4579b",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/comparisons/20260922T140050569791Z/price_and_greeks/last.pt": {
+      "sha256": "16ce631ac4647f01a593b3ecdf3f3cdcadde7357ea5a1381d0dbd308d1d9f94c",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "results/deeponet/comparisons/20260922T140050569791Z/price_only/last.pt": {
+      "sha256": "205026bdc62b2dd0414dda6d0634ea6186f99d2ecb816d1bbaf93a65975a6fd3",
+      "reason": "Unselected final-iteration checkpoint; selected checkpoints retained"
+    },
+    "report/figures/classical_common_benchmark.png": {
+      "sha256": "07dd95e7dc8e76354c8ecf69bf25fc9eb55d28797431aefa61b6a48648a3974d",
+      "reason": "Figure not used by current report"
+    },
+    "report/figures/crank_nicolson_boundary_sensitivity.png": {
+      "sha256": "65320337762f84b8e9676fd91f9e7fc815aaa57cf9781495a3c3e81d288747be",
+      "reason": "Figure not used by current report"
+    },
+    "report/figures/crank_nicolson_richardson.png": {
+      "sha256": "2fd0acb57108fe64730bb4dc7daf5ababd5491ffa8a00006ec44dfaa2dd994c6",
+      "reason": "Figure not used by current report"
+    },
+    "report/figures/crank_nicolson_validation.png": {
+      "sha256": "345e9e8eae13d8992fc500bce984422834b3f4cdf1cec5e1288691ba86f4dd06",
+      "reason": "Figure not used by current report"
+    },
+    "report/figures/deeponet_arm_comparison.png": {
+      "sha256": "422f39eade9e31259ded8de59ef304198c2f03451640da4d9c66faa23fa4bf95",
+      "reason": "Figure not used by current report"
+    },
+    "report/figures/deeponet_history.png": {
+      "sha256": "c7ecffab98b730e73f3415f4e96ad0ddbcb60f5d166e392d7f67bb615b124311",
+      "reason": "Figure not used by current report"
+    },
+    "report/figures/deeponet_regional_theta.png": {
+      "sha256": "226c1dd1de8692b044aee6bfbde495d802983eda6165788ea16eeb6a45714545",
+      "reason": "Figure not used by current report"
+    },
+    "report/figures/fixed_pinn_validation.png": {
+      "sha256": "d05b2a5615a39640e002126e9dfeaeff33b4e9eb3b43a10f2f7d67b4c0cb8267",
+      "reason": "Figure not used by current report"
+    },
+    "report/figures/mc_conditional_convergence.png": {
+      "sha256": "30f5f6700c28f81e68fd9238ff7d3ac89db2134c6b7794075ad3b4fa8c923c9c",
+      "reason": "Figure not used by current report"
+    },
+    "report/figures/mc_conditional_greek_improvement.png": {
+      "sha256": "33e3ccd141fa1cc94915b4531a3d93c5ba4f7ff75255ad516fdb6183a6cf00b8",
+      "reason": "Figure not used by current report"
+    },
+    "report/figures/mc_conditional_high_compute.png": {
+      "sha256": "01c43db9e22fdf1482224ae4bd7e54293742598b275fad42bd9db9408949d694",
+      "reason": "Figure not used by current report"
+    },
+    "report/figures/mc_convergence_to_2pow20.png": {
+      "sha256": "f589dd70a6602510617460bb0f0f7d4e285a65ce87d4b7aec531114f83c28eec",
+      "reason": "Figure not used by current report"
+    },
+    "report/figures/monte_carlo_comparison.png": {
+      "sha256": "f1f8688fec2e0c20f7a7bb4236420b2366cfab0e18cb65469117395ef862354f",
+      "reason": "Figure not used by current report"
+    },
+    "report/figures/strong_monte_carlo_greeks.png": {
+      "sha256": "65dc7213a92b7d830afbec7b6afde50660183ebf3c10ffe1619c45cbd48a9ef3",
+      "reason": "Figure not used by current report"
+    },
+    "report/figures/strong_monte_carlo_prices.png": {
+      "sha256": "90458ccc210f414e73e65e3d71d5c617ddafe54b3f6db481783e8b5a7a0881c4",
+      "reason": "Figure not used by current report"
+    },
+    "report/figures/training_loss.png": {
+      "sha256": "c1952ada59340d302adb0fe1a9b70a316659c044702051577b2ce03564771082",
+      "reason": "Figure not used by current report"
+    },
+    "report/figures/_check_pinn_loss_history.png": {
+      "sha256": "9a388b9161bd6e64fe39251f1d7bf00f1fce3287177b6843c410cbdf9021bf01",
+      "reason": "Figure not used by current report"
+    },
+    "report/archive/before_educational_revision_20260926/main.pdf": {
+      "sha256": "3d40d6d4c1a6955ea5ae8e31851512ad33b50b4e8ce8d290676496294fab4372",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "report/archive/before_educational_revision_20260926/main.tex": {
+      "sha256": "8108748d70edacc8131816bde8163a6a4735dcf6dd7100c6a3d1a800803f5d50",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "report/archive/before_shared_comparison_v1/main.pdf": {
+      "sha256": "a3019c4edfc0074cea1d9409a199993204e38ca2144bf36a32bf02ae6483b267",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "report/archive/before_shared_comparison_v1/main.tex": {
+      "sha256": "da177e31d45ba4a84dda93777fdd807b9d5a020a94cc581e08f7962b8c642b42",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "experiments/pinn/evaluate_pinn_study.py": {
+      "sha256": "868329eb155ca87f8965713e77a3fdf47ad2e9dd42e9bfa96d0413335539124f",
+      "reason": "Superseded authoring or dormant study runner"
+    },
+    "experiments/pinn/evaluate_pinn_study_multi.py": {
+      "sha256": "3c0c68da9cafeddcfcf74e71ebbc1d2db74199f0151b9bf70990c00a8fc7eead",
+      "reason": "Superseded authoring or dormant study runner"
+    },
+    "experiments/pinn/refine_pinn_optimizer.py": {
+      "sha256": "76d06ad874d07b54e7034e114280e2e4968a064d53b6eb385d3004f94865012d",
+      "reason": "Superseded authoring or dormant study runner"
+    },
+    "experiments/pinn/run_anchored_study.ps1": {
+      "sha256": "80159227335742c51e9c58d6a523617907495b399c7ecfac965ad7aec2db3c14",
+      "reason": "Superseded authoring or dormant study runner"
+    },
+    "experiments/pinn/run_anchored_study_v2.ps1": {
+      "sha256": "8cc960f594186518574925bc0857dbfa4495566f020dd8394de2d219e568a167",
+      "reason": "Superseded authoring or dormant study runner"
+    },
+    "experiments/pinn/run_study.ps1": {
+      "sha256": "2a2df4a0063bb1e7d31b46067532b232a98f3c7244ff1b999b8de02d98092530",
+      "reason": "Superseded authoring or dormant study runner"
+    },
+    "experiments/pinn/run_study_revised.ps1": {
+      "sha256": "ca467ee9e470e98f0c689c8940238f65b9b437daf589db8334566514b0313ba0",
+      "reason": "Superseded authoring or dormant study runner"
+    },
+    "experiments/pinn/train_pinn_variant.py": {
+      "sha256": "00c43b9bd6364b2c78512752208e46b4675687dfcc9f24afb2583c3f115911ed",
+      "reason": "Superseded authoring or dormant study runner"
+    },
+    "checkpoints/pinn/legacy/anchored_study/data_only_n1024_s19102026.pt": {
+      "sha256": "806f4ba71ed4f692a0634c2b3fbdf0d46d98ea712deb065e92124d377b06a3fd",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/data_only_n1024_s19112026.pt": {
+      "sha256": "1b7c3ae0d51801e102093f7a8ed7c57f503454043a7b90b8b3dda6461f205bc1",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/data_only_n1024_s19122026.pt": {
+      "sha256": "40a90dbe3a5631a1d16a8c70c26193e90dfb591c709d10bbedd6b5401ff661e6",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/data_only_n2048_s19102026.pt": {
+      "sha256": "57910d307e33a72c1f18705b4159ae7d9b76a39083322cf7353e41af33cffdee",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/data_only_n2048_s19112026.pt": {
+      "sha256": "9220e4219dcaecb13240d501964cad98582b7e3c592b7ce9fd61256607d2f0ee",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/data_only_n2048_s19122026.pt": {
+      "sha256": "8a08ae5b81f41726a2d7741f977a27bc7eb99c714dbb3b64445fe8c074db681d",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/data_only_n4096_s19102026.pt": {
+      "sha256": "e815d37b1b9e2e67711778b06f46cad12353a97127fa7254d87aac97b5cd77a7",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/data_only_n4096_s19112026.pt": {
+      "sha256": "f80b0a30f159a69a45b9dcf52c004c17fe350707f59907b5aae2c13e761d664a",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/data_only_n4096_s19122026.pt": {
+      "sha256": "c766408a77886077e8dfc4744082a3e31d78bf8d326730324e2da5a6b793759e",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/data_only_n512_s19102026.pt": {
+      "sha256": "3fb5c90d77aadd24a85cc440fda97e1e69bd8c91a14b7425385895740368a232",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/data_only_n512_s19112026.pt": {
+      "sha256": "9ef8de0c3578de608ce0aea1c352ae700eda423e9d41503414045fc2c4d30992",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/data_only_n512_s19122026.pt": {
+      "sha256": "8f7fb822e312171a3f8572af5bfb52d51d919a7a4a28230762152c979cec9c1c",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/data_only_n8192_s19102026.pt": {
+      "sha256": "51f401190d36c5a21ca216e20ebe7a36aef0c7da88e0066256e87795d34d677a",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/data_only_n8192_s19112026.pt": {
+      "sha256": "a132abcaf9176d18abfc86619052f0ef4ec860c29dab5a10505ada4f4bf8069d",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/data_only_n8192_s19122026.pt": {
+      "sha256": "0d089c3fdee0cc7786b9ef33ebc056fb20a1c276c87f1587dac1729f61efa2c2",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/hybrid_n1024_s19102026.pt": {
+      "sha256": "ef07e2a3ed1f0d73cb161bb3053ff2b08fcba236e4ad80320f1ac3c3c5fe2da7",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/hybrid_n1024_s19112026.pt": {
+      "sha256": "72a472b951ff5d034fe229dac29343bc965f9d6aba2e4f65a095e1c4a27a58de",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/hybrid_n1024_s19122026.pt": {
+      "sha256": "5e5ed99f431f0512376ef2e6f74fb480ffa74283007460587d6574370e142800",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/hybrid_n2048_s19102026.pt": {
+      "sha256": "23dbaf9946eb17f5d376e69438c533183693117e6a1af511c45541358bcdcf13",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/hybrid_n2048_s19112026.pt": {
+      "sha256": "03f3ead2c0c6f1438954b0c1add2228dfdf5066d2add1edd674e4349cc92a10a",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/hybrid_n2048_s19122026.pt": {
+      "sha256": "e4828d9077d58496b74b333bd00543201e2b6144fcdc1e924e22cdb56f5a2fac",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/hybrid_n4096_s19102026.pt": {
+      "sha256": "312ea71e3f9b02c9d94506bd16bbf7cb3e88e6edbab8d21d7cfc42e7fedfca27",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/hybrid_n4096_s19112026.pt": {
+      "sha256": "5ed5e527e369a2e5d32698a51fe8e0e931b7a9cd160cc1b28e7ea9ac6db21161",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/hybrid_n4096_s19122026.pt": {
+      "sha256": "78ea223cf6ba779c8830f43e21f1d502e1fac2553a1f71fd43bb379b8821287d",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/hybrid_n512_s19102026.pt": {
+      "sha256": "f73449da720b77746c69c58468bd38ff96439166c1a9bcdc4da0cd20394921a7",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/hybrid_n512_s19112026.pt": {
+      "sha256": "fba70f9459b185ad435297897ad2d61b72a7b6fe37be7dc1c1d5824730acdf31",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/hybrid_n512_s19122026.pt": {
+      "sha256": "d0fd8bfacd92dd7b0f558889d0780461605212ecdf60b593087f93a708c01428",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/hybrid_n8192_s19102026.pt": {
+      "sha256": "020e031266d82ddc7647df0ee70293bdae54d6a53ea3a2406b6dddbf457acf44",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/hybrid_n8192_s19112026.pt": {
+      "sha256": "902d5517826187187e1a061be1c9323be2496ad3f390b5bbf464065adb28b9e3",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/hybrid_n8192_s19122026.pt": {
+      "sha256": "8acd402bc0f0c32e2e0cce44798c6a0bbd8f8b77d1dd41009e93d7ee9a6e23cb",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/physics_only_n8192_s19102026.pt": {
+      "sha256": "394106fcae6c90c3efae3cc483dd90251cca2f9e27c6f8e8554dedf9e96aa7c8",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/physics_only_n8192_s19112026.pt": {
+      "sha256": "d025e613f10b238965e91e5ef9eb38862f95cf2e8b6c648ebf4b2e2adf21bfab",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/physics_only_n8192_s19122026.pt": {
+      "sha256": "e3aaaf42ede6e819119e338ff14beccd668ec833f4e4f3a8610f23a622e6ec9c",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/v2_n1024_s19102026.pt": {
+      "sha256": "8392e36303023be2ec23b8650171fdb24401da344b3f07f4bbe3751a9af03aaf",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/v2_n1024_s19112026.pt": {
+      "sha256": "cc0b980fefd6220465160d441c1a185f6fe50ed0971c9a984119068271fff308",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/v2_n1024_s19122026.pt": {
+      "sha256": "09bb3f0facc2c350578086f6eee2377cefa221326d03fc697ddb8b472e247877",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/v2_n2048_s19102026.pt": {
+      "sha256": "c2c1a2b2c4c2ed8a5e3c131f8aed3a69f7db68b1450f095e6c1865a4ed9ae696",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/v2_n2048_s19112026.pt": {
+      "sha256": "f5d380b9cea4b3c83080f8286ce4a3d23deb34987d73a4b0ed563594cda2d3f3",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/v2_n2048_s19122026.pt": {
+      "sha256": "f842838224f73a85760b7df2abc29ba68d58a8e26f9c1241920c2fc3af7386b6",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/v2_n4096_s19102026.pt": {
+      "sha256": "27a8b6734cce9c87fa83060138d28b0c29e140f4cca75241246b1db26f37b7c9",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/v2_n4096_s19112026.pt": {
+      "sha256": "b2a86d6725a64bd1f01e97c28489d04bbb82dd5452f03e269f457b8ceec38b57",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/v2_n4096_s19122026.pt": {
+      "sha256": "01c3145df2b120b4014ed0f887ff97a460ea888c41765124ea8561e535598b01",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/v2_n512_s19102026.pt": {
+      "sha256": "a63233479ab9c6ebc57ba9535828baa8a572f90ad4a3e1051713edd4b6ec878d",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/v2_n512_s19112026.pt": {
+      "sha256": "f23b4b49a3a79fc38e81bf32df0113b5eeeb2448a5a698a532789ace2f412f38",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/v2_n512_s19122026.pt": {
+      "sha256": "820ee2c33dbd9f7a3bd85573c0505bb1ff08419c763f999f32e769157ae6329f",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/v2_n8192_s19102026.pt": {
+      "sha256": "4655117cb9da1deca6116e8d9d0ece828c8960b43ab5e5f90fef48236802ba86",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/v2_n8192_s19112026.pt": {
+      "sha256": "da9a282c2172a3b542937534c7219c36cd29fd622dadb803e215324cc1fe3dc9",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study/v2_n8192_s19122026.pt": {
+      "sha256": "93b675f187aee7768634b24d500dca1102ce6c77619a51317838fdf9d4a635b0",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2/data_only_n8192_s19102026.pt": {
+      "sha256": "bdfcb2213088e805b45a29f42566f6928dc06c4be09b7e74b137f5be58e72d20",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2/data_only_n8192_s19102026_last.pt": {
+      "sha256": "3152801c15df2e2530ae4fee40d9d3451549294d012b74fdf84e8b7311e3f3e6",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2/data_only_n8192_s19112026.pt": {
+      "sha256": "d3905fbe6e233d12ed15119db918d24d4f0aa49e5e84646006aa05bd6f466afe",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2/data_only_n8192_s19112026_last.pt": {
+      "sha256": "ec6fbeb2994875fc84580c3f3e4ca50ebdf964ed57bd4a76cdf89ebb6c36d0cb",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2/data_only_n8192_s19122026.pt": {
+      "sha256": "c9b39f82cc4f356fd4f58c4a55108d74eb1d5047d5db3f8cbee3763033b7d78d",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2/data_only_n8192_s19122026_last.pt": {
+      "sha256": "da77ea963a45555260a2b5dec4bf561cf49053aeb165af74d808d544b70ee335",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2/hybrid_n8192_s19102026.pt": {
+      "sha256": "9a1ca7182848473c8851c27aae53047698b416c010510e4aafdbecdc9e52a733",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2/hybrid_n8192_s19102026_last.pt": {
+      "sha256": "e85ecc84f899e1e8eefd51a083b09513dccef2552ac75cd3fe300700a8a087a2",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2/hybrid_n8192_s19112026.pt": {
+      "sha256": "7096d18eb9032c7e6c1a2188b594c326a8217c39879bbbc9a730f241513d4232",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2/hybrid_n8192_s19112026_last.pt": {
+      "sha256": "2a652f4fb6aaaf371a1fc8bc870f03d62bf51fb74b51b109ef312158ced50b75",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2/hybrid_n8192_s19122026.pt": {
+      "sha256": "21a78d7ec2fdb7e35ea40285235f4823a5b1bd05fcde4ebc9d30aa18a6771dc0",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2/hybrid_n8192_s19122026_last.pt": {
+      "sha256": "cdc33aa799107e37b145a3cc2c530d0a16295eaf34b029723d9af79a3b3fdda2",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2/physics_only_n8192_s19102026.pt": {
+      "sha256": "72e2bbf4c448ace7defb79d6ea491a8c3f965f6461c49846973a2e04b9657abc",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2/physics_only_n8192_s19102026_last.pt": {
+      "sha256": "f0e33ad591ef40670a5d9fdd2641b3f60514258573f3c4233692b9046b3a4270",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2/physics_only_n8192_s19112026.pt": {
+      "sha256": "d2fbbd7716d8b9c0856b0d12dc01a542b71c725c701414a5ec60072ed0c2611b",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2/physics_only_n8192_s19112026_last.pt": {
+      "sha256": "41c60db151f54f3f577ca9c1ce45b4eff1188a5054cab50d1608f2d8e611a67c",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2/physics_only_n8192_s19122026.pt": {
+      "sha256": "710dcb0b91b0a68fbe17c83779f4f79be70940efc8586acd2cb9f87ea9b21e2a",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2/physics_only_n8192_s19122026_last.pt": {
+      "sha256": "da60a4220467bffd3fa8f4bca9a49a5088082f24081fd0d3863e3f9d4fd70210",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2/supervised_hybrid_control_n8192_s19102026.pt": {
+      "sha256": "f432cbc02b0d45bbfff388dc9d3ca980f6619c818a4b1c22d85bc6b656f6f7aa",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2/supervised_hybrid_control_n8192_s19102026_last.pt": {
+      "sha256": "431c348e29b114966459b67f9531e444a62c014e7cc035e48a36ab44fabdfc7f",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2/supervised_v2_control_n8192_s19102026.pt": {
+      "sha256": "eb7ec844add505557385c48d74c0c4548d3320ea14397aee0038682ad62a66b7",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2/supervised_v2_control_n8192_s19102026_last.pt": {
+      "sha256": "f52ae418113d1fae9ce5a35adf3caf3f74b39d45793c300e453f35b058da8b38",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2/v2_n8192_s19102026.pt": {
+      "sha256": "cc7e265bb3741b2681647b0f8a5dc06e6e365aa31dfebce4fe65231e4e8da217",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2/v2_n8192_s19102026_last.pt": {
+      "sha256": "3181b503ef290e25b5c1e4d293a16bde79c33a6ffd4874d4d24f1e443f903d17",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2_pilot/data_only_n8192_s19102026.pt": {
+      "sha256": "bdfcb2213088e805b45a29f42566f6928dc06c4be09b7e74b137f5be58e72d20",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2_pilot/data_only_n8192_s19102026_last.pt": {
+      "sha256": "3152801c15df2e2530ae4fee40d9d3451549294d012b74fdf84e8b7311e3f3e6",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2_pilot/data_only_n8192_s19112026.pt": {
+      "sha256": "d3905fbe6e233d12ed15119db918d24d4f0aa49e5e84646006aa05bd6f466afe",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2_pilot/data_only_n8192_s19112026_last.pt": {
+      "sha256": "ec6fbeb2994875fc84580c3f3e4ca50ebdf964ed57bd4a76cdf89ebb6c36d0cb",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2_pilot/data_only_n8192_s19122026.pt": {
+      "sha256": "c9b39f82cc4f356fd4f58c4a55108d74eb1d5047d5db3f8cbee3763033b7d78d",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2_pilot/data_only_n8192_s19122026_last.pt": {
+      "sha256": "da77ea963a45555260a2b5dec4bf561cf49053aeb165af74d808d544b70ee335",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2_pilot/hybrid_n8192_s19102026.pt": {
+      "sha256": "fe24b6fab31491aaa996b4a4f66d9b08fa7eebfa40a8944b220dd52f967720ee",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2_pilot/hybrid_n8192_s19102026_last.pt": {
+      "sha256": "aa7f37bba66c6bbe49f7cb03ebb7fdf44a22ed3a35d3d57b7fdc41238a166dc7",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2_pilot/physics_only_n8192_s19102026.pt": {
+      "sha256": "72e2bbf4c448ace7defb79d6ea491a8c3f965f6461c49846973a2e04b9657abc",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2_pilot/physics_only_n8192_s19102026_last.pt": {
+      "sha256": "f0e33ad591ef40670a5d9fdd2641b3f60514258573f3c4233692b9046b3a4270",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2_pilot/physics_only_n8192_s19112026.pt": {
+      "sha256": "d2fbbd7716d8b9c0856b0d12dc01a542b71c725c701414a5ec60072ed0c2611b",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2_pilot/physics_only_n8192_s19112026_last.pt": {
+      "sha256": "41c60db151f54f3f577ca9c1ce45b4eff1188a5054cab50d1608f2d8e611a67c",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2_pilot/supervised_hybrid_control_n8192_s19102026.pt": {
+      "sha256": "f432cbc02b0d45bbfff388dc9d3ca980f6619c818a4b1c22d85bc6b656f6f7aa",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2_pilot/supervised_hybrid_control_n8192_s19102026_last.pt": {
+      "sha256": "431c348e29b114966459b67f9531e444a62c014e7cc035e48a36ab44fabdfc7f",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2_pilot/supervised_v2_control_n8192_s19102026.pt": {
+      "sha256": "eb7ec844add505557385c48d74c0c4548d3320ea14397aee0038682ad62a66b7",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2_pilot/supervised_v2_control_n8192_s19102026_last.pt": {
+      "sha256": "f52ae418113d1fae9ce5a35adf3caf3f74b39d45793c300e453f35b058da8b38",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2_pilot/v2_n8192_s19102026.pt": {
+      "sha256": "cc7e265bb3741b2681647b0f8a5dc06e6e365aa31dfebce4fe65231e4e8da217",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/anchored_study_v2_pilot/v2_n8192_s19102026_last.pt": {
+      "sha256": "3181b503ef290e25b5c1e4d293a16bde79c33a6ffd4874d4d24f1e443f903d17",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/fixed_prototypes/fixed_black_scholes_pinn_hard_terminal_failed.pt": {
+      "sha256": "cd57436590728046ac2d5792192d17e127c2fc70e2e30dd429f307b2217a337d",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/fixed_prototypes/fixed_black_scholes_pinn_physics_only.pt": {
+      "sha256": "384699f74345b53809dcf9e1d0531c27a58773c198e581957bbc7437c3884938",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "checkpoints/pinn/legacy/fixed_prototypes/fixed_black_scholes_pinn_raw_moneyness_failed.pt": {
+      "sha256": "161c5206e583db2b452a568a412aaa65c10fa03fe9accfcc1b7334bcaa9cfe4b",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/pages_v2/page-01.png": {
+      "sha256": "08dd2f0d1c47e10fab3bd091f6243267252ab74485f59b07613226040a9ffdbf",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/pages_v2/page-02.png": {
+      "sha256": "d5416f3402c4943a16a34445f30e54ad484c3912ce12e0bb1296a411b715a53a",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/pages_v2/page-03.png": {
+      "sha256": "7a442755a5a90bad379bcd4cc7ec6ae3787026a1f9832a3ade91fb4134bc57c0",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/pages_v2/page-04.png": {
+      "sha256": "1e8afcba5a34d06424533abf61aff21fc9fae1c515d5fd31250968e23e7e76ce",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/pages_v2/page-05.png": {
+      "sha256": "654263cca49a6aef92bbd12aaccc490755a98d5d64dcc49510132db884fc4acb",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/pages_v2/page-06.png": {
+      "sha256": "35b35e83c07c9034c7a3325f280aaec3564bba574b930a23171a83aa56f7f720",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/pages_v2/page-07.png": {
+      "sha256": "f15bfbd79c5093ce733c3fdd07a34350fc7fa6c127dca69eda7e2ab9c2ea3658",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/pages_v2/page-08.png": {
+      "sha256": "68eeef5abd22ffa4edea2224e063942f06e6bda2fca45675f160debb5e568fa5",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/pages_v2/page-09.png": {
+      "sha256": "724902ee2be8cc689ed93cf17d7db6845db6508c13740a192c7106ba7d8dc21e",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/pages_v2/page-10.png": {
+      "sha256": "fb7acecf75d79d102c7c3cc89b3627f694dc265c48d5aacf6c74a828eb4bc911",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/pages_v2/page-11.png": {
+      "sha256": "ad7e5e8a6687cc1d258ecb410fb66feb690954e2b53ab1b5fe511829b156b2f3",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/pages_v2/page-12.png": {
+      "sha256": "7bc3f48bc5dcc52f64944b6776bb53b266199f4bd9f1ce458130d07c83025949",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/pages_v2/page-13.png": {
+      "sha256": "25d4731c082bac0b94b8fe645e7607a5942e1c4299e0c15934bb06b4ef7c9b1f",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/pages_v2/page-14.png": {
+      "sha256": "9290a415ad24b625c37c176a1f499cfac9b7c21777c018ac1b44f27bb9cabce4",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/pages_v2/page-15.png": {
+      "sha256": "5be285e92348e49b4366fc2e92ef4bb941bbf464deee1a1a8064e1e5311e3371",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/pages_v2/page-16.png": {
+      "sha256": "27487f098a00df42d82013bde5aec864c215e53d0ae7309e8f0cad2beb6ccd92",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/pages_v2/page-17.png": {
+      "sha256": "c554cc64ed91c64601107d33401e145aeaf8c780ac2b77acb2d12e99b977efcb",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/pages_v2/page-18.png": {
+      "sha256": "030e1f1e56f870ba04b20eb32591b979cf5d071a5101e1ca8dbc40f397395433",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/pages_v2/page-19.png": {
+      "sha256": "2cd4037bff34d87e2eddb2ea1f9d3447d09f51eea48b8c5934fc0197ce1c9fd4",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/pages_v2/page-20.png": {
+      "sha256": "d5dfc8086e49e81f213d0d4144eeb427a26bcb737e846cfa140875d09b91f637",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/pages_v2/page-21.png": {
+      "sha256": "206d9524bccb82dc694175a265bd3d16848a8182b8ebdf3e40ab3f11b06393c9",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/pages_v2/page-22.png": {
+      "sha256": "23d26319d0ca689c3ca72e00d0eb11d2b70596f6be33445dcb9583e236323557",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/pages_v2/page-23.png": {
+      "sha256": "ffae8751077db66bf34381b40c80af6d3002f5f7dcf4c71701e8787f3a0dd7a6",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-original/main.pdf": {
+      "sha256": "a08f2a881cc17c77b48b428d17b83d220b4c98b057d2ae807962c8795877b9b9",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-original/main.tex": {
+      "sha256": "9b5e687c3b3eb09800b9ea86a9a2a9f17fc4fa95b51127e6a8b6b43b3f0a6d2b",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-original/make_report_figures.py": {
+      "sha256": "a697733083fe3096773db56400ba2b453950286302df0f690ddb8ecfc13ea534",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/final-09.png": {
+      "sha256": "bc5393525d33bf5f0af50583cf3b2842f13928f86bbbb39b7ce896c1f45a6772",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/final-10.png": {
+      "sha256": "f7143e478d9d3df42f49eedbf1eb9068163dcfed03ee2b775270ccf507cbfb54",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/final-11.png": {
+      "sha256": "984fd144a8cafa2652a473d840d53c955fa119f64ef3f40ee69fa12d84dfdc4b",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/final-12.png": {
+      "sha256": "5d8fa18a59d6a8120d0d3ef5d55fd151553f7a9d332c3df99015d23abd527d1b",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/final-13.png": {
+      "sha256": "b2c661f8181b036166d6554bdf4bb918764ebbf904bf27e006417491f8975905",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/final-14.png": {
+      "sha256": "a6ef6a00b97efb2eba298362ec2c5bedc0fe5cd87d34d9e4eacc2a26d8a1653d",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/final-15.png": {
+      "sha256": "a298459113b603bd28c50e3c6ab0e54b88ecc8ed51e988e7cf250495d6ccfb5c",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/final-16.png": {
+      "sha256": "02639f241b6f56b842b1e2080cf8d24257a60fd6ac865aa6ca7a19f1ebd99849",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/final-sheet-1.png": {
+      "sha256": "f993ce495b6dcd7ded265ae41fd60fc223a418efb5140fc4c24cd4c8fbcd15e7",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/final-sheet-2.png": {
+      "sha256": "06e6816a1014337b27c4f7dd0bedbc4de3dd80fc97cf74629b27d1f88ac5604b",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/page-01.png": {
+      "sha256": "22846b1b7f0286eb9cc7ef0e98549033f5cde62720d16e7120184e40c0be7c9a",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/page-02.png": {
+      "sha256": "9d23d9a134b0c70cd376c526cba1bc8cfa2f52979d7a1292c0b8ce905a2dbe06",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/page-03.png": {
+      "sha256": "9b99decbda0ba3b5994a94eb536af3c44528ad7842bcbd0ea33bfb3dc43af3bc",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/page-04.png": {
+      "sha256": "2f3b095ded4d76b9fec6e21f211b7f8ff7af87bb657eabb2f310ac9a025eab84",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/page-05.png": {
+      "sha256": "1b5de1a3bdd07d80a53117fa2d64bb942c69630fea15163de092062b2dbcd052",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/page-06.png": {
+      "sha256": "e4378c4ca53ff5f905e147b41ba0faf0d14a8ec601f8abfb0518dc6a4cbc78c4",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/page-07.png": {
+      "sha256": "2314495c5de740ba3c01d1c42bbc5656d61e34178e51aa38072269038ce43a14",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/page-08.png": {
+      "sha256": "e3c1e3f7fa8c2c744587814081069d75968c40c92befc802aa92e4ef1bd5d036",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/page-09.png": {
+      "sha256": "0d5945c0c26c646bdf725325025f68dd2249bfe1d9f842d63eda20f16faef8ad",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/page-10.png": {
+      "sha256": "f7143e478d9d3df42f49eedbf1eb9068163dcfed03ee2b775270ccf507cbfb54",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/page-11.png": {
+      "sha256": "984fd144a8cafa2652a473d840d53c955fa119f64ef3f40ee69fa12d84dfdc4b",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/page-12.png": {
+      "sha256": "5d8fa18a59d6a8120d0d3ef5d55fd151553f7a9d332c3df99015d23abd527d1b",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/page-13.png": {
+      "sha256": "b2c661f8181b036166d6554bdf4bb918764ebbf904bf27e006417491f8975905",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/page-14.png": {
+      "sha256": "16b5befd0406349847befe78cef59a8fc2d98c0b5f8f8fbdae90ce721d30ab86",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/page-15.png": {
+      "sha256": "cb58399bc4088ba2cadcd67c563d1d1741c69b3a941704ef74835a9551e4ce7e",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/page-16.png": {
+      "sha256": "b5c87b0cda1a8a294c731a8af80091ea5f77fd7d3b6932ad66731e7320bb839d",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/page-17.png": {
+      "sha256": "a488fd5d948332b89cac37227b9bfd24419b870fbf8c4a1ac3a9cfce49d632a2",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/page-18.png": {
+      "sha256": "6b9ae96ba5231a149b386141d1a82a462988a9bb57f720bc9e5463d52bb727ca",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/page-19.png": {
+      "sha256": "7cc3965ed5f9970aed76c19f5cd686d77dc1b45a72738a9c47b158f17d729048",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/page-20.png": {
+      "sha256": "722c63e4eff014094ef45a1bd0fac33965dce61b38953ca8276e6f51f6afaab6",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/page-21.png": {
+      "sha256": "1cac19470de34066d844d997af7922582ef62381d68723781d5d423fe3eaaa79",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/page-22.png": {
+      "sha256": "518bdfcbdda653f4ea7d43821b362a92ce06f62318dbc22cacf7b3065a892d0f",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/page-23.png": {
+      "sha256": "7e5f22a3624455ac4ca768503414a0cdb3073bd9ffbc17b9a29e29724c3275bf",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/page-24.png": {
+      "sha256": "293dd0df3adab34aaf09b1c2db5c7164652241b0b2681c63406e298a31749d99",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/page-25.png": {
+      "sha256": "112797d3f76a0e13b065ef674a601bc13e8960b509b1934787123aeb3ecd74fc",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/sheet-1.png": {
+      "sha256": "3420107fe2f6d8c4ed86d4add5bf0f530ec640f853c64e49acdcc9a969039e52",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/sheet-2.png": {
+      "sha256": "a0b2d9871973cecc909182355da3259d38d4a3478ec13922347ddf14db7ac46c",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/sheet-3.png": {
+      "sha256": "e7a58c801a55d4faab8699e9cf9e3845eb5a9c9a8b6d843a43d38ecb08e15edd",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/sheet-4.png": {
+      "sha256": "2d443d3f3d0e1bc7034c705bcd4936e0b38585ffa6d2b2b26399e2bd8a59b6d5",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/sheet-5.png": {
+      "sha256": "51548511b541c71c8a856cd3143ed335e90c44893d6c71f8917a6e5e0a1a1af1",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/sheet-6.png": {
+      "sha256": "c9b0c9d6db762508702ee1af27e07d89ccbf9e39c1cd640accc9193dadcad4c7",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "build/report-review-pages/sheet-7.png": {
+      "sha256": "c29dd13fbcdc947bf4da856219c32e1458e1967355ef199fa71e044208e0e037",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "artifacts/logs/diagnostics/compile_out.txt": {
+      "sha256": "5328561b2e71be583e597f18ba4ff0b2edeac1d743e710869d96b2c33fa314a2",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "artifacts/logs/diagnostics/diag_out.txt": {
+      "sha256": "c3e5e65ddeb0959ba229a3558ec5631a3cfeeb62e4e1e892dd193dc61abde8b5",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "artifacts/logs/diagnostics/jvp_probe_out.txt": {
+      "sha256": "9517391e08b2d2a8f79c3932a738fcef4c99a490515f0180ee64ac1537ee160a",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "artifacts/logs/diagnostics/probe_out.txt": {
+      "sha256": "2cee59744f61d016708fdcd8e3b966e197a0473a3c1fbe52f2a9b9b234db304e",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "artifacts/logs/pinn/anchored_study.log": {
+      "sha256": "39f08a82fd6cc7dc42a1929a23bcf84d4bd5aca814b2565290c0aacd9a210ee3",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "artifacts/logs/pinn/eval_v2_err.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "artifacts/logs/pinn/eval_v2_out.txt": {
+      "sha256": "265b872678b0c38ecceb855d83a0ee17bc3c7f4ed54f57f2dadc289fd36a6294",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "artifacts/logs/pinn/frozen_err.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "artifacts/logs/pinn/frozen_out.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "artifacts/logs/pinn/stageB_err.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "artifacts/logs/pinn/stageB_out.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "artifacts/logs/pinn/study_run.log": {
+      "sha256": "7450b6a16005a088b9d5d62fac6c540566d1f967f1fb9d0f7e9f82dda6f5e6fa",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "artifacts/logs/pinn/study_run_revised.log": {
+      "sha256": "0d60e567137da91b7d0514832e4e98a3e92370447f998de1ec0c3f0a58c63742",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "artifacts/logs/pinn/train_baseline.log": {
+      "sha256": "6bbe8324882af709551814b3b86c271bd54f3c06e35c675a2cc0ec081fb39bb8",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "artifacts/logs/pinn/train_causal.log": {
+      "sha256": "2a3cb5d544b919dddee9d8526eca4409f6832ab13177e953ed0d787539502bac",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "artifacts/logs/pinn/train_constrained.log": {
+      "sha256": "f8e3bbd0fec4976ffe89d6b2498381fb63514135c63348f7569dbac10a83a4e8",
+      "reason": "Generated log or compiler intermediate"
+    },
+    "artifacts/logs/pinn/v2ctrl_err.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "artifacts/logs/pinn/v2ctrl_out.txt": {
+      "sha256": "eaf11192cb2a76c5295ac66b59addfb2688dde2a96f3752acfdfd2e1ea585fab",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "artifacts/logs/tests/full_test_out.txt": {
+      "sha256": "b8ec3d8f0073777abc09097d9723e4d0055aee70197ea455aae39c1705394b9d",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "artifacts/logs/tests/test_nncg.txt": {
+      "sha256": "d19ccc28e86a9d3076a4625b4bc53c0139ea7890ca31df2e1d2647b1d090f7bb",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    },
+    "artifacts/logs/tests/test_out.txt": {
+      "sha256": "76585a14cae1602e32e31148d20115ed211491c41e7f6b3ba2856c7396b60673",
+      "reason": "Archived intermediate, learning exercise or legacy run"
+    }
+  },
+  "recovery": "Extract named entries from before_cleanup.zip into the repository root. Verify each SHA-256 before use. Do not restore over changed files."
+}

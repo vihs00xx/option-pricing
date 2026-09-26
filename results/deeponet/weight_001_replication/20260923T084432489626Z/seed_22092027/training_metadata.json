@@ -1,0 +1,80 @@
+{
+  "run_protocol": {
+    "weight": 0.01,
+    "seeds": [
+      22092027,
+      22092028
+    ],
+    "dataset_sha256": "bb892af8c78df4125346b22aa68945be1a8d10ec570bc1ebb409d75f0ccba6ca",
+    "source_sha256": {
+      "experiments\\deeponet\\replicate_weight_001.py": "ac53e4741bdcc8fa92f3c4c74c3da6ae54ce4fd1f8c7cf350726a2db21fb2559",
+      "experiments\\deeponet\\train.py": "ade588bc01854eef9fb44ecb7f71802510307bf137054a82f96d778b2c77236e",
+      "experiments\\deeponet\\compare_supervision.py": "24b295cd9257697333f5787b13ed23cae4784251a3b713c789d4db2b22ea22df",
+      "src\\neural\\deeponet.py": "1bd8c80edaa58d279867e924abfc6b3897c3b328000f2764c4c81c8e4c7b02fa"
+    },
+    "greek_scales": [
+      0.5823468873578548,
+      0.018749898002260283,
+      22.560560095970324,
+      11.538700852018152,
+      36.00645780086356
+    ],
+    "retained_checkpoint_sha256": {
+      "results\\deeponet\\comparisons\\20260922T140050569791Z\\price_and_greeks\\selected.pt": "249c0c0a6190fb9793034b5e0abcbc8b8d16b6843fa7d73e83ce4d5754a59a40",
+      "results\\deeponet\\weight_sweeps\\20260922T142444840021Z\\seed_22092027\\weighted\\selected.pt": "c75ea9b21e6c86e2ab35d400e2e281e21ec74933a320af7503f52a6a90ea2729",
+      "results\\deeponet\\weight_sweeps\\20260922T142444840021Z\\seed_22092028\\weighted\\selected.pt": "0b533b7d29b1c6f51bc899e917205fea9eab0f5d2b8eb3cc1e7fe2e2b98e0ff3",
+      "results\\deeponet\\weight_sweeps\\20260922T142444840021Z\\weight_0.01\\selected.pt": "a1477355e329f4e30f677a74c153c047e614553a9dd8a5affb6bc505cac14636",
+      "results\\deeponet\\weight_sweeps\\20260922T142444840021Z\\seed_22092027\\pilot\\selected.pt": "9dd00880ca43b9b93d17b6a8905c4cdf7df930fc93c6caf8c361236817964035",
+      "results\\deeponet\\weight_sweeps\\20260922T142444840021Z\\seed_22092028\\pilot\\selected.pt": "e29a28aafe0c629514c8e51b4696a7d66bd8f5e42ee990e8273d9633cb5f0007"
+    },
+    "parent_study": "results\\deeponet\\weight_sweeps\\20260922T142444840021Z",
+    "selection_rule": "Pair each seed with weight 1 at equal budget. Prefer weight 0.01 if mean price RMSE is lower and each of Gamma, Theta and Rho mean RMSE is within 20% of weight 1; otherwise retain weight 1.",
+    "final_test_accessed": false,
+    "python": "3.13.3",
+    "torch": "2.8.0+cpu"
+  },
+  "settings": {
+    "protocol_id": "deeponet_greek_weight_sweep_v1",
+    "architecture": {
+      "width": 64,
+      "depth": 3,
+      "rank": 64
+    },
+    "seed": 22092027,
+    "epochs": 100000,
+    "batch_size": 512,
+    "learning_rate": 0.0003,
+    "validation_every": 10,
+    "wall_seconds": 300,
+    "threads": 2,
+    "loss": "price_mse_over_strike_squared_plus_weighted_training_rms_greek_mse",
+    "selection": "minimum_validation_normalized_price_mse",
+    "dataset": "results/deeponet/data/black_scholes_operator_v1.npz",
+    "dataset_manifest": "results/deeponet/data/black_scholes_operator_v1_manifest.json",
+    "output_root": "results/deeponet/training",
+    "note": "Validation-only development; final test excluded",
+    "progress_every_seconds": 45,
+    "greek_weight": 0.01
+  },
+  "selected_epoch": 1050,
+  "selected_validation_mse": 7.536181966507678e-07,
+  "optimizer_steps": 16911,
+  "stop_reason": "wall_budget",
+  "training_wall_seconds": 300.1139232000005,
+  "peak_sampled_rss_mb": 266.18359375,
+  "dataset_sha256": "bb892af8c78df4125346b22aa68945be1a8d10ec570bc1ebb409d75f0ccba6ca",
+  "parent_checkpoint": "results\\deeponet\\weight_sweeps\\20260922T142444840021Z\\seed_22092027\\pilot\\selected.pt",
+  "parent_sha256": "9dd00880ca43b9b93d17b6a8905c4cdf7df930fc93c6caf8c361236817964035",
+  "label_columns_used": [
+    "price",
+    "delta",
+    "gamma",
+    "vega",
+    "theta",
+    "rho"
+  ],
+  "checkpoint_sha256": {
+    "selected": "e95693bea39ccfe3469449948f179efa92542a6394327ef84fb92ade66dc4901",
+    "last": "410e2f537f12647e6b306413d13d81ea8a9ae3c321800e1a34f81f8e06bc7207"
+  }
+}

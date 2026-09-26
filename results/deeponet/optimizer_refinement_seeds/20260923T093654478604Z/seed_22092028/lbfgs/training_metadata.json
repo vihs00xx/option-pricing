@@ -1,0 +1,102 @@
+{
+  "protocol_id": "deeponet_optimizer_refinement_seeds_v1",
+  "purpose": "Repeat the two-arm optimizer refinement on the other saved weight-0.01 seeds and judge dependability across seeds.",
+  "prior_refinement": "results\\deeponet\\optimizer_refinement\\20260923T090451734503Z",
+  "prior_refinement_summary_sha256": "94a67d9f97904612b977d7e53968164495e7600861fc092eebb6bf29da33614f",
+  "prior_seed": 22092027,
+  "parents": {
+    "22092026": {
+      "checkpoint": "results\\deeponet\\weight_sweeps\\20260922T142444840021Z\\weight_0.01\\selected.pt",
+      "sha256": "a1477355e329f4e30f677a74c153c047e614553a9dd8a5affb6bc505cac14636"
+    },
+    "22092028": {
+      "checkpoint": "results\\deeponet\\weight_001_replication\\20260923T084432489626Z\\seed_22092028\\selected.pt",
+      "sha256": "3e499fc158cb7a01fad6e2210aac62852ea1f28601af5c02e661e641a3e07866"
+    }
+  },
+  "dataset_sha256": "bb892af8c78df4125346b22aa68945be1a8d10ec570bc1ebb409d75f0ccba6ca",
+  "source_sha256": {
+    "experiments\\deeponet\\refine_optimizer_seeds.py": "f29d1c5d9c879bfbae33a4acad6cb9b78f3943db50d562235edcdf98bfe8a340",
+    "experiments\\deeponet\\refine_optimizer.py": "f56c27323c95388b2d9fb6fdd4958a3be97dcf8219ef607dbddee5d8ebf0176e",
+    "experiments\\deeponet\\train.py": "ade588bc01854eef9fb44ecb7f71802510307bf137054a82f96d778b2c77236e",
+    "experiments\\deeponet\\compare_supervision.py": "24b295cd9257697333f5787b13ed23cae4784251a3b713c789d4db2b22ea22df",
+    "src\\neural\\deeponet.py": "1bd8c80edaa58d279867e924abfc6b3897c3b328000f2764c4c81c8e4c7b02fa",
+    "src\\neural\\deeponet_data.py": "aa33e26d53db6b5b80450c667edf9c70201cb9b396db330f2c671daa7787ec7d",
+    "src\\black_scholes.py": "0746033b38cb276d51188c010cd33b814031d8bd91f1336ae4ea8d74af5ced15"
+  },
+  "greek_scales": [
+    0.5823468873578548,
+    0.018749898002260283,
+    22.560560095970324,
+    11.538700852018152,
+    36.00645780086356
+  ],
+  "wall_seconds_per_arm": 180,
+  "refinement_seed": 23092026,
+  "greek_weight": 0.01,
+  "lbfgs_loss_multiplier": 10000,
+  "lbfgs_chunk_size": 1024,
+  "selection_rule": "Each Greek RMSE must remain within 10% of the parent model, then minimize price RMSE among baseline and refined arms.",
+  "verdict_rule": {
+    "refinement_improves_price": "Every seed selects a refined arm with lower price RMSE than its parent.",
+    "lbfgs_dependable": "L-BFGS is the selected arm on at least two of three seeds and lowers price RMSE versus the parent on all three seeds."
+  },
+  "observed_audit": {
+    "file": "results\\deeponet\\optimizer_refinement\\20260923T090451734503Z\\fresh_audit.npz",
+    "sha256": "eb1fa413e1bf575501c06ec6667640cdec90aec652da7f6cc1fc2f5b41e9b07a",
+    "status": "observed_benchmark_reused_for_cross_seed_comparability",
+    "selection_uses": "validation_only",
+    "note": "This audit was opened by the prior refinement; it is not an untouched test."
+  },
+  "final_test_accessed": false,
+  "selected_step": 14,
+  "selected_validation_mse": 2.313253884819309e-06,
+  "optimizer_steps": 116,
+  "closure_calls": 236,
+  "training_wall_seconds": 182.99344420000125,
+  "stop_reason": "wall_budget_checked_between_lbfgs_steps",
+  "settings": {
+    "protocol_id": "deeponet_optimizer_refinement_seeds_v1",
+    "architecture": {
+      "width": 64,
+      "depth": 3,
+      "rank": 64
+    },
+    "seed": 23092026,
+    "epochs": 100000,
+    "batch_size": 8192,
+    "learning_rate": 1.0,
+    "validation_every": 10,
+    "wall_seconds": 180,
+    "threads": 2,
+    "loss": "price_mse_over_strike_squared_plus_weighted_training_rms_greek_mse",
+    "selection": "minimum_validation_normalized_price_mse",
+    "dataset": "results/deeponet/data/black_scholes_operator_v1.npz",
+    "dataset_manifest": "results/deeponet/data/black_scholes_operator_v1_manifest.json",
+    "output_root": "results/deeponet/training",
+    "note": "Validation-only development; final test excluded",
+    "progress_every_seconds": 45,
+    "greek_weight": 0.01,
+    "optimizer": "lbfgs",
+    "loss_multiplier": 10000.0,
+    "chunk_size": 1024,
+    "history_size": 50,
+    "max_iter": 1,
+    "line_search_fn": "strong_wolfe"
+  },
+  "seed": 22092028,
+  "parent_checkpoint": "results\\deeponet\\weight_001_replication\\20260923T084432489626Z\\seed_22092028\\selected.pt",
+  "parent_sha256": "3e499fc158cb7a01fad6e2210aac62852ea1f28601af5c02e661e641a3e07866",
+  "label_columns_used": [
+    "price",
+    "delta",
+    "gamma",
+    "vega",
+    "theta",
+    "rho"
+  ],
+  "checkpoint_sha256": {
+    "selected": "174ce609338c439f6df88bc350704f94945c25e1d6bc4defcd2ece8748fbcd5f",
+    "last": "4dcff58dc7eb2e8d5d5be0ca05d649c841a770e1da22eb4d82bd39c3d0dcac0a"
+  }
+}
