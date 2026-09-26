@@ -1,0 +1,79 @@
+{
+  "protocol_id": "deeponet_model_selection_v1",
+  "decision": "Select weight 0.01 after the paired three-seed validation study. Within that family, select the seed-22092027 checkpoint by minimum validation price RMSE. Evaluate the final test only after recording this decision.",
+  "primary": {
+    "weight": 0.01,
+    "seed": 22092027,
+    "checkpoint": "results/deeponet/weight_001_replication/20260923T084432489626Z/seed_22092027/selected.pt",
+    "checkpoint_sha256": "e95693bea39ccfe3469449948f179efa92542a6394327ef84fb92ade66dc4901",
+    "validation_price_rmse": 0.08740654569455421
+  },
+  "greek_focused_reference": {
+    "weight": 1.0,
+    "seed": 22092026,
+    "checkpoint": "results/deeponet/comparisons/20260922T140050569791Z/price_and_greeks/selected.pt",
+    "checkpoint_sha256": "249c0c0a6190fb9793034b5e0abcbc8b8d16b6843fa7d73e83ce4d5754a59a40"
+  },
+  "price_only_reference": {
+    "checkpoint": "results/deeponet/comparisons/20260922T140050569791Z/price_only/selected.pt",
+    "checkpoint_sha256": "833ef6522c4c0d7a3ccca81569ac0fe543f8ec3b819d24e5169a8193107396c5"
+  },
+  "validation_studies": [
+    "results/deeponet/weight_sweeps/20260922T142444840021Z/report.md",
+    "results/deeponet/weight_001_replication/20260923T084432489626Z/report.md"
+  ],
+  "selection_seed_included_in_three_seed_aggregate": true,
+  "refined_candidate": {
+    "status": "single_seed_refinement_with_fresh_audit",
+    "optimizer": "L-BFGS",
+    "checkpoint": "results/deeponet/optimizer_refinement/20260923T090451734503Z/lbfgs/selected.pt",
+    "checkpoint_sha256": "79edbd515b5276b9a64ca1063dedd9295378cbd9043152a48d5d971540c0498f",
+    "validation_price_rmse": 0.06180398022720165,
+    "fresh_audit_summary": "results/deeponet/optimizer_refinement/20260923T090451734503Z/summary.json",
+    "limitation": "Price accuracy improved; stress-set Theta and Rho and financial shape violations remain. Existing primary retains its original final-test record.",
+    "cross_seed_status": "See optimizer_refinement_across_seeds: the refinement procedure is dependable, but L-BFGS is not a uniformly better refiner than small-step Adam."
+  },
+  "optimizer_refinement_across_seeds": {
+    "status": "three_seed_refinement_verdict",
+    "report": "results/deeponet/optimizer_refinement_seeds/20260923T093654478604Z/report.md",
+    "corrected_report": "results/deeponet/optimizer_refinement_seeds/20260923T093654478604Z/report_corrected.md",
+    "verdict": "Refinement helped validation price accuracy on all three seeds; Adam won two seeds and L-BFGS one under the recorded selection rule. Neither optimizer is uniformly superior.",
+    "audit_status": "The first refinement audit was reused as an observed benchmark for cross-seed comparability only.",
+    "final_test_accessed": false
+  },
+  "training_ablation": {
+    "status": "single_factor_study_matched_update_counts",
+    "protocol": "deeponet_training_ablation_v2",
+    "report": "results/deeponet/training_ablation/20260923T111505263380Z/report.md",
+    "corrected_report": "results/deeponet/training_ablation/20260923T111505263380Z/report_corrected.md",
+    "findings": "Parity by construction eliminates call-put inconsistency exactly and improves most validation RMSEs at matched update counts while reducing price-bound violation frequency; measured exceptions (slightly worse stress Rho, small negative-Gamma frequency increase) are listed in the corrected report. Concentrated near-expiry/near-strike sampling roughly halves target-region Gamma and Theta error at a broad price/Delta accuracy cost. Bound-violation penalties reduce their targeted violations but only at an accuracy cost; no penalty arm both removes violations and keeps accuracy acceptable.",
+    "sampling_normalization_caveat": "The previous sampling results changed sampling and normalization jointly; the corrected study with shared normalization scales is results/deeponet/sampling_correction/.",
+    "superseded": "results/deeponet/training_ablation/20260923T100456099544Z (wall-clock budget confound; see its report addendum)",
+    "evaluation_status": "Fresh evaluation cases were opened after selection and are now observed; a later independent assessment needs new fresh cases.",
+    "final_test_accessed": false
+  },
+  "recommendations": {
+    "parity_architecture": "Strongest candidate to develop next.",
+    "mixed_sampling": "Keep as a specialist variant: near-expiry Greeks improve, but broad price RMSE worsens 35.9% and Rho 37.7%.",
+    "penalties": "Retain as targeted experiments; no general improvement established.",
+    "optimizer_refinement": "Supported across seeds; Adam won two, L-BFGS one."
+  },
+  "parity_refinement": {
+    "status": "established_refinement_procedure_across_seeds",
+    "report": "results/deeponet/parity_refinement/20260923T155834294516Z/report.md",
+    "verdict": "Refined parity improves 6 of 6 validation RMSEs versus refined control at matched parents, procedure and seeds (price -27.7%) and enforces exact call-put consistency by construction; the corrected audit verifies every saved identity. Financial constraint violations (stress negative-Gamma frequency 13.88% -> 15.19%, price bounds 12.08% -> 13.41%) and limited seed coverage (3 seeds) remain material limitations: parity showed ~17x lower validation price SD across these seeds without establishing general seed robustness. Supports parity as the strongest candidate; the registered primary remains unchanged pending an explicit selection decision.",
+    "fresh_evaluation_status": "Fresh cases opened after selection and now observed; the final benchmark was not accessed again.",
+    "final_test_accessed": false
+  },
+  "final_benchmark_status": "Observed once in the earlier one-time study (results/deeponet/primary/final_test_metrics.json). Later work did not access it again; any further independent assessment needs fresh cases.",
+  "final_test_is_for_evaluation_only": true,
+  "fresh_shared_comparison_v1": {
+    "status": "completed_observed",
+    "protocol": "results/shared_comparison/v1/protocol.json",
+    "report": "results/shared_comparison/v1/report.md",
+    "scope": "Fixed calls: all five methods, four outputs. Varying contracts: analytical, RQMC, CN and refined parity; six outputs.",
+    "parity_model": "parity_22092027",
+    "selection": "Existing validation only, before fresh prediction",
+    "registered_primary_unchanged": true
+  }
+}

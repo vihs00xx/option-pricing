@@ -226,7 +226,7 @@ def main():
     save_csv(tables / "mc_greek_tuning_runs.csv", greek_tuning)
     save_csv(tables / "mc_greek_tuning_summary.csv", greek_tuning_summary)
     selected_fd = min(fd_configs, key=lambda c: score(greek_tuning_summary, c["id"]))
-    reliable = [c for c in greek_configs if all(row["coverage"] >= 0.75 and row["zero_se_rate"] == 0
+    reliable = [c for c in greek_configs if all(row["coverage"] >= settings["minimum_coverage"] and row["zero_se_rate"] == 0
                 for row in greek_tuning_summary if row["config"] == c["id"])]
     greek_selected = []
     for method in METHODS:
@@ -237,7 +237,9 @@ def main():
     frozen["greek_selected"] = greek_selected
     frozen["greek_reliable_on_tuning"] = [c["id"] for c in reliable]
     frozen["greek_preferred_by_tuning"] = min(reliable, key=lambda c: score(greek_tuning_summary, c["id"])) if reliable else None
-    frozen["greek_reliability_gate"] = "At least 75% coverage and no zero standard errors for every tuning case and quantity, before ranking by score. No recommendation if none qualify."
+    frozen["greek_reliability_gate"] = (f"At least {settings['minimum_coverage']:.0%} coverage and no zero "
+                                            "standard errors for every tuning case and quantity, before "
+                                            "ranking by score. No recommendation if none qualify.")
     frozen["greek_tuning_seconds"] = perf_counter()-greek_tuning_start
     frozen_path.write_text(json.dumps(frozen, indent=2) + "\n")
     greek_runs = run_cases(settings, settings["evaluation_cases"], greek_selected, [settings["greek_budget"]],

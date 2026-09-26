@@ -1,0 +1,9 @@
+# Recorded CPU benchmark runtime; use Python 3.13.3.
+--extra-index-url https://download.pytorch.org/whl/cpu
+numpy==2.2.6
+scipy==1.15.3
+torch==2.8.0+cpu
+matplotlib==3.10.3
+psutil==7.2.2
+pytest==9.1.1
+QuantLib==1.43

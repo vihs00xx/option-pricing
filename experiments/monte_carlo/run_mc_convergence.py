@@ -1,4 +1,5 @@
 import csv
+import hashlib
 import json
 import platform
 from collections import defaultdict
@@ -38,7 +39,8 @@ def fit_rate(rows):
 
 def main():
     project = Path(__file__).resolve().parents[2]
-    settings = json.loads((project / "experiments" / "config" / "classical" / "convergence_settings.json").read_text())
+    settings_bytes = (project / "experiments" / "config" / "classical" / "convergence_settings.json").read_bytes()
+    settings = json.loads(settings_bytes)
     tables = project / "results" / "monte_carlo" / "tables"
     figures = project / "results" / "monte_carlo" / "figures"
     tables.mkdir(parents=True, exist_ok=True)
@@ -130,6 +132,8 @@ def main():
     metadata = dict(settings=settings, total_runs=len(runs), python=platform.python_version(),
                     numpy=np.__version__, scipy=scipy.__version__, matplotlib=matplotlib.__version__,
                     platform=platform.platform(),
+                    protocol_id=settings["protocol_id"],
+                    settings_sha256=hashlib.sha256(settings_bytes).hexdigest(),
                     rate_fit="OLS of log(RMSE) on log(N). alpha is minus the slope. Tail fit uses the largest four N values. Standard error is the ordinary regression slope SE over six or four aggregate points; it does not include case-selection uncertainty.",
                     work="N is total payoff evaluations for prices. Sobol-control includes its 50% independent pilot in N. Each Sobol production or pilot scramble has a power-of-two point count.",
                     caution="Twenty-four independent repetitions give noisy RMSE and coverage estimates, especially when QMC errors are very small. Observed alpha is empirical for these four one-dimensional European cases, not a universal QMC convergence theorem.")

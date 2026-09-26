@@ -1,4 +1,5 @@
 import csv
+import hashlib
 import json
 import platform
 from pathlib import Path
@@ -23,7 +24,9 @@ def write_csv(path, rows):
 
 
 def main():
-    settings = json.loads((ROOT / "experiments" / "config" / "classical" / "finite_difference_settings.json").read_text())
+    settings_path = ROOT / "experiments" / "config" / "classical" / "finite_difference_settings.json"
+    settings_bytes = settings_path.read_bytes()
+    settings = json.loads(settings_bytes)
     table_dir = ROOT / "results" / "finite_difference" / "tables"
     figure_dir = ROOT / "results" / "finite_difference" / "figures"
     table_dir.mkdir(parents=True, exist_ok=True)
@@ -250,6 +253,8 @@ def main():
                            - min(row["price"] for row in boundary_rows),
         },
         "versions": {"python": platform.python_version(), "numpy": np.__version__, "scipy": scipy.__version__},
+        "protocol_id": settings["protocol_id"],
+        "settings_sha256": hashlib.sha256(settings_bytes).hexdigest(),
     }
     (table_dir / "fd_validation.json").write_text(json.dumps(summary, indent=2) + "\n")
 

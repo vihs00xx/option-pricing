@@ -24,3 +24,11 @@ checkpoints/
 
 # Local run logs and temporary diagnostics
 /artifacts/
+
+# Isolated benchmark runtime
+.venv-benchmark/
+
+# Rebuildable previews and editor-local state
+/build/
+.zcodeignore
+*.last.pt

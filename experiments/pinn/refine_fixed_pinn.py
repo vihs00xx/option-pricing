@@ -1,5 +1,7 @@
+import argparse
 import csv
 import json
+import platform
 from pathlib import Path
 from time import perf_counter
 
@@ -7,16 +9,36 @@ import torch
 
 from src.neural.fixed_pinn import load_fixed_pinn, sample_collocation, sample_terminal
 
+from experiments.pinn import frozen_checkpoint
+
 
 ROOT = Path(__file__).resolve().parents[2]
 
 
 def main():
+    parser = argparse.ArgumentParser(description=(
+        "Refine a fixed-parity PINN candidate with an extra L-BFGS phase. "
+        "Writes a NEW candidate; never touches the frozen primary checkpoint."))
+    parser.add_argument("--source", required=True,
+                        help="Candidate checkpoint (.pt) to refine, under "
+                             "checkpoints/pinn/research_variants/fixed_pinn_candidates/")
+    parser.add_argument("--tag", required=True,
+                        help="Name of the new refined candidate (no extension)")
+    arguments = parser.parse_args()
+
     settings = json.loads((ROOT / "experiments" / "config" / "neural" / "fixed_pinn_settings.json").read_text())
     training = settings["training"]
-    table_dir = ROOT / "results" / "pinn" / "primary" / "anchored" / "tables"
-    checkpoint_path = ROOT / "checkpoints" / "pinn" / "primary" / "anchored" / "fixed_black_scholes_pinn.pt"
-    model = load_fixed_pinn(checkpoint_path)
+    refuse_primary_overwrite = frozen_checkpoint.refuse_primary_overwrite(ROOT)
+    source = Path(arguments.source)
+    if not source.is_absolute():
+        source = ROOT / source
+    if source == frozen_checkpoint.primary_checkpoint_path(ROOT):
+        raise ValueError("refuse: refining the frozen primary directly is not "
+                         "allowed; copy it to a candidate first")
+    if not source.exists():
+        raise FileNotFoundError(f"refine: source checkpoint not found: {source}")
+
+    model = load_fixed_pinn(source)
     dtype = next(model.parameters()).dtype
     problem = model.problem
     x, tau = sample_collocation(
@@ -33,8 +55,7 @@ def main():
         history_size=training["lbfgs_history_size"], line_search_fn="strong_wolfe",
         tolerance_grad=1e-12, tolerance_change=1e-14,
     )
-    history_path = table_dir / "training_history.csv"
-    history = list(csv.DictReader(history_path.open()))
+    history = []
     calls = 0
     start = perf_counter()
 
@@ -59,6 +80,9 @@ def main():
     refinement_seconds = perf_counter() - start
     residual_loss = float(torch.mean(model.pde_residual(x, tau)**2).detach())
     terminal_loss = float(torch.mean((model(terminal_x, terminal_tau) - payoff)**2).detach())
+    final_loss = residual_loss + training["terminal_loss_weight"] * terminal_loss
+
+    checkpoint_path = frozen_checkpoint.candidate_path(ROOT, arguments.tag)
     torch.save({
         "state_dict": model.state_dict(), "problem": vars(problem),
         "network": {
@@ -66,24 +90,29 @@ def main():
             "hidden_width": settings["network"]["hidden_width"],
         },
     }, checkpoint_path)
-    with history_path.open("w", newline="") as handle:
+
+    table_dir = (ROOT / "results" / "pinn" / "research_variants"
+                 / "fixed_pinn_candidates" / arguments.tag / "tables")
+    table_dir.mkdir(parents=True, exist_ok=True)
+    with (table_dir / "refinement_history.csv").open("w", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=history[0])
         writer.writeheader()
         writer.writerows(history)
-    metadata_path = table_dir / "training_metadata.json"
-    metadata = json.loads(metadata_path.read_text())
-    metadata["optimizer_steps"] += calls
-    metadata["lbfgs_refinement_closure_calls"] = (
-        metadata.get("lbfgs_refinement_closure_calls", 0) + calls
-    )
-    metadata["refinement_wall_seconds"] = (
-        metadata.get("refinement_wall_seconds", 0) + refinement_seconds
-    )
-    metadata["wall_seconds"] += refinement_seconds
-    metadata["final_pde_loss"] = residual_loss
-    metadata["final_terminal_loss"] = terminal_loss
-    metadata["final_training_loss"] = residual_loss + training["terminal_loss_weight"] * terminal_loss
-    metadata_path.write_text(json.dumps(metadata, indent=2) + "\n")
+    metadata = {
+        "model": "fixed_black_scholes_pinn_refined",
+        "source_checkpoint": str(source.relative_to(ROOT)),
+        "source_sha256": frozen_checkpoint.sha256_of(source),
+        "refinement_seed": training["seed"],
+        "lbfgs_closure_calls": calls,
+        "refinement_wall_seconds": refinement_seconds,
+        "final_pde_loss": residual_loss,
+        "final_terminal_loss": terminal_loss,
+        "final_training_loss": final_loss,
+        "checkpoint": str(checkpoint_path.relative_to(ROOT)),
+        "python": platform.python_version(),
+        "torch_version": torch.__version__,
+    }
+    (table_dir / "training_metadata.json").write_text(json.dumps(metadata, indent=2) + "\n")
     print(json.dumps(metadata, indent=2))
 
 

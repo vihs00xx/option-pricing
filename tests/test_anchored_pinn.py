@@ -16,8 +16,21 @@ from src.neural.anchored_pinn import (
     term_losses, training_batches, validation_batches, weighted_total,
 )
 from src.neural.fixed_pinn import FixedBlackScholesPINN
+import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
+
+_MODULE_DTYPE = None
+
+
+def setUpModule():
+    global _MODULE_DTYPE
+    _MODULE_DTYPE = torch.get_default_dtype()
+    torch.set_default_dtype(torch.float64)
+
+
+def tearDownModule():
+    torch.set_default_dtype(_MODULE_DTYPE)
 
 SETTINGS = {
     "study_version": 2,
@@ -279,18 +292,15 @@ class DatasetTests(unittest.TestCase):
         dataset["test_tau"] = dataset["anchor_tau"].copy()
         self.assertIn("anchor_train|test", verify_disjoint(dataset))
 
-    def test_provenance_mismatch_is_detected(self, ):
+    def test_provenance_mismatch_is_detected(self):
         dataset = build_dataset(SETTINGS)
-        path = ROOT / "results" / "pinn" / "anchored_study_v2" / "data" / "test_provenance.npz"
-        save_dataset(path, dataset, SETTINGS)
-        try:
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "test_provenance.npz"
+            save_dataset(path, dataset, SETTINGS)
             load_dataset(path, SETTINGS)  # matching config is accepted
             changed = dict(SETTINGS, seed=SETTINGS["seed"] + 1)
             with self.assertRaises(ValueError):
                 load_dataset(path, changed)
-        finally:
-            path.unlink(missing_ok=True)
-            path.with_suffix(path.suffix + ".meta.json").unlink(missing_ok=True)
 
     def test_smoke_and_production_dataset_paths_differ(self):
         from experiments.pinn.train_anchored_ablation import dataset_paths

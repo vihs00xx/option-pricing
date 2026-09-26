@@ -10,9 +10,21 @@ from src.neural.fixed_pinn import (
 )
 
 
+_MODULE_DTYPE = None
+
+
+def setUpModule():
+    global _MODULE_DTYPE
+    _MODULE_DTYPE = torch.get_default_dtype()
+    torch.set_default_dtype(torch.float64)
+
+
+def tearDownModule():
+    torch.set_default_dtype(_MODULE_DTYPE)
+
+
 class FixedPINNTests(unittest.TestCase):
     def setUp(self):
-        torch.set_default_dtype(torch.float64)
         self.problem = FixedBlackScholesProblem(100, 1, 0.05, 0.2, 0, 0.05, 4)
         self.model = FixedBlackScholesPINN(self.problem, hidden_layers=2, hidden_width=8)
 

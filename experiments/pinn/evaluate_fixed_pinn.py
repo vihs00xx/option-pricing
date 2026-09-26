@@ -10,6 +10,8 @@ import torch
 from src.black_scholes import black_scholes_greeks, black_scholes_price
 from src.neural.fixed_pinn import load_fixed_pinn, sample_collocation
 
+from experiments.pinn import frozen_checkpoint
+
 
 ROOT = Path(__file__).resolve().parents[2]
 QUANTITIES = ("price", "delta", "gamma", "theta")
@@ -43,6 +45,13 @@ def main():
     table_dir = ROOT / "results" / "pinn" / "primary" / "anchored" / "tables"
     figure_dir = ROOT / "results" / "pinn" / "primary" / "anchored" / "figures"
     checkpoint = ROOT / "checkpoints" / "pinn" / "primary" / "anchored" / "fixed_black_scholes_pinn.pt"
+    digest = frozen_checkpoint.primary_digest(ROOT)
+    if digest["status"] != "frozen":
+        raise RuntimeError(
+            f"refuse to evaluate a non-baseline primary: status "
+            f"'{digest['status']}' (registry pin {digest['frozen_sha256']}); "
+            "the frozen anchored baseline must be intact before evaluation")
+    checkpoint_sha256 = digest["actual_sha256"]
     model = load_fixed_pinn(checkpoint)
     model.eval()
     x_axis = np.linspace(problem["x_min"], problem["x_max"], evaluation["x_points"])
@@ -182,10 +191,19 @@ def main():
         "shape_checks": {"full": shape, "core": core_shape}, "inference": inference,
     }
     (table_dir / "validation.json").write_text(json.dumps(summary, indent=2) + "\n")
-    training_metadata_path = table_dir / "training_metadata.json"
-    training_metadata = json.loads(training_metadata_path.read_text())
-    training_metadata["final_validation_loss"] = residual_metrics["rmse"]**2
-    training_metadata_path.write_text(json.dumps(training_metadata, indent=2) + "\n")
+    # Evaluation provenance lives in its own record and NEVER mutates the
+    # immutable training_metadata.json. The record pins the exact checkpoint
+    # SHA-256 that produced these metrics.
+    import platform
+    evaluation_metrics = {
+        **summary,
+        "checkpoint": str(checkpoint.relative_to(ROOT)),
+        "checkpoint_sha256": checkpoint_sha256,
+        "registry_pin_sha256": digest["frozen_sha256"],
+        "python": platform.python_version(),
+    }
+    (table_dir / "evaluation_metrics.json").write_text(
+        json.dumps(evaluation_metrics, indent=2) + "\n")
 
     price_error = np.abs(predicted["price"] - exact_price).reshape(tau_grid.shape)
     final = tau_flat == problem["T"]

@@ -17,6 +17,19 @@ from src.neural.pinn_training import (
 )
 
 
+_MODULE_DTYPE = None
+
+
+def setUpModule():
+    global _MODULE_DTYPE
+    _MODULE_DTYPE = torch.get_default_dtype()
+    torch.set_default_dtype(torch.float64)
+
+
+def tearDownModule():
+    torch.set_default_dtype(_MODULE_DTYPE)
+
+
 class ConstraintViolationTests(unittest.TestCase):
     def setUp(self):
         torch.set_default_dtype(torch.float64)

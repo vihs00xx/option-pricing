@@ -64,6 +64,58 @@ def synthetic_split(contract_count, coordinates_per_contract, domain, seed):
     }
 
 
+MIXED_REGIONS = ("broad", "near_strike", "near_expiry", "near_strike_and_expiry")
+STRIKE_BAND = (0.95, 1.05)
+EXPIRY_TAU = 0.05
+
+
+def contract_coordinate_split(contracts, coordinates_per_contract, domain, seed, mixed=False):
+    """Coordinates and targets for fixed contracts sampled uniformly or with
+    near-expiry and near-strike concentrations.
+
+    mixed=True keeps total size unchanged: half of each contract's coordinates
+    stay broad, one quarter concentrate near the strike, one eighth near expiry
+    and the remainder near both. Region codes in ``region`` record the layout
+    (MIXED_REGIONS indices; all zero when mixed=False).
+    """
+    count = len(contracts)
+    branch = np.repeat(contracts, coordinates_per_contract, axis=0)
+    moneyness = np.empty((count, coordinates_per_contract))
+    tau = np.empty((count, coordinates_per_contract))
+    region = np.zeros((count, coordinates_per_contract), dtype=np.int64)
+    minimum_tau = float(domain["tau_minimum"])
+    horizon = contracts[:, 1:2]
+    if mixed:
+        sizes = [coordinates_per_contract // 2, coordinates_per_contract // 4,
+                 coordinates_per_contract // 8]
+        sizes.append(coordinates_per_contract - sum(sizes))
+        if min(sizes) < 1:
+            raise ValueError("mixed sampling needs at least 8 coordinates per contract")
+    else:
+        sizes = [coordinates_per_contract]
+    bands = (domain["moneyness"], STRIKE_BAND, domain["moneyness"], STRIKE_BAND)
+    capped = (False, False, True, True)
+    offset = 0
+    for code, size in enumerate(sizes):
+        unit = qmc.LatinHypercube(d=2, seed=seed + 10 * code).random(count * size)
+        band = bands[code] if mixed else domain["moneyness"]
+        upper = np.minimum(EXPIRY_TAU, horizon) if (mixed and capped[code]) else horizon
+        moneyness[:, offset:offset + size] = _scale(unit[:, 0], *band).reshape(count, size)
+        tau[:, offset:offset + size] = (
+            minimum_tau + unit[:, 1].reshape(count, size) * (upper - minimum_tau))
+        region[:, offset:offset + size] = code if mixed else 0
+        offset += size
+    trunk = np.column_stack((branch[:, 0] * moneyness.ravel(), tau.ravel()))
+    contract_id = np.repeat(np.arange(count), coordinates_per_contract)
+    return {
+        "branch": branch,
+        "trunk": trunk,
+        "targets": _targets(branch, trunk),
+        "contract_id": contract_id,
+        "region": region.ravel(),
+    }
+
+
 def benchmark_split(cases):
     option_code = np.array([
         1.0 if case["option"] == "call" else -1.0 for case in cases

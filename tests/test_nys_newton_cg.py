@@ -7,6 +7,19 @@ from src.neural.fixed_pinn import FixedBlackScholesPINN, FixedBlackScholesProble
 from src.neural.nys_newton_cg import NysNewtonCG, flatten, unflatten
 
 
+_MODULE_DTYPE = None
+
+
+def setUpModule():
+    global _MODULE_DTYPE
+    _MODULE_DTYPE = torch.get_default_dtype()
+    torch.set_default_dtype(torch.float64)
+
+
+def tearDownModule():
+    torch.set_default_dtype(_MODULE_DTYPE)
+
+
 def finite_difference_hessian_vector(loss_fn, params, vector, epsilon=1e-6):
     for parameter, direction in zip(params, vector):
         parameter.data.add_(direction, alpha=epsilon)

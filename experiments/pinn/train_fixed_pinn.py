@@ -17,6 +17,8 @@ from src.neural.fixed_pinn import (
     sample_terminal,
 )
 
+from experiments.pinn.frozen_checkpoint import refuse_primary_overwrite
+
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -25,6 +27,10 @@ def main():
     settings = json.loads((ROOT / "experiments" / "config" / "neural" / "fixed_pinn_settings.json").read_text())
     training = settings["training"]
     network = settings["network"]
+    candidate_dir = refuse_primary_overwrite(ROOT)
+    # A candidate tag identifies this training run; prompts use it to name the
+    # checkpoint and its results, keeping the frozen primary untouched.
+    tag = f"fixed_black_scholes_pinn_{training['seed']}"
     dtype = torch.float64 if network["dtype"] == "float64" else torch.float32
     torch.set_default_dtype(dtype)
     torch.manual_seed(training["seed"])
@@ -35,12 +41,11 @@ def main():
     model = FixedBlackScholesPINN(
         problem, hidden_layers=network["hidden_layers"], hidden_width=network["hidden_width"]
     )
-    table_dir = ROOT / "results" / "pinn" / "primary" / "anchored" / "tables"
-    figure_dir = ROOT / "results" / "pinn" / "primary" / "anchored" / "figures"
-    checkpoint_dir = ROOT / "checkpoints" / "pinn" / "primary" / "anchored"
+    table_dir = ROOT / "results" / "pinn" / "research_variants" / "fixed_pinn_candidates" / tag / "tables"
+    figure_dir = ROOT / "results" / "pinn" / "research_variants" / "fixed_pinn_candidates" / tag / "figures"
+    checkpoint_dir = candidate_dir
     table_dir.mkdir(parents=True, exist_ok=True)
     figure_dir.mkdir(parents=True, exist_ok=True)
-    checkpoint_dir.mkdir(parents=True, exist_ok=True)
     process = psutil.Process()
     baseline = process.memory_info().rss
     peak = [baseline]
@@ -127,7 +132,7 @@ def main():
     memory_thread.join()
     peak[0] = max(peak[0], process.memory_info().rss)
 
-    checkpoint_path = checkpoint_dir / "fixed_black_scholes_pinn.pt"
+    checkpoint_path = checkpoint_dir / f"{tag}.pt"
     torch.save({
         "state_dict": model.state_dict(), "problem": asdict(problem),
         "network": {"hidden_layers": network["hidden_layers"],

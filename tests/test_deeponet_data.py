@@ -5,7 +5,8 @@ from pathlib import Path
 import numpy as np
 
 from src.common_benchmark import build_cases
-from src.neural.deeponet_data import build_dataset
+from src.neural.deeponet_data import (EXPIRY_TAU, STRIKE_BAND, _contract_samples, build_dataset,
+                                      contract_coordinate_split)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -64,6 +65,31 @@ class DeepONetDataTests(unittest.TestCase):
                 np.testing.assert_array_equal(
                     self.dataset[split][name], repeated[split][name]
                 )
+
+    def test_mixed_split_layout_and_bounds(self):
+        domain = self.settings["training_domain"]
+        contracts = _contract_samples(8, domain, 777)
+        mixed = contract_coordinate_split(contracts, 32, domain, 888, mixed=True)
+        uniform = contract_coordinate_split(contracts, 32, domain, 888)
+        self.assertEqual(len(mixed["branch"]), 8 * 32)
+        self.assertEqual(len(uniform["branch"]), 8 * 32)
+        self.assertEqual({code: int(np.sum(mixed["region"] == code)) for code in range(4)},
+                         {0: 8 * 16, 1: 8 * 8, 2: 8 * 4, 3: 8 * 4})
+        self.assertTrue(np.all(uniform["region"] == 0))
+        moneyness = mixed["trunk"][:, 0] / mixed["branch"][:, 0]
+        tau = mixed["trunk"][:, 1]
+        for code in (1, 3):
+            mask = mixed["region"] == code
+            self.assertTrue(np.all(np.abs(moneyness[mask] - 1.) <= STRIKE_BAND[1] - 1.))
+        for code in (2, 3):
+            mask = mixed["region"] == code
+            self.assertTrue(np.all(tau[mask] <= EXPIRY_TAU))
+        self.assertTrue(np.all((moneyness >= domain["moneyness"][0])
+                               & (moneyness <= domain["moneyness"][1])))
+        self.assertTrue(np.all(tau > 0.))
+        self.assertTrue(np.all(tau <= mixed["branch"][:, 1]))
+        self.assertTrue(np.isfinite(mixed["targets"]).all())
+        self.assertTrue(np.isfinite(uniform["targets"]).all())
 
 
 if __name__ == "__main__":

@@ -15,7 +15,10 @@
       "sigma": 0.2,
       "q": 0.0
     },
-    "uses_analytical_labels": ["price", "theta"],
+    "uses_analytical_labels": [
+      "price",
+      "theta"
+    ],
     "results": {
       "training": "results/pinn/primary/anchored/tables/training_metadata.json",
       "validation": "results/pinn/primary/anchored/tables/validation.json",
@@ -107,5 +110,14 @@
     "Preserve selected and last checkpoint entries separately in evaluation manifests.",
     "Make the staged runner fail immediately after a failed command.",
     "Revisit gradient-enhanced and structurally constrained formulations only under a new versioned protocol."
-  ]
+  ],
+  "fresh_shared_comparison_v1": {
+    "status": "completed_observed",
+    "protocol": "results/shared_comparison/v1/protocol.json",
+    "report": "results/shared_comparison/v1/report.md",
+    "scope": "Fixed calls: all five methods, four outputs. Varying contracts: analytical, RQMC, CN and refined parity; six outputs.",
+    "parity_model": "parity_22092027",
+    "selection": "Existing validation only, before fresh prediction",
+    "registered_primary_unchanged": true
+  }
 }

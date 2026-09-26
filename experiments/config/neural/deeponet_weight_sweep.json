@@ -1,0 +1,15 @@
+{
+  "protocol_id": "deeponet_greek_weight_sweep_v1",
+  "reference_comparison": "results/deeponet/comparisons/20260922T140050569791Z",
+  "pilot": "results/deeponet/training/pilot_20260922T135135187961Z",
+  "weights": [0.01, 0.1, 1.0],
+  "reuse_weight_one_reference": true,
+  "continuation_seconds": 300,
+  "learning_rate": 0.0003,
+  "replication_seeds": [22092027, 22092028],
+  "price_rmse_limit_relative_to_price_only": 1.10,
+  "selection": "Among candidates inside the fixed price RMSE limit, minimize mean squared Greek RMSE divided by training-label RMS squared. If none pass, select minimum price RMSE and mark the gate failed.",
+  "checkpoint_selection": "Minimum validation price MSE normalized by strike, unchanged from comparison.",
+  "replication": "Retrain the full price-only pilot from each fresh seed before the selected weighted continuation. Include selection seed separately and report all three, with sample standard deviation. No retuning after replication.",
+  "final_test_accessed": false
+}

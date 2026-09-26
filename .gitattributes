@@ -1,0 +1,7 @@
+# Preserve recorded bytes and hashes on every checkout.
+* -text whitespace=cr-at-eol
+*.pt binary
+*.npz binary
+*.pdf binary
+*.png binary
+*.zip binary

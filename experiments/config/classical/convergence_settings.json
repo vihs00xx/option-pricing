@@ -1,4 +1,5 @@
 {
+  "protocol_id": "mc_convergence_v1",
   "seed": 2026091601,
   "sample_sizes": [1024, 4096, 16384, 65536, 262144, 1048576],
   "repetitions": 24,

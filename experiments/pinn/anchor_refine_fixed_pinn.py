@@ -1,5 +1,7 @@
+import argparse
 import csv
 import json
+import platform
 from pathlib import Path
 from time import perf_counter
 
@@ -8,6 +10,8 @@ import torch
 
 from src.black_scholes import black_scholes_greeks, black_scholes_price
 from src.neural.fixed_pinn import load_fixed_pinn, sample_collocation, sample_terminal
+
+from experiments.pinn import frozen_checkpoint
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -35,16 +39,15 @@ def anchor_data(model, settings, seed, dtype):
     ) * global_unit[:, 1:]
     x = torch.cat((core_x, global_x))
     tau = torch.cat((core_tau, global_tau))
+    spots = model.problem.K * x.numpy()[:, 0]
     price = black_scholes_price(
-        (model.problem.K * x.numpy()[:, 0]), model.problem.K,
-        tau.numpy()[:, 0], model.problem.r, model.problem.sigma, model.problem.q,
-        "call",
+        spots, model.problem.K, tau.numpy()[:, 0],
+        model.problem.r, model.problem.sigma, model.problem.q, "call",
     )
     target = torch.tensor(price[:, None] / model.problem.K, dtype=dtype)
     theta = black_scholes_greeks(
-        (model.problem.K * x.numpy()[:, 0]), model.problem.K,
-        tau.numpy()[:, 0], model.problem.r, model.problem.sigma, model.problem.q,
-        "call",
+        spots, model.problem.K, tau.numpy()[:, 0],
+        model.problem.r, model.problem.sigma, model.problem.q, "call",
     )["theta"]
     theta_target = torch.tensor(theta[:, None] / model.problem.K, dtype=dtype)
     return torch.log(x), tau, target, theta_target
@@ -62,13 +65,28 @@ def save_checkpoint(model, settings, path):
 
 
 def main():
+    parser = argparse.ArgumentParser(description=(
+        "Anchor a fixed-parity PINN candidate with analytical price/theta "
+        "labels. Writes a NEW candidate; never touches the frozen primary."))
+    parser.add_argument("--source", required=True,
+                        help="Candidate checkpoint (.pt) to anchor")
+    parser.add_argument("--tag", required=True,
+                        help="Name of the new anchored candidate (no extension)")
+    arguments = parser.parse_args()
+
     settings = json.loads((ROOT / "experiments" / "config" / "neural" / "fixed_pinn_settings.json").read_text())
     refinement = settings["anchored_refinement"]
-    checkpoint = ROOT / "checkpoints" / "pinn" / "primary" / "anchored" / "fixed_black_scholes_pinn.pt"
-    physics_checkpoint = checkpoint.with_name("fixed_black_scholes_pinn_physics_only.pt")
-    if not physics_checkpoint.exists():
-        physics_checkpoint.write_bytes(checkpoint.read_bytes())
-    model = load_fixed_pinn(checkpoint)
+    refuse_primary_overwrite = frozen_checkpoint.refuse_primary_overwrite(ROOT)
+    source = Path(arguments.source)
+    if not source.is_absolute():
+        source = ROOT / source
+    if source == frozen_checkpoint.primary_checkpoint_path(ROOT):
+        raise ValueError("refuse: anchoring the frozen primary directly is not "
+                         "allowed; copy it to a candidate first")
+    if not source.exists():
+        raise FileNotFoundError(f"anchor: source checkpoint not found: {source}")
+
+    model = load_fixed_pinn(source)
     dtype = next(model.parameters()).dtype
     torch.manual_seed(refinement["seed"])
     anchor_y, anchor_tau, anchor_target, theta_target = anchor_data(
@@ -169,29 +187,35 @@ def main():
         optimizer.step(closure)
         total_lbfgs_calls += stage_calls
     elapsed = perf_counter() - start
-    save_checkpoint(model, settings, checkpoint)
-    table_dir = ROOT / "results" / "pinn" / "primary" / "anchored" / "tables"
+    checkpoint_path = frozen_checkpoint.candidate_path(ROOT, arguments.tag)
+    save_checkpoint(model, settings, checkpoint_path)
+    table_dir = (ROOT / "results" / "pinn" / "research_variants"
+                 / "fixed_pinn_candidates" / arguments.tag / "tables")
+    table_dir.mkdir(parents=True, exist_ok=True)
     with (table_dir / "anchored_refinement_history.csv").open("w", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=history[0])
         writer.writeheader()
         writer.writerows(history)
-    metadata_path = table_dir / "training_metadata.json"
-    metadata = json.loads(metadata_path.read_text())
-    metadata["model"] = "fixed_black_scholes_anchored_pinn"
-    metadata["anchored_refinement"] = {
-        "physics_informed": True,
-        "labelled_price_anchors_used": True,
-        "labelled_greeks_used": True,
-        "labelled_greeks": ["theta"],
-        "anchor_source": "analytical Black-Scholes prices and Theta",
-        "wall_seconds": elapsed,
-        "adam_steps": total_adam_steps,
-        "lbfgs_closure_calls": total_lbfgs_calls,
-        "settings": refinement,
+    metadata = {
+        "model": "fixed_black_scholes_anchored_pinn_candidate",
+        "source_checkpoint": str(source.relative_to(ROOT)),
+        "source_sha256": frozen_checkpoint.sha256_of(source),
+        "anchored_refinement": {
+            "physics_informed": True,
+            "labelled_price_anchors_used": True,
+            "labelled_greeks_used": True,
+            "labelled_greeks": ["theta"],
+            "anchor_source": "analytical Black-Scholes prices and Theta",
+            "wall_seconds": elapsed,
+            "adam_steps": total_adam_steps,
+            "lbfgs_closure_calls": total_lbfgs_calls,
+            "settings": refinement,
+        },
+        "checkpoint": str(checkpoint_path.relative_to(ROOT)),
+        "python": platform.python_version(),
+        "torch_version": torch.__version__,
     }
-    metadata["wall_seconds"] += elapsed
-    metadata["optimizer_steps"] += total_adam_steps + total_lbfgs_calls
-    metadata_path.write_text(json.dumps(metadata, indent=2) + "\n")
+    (table_dir / "training_metadata.json").write_text(json.dumps(metadata, indent=2) + "\n")
     print(json.dumps(metadata["anchored_refinement"], indent=2))
 
 
