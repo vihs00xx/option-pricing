@@ -1,0 +1,31 @@
+\begin{table}[!ht]\centering\small\setlength{\tabcolsep}{4pt}
+\caption{Recorded historical neural models. PINN rows show the saved core RMSE means (three seeds for baseline, constrained, and causal; one run for optimiser references). DeepONet reference rows use the once-evaluated common benchmark.}
+\begin{tabular}{lrrrrrr}\toprule
+Model & Price & Delta & Gamma & Vega & Theta & Rho\\
+\midrule\multicolumn{7}{l}{\textit{Archived PINN studies: fixed-contract core}}\\
+Physics-only baseline & 0.254 & 0.0225 & 0.00364 & --- & 0.878 & ---\\
+Constrained (original) & 0.319 & 0.0282 & 0.00471 & --- & 1.02 & ---\\
+Constrained (revised) & 0.361 & 0.0302 & 0.00519 & --- & 1.18 & ---\\
+Causal (original) & 50.4 & 0.204 & 0.0108 & --- & 146 & ---\\
+Causal (revised) & 1.25 & 0.0704 & 0.00775 & --- & 3.24 & ---\\
+L-BFGS refinement & 0.199 & 0.0172 & 0.0033 & --- & 0.653 & ---\\
+NysNewton--CG refinement & 2.01 & 0.133 & 0.0109 & --- & 3.13 & ---\\
+\midrule\multicolumn{7}{l}{\textit{DeepONet reference checkpoints: 68-case benchmark}}\\
+Greek-focused reference & 0.472 & 0.0274 & 0.00488 & 3.08 & 1.86 & 4.2\\
+Price-only reference & 0.545 & 0.061 & 0.0149 & 3.53 & 3.23 & 9.58\\
+\bottomrule\end{tabular}\end{table}
+\begin{table}[!ht]\centering\small
+\caption{Earlier simulation price studies. RMSE is pooled across the recorded cases and repetitions. Greeks were not evaluated in these price-only tables. Budget labels identify the saved study rather than imply equal runtime across methods.}
+\begin{tabular}{lrr}\toprule
+Estimator & Recorded budget & Price RMSE\\\midrule
+antithetic (early study) & 32,768 & 0.0339\\
+control (early study) & 32,768 & 0.0275\\
+plain (early study) & 32,768 & 0.0549\\
+sobol (early study) & 32,768 & 0.000547\\
+\midrule
+Plain MC & $2^{20}$ total evaluations & 0.0392\\
+Sobol, 8 scrambles & $2^{20}$ total evaluations & 0.000468\\
+Sobol + control, 8 scrambles & $2^{20}$ total evaluations & $8.06\times10^{-6}$\\
+\bottomrule\end{tabular}
+\par\smallskip\parbox{.93\textwidth}{\footnotesize In the convergence study, $N$ includes the independent pilot: the controlled estimator allocates half to pilot and half to total evaluations. Equal evaluation counts need not imply equal runtime. The early study uses a different recorded case set, so its pooled RMSE should not be compared with the convergence study as though only the sample budget changed.}
+\end{table}

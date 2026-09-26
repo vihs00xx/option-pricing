@@ -1,0 +1,22 @@
+\begin{table}[!ht]\centering\small\setlength{\tabcolsep}{3pt}
+\caption{Price and Greek RMSEs grouped by evaluation set. Neural multi-seed rows report the mean of run-level RMSEs. A dash indicates an unreported quantity.}
+\label{tab:master}
+\begin{tabular}{lrrrrrr}\toprule
+Model & Price & Delta & Gamma & Vega & Theta & Rho\\
+\midrule\multicolumn{7}{l}{\textit{A. Common benchmark: 68 contracts}}\\
+Analytical reference & 0 & 0 & 0 & 0 & 0 & 0\\
+Conditional RQMC & $4.68\times10^{-5}$ & $7\times10^{-7}$ & $3.78\times10^{-8}$ & 0.000114 & $3.2\times10^{-5}$ & $4.74\times10^{-5}$\\
+Crank--Nicolson + Richardson & $1.66\times10^{-9}$ & $2.8\times10^{-9}$ & $6.8\times10^{-7}$ & $9.5\times10^{-5}$ & 0.000137 & $7.81\times10^{-6}$\\
+DeepONet: registered primary & 0.276 & 0.0162 & 0.00232 & 2.24 & 1.23 & 3.25\\
+\midrule\multicolumn{7}{l}{\textit{B. Fixed-call core surface: 1,920 coordinates}}\\
+Anchored PINN & 0.0098 & 0.00247 & 0.000872 & --- & 0.0874 & ---\\
+\midrule\multicolumn{7}{l}{\textit{C. DeepONet validation: 2,048 queries; three seeds}}\\
+Refined DeepONet control & 0.0913 & 0.0106 & 0.00272 & 1 & 1.35 & 1.15\\
+Refined DeepONet parity & 0.066 & 0.00838 & 0.00246 & 0.825 & 1.12 & 1.03\\
+\midrule\multicolumn{7}{l}{\textit{D. Fresh in-domain: 4,096 queries; three seeds}}\\
+Refined DeepONet control & 0.0922 & 0.0107 & 0.00249 & 0.943 & 1.5 & 1.13\\
+Refined DeepONet parity & 0.0688 & 0.00869 & 0.0022 & 0.836 & 1.2 & 1.02\\
+\midrule\multicolumn{7}{l}{\textit{E. Fresh stress: 2,048 queries; three seeds}}\\
+Refined DeepONet control & 0.237 & 0.019 & 0.00362 & 1.95 & 1.99 & 3.08\\
+Refined DeepONet parity & 0.208 & 0.0177 & 0.00336 & 1.9 & 1.75 & 2.79\\
+\bottomrule\end{tabular}\end{table}

@@ -1,0 +1,17 @@
+\begin{table}[!ht]\centering\small\setlength{\tabcolsep}{3pt}
+\caption{Fresh common-domain RMSEs. Rows within each panel use exactly the same queries. The fixed PINN supplies four outputs; it is excluded from the cross-contract panel. Analytical errors are zero by definition.}
+\label{tab:fresh-shared}
+\begin{tabular}{lrrrrrr}\toprule
+Method & Price & Delta & Gamma & Vega & Theta & Rho\\
+\midrule\multicolumn{7}{l}{\textit{Fixed parameters: 128 calls}}\\
+Analytical reference & 0 & 0 & 0 & --- & 0 & ---\\
+Conditional RQMC & $2.75\times10^{-5}$ & $8.14\times10^{-7}$ & $6.66\times10^{-8}$ & --- & $5.30\times10^{-5}$ & ---\\
+CN + Richardson & $9.09\times10^{-10}$ & $7.37\times10^{-9}$ & $1.68\times10^{-7}$ & --- & $2.78\times10^{-5}$ & ---\\
+Anchored PINN & 0.01107 & 0.002865 & 0.001125 & --- & 0.09423 & ---\\
+Parity DeepONet & 0.04265 & 0.006023 & 0.001245 & --- & 0.3178 & ---\\
+\midrule\multicolumn{7}{l}{\textit{Varying parameters: 128 interpolation queries}}\\
+Analytical reference & 0 & 0 & 0 & 0 & 0 & 0\\
+Conditional RQMC & $4.55\times10^{-5}$ & $7.71\times10^{-7}$ & $5.25\times10^{-8}$ & 0.0001462 & 0.0001041 & $3.58\times10^{-5}$\\
+CN + Richardson & $1.20\times10^{-9}$ & $6.59\times10^{-9}$ & $1.14\times10^{-7}$ & $8.05\times10^{-5}$ & $5.03\times10^{-5}$ & $1.94\times10^{-6}$\\
+Parity DeepONet & 0.0742 & 0.006988 & 0.002 & 1.003 & 0.538 & 1.784\\
+\bottomrule\end{tabular}\end{table}

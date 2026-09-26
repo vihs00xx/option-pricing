@@ -1,0 +1,11 @@
+\begin{table}[!ht]\centering\small
+\caption{Fresh timing comparison at batch size 32: median milliseconds per query over five repetitions after one warm-up. The fixed panel requests four outputs and the varying panel six. Detailed repetition spread and memory are retained with the results.}
+\label{tab:fresh-timing}
+\begin{tabular}{lrr}\toprule
+Method & Fixed parameters & Varying parameters\\\midrule
+Analytical reference & 0.04511 & 0.01884\\
+Conditional RQMC & 384.8 & 352.2\\
+CN + Richardson & 158.7 & 729.5\\
+Anchored PINN & 0.08329 & ---\\
+Parity DeepONet & 0.1585 & 0.1747\\
+\bottomrule\end{tabular}\end{table}
