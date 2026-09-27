@@ -58,6 +58,49 @@ Crank--Nicolson solves a discretised pricing PDE. The treatment here is delibera
 more compact than the neural sections that follow: these methods are the
 yardstick of the study, while the neural methods are its focus.
 
+\subsection{The Black--Scholes pricing equation}
+Under the model assumptions, a European option value $V(S,t)$ satisfies the
+Black--Scholes partial differential equation, including continuous dividend
+yield $q$ \cite{black1973,merton1973}:
+\begin{equation}
+\boxed{
+\frac{\partial V}{\partial t}
++\frac{1}{2}\sigma^2S^2\frac{\partial^2 V}{\partial S^2}
++(r-q)S\frac{\partial V}{\partial S}
+-rV=0,
+\qquad S>0,\quad 0\leq t<T.
+}
+\label{eq:bs-calendar-pde}
+\end{equation}
+Here $S$ is the underlying asset price, $t$ is calendar time, $T$ is expiry,
+and $K$ is the strike price. The constant parameters $r$, $q$, and $\sigma$
+are the risk-free rate, continuous dividend yield, and annualised volatility.
+Time is measured in years, and rates and volatility are expressed as decimals. The same equation applies to calls and
+puts. Their different values follow from the terminal payoff:
+\begin{equation}
+V(S,T)=g(S)=
+\begin{cases}
+\max(S-K,0), & \text{European call},\\
+\max(K-S,0), & \text{European put}.
+\end{cases}
+\label{eq:bs-terminal-payoff}
+\end{equation}
+
+The equation follows from eliminating the stock-price risk with a
+Delta hedge and requiring the remaining locally riskless position to earn
+the risk-free rate. Its terms connect valuation directly to the Greeks:
+$V_t$ is Theta, $V_S$ is Delta, and $V_{SS}$ is Gamma. The curvature term
+captures the effect of volatility, the first-derivative term accounts for
+risk-neutral carry, and $-rV$ accounts for discounting. The equation therefore
+links the price to its time change, slope, and curvature rather than treating
+those quantities as separate predictions.
+
+The analytical formulas below solve this terminal-value problem with the
+appropriate boundary behaviour. Crank--Nicolson discretises the same equation,
+whereas the PINN penalises departures from it during training. Using
+$\tau=T-t$ changes $V_t$ to $-U_\tau$ for $U(S,\tau)=V(S,T-\tau)$;
+Equation~\eqref{eq:pde} gives this equivalent form used by the numerical methods.
+
 \subsection{Reading prices and Greeks}
 The same price function supplies both a valuation and its sensitivities. The table below fixes our notation. Greek values depend on units: volatility and rates are decimal inputs, time is measured in years, and $\Theta$ differentiates calendar time. Theta is often negative, but it is not defined as a loss and need not always have that sign.
 \begin{table}[!ht]\centering\small
@@ -232,7 +275,8 @@ give a valid ordinary pathwise Gamma.
 
 \subsection{The Crank--Nicolson discretisation}
 
-Writing \(U(S,\tau)=V(S,T-\tau)\) gives a forward equation in time to
+Rewriting Equation~\eqref{eq:bs-calendar-pde} with
+\(U(S,\tau)=V(S,T-\tau)\) gives a forward equation in time to
 expiry on the truncated domain \([0,S_{\max}]\):
 \begin{equation}
  U_\tau=\tfrac12\sigma^2S^2U_{SS}+(r-q)SU_S-rU,
