@@ -17,11 +17,11 @@ reproducible evaluation inputs, and historical training used different budgets.
 
 ## Cleanup and recovery
 
-`cleanup_manifest.json` identifies each removed file, its original path and
+`cleanup_manifest.json` identifies files removed in the first cleanup, their original paths and
 SHA-256. A verified pre-cleanup recovery archive is stored locally beside the
 project at `../option-pricing-archive/milestone-20260926/before_cleanup.zip`.
 It includes prior drafts, legacy experiments and all pre-cleanup checkpoints.
-The archive is intentionally outside Git; clone-only users cannot restore these
+The same verified archive also contains the superseded DeepONet ablation intermediates removed in the later repository cleanup; the three data files referenced by the frozen protocol and its summary remain tracked. The archive is intentionally outside Git; clone-only users cannot restore these
 discarded intermediates without that archive. No active benchmark dependency
 is intended to require them. Historical registry entries describing archived
 legacy runs should be interpreted using the cleanup manifest.
