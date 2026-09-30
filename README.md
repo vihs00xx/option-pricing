@@ -30,15 +30,8 @@ metrics, timing and checkpoint identities.
 | `report/` | [Paper](report/main.pdf), [LaTeX](report/main.tex), figures and [Overleaf bundle](report/overleaf_bundle.zip) |
 
 The [milestone record](results/milestone_1d/README.md) documents the saved
-comparison and recovery archive. Superseded DeepONet ablation intermediates
-are archived locally; its report and three datasets referenced by the
-benchmark remain in the repository. Research variants remain available
-through recorded reports, selected checkpoints and Git history.
-
+comparison. 
 ## Reproduce
-
-The recorded benchmark used Windows, Python 3.13.3 and CPU PyTorch 2.8.0.
-Use an isolated environment:
 
 ```powershell
 python -m venv .venv
