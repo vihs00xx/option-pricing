@@ -1,4 +1,4 @@
-# Option Pricing
+# Option Pricing — 1D study (frozen)
 
 A reproducible comparison of European option prices and Greeks from analytical
 Black–Scholes, conditional randomized quasi-Monte Carlo, Crank–Nicolson,
@@ -30,8 +30,15 @@ metrics, timing and checkpoint identities.
 | `report/` | [Paper](report/main.pdf), [LaTeX](report/main.tex), figures and [Overleaf bundle](report/overleaf_bundle.zip) |
 
 The [milestone record](results/milestone_1d/README.md) documents the saved
-comparison. 
+comparison. This study is frozen: tag `1d-v1.0` marks it at its original
+repository-root paths. Treat this folder as read-only; new work belongs in
+[`../multi_asset/`](../multi_asset/README.md). The recovery archive that the
+milestone record places beside the project is now two levels above this folder.
+
 ## Reproduce
+
+Run every command from this `1d/` folder; paths in the frozen evidence are
+relative to it.
 
 ```powershell
 python -m venv .venv

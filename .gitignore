@@ -20,15 +20,15 @@ checkpoints/
 *.synctex.gz
 
 # Local documentation
-/docs/
+docs/
 
 # Local run logs and temporary diagnostics
-/artifacts/
+artifacts/
 
 # Isolated benchmark runtime
 .venv-benchmark/
 
 # Rebuildable previews and editor-local state
-/build/
+build/
 .zcodeignore
 *.last.pt
