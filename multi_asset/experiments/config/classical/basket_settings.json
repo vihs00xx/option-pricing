@@ -1,0 +1,20 @@
+{
+  "study_id": "two_asset_classical_v1",
+  "status": "exploratory_classical_verification_not_neural_final_test",
+  "points_per_replicate": [1024, 4096, 16384],
+  "replicates": 64,
+  "seeds": [20260930, 20261001, 20261002],
+  "pilot_points_per_replicate": 256,
+  "pilot_replicates": 32,
+  "adi_grids": [40, 80, 160],
+  "cases": [
+    {"name": "standard", "spots": [100, 100]},
+    {"name": "unequal", "spots": [80, 130], "weights": [0.3, 0.7]},
+    {"name": "negative_correlation", "spots": [95, 105], "correlation": -0.7, "dividends": [0.01, 0.03]},
+    {"name": "high_correlation", "correlation": 0.95},
+    {"name": "near_expiry", "tau": 0.02},
+    {"name": "high_volatility", "tau": 2, "volatilities": [0.5, 0.65]},
+    {"name": "standard_put", "option": "put"},
+    {"name": "unequal_put", "option": "put", "spots": [80, 130], "weights": [0.3, 0.7]}
+  ]
+}

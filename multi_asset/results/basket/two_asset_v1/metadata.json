@@ -1,0 +1,303 @@
+{
+  "created_at": "2026-09-30T09:59:52.921438+00:00",
+  "settings": {
+    "study_id": "two_asset_classical_v1",
+    "status": "exploratory_classical_verification_not_neural_final_test",
+    "points_per_replicate": [
+      1024,
+      4096,
+      16384
+    ],
+    "replicates": 64,
+    "seeds": [
+      20260930,
+      20261001,
+      20261002
+    ],
+    "pilot_points_per_replicate": 256,
+    "pilot_replicates": 32,
+    "adi_grids": [
+      40,
+      80,
+      160
+    ],
+    "cases": [
+      {
+        "name": "standard",
+        "spots": [
+          100,
+          100
+        ]
+      },
+      {
+        "name": "unequal",
+        "spots": [
+          80,
+          130
+        ],
+        "weights": [
+          0.3,
+          0.7
+        ]
+      },
+      {
+        "name": "negative_correlation",
+        "spots": [
+          95,
+          105
+        ],
+        "correlation": -0.7,
+        "dividends": [
+          0.01,
+          0.03
+        ]
+      },
+      {
+        "name": "high_correlation",
+        "correlation": 0.95
+      },
+      {
+        "name": "near_expiry",
+        "tau": 0.02
+      },
+      {
+        "name": "high_volatility",
+        "tau": 2,
+        "volatilities": [
+          0.5,
+          0.65
+        ]
+      },
+      {
+        "name": "standard_put",
+        "option": "put"
+      },
+      {
+        "name": "unequal_put",
+        "option": "put",
+        "spots": [
+          80,
+          130
+        ],
+        "weights": [
+          0.3,
+          0.7
+        ]
+      }
+    ]
+  },
+  "settings_sha256": "8238701f4813f3e6a5ce52c394b21a6c999fd06a805cf1b30a6cbb3de34d087d",
+  "contracts": {
+    "standard": {
+      "spots": [
+        100.0,
+        100.0
+      ],
+      "strike": 100.0,
+      "tau": 1.0,
+      "rate": 0.05,
+      "volatilities": [
+        0.2,
+        0.3
+      ],
+      "dividends": [
+        0.0,
+        0.0
+      ],
+      "weights": [
+        0.5,
+        0.5
+      ],
+      "correlation": 0.5,
+      "option": "call"
+    },
+    "unequal": {
+      "spots": [
+        80.0,
+        130.0
+      ],
+      "strike": 100.0,
+      "tau": 1.0,
+      "rate": 0.05,
+      "volatilities": [
+        0.2,
+        0.3
+      ],
+      "dividends": [
+        0.0,
+        0.0
+      ],
+      "weights": [
+        0.3,
+        0.7
+      ],
+      "correlation": 0.5,
+      "option": "call"
+    },
+    "negative_correlation": {
+      "spots": [
+        95.0,
+        105.0
+      ],
+      "strike": 100.0,
+      "tau": 1.0,
+      "rate": 0.05,
+      "volatilities": [
+        0.2,
+        0.3
+      ],
+      "dividends": [
+        0.01,
+        0.03
+      ],
+      "weights": [
+        0.5,
+        0.5
+      ],
+      "correlation": -0.7,
+      "option": "call"
+    },
+    "high_correlation": {
+      "spots": [
+        100.0,
+        100.0
+      ],
+      "strike": 100.0,
+      "tau": 1.0,
+      "rate": 0.05,
+      "volatilities": [
+        0.2,
+        0.3
+      ],
+      "dividends": [
+        0.0,
+        0.0
+      ],
+      "weights": [
+        0.5,
+        0.5
+      ],
+      "correlation": 0.95,
+      "option": "call"
+    },
+    "near_expiry": {
+      "spots": [
+        100.0,
+        100.0
+      ],
+      "strike": 100.0,
+      "tau": 0.02,
+      "rate": 0.05,
+      "volatilities": [
+        0.2,
+        0.3
+      ],
+      "dividends": [
+        0.0,
+        0.0
+      ],
+      "weights": [
+        0.5,
+        0.5
+      ],
+      "correlation": 0.5,
+      "option": "call"
+    },
+    "high_volatility": {
+      "spots": [
+        100.0,
+        100.0
+      ],
+      "strike": 100.0,
+      "tau": 2,
+      "rate": 0.05,
+      "volatilities": [
+        0.5,
+        0.65
+      ],
+      "dividends": [
+        0.0,
+        0.0
+      ],
+      "weights": [
+        0.5,
+        0.5
+      ],
+      "correlation": 0.5,
+      "option": "call"
+    },
+    "standard_put": {
+      "spots": [
+        100.0,
+        100.0
+      ],
+      "strike": 100.0,
+      "tau": 1.0,
+      "rate": 0.05,
+      "volatilities": [
+        0.2,
+        0.3
+      ],
+      "dividends": [
+        0.0,
+        0.0
+      ],
+      "weights": [
+        0.5,
+        0.5
+      ],
+      "correlation": 0.5,
+      "option": "put"
+    },
+    "unequal_put": {
+      "spots": [
+        80.0,
+        130.0
+      ],
+      "strike": 100.0,
+      "tau": 1.0,
+      "rate": 0.05,
+      "volatilities": [
+        0.2,
+        0.3
+      ],
+      "dividends": [
+        0.0,
+        0.0
+      ],
+      "weights": [
+        0.3,
+        0.7
+      ],
+      "correlation": 0.5,
+      "option": "put"
+    }
+  },
+  "source_sha256": {
+    "src/basket/adi.py": "65f15cd4af5fcefca9a6c31248f7d561fe24d8f4516970dcf781976561592e95",
+    "src/basket/analytical.py": "2811ca55c188304a42b1659f0bd5ee79ce88c4b2938eed971218c9247def523a",
+    "src/basket/contract.py": "61b55be33377b05654089c2a383c6ad4a871e6b32271d4fe10588e977270c8a1",
+    "src/basket/integration.py": "7cee14c11bccc695f1c197f3f8fffbcbca8f6d4e3bbf6e75d82cb04cfe9c6def",
+    "src/basket/simulation.py": "6fb8a8a5fd2867618ea798f6ecbaae58effd00ff9e628c2e6af9cfd411d121df",
+    "src/basket/__init__.py": "2a702aaa39fe3761fccebb643bc2157891c85863862a0bf679dae617f64a8d4a",
+    "src/black_scholes.py": "0746033b38cb276d51188c010cd33b814031d8bd91f1336ae4ea8d74af5ced15",
+    "experiments/basket/run_classical.py": "9d8cc49eaa823ef6fbf17c4468869a65c031769083032a61c1e5d2bab7eacb90",
+    "experiments/config/classical/basket_settings.json": "8238701f4813f3e6a5ce52c394b21a6c999fd06a805cf1b30a6cbb3de34d087d"
+  },
+  "environment": {
+    "python": "3.13.3",
+    "numpy": "2.1.0",
+    "scipy": "1.15.3",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "outputs_sha256": {
+    "adi_convergence.csv": "f9681a1cabdbc8bde9d2f93e501b04d8a26c8f95252621933b4311e105cf8df7",
+    "convergence.pdf": "18833746d8699d0be6a878f16adb14915cefc40d6fe3dd8d7f70d8503b3fbdbd",
+    "greek_runs.csv": "4f67822e4abc6a12b5b41f01aaaba6c91c230aa7c9bd88dc4fc7c48bf7b41440",
+    "price_runs.csv": "08762c270c02258f60df473cf2691896e4e69035f94afb88b8a2c3f8b1d3cc47",
+    "price_summary.csv": "8219fa7c2790772af6acf0f676bc3058b54a58d15f46d605654f149211244325",
+    "reference_checks.csv": "1ef53c8442010a7f29d554fc27ce20788cf5e57209f6ddcf68bafc456a5c6af1",
+    "replicate_means.npz": "52615f7e9162eaf2c1bafd55e420ea62104571653ea43949c1cab1cf30b5c0b3",
+    "report.md": "426b89eb018747e1f8319d1a76fa78c954671feed10d98e306e3a0b85ac1906f"
+  }
+}
