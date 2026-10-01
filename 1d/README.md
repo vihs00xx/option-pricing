@@ -31,9 +31,10 @@ metrics, timing and checkpoint identities.
 
 The [milestone record](results/milestone_1d/README.md) documents the saved
 comparison. This study is frozen: tag `1d-v1.0` marks it at its original
-repository-root paths. Treat this folder as read-only; new work belongs in
-[`../multi_asset/`](../multi_asset/README.md). The recovery archive that the
-milestone record places beside the project is now two levels above this folder.
+repository-root paths. Treat this folder as read-only; new work belongs in the
+higher-dimensional folders, starting with [`../2d/`](../2d/README.md). The
+recovery archive that the milestone record places beside the project is now
+two levels above this folder.
 
 ## Reproduce
 

@@ -1,8 +1,8 @@
-# Option Pricing — multi-asset baskets
+# Option Pricing — 2D (two-stock baskets)
 
-European basket options on correlated stocks under risk-neutral GBM. The
-current stage covers two stocks; higher dimensions follow. The neural methods
-will be compared against the classical baselines developed here.
+European basket options on two correlated stocks under risk-neutral GBM. The
+neural methods will be compared against the classical baselines developed
+here. Higher dimensions live in sibling folders.
 
 ## Two-stock classical baseline
 
@@ -28,7 +28,7 @@ stocks.
 
 ## Reproduce
 
-Run every command from this `multi_asset/` folder. The study used Windows,
+Run every command from this `2d/` folder. The study used Windows,
 Python 3.13.3, NumPy 2.1.0 and SciPy 1.15.3.
 
 ```powershell
