@@ -1,0 +1,79 @@
+{
+  "protocol_id": "two_stock_test_v1",
+  "purpose": "Final assessment of two-stock pricing methods, neural and classical. No training, tuning or model selection may use these cases or their references.",
+  "conventions": "Strike fixed at 100. Time in years; rates, dividend yields and volatilities are decimals. Vega and correlation sensitivities per unit decimal change; theta is calendar time per year; rho per unit rate.",
+  "strike": 100.0,
+  "seed": 20261010,
+  "training_domain": {
+    "moneyness_1": [0.7, 1.3],
+    "moneyness_2": [0.7, 1.3],
+    "tau": [0.05, 2.0],
+    "volatility_1": [0.1, 0.6],
+    "volatility_2": [0.1, 0.6],
+    "correlation": [-0.8, 0.9],
+    "rate": [-0.02, 0.10],
+    "dividend_1": [0.0, 0.06],
+    "dividend_2": [0.0, 0.06],
+    "weight_1": [0.2, 0.8]
+  },
+  "splits": {
+    "interpolation": {"count": 128, "reason": "inside the training domain"},
+    "short_maturity": {"count": 32, "tau": [0.005, 0.05], "reason": "remaining life below the training domain"},
+    "extrapolation": {
+      "cases_per_value": 4,
+      "reason": "one parameter outside the training domain",
+      "values": {
+        "moneyness_1": [0.55, 1.45],
+        "moneyness_2": [0.55, 1.45],
+        "tau": [2.5, 3.0],
+        "volatility_1": [0.05, 0.75],
+        "volatility_2": [0.05, 0.75],
+        "correlation": [-0.95, 0.97],
+        "rate": [-0.04, 0.14],
+        "dividend_1": [0.09],
+        "dividend_2": [0.09],
+        "weight_1": [0.05, 0.95]
+      }
+    },
+    "anchor": {
+      "reason": "hand-chosen regimes",
+      "defaults": {"moneyness_1": 1.0, "moneyness_2": 1.0, "tau": 1.0, "volatility_1": 0.25, "volatility_2": 0.35,
+                   "correlation": 0.4, "rate": 0.03, "dividend_1": 0.01, "dividend_2": 0.02, "weight_1": 0.5},
+      "cases": [
+        {"name": "atm_call", "option": "call"},
+        {"name": "atm_put", "option": "put"},
+        {"name": "itm_call", "option": "call", "moneyness_1": 1.2, "moneyness_2": 1.15},
+        {"name": "otm_call", "option": "call", "moneyness_1": 0.85, "moneyness_2": 0.8},
+        {"name": "itm_put", "option": "put", "moneyness_1": 0.85, "moneyness_2": 0.8},
+        {"name": "otm_put", "option": "put", "moneyness_1": 1.2, "moneyness_2": 1.15},
+        {"name": "short_atm_call", "option": "call", "tau": 0.02},
+        {"name": "short_atm_put", "option": "put", "tau": 0.02},
+        {"name": "high_volatility_call", "option": "call", "tau": 2.0, "volatility_1": 0.55, "volatility_2": 0.6},
+        {"name": "negative_correlation_call", "option": "call", "correlation": -0.8},
+        {"name": "high_correlation_put", "option": "put", "correlation": 0.9},
+        {"name": "unequal_weight_call", "option": "call", "weight_1": 0.2, "moneyness_1": 0.8, "moneyness_2": 1.25},
+        {"name": "volatility_dispersion_call", "option": "call", "volatility_1": 0.1, "volatility_2": 0.6},
+        {"name": "negative_rate_put", "option": "put", "rate": -0.02, "dividend_1": 0.04, "dividend_2": 0.02},
+        {"name": "high_dividend_call", "option": "call", "rate": 0.02, "dividend_1": 0.06, "dividend_2": 0.06},
+        {"name": "deep_itm_short_put", "option": "put", "tau": 0.05, "moneyness_1": 0.75, "moneyness_2": 0.7}
+      ]
+    }
+  },
+  "reference": {
+    "method": "Adaptive conditional quadrature of src/basket (shared-factor conditioning); analytic conditional Deltas and spot Hessian; central quadrature bumps for vega, theta, rho and correlation.",
+    "quadrature_atol": 1e-10,
+    "quadrature_rtol": 1e-11,
+    "cross_checks": ["asset conditioning price", "src/pricing Gauss-Hermite engine with 128 nodes, all quantities", "halved reference bumps"],
+    "gauss_hermite_nodes": 128
+  },
+  "development_case_settings": [
+    "experiments/config/classical/basket_settings.json",
+    "experiments/config/classical/engine_validation_settings.json"
+  ],
+  "rules": [
+    "Train, tune and select models only on data generated with other seeds; never on these cases or references.",
+    "Before evaluating any model on these cases, freeze its checkpoint hash, settings and the evaluation protocol.",
+    "Report every method on every split; do not drop cases after seeing results.",
+    "Once any method is evaluated here, the cases are observed; later model changes need a new test set."
+  ]
+}

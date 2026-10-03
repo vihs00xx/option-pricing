@@ -1,0 +1,59 @@
+{
+  "study_id": "engine_validation_v1",
+  "status": "development_cases_only_not_a_test_set",
+  "two_asset_defaults": {"spots": [100, 100], "strike": 100, "tau": 1.0, "rate": 0.05,
+                         "volatilities": [0.2, 0.3], "dividends": [0.0, 0.0], "weights": [0.5, 0.5],
+                         "correlation": 0.5, "option": "call"},
+  "two_asset_cases": [
+    {"name": "standard"},
+    {"name": "unequal", "spots": [80, 130], "weights": [0.3, 0.7]},
+    {"name": "negative_correlation", "spots": [95, 105], "correlation": -0.7, "dividends": [0.01, 0.03]},
+    {"name": "high_correlation", "correlation": 0.95},
+    {"name": "near_expiry", "tau": 0.02},
+    {"name": "high_volatility", "tau": 2, "volatilities": [0.5, 0.65]},
+    {"name": "standard_put", "option": "put"},
+    {"name": "unequal_put", "option": "put", "spots": [80, 130], "weights": [0.3, 0.7]}
+  ],
+  "reference": {"quadrature_atol": 1e-10, "quadrature_rtol": 1e-11, "gauss_hermite_nodes": 128},
+  "rqmc": {
+    "seeds": [20261003, 20261004, 20261005],
+    "replicates": 64,
+    "pilot_points_per_replicate": 256,
+    "pilot_replicates": 32,
+    "price_points_per_replicate": [1024, 4096, 16384],
+    "greek_points_per_replicate": 4096,
+    "variants": [
+      {"name": "equal", "direction": "equal", "control": false},
+      {"name": "equal_control", "direction": "equal", "control": true},
+      {"name": "volatility", "direction": "volatility", "control": false},
+      {"name": "volatility_control", "direction": "volatility", "control": true}
+    ]
+  },
+  "higher_dimension_cases": [
+    {"name": "one_stock_put", "spots": [105], "strike": 100, "tau": 0.7, "rate": 0.03,
+     "volatilities": [0.25], "dividends": [0.01], "weights": [1.0], "correlation": 1.0, "option": "put"},
+    {"name": "three_stock_mixed", "spots": [90, 100, 115], "strike": 100, "tau": 0.8, "rate": 0.04,
+     "volatilities": [0.2, 0.35, 0.25], "dividends": [0.0, 0.01, 0.03], "weights": [0.2, 0.3, 0.5],
+     "correlation": [[1, 0.5, -0.3], [0.5, 1, 0.2], [-0.3, 0.2, 1]], "option": "call"},
+    {"name": "four_stock_mixed", "spots": [90, 100, 110, 120], "strike": 105, "tau": 1.0, "rate": 0.04,
+     "volatilities": [0.2, 0.3, 0.25, 0.4], "dividends": [0.0, 0.01, 0.02, 0.03], "weights": [0.1, 0.2, 0.3, 0.4],
+     "correlation": [[1, 0.5, 0.3, 0.2], [0.5, 1, 0.4, 0.1], [0.3, 0.4, 1, -0.2], [0.2, 0.1, -0.2, 1]], "option": "call"},
+    {"name": "four_stock_equicorrelated_put", "spots": [100, 100, 100, 100], "strike": 100, "tau": 0.5, "rate": 0.03,
+     "volatilities": [0.3, 0.3, 0.3, 0.3], "dividends": [0.0, 0.0, 0.0, 0.0], "weights": [0.25, 0.25, 0.25, 0.25],
+     "correlation": 0.6, "option": "put"}
+  ],
+  "higher_dimension": {"gauss_hermite_nodes": [16, 24, 32, 40], "points_per_replicate": 4096, "replicates": 32},
+  "calibration": {
+    "purpose": "Uncertainty calibration over many independent seeds; the comparison runs above share seeds across cases.",
+    "seed_start": 30000000,
+    "two_stock": {"case": "unequal", "seeds": 200, "points_per_replicate": 4096, "replicates": 64},
+    "three_stock": {"case": "three_stock_mixed", "seeds": 100, "points_per_replicate": 1024, "replicates": 32}
+  },
+  "adi": {
+    "cases": ["standard", "unequal", "negative_correlation", "near_expiry", "high_volatility", "unequal_put"],
+    "intervals": [40, 80, 160],
+    "parameter_greek_intervals": 80,
+    "tail_sd": 5.0,
+    "clustering": 0.5
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "created_at": "2026-10-03T17:45:26.074118+00:00",
+  "settings": {
+    "study_id": "pinn_deeponet_v1",
+    "purpose": "PINN and DeepONet pricers for two-stock arithmetic basket options, each built as a ladder: every level adds one technique to the configuration below it, and every level is scored on the same validation contracts.",
+    "protocol": "experiments/config/protocol/test_set_v1.json",
+    "seeds": {
+      "training": 0,
+      "data": 7001,
+      "anchors": 7002,
+      "monitor": 7201,
+      "validation": 7301,
+      "short_validation": 7302,
+      "development": 7501
+    },
+    "monitor_contracts": 512,
+    "validation_contracts": 4096,
+    "short_validation_tau": [
+      0.005,
+      0.05
+    ],
+    "selection_rule": "Within each family the level with the lowest validation score is selected. Score = mean over price and the ten Greeks of RMSE / RMS(reference) on the 4,096 validation contracts drawn from the protocol's training domain. A level within 1% of the best score yields to the earlier level.",
+    "computational_domain": {
+      "z": [
+        -3.0,
+        2.5
+      ],
+      "s": [
+        0.01,
+        0.99
+      ],
+      "note": "Spatial extent of the PDE problem in z = log basket forward moneyness and s = first weight share, like a grid solver's far boundary. sigma_1, sigma_2, rho and the maturity cap are the protocol's training domain; tau starts at 0 because the PDE starts at the payoff."
+    }
+  },
+  "source_sha256": {
+    "experiments/config/neural/deeponet_ladder.json": "3defe9269518fb5c4f58a714f320d2e75c6e361d16dcfdac7d50063d247c1fe0",
+    "experiments/config/neural/pinn_ladder.json": "2717f2b6e33512ab6b64a778f899fe931b152c0e709bf1c0ace7f33c8bbff685",
+    "experiments/config/neural/study.json": "edd8e73c4db1f436d57af97536e31a4daf13bdd948757bedf472d4dd1fdb461c",
+    "experiments/neural/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "experiments/neural/benchmark_monte_carlo.py": "fd94f52eda32e7836b95f0373ec84bc47e4ce1b5ddb1e9193be7823ae5808a5e",
+    "experiments/neural/common.py": "9ed90076e75bf240d8b5d3b5d718a2360b77156fec5e6edd7020ccebf13ac537",
+    "experiments/neural/ensemble.py": "674d35d4938e515c697c7b9f411fcdab308c3b530bb9d60483575b4e4419ae03",
+    "experiments/neural/evaluate_test.py": "de36a821c05b9535f88cfa5495d1dddb10fde4191c4709f97ef3fb57305133e5",
+    "experiments/neural/make_report.py": "b55caa03626cfaa0cf0e93b358c3f484ee10303f4f704b44e318ff9caf442697",
+    "experiments/neural/report_text.py": "069bf3a8c2fd31d6feb46860b4e12249422bafd79a612c397de33017d7e58d8f",
+    "experiments/neural/select_models.py": "e04ffc83baf3260b06eb14004d63b95f8b4ba9773e05d56997d8f1653d873853",
+    "experiments/neural/train.py": "21825ad545f308d7293a9ec46fc0d2a074402db386f5b2df7b17bd9e9c272c4b",
+    "experiments/neural/verify_results.py": "1972818b6f3034bee2daa5b4e12ec3bbf05dd1dc499c3907a033f7ddb7ad6174",
+    "experiments/records.py": "7c75827bc491c189b74ea8e4e41971d699e1785cc742c2dff326758aa5cbc6bc",
+    "experiments/test_set/freeze_test_set.py": "a34e8f7afafd632f8015381f617493d526eee49a49cf63621db7d5f245fe08b4",
+    "src/neural/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/neural/coordinates.py": "860853c42b6d5e84e5593be59b269819cd7e7c8389a63d30095c9900947d9178",
+    "src/neural/deeponet.py": "485921eb30853335b21f78b7502568dc03929fcbf64f4814cf0b84c3f9003cf7",
+    "src/neural/monte_carlo.py": "6f53a04a0818af7e23586cfd7cc5712de26bb2ef915bbe7d8b1ef1fa56b99c6c",
+    "src/neural/networks.py": "3659ddaecebe59254f515d2fd9e8f0a897b222e1219c047fe605a6ef8528657c",
+    "src/neural/nys_newton_cg.py": "7c18470b0380d681a33b6bd77393a5895be42dd3e2b6f7c62dc67141f892e210",
+    "src/neural/pde.py": "94aef263a203d11f64238d396517cf0406b386718bb207c686232aa15fdbef82",
+    "src/neural/pinn.py": "4ba5bf87d6c317a6d26b42a6be91a6a559551fa79a772c7883ecad3dc3d33a7e",
+    "src/neural/reference.py": "91dabf393cb911d5005e1513b620f87992d45b57fc9e0d39d3836649d72e2c5c",
+    "src/neural/training.py": "9d3862e3335204cc9a86da8fb8e5dda750f5359f42b06233b61b03e009fcb781",
+    "src/pricing/__init__.py": "44761514e8b9e7095f94213fdfa601e969a2c4ca930d2f8a4526be7338746280",
+    "src/pricing/adi.py": "71cee068588842aede8fec9cdb6370e244932348908d97e0f2b0e54b3756dcd1",
+    "src/pricing/conditional.py": "5d821d3369bfbeededded63be502f3726acf7cb6c2172a0352e9ee38e0b7212f",
+    "src/pricing/contract.py": "016aa839645c6f00bb6a85436269a5f4e6044a93e5e07677576e51adc3a2d284",
+    "src/pricing/geometric.py": "036cf2ec2bce681be8dea7621e42d05f29307dccf9593343d3a90af445967d2f",
+    "src/pricing/rqmc.py": "309b557e4711fa5f167faf0583fa1046194bf2517649f6f9451805910a161461"
+  },
+  "environment": {
+    "python": "3.13.3",
+    "numpy": "2.1.0",
+    "scipy": "1.15.3",
+    "platform": "Windows-11-10.0.26300-SP0"
+  },
+  "outputs_sha256": {
+    "benchmark_values.npz": "6a97a9f401436ef96b3b9c24c436679936376dd189a40127f47ddef9f514582b",
+    "error_by_maturity.csv": "0e80bd91e9c87ce7e4364de9e1570071839212d850d2392a4483c8dbec4023c0",
+    "error_by_maturity.png": "c7d1b3abca8f4c1e046fca7144eca759c1af8fcb1eae168b05738f794bd538b4",
+    "greek_coverage.csv": "1b6bc9f73b54d7e0358e77a42a10ce9cb06aa73807ad42f6d94017ab400ffa5b",
+    "greek_identities.csv": "86b50cd05dd795d3d538ae996ab922da81af4415585c4a5234e3908927505801",
+    "ladder.csv": "12d2c9e49ea69df7a8552abcd5940a6396b5c45d745c9902279a4fe98cc182e1",
+    "ladder.png": "4783b4dcbc8976ba857d3b72ee3b7669cfe086796f0e7828c8d9530e537733ab",
+    "ladder_manifest.json": "d270b4fa1c88f668f2f6a1722abe311afcc56f5f2a98e59360b39c8dd349bd45",
+    "monte_carlo_benchmark.csv": "00cdf9fbece99ad959f616f32580f2cb21ab0cd44f2c0d49277f7a3b96847f99",
+    "monte_carlo_benchmark.png": "618cfcf85a3b9435e26c715fbb09a2b68a74aa7db8da25eee9d3aeb22d275780",
+    "neural_throughput.json": "12058c359d7672d8485937993cbc5eb24b0c05e1723ebbbff04d0eed5d5c7a6b",
+    "report.md": "cdeb6a6497b4f1c1c5c274301c2302690a3eba85e2c86222bb8d6e59c0573d2c",
+    "selection.json": "19f5dc70ab727cb568cf3b53040c93816d8bf01f6bff5b53ec0d910776586959",
+    "test_metrics.csv": "700aed7a4ca417bdd9260a65a7effa66874120099667b3a1338cf4503734f240",
+    "test_predictions.csv": "ae4d77651c06d8447de4420635b5ae012a93602b480543a5b0f201f95828b565",
+    "test_set_checks.json": "7ff321808a0eca5e09e327fc1bbf680b8221df145c3981537b97b49dca15d2ab",
+    "test_timing.json": "c994c7be8c6d0f4253f5e819af3104d533b13e7e322b1b2a107e58c3096a1c4a"
+  },
+  "torch": "2.8.0+cpu",
+  "matplotlib": "3.10.3",
+  "test_set_protocol_sha256": "9d492c261cb823368118e5308b4444c6b75a9e042e826cedf30a5473d76efaa8"
+}

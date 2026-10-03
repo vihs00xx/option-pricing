@@ -1,0 +1,370 @@
+{
+  "created_at": "2026-10-01T15:12:42.482794+00:00",
+  "settings": {
+    "study_id": "engine_validation_v1",
+    "status": "development_cases_only_not_a_test_set",
+    "two_asset_defaults": {
+      "spots": [
+        100,
+        100
+      ],
+      "strike": 100,
+      "tau": 1.0,
+      "rate": 0.05,
+      "volatilities": [
+        0.2,
+        0.3
+      ],
+      "dividends": [
+        0.0,
+        0.0
+      ],
+      "weights": [
+        0.5,
+        0.5
+      ],
+      "correlation": 0.5,
+      "option": "call"
+    },
+    "two_asset_cases": [
+      {
+        "name": "standard"
+      },
+      {
+        "name": "unequal",
+        "spots": [
+          80,
+          130
+        ],
+        "weights": [
+          0.3,
+          0.7
+        ]
+      },
+      {
+        "name": "negative_correlation",
+        "spots": [
+          95,
+          105
+        ],
+        "correlation": -0.7,
+        "dividends": [
+          0.01,
+          0.03
+        ]
+      },
+      {
+        "name": "high_correlation",
+        "correlation": 0.95
+      },
+      {
+        "name": "near_expiry",
+        "tau": 0.02
+      },
+      {
+        "name": "high_volatility",
+        "tau": 2,
+        "volatilities": [
+          0.5,
+          0.65
+        ]
+      },
+      {
+        "name": "standard_put",
+        "option": "put"
+      },
+      {
+        "name": "unequal_put",
+        "option": "put",
+        "spots": [
+          80,
+          130
+        ],
+        "weights": [
+          0.3,
+          0.7
+        ]
+      }
+    ],
+    "reference": {
+      "quadrature_atol": 1e-10,
+      "quadrature_rtol": 1e-11,
+      "gauss_hermite_nodes": 128
+    },
+    "rqmc": {
+      "seeds": [
+        20261003,
+        20261004,
+        20261005
+      ],
+      "replicates": 64,
+      "pilot_points_per_replicate": 256,
+      "pilot_replicates": 32,
+      "price_points_per_replicate": [
+        1024,
+        4096,
+        16384
+      ],
+      "greek_points_per_replicate": 4096,
+      "variants": [
+        {
+          "name": "equal",
+          "direction": "equal",
+          "control": false
+        },
+        {
+          "name": "equal_control",
+          "direction": "equal",
+          "control": true
+        },
+        {
+          "name": "volatility",
+          "direction": "volatility",
+          "control": false
+        },
+        {
+          "name": "volatility_control",
+          "direction": "volatility",
+          "control": true
+        }
+      ]
+    },
+    "higher_dimension_cases": [
+      {
+        "name": "one_stock_put",
+        "spots": [
+          105
+        ],
+        "strike": 100,
+        "tau": 0.7,
+        "rate": 0.03,
+        "volatilities": [
+          0.25
+        ],
+        "dividends": [
+          0.01
+        ],
+        "weights": [
+          1.0
+        ],
+        "correlation": 1.0,
+        "option": "put"
+      },
+      {
+        "name": "three_stock_mixed",
+        "spots": [
+          90,
+          100,
+          115
+        ],
+        "strike": 100,
+        "tau": 0.8,
+        "rate": 0.04,
+        "volatilities": [
+          0.2,
+          0.35,
+          0.25
+        ],
+        "dividends": [
+          0.0,
+          0.01,
+          0.03
+        ],
+        "weights": [
+          0.2,
+          0.3,
+          0.5
+        ],
+        "correlation": [
+          [
+            1,
+            0.5,
+            -0.3
+          ],
+          [
+            0.5,
+            1,
+            0.2
+          ],
+          [
+            -0.3,
+            0.2,
+            1
+          ]
+        ],
+        "option": "call"
+      },
+      {
+        "name": "four_stock_mixed",
+        "spots": [
+          90,
+          100,
+          110,
+          120
+        ],
+        "strike": 105,
+        "tau": 1.0,
+        "rate": 0.04,
+        "volatilities": [
+          0.2,
+          0.3,
+          0.25,
+          0.4
+        ],
+        "dividends": [
+          0.0,
+          0.01,
+          0.02,
+          0.03
+        ],
+        "weights": [
+          0.1,
+          0.2,
+          0.3,
+          0.4
+        ],
+        "correlation": [
+          [
+            1,
+            0.5,
+            0.3,
+            0.2
+          ],
+          [
+            0.5,
+            1,
+            0.4,
+            0.1
+          ],
+          [
+            0.3,
+            0.4,
+            1,
+            -0.2
+          ],
+          [
+            0.2,
+            0.1,
+            -0.2,
+            1
+          ]
+        ],
+        "option": "call"
+      },
+      {
+        "name": "four_stock_equicorrelated_put",
+        "spots": [
+          100,
+          100,
+          100,
+          100
+        ],
+        "strike": 100,
+        "tau": 0.5,
+        "rate": 0.03,
+        "volatilities": [
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ],
+        "dividends": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "weights": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "correlation": 0.6,
+        "option": "put"
+      }
+    ],
+    "higher_dimension": {
+      "gauss_hermite_nodes": [
+        16,
+        24,
+        32,
+        40
+      ],
+      "points_per_replicate": 4096,
+      "replicates": 32
+    },
+    "calibration": {
+      "purpose": "Uncertainty calibration over many independent seeds; the comparison runs above share seeds across cases.",
+      "seed_start": 30000000,
+      "two_stock": {
+        "case": "unequal",
+        "seeds": 200,
+        "points_per_replicate": 4096,
+        "replicates": 64
+      },
+      "three_stock": {
+        "case": "three_stock_mixed",
+        "seeds": 100,
+        "points_per_replicate": 1024,
+        "replicates": 32
+      }
+    },
+    "adi": {
+      "cases": [
+        "standard",
+        "unequal",
+        "negative_correlation",
+        "near_expiry",
+        "high_volatility",
+        "unequal_put"
+      ],
+      "intervals": [
+        40,
+        80,
+        160
+      ],
+      "parameter_greek_intervals": 80,
+      "tail_sd": 5.0,
+      "clustering": 0.5
+    }
+  },
+  "source_sha256": {
+    "experiments/config/classical/engine_validation_settings.json": "98e87f0706969467edf853afcef73662ad683f9a4f0ba56087670e307c8b41f1",
+    "experiments/pricing/validate_engine.py": "a8397043476a77d9734a2d32b638c6ec92da8a2bfeab32a7a6b2b74e2cff176e",
+    "experiments/records.py": "7c75827bc491c189b74ea8e4e41971d699e1785cc742c2dff326758aa5cbc6bc",
+    "results/basket/two_asset_v1/adi_convergence.csv": "f9681a1cabdbc8bde9d2f93e501b04d8a26c8f95252621933b4311e105cf8df7",
+    "src/basket/__init__.py": "2a702aaa39fe3761fccebb643bc2157891c85863862a0bf679dae617f64a8d4a",
+    "src/basket/adi.py": "65f15cd4af5fcefca9a6c31248f7d561fe24d8f4516970dcf781976561592e95",
+    "src/basket/analytical.py": "2811ca55c188304a42b1659f0bd5ee79ce88c4b2938eed971218c9247def523a",
+    "src/basket/contract.py": "61b55be33377b05654089c2a383c6ad4a871e6b32271d4fe10588e977270c8a1",
+    "src/basket/integration.py": "7cee14c11bccc695f1c197f3f8fffbcbca8f6d4e3bbf6e75d82cb04cfe9c6def",
+    "src/basket/simulation.py": "6fb8a8a5fd2867618ea798f6ecbaae58effd00ff9e628c2e6af9cfd411d121df",
+    "src/black_scholes.py": "0746033b38cb276d51188c010cd33b814031d8bd91f1336ae4ea8d74af5ced15",
+    "src/pricing/__init__.py": "44761514e8b9e7095f94213fdfa601e969a2c4ca930d2f8a4526be7338746280",
+    "src/pricing/adi.py": "71cee068588842aede8fec9cdb6370e244932348908d97e0f2b0e54b3756dcd1",
+    "src/pricing/conditional.py": "5d821d3369bfbeededded63be502f3726acf7cb6c2172a0352e9ee38e0b7212f",
+    "src/pricing/contract.py": "016aa839645c6f00bb6a85436269a5f4e6044a93e5e07677576e51adc3a2d284",
+    "src/pricing/geometric.py": "036cf2ec2bce681be8dea7621e42d05f29307dccf9593343d3a90af445967d2f",
+    "src/pricing/rqmc.py": "309b557e4711fa5f167faf0583fa1046194bf2517649f6f9451805910a161461"
+  },
+  "environment": {
+    "python": "3.13.3",
+    "numpy": "2.1.0",
+    "scipy": "1.15.3",
+    "platform": "Windows-11-10.0.26300-SP0"
+  },
+  "outputs_sha256": {
+    "adi_convergence.csv": "dc8026b5874a54e23e03838a08a01dbb3d35fefe60ea86b0fff5e50ea021d952",
+    "calibration_runs.csv": "ecd3e11af950b600b5edbee15acb41f85ae2ff8f5bf0f0f17fbe2792c6b4a0e7",
+    "dimension_quadrature.csv": "f4d3fb16b76d3cc2fa9d9f9c057291ffcd13b0ef8d49a9391e05a464451cbbc6",
+    "dimension_rqmc.csv": "69375577cdd6dda42619c2df6b82df9ab958c364d6fbb0418d7ba24b6f7c13ea",
+    "greek_runs.csv": "e47b9536ec86e14d97fd570da3f70b5df4bbd295f1b354613c0406655b5048e0",
+    "greek_summary.csv": "8a39e680f9857f6a27c9b3144eccc2131bb8f2f3d5559f9c1e1fe045456e88fc",
+    "price_runs.csv": "ab1d9108201470d97aea718fbcee145c8de2c4ca623f709cdeab2ce190548f11",
+    "price_summary.csv": "90f4b33d0a65ef59d3d93b702f57a3ad86b6467d616297096d11e4374fc8ed9b",
+    "reference_agreement.csv": "d40d27e5f047a02933c54fd986773753bea720f80e4a1b9283fa51e6255672ea",
+    "report.md": "4ab65c43d1506df6700080c28a880e3901c9756aa94f0e70aad61de302a64ffa",
+    "validation.pdf": "a718c7d8f23a546127a5a6596c2474cbd078c46781c6d0ce9873850dd02a6ea1"
+  }
+}

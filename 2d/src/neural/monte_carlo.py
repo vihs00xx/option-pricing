@@ -1,5 +1,7 @@
 """Plain Monte Carlo prices and Greeks for one basket contract, the textbook baseline.
 
+Carried over from the earlier two-stock neural study, reordered to the test set's quantities.
+
 Exact GBM terminal draws with pseudo-random normals (no QMC, no conditioning, no
 control variate). First-order Greeks use pathwise derivatives of the payoff;
 the spot Hessian uses the likelihood-ratio/pathwise mixed estimator
@@ -11,7 +13,7 @@ mixed orders. Units match ``price_and_greeks``.
 
 import numpy as np
 
-from .domain import FIELDS
+from .coordinates import FIELDS
 from .reference import QUANTITIES
 
 
@@ -44,8 +46,9 @@ def monte_carlo_estimates(row, put, n_paths, seed, chunk=1 << 20):
         samples = np.stack((
             discount*payoff,
             h[0], h[1],
-            h[0]*(score[0]-1/spot[0]), h[1]*(score[1]-1/spot[1]),
+            h[0]*(score[0]-1/spot[0]),
             0.5*(h[0]*score[1]+h[1]*score[0]),
+            h[1]*(score[1]-1/spot[1]),
             slope*weighted[0]*(root_tau*z[0]-vol[0]*tau),
             slope*weighted[1]*(root_tau*z[1]-vol[1]*tau),
             rate*discount*payoff-slope*(weighted*(drift[:, None]+vol[:, None]*z/(2*root_tau))).sum(0),

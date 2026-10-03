@@ -1,0 +1,15 @@
+{
+  "threads": 1,
+  "models": {
+    "pinn": {
+      "batch": 4096,
+      "seconds_per_contract": 1.655402832057007e-05,
+      "single_contract_seconds": 0.012380049993225839
+    },
+    "deeponet": {
+      "batch": 4096,
+      "seconds_per_contract": 0.0001276507568377383,
+      "single_contract_seconds": 0.043760000000474975
+    }
+  }
+}

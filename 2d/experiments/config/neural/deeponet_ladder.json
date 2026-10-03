@@ -1,0 +1,139 @@
+{
+  "family": "deeponet",
+  "defaults": {
+    "model": {
+      "layout": "reduced",
+      "output": "plain",
+      "width": 64,
+      "depth": 4,
+      "rank": 64
+    },
+    "loss": {
+      "price": 1.0
+    },
+    "sampling": {
+      "focus": 0.7,
+      "focus_z": [
+        -0.6,
+        0.55
+      ],
+      "tau_power": 1.0,
+      "weight": "none"
+    },
+    "data_contracts": 32768,
+    "batch": {
+      "data": 1024,
+      "collocation": 2048,
+      "boundary": 256
+    },
+    "optimizer": {
+      "adam_steps": 15000,
+      "learning_rate": 0.002,
+      "final_learning_rate": 2e-05,
+      "check_every": 500,
+      "lbfgs_iterations": 0
+    }
+  },
+  "levels": {
+    "D0_vanilla": {
+      "technique": "Textbook DeepONet: branch on the seven raw contract parameters plus a put flag, trunk on (S_1/K, S_2/K, tau); price labels from the reference; Adam",
+      "model": {
+        "layout": "raw"
+      }
+    },
+    "D1_reduced": {
+      "technique": "Exact symmetry reduction: branch on (sigma_1, sigma_2, rho), trunk on (z, s, tau); put-call parity"
+    },
+    "D2_hard_payoff": {
+      "technique": "Hard terminal condition: c = Levy + tau * <branch, trunk(z, s, sqrt(tau))>",
+      "base": "D1_reduced",
+      "model": {
+        "output": "levy"
+      }
+    },
+    "D3_differential": {
+      "technique": "Differential (Sobolev) training: add the nine derivative labels in (y_1, y_2, tau, sigma_1, sigma_2, rho), first and second order in the log forwards",
+      "base": "D2_hard_payoff",
+      "loss": {
+        "derivatives": 1.0
+      }
+    },
+    "D4_physics": {
+      "technique": "Physics-informed DeepONet: add the PDE residual on unlabelled collocation over the whole computational domain (tau from 0) and the far-boundary condition",
+      "base": "D3_differential",
+      "loss": {
+        "pde": 1.0,
+        "boundary": 1.0
+      },
+      "sampling": {
+        "weight": "time",
+        "tau_power": 2.0
+      }
+    },
+    "D5_similarity": {
+      "technique": "Boundary-layer coordinate in the trunk: tanh(z / (3 sigma_ref sqrt(tau))) with sigma_ref = 0.35, so the trunk still sees coordinates only",
+      "base": "D4_physics",
+      "model": {
+        "similarity": 0.35
+      }
+    },
+    "D6_lbfgs": {
+      "technique": "Quasi-Newton polish: full-batch L-BFGS warm-started from D5 on 4,096 labelled contracts and 4,096 collocation points",
+      "base": "D5_similarity",
+      "warm_start": "D5_similarity",
+      "optimizer": {
+        "adam_steps": 0,
+        "lbfgs_iterations": 1000,
+        "lbfgs_chunk": 50,
+        "lbfgs_history": 50,
+        "lbfgs_batch": {
+          "data": 4096,
+          "collocation": 4096,
+          "boundary": 512
+        }
+      }
+    },
+    "D7_scale_up": {
+      "technique": "Scale up: width and rank 128 and 131,072 labelled contracts from a fresh start, then the L-BFGS stage of D6",
+      "base": "D5_similarity",
+      "model": {
+        "width": 128,
+        "rank": 128
+      },
+      "data_contracts": 131072,
+      "optimizer": {
+        "adam_steps": 15000,
+        "lbfgs_iterations": 500,
+        "lbfgs_chunk": 50,
+        "lbfgs_history": 50,
+        "lbfgs_batch": {
+          "data": 4096,
+          "collocation": 4096,
+          "boundary": 512
+        }
+      }
+    },
+    "D8_envelope": {
+      "technique": "Enveloped correction: c = Levy + tau * phi(d_2) * <branch, trunk>, trained from a fresh start through the Adam and L-BFGS stages",
+      "base": "D6_lbfgs",
+      "warm_start": null,
+      "model": {
+        "output": "levy_envelope"
+      },
+      "optimizer": {
+        "adam_steps": 15000
+      }
+    },
+    "D9_ensemble": {
+      "technique": "Ensemble: average of four independently seeded D8 trainings (seeds 0-3); Greeks are member averages",
+      "base": "D8_envelope",
+      "members_of": "D8_envelope",
+      "seeds": [
+        0,
+        1,
+        2,
+        3
+      ]
+    }
+  }
+}

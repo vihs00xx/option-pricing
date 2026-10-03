@@ -1,0 +1,103 @@
+{
+  "threads": 1,
+  "contracts": 248,
+  "torch": "2.8.0+cpu",
+  "methods": {
+    "pinn_selected": {
+      "batch_seconds_per_contract": 7.391693543468136e-05,
+      "single_contract_seconds": 0.014074700004130136
+    },
+    "deeponet_selected": {
+      "batch_seconds_per_contract": 0.00041082661288871145,
+      "single_contract_seconds": 0.057774450004217215
+    },
+    "levy_approximation": {
+      "batch_seconds_per_contract": 3.215201609090136e-05,
+      "single_contract_seconds": 0.006884149996039923
+    },
+    "P0_vanilla": {
+      "batch_seconds_per_contract": 2.616814520977993e-05,
+      "single_contract_seconds": 0.0036374999981489964
+    },
+    "P1_reduced": {
+      "batch_seconds_per_contract": 2.7163709678608293e-05,
+      "single_contract_seconds": 0.004496150002523791
+    },
+    "P2_hard_payoff": {
+      "batch_seconds_per_contract": 9.010322578579954e-05,
+      "single_contract_seconds": 0.009683699994639028
+    },
+    "P3_time_balanced": {
+      "batch_seconds_per_contract": 7.009677415959643e-05,
+      "single_contract_seconds": 0.008433499999227934
+    },
+    "P4_adaptive": {
+      "batch_seconds_per_contract": 7.432903223689795e-05,
+      "single_contract_seconds": 0.00887065000279108
+    },
+    "P5_similarity": {
+      "batch_seconds_per_contract": 6.155241933283246e-05,
+      "single_contract_seconds": 0.010489750005945098
+    },
+    "P6_lbfgs": {
+      "batch_seconds_per_contract": 6.144596773083322e-05,
+      "single_contract_seconds": 0.011633800000709016
+    },
+    "P7_nncg": {
+      "batch_seconds_per_contract": 6.33161290029567e-05,
+      "single_contract_seconds": 0.01292375000048196
+    },
+    "P8_scale_up": {
+      "batch_seconds_per_contract": 9.480887098517644e-05,
+      "single_contract_seconds": 0.01325370000267867
+    },
+    "P9_envelope": {
+      "batch_seconds_per_contract": 8.084233870190914e-05,
+      "single_contract_seconds": 0.014538649993482977
+    },
+    "P10_anchored": {
+      "batch_seconds_per_contract": 7.35374999954553e-05,
+      "single_contract_seconds": 0.014676400009193458
+    },
+    "D0_vanilla": {
+      "batch_seconds_per_contract": 5.054072578552164e-05,
+      "single_contract_seconds": 0.004474249995837454
+    },
+    "D1_reduced": {
+      "batch_seconds_per_contract": 4.351814512178422e-05,
+      "single_contract_seconds": 0.005666449993441347
+    },
+    "D2_hard_payoff": {
+      "batch_seconds_per_contract": 8.200766129565665e-05,
+      "single_contract_seconds": 0.009133499996096361
+    },
+    "D3_differential": {
+      "batch_seconds_per_contract": 7.508588708832019e-05,
+      "single_contract_seconds": 0.01058595000358764
+    },
+    "D4_physics": {
+      "batch_seconds_per_contract": 8.914314516474522e-05,
+      "single_contract_seconds": 0.010522649994527455
+    },
+    "D5_similarity": {
+      "batch_seconds_per_contract": 8.357258065511667e-05,
+      "single_contract_seconds": 0.010960500003420748
+    },
+    "D6_lbfgs": {
+      "batch_seconds_per_contract": 9.013750000562024e-05,
+      "single_contract_seconds": 0.011083199999120552
+    },
+    "D7_scale_up": {
+      "batch_seconds_per_contract": 0.00010999516129114425,
+      "single_contract_seconds": 0.009350049993372522
+    },
+    "D8_envelope": {
+      "batch_seconds_per_contract": 8.783830649448529e-05,
+      "single_contract_seconds": 0.012299149995669723
+    },
+    "D9_ensemble": {
+      "batch_seconds_per_contract": 0.0011480806451506778,
+      "single_contract_seconds": 0.05781069999648025
+    }
+  }
+}

@@ -1,54 +1,49 @@
-"""Check the saved neural study: hashes, then re-evaluate the selected checkpoint without retraining."""
+"""Verify the saved PINN/DeepONet study without training: hashes, then a re-evaluation.
+
+Checks the pinned sources and outputs (``metadata.json``), every ladder file
+(``ladder_manifest.json``) and the frozen selection, then re-prices the frozen test set
+with the selected checkpoints and compares with the saved predictions.
+
+Usage: python -m experiments.neural.verify_results
+"""
 
 import csv
-import hashlib
 import json
-from pathlib import Path
 
 import numpy as np
 import torch
 
-from experiments.neural.evaluate import LEVELS, PANELS, RESULTS, SETTINGS, load_model, panels
+from experiments.neural.common import RESULTS
+from experiments.neural.evaluate_test import load_test_set, verify_selection
+from experiments.records import ROOT, digest, verify_metadata
+from src.neural.networks import load_model
 from src.neural.reference import QUANTITIES, price_and_greeks
-from src.neural.training import quantity_metrics
-
-ROOT = Path(__file__).resolve().parents[2]
-
-
-def digest(path):
-    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
 def main():
-    torch.set_default_dtype(torch.float64)
-    protocol = json.loads((RESULTS/"protocol.json").read_text(encoding="utf-8"))
-    summary = json.loads((RESULTS/"summary.json").read_text(encoding="utf-8"))
-    if digest(RESULTS/"test_sets.npz") != protocol["test_sets_sha256"] or digest(SETTINGS) != protocol["settings_sha256"]:
-        raise RuntimeError("Frozen test sets or their settings changed")
-    for group, base in (("outputs_sha256", RESULTS), ("checkpoints_sha256", RESULTS/"ladder"),
-                        ("source_sha256", ROOT)):
-        for relative, expected in summary[group].items():
-            if digest(base/relative) != expected:
-                raise RuntimeError(f"Integrity mismatch: {relative}")
-    levels = {level["name"]: level for level in json.loads(LEVELS.read_text(encoding="utf-8"))["levels"]}
-    model = load_model(levels[summary["selected"]])
-    data, _ = panels()
-    with np.load(RESULTS/"selected_predictions.npz", allow_pickle=False) as saved:
-        with (RESULTS/"test_metrics.csv").open(encoding="utf-8") as handle:
-            rows = {r["panel"]: r for r in csv.DictReader(handle) if r["level"] == summary["selected"]}
-        for panel in PANELS:
-            predicted = price_and_greeks(model, data[panel]["x"], data[panel]["put"])
-            stored = saved[f"{panel}_predicted"]
-            for i, q in enumerate(QUANTITIES):
-                if not np.allclose(predicted[q], stored[:, i], rtol=1e-9, atol=1e-11):
-                    raise RuntimeError(f"Re-evaluated {q} on {panel} differs from saved predictions")
-            metrics = quantity_metrics(predicted, data[panel]["reference"])
+    torch.set_num_threads(4)
+    metadata = verify_metadata(RESULTS)
+    manifest = json.loads((RESULTS/"ladder_manifest.json").read_text(encoding="utf-8"))
+    for name, expected in manifest.items():
+        if digest(ROOT/name) != expected:
+            raise RuntimeError(f"Ladder file changed: {name}")
+    selection = verify_selection()
+    checked = 0
+    if (RESULTS/"test_predictions.csv").exists():
+        test = load_test_set()
+        with (RESULTS/"test_predictions.csv").open(encoding="utf-8", newline="") as handle:
+            saved = list(csv.DictReader(handle))
+        for family, entry in selection["selected"].items():
+            values = price_and_greeks(load_model(ROOT/entry["checkpoint"]).price, test["x"], test["put"])
+            rows = {r["case_id"]: r for r in saved if r["method"] == f"{family}_selected"}
             for q in QUANTITIES:
-                if not np.isclose(metrics[q]["rmse"], float(rows[panel][f"{q}_rmse"]), rtol=1e-6):
-                    raise RuntimeError(f"Recomputed {q} RMSE on {panel} differs from the saved table")
-    print(f"Verified protocol, {len(summary['outputs_sha256'])} outputs, {len(summary['checkpoints_sha256'])} "
-          f"checkpoints and {len(summary['source_sha256'])} sources; re-evaluated {summary['selected']} "
-          f"on {len(PANELS)} panels. No model was trained.")
+                stored = np.array([float(rows[c][q]) for c in test["case_id"]])
+                if not np.allclose(values[q], stored, rtol=1e-9, atol=1e-12):
+                    raise RuntimeError(f"Re-evaluated {family} {q} differs from the saved predictions")
+            checked += 1
+    print(f"Verified {len(metadata['source_sha256'])} sources, {len(metadata['outputs_sha256'])} outputs, "
+          f"{len(manifest)} ladder files and the frozen selection; re-evaluated {checked} selected pricers "
+          "on the test set.")
 
 
 if __name__ == "__main__":

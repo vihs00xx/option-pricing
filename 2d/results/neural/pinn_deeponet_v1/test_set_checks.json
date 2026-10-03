@@ -1,0 +1,31 @@
+{
+  "seal_verified": true,
+  "cases": 248,
+  "puts": 123,
+  "split_counts": {
+    "interpolation": 128,
+    "short_maturity": 32,
+    "extrapolation": 72,
+    "anchor": 16
+  },
+  "smallest_scaled_distance_to_development": {
+    "data_32768": 0.0792276782108501,
+    "anchors_4096": 0.11313054759311045,
+    "monitor": 0.16144056720928915,
+    "validation": 0.10150919693839083,
+    "short_validation": 0.1341421301954954
+  },
+  "batched_reference_worst_relative_difference": {
+    "price": 4.632185620101736e-09,
+    "delta_1": 1.522904110061015e-10,
+    "delta_2": 1.226617184970525e-10,
+    "gamma_11": 3.884136192818627e-12,
+    "gamma_12": 6.668913802700825e-11,
+    "gamma_22": 8.222162879048423e-12,
+    "vega_1": 1.8110961927841976e-06,
+    "vega_2": 1.2214589700476157e-05,
+    "theta": 2.581518974474602e-06,
+    "rho": 3.0984642469897662e-06,
+    "correlation_12": 1.80697590089515e-06
+  }
+}

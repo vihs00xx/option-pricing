@@ -1,0 +1,278 @@
+{
+  "created_at": "2026-10-01T14:40:33.393415+00:00",
+  "settings": {
+    "protocol_id": "two_stock_test_v1",
+    "purpose": "Final assessment of two-stock pricing methods, neural and classical. No training, tuning or model selection may use these cases or their references.",
+    "conventions": "Strike fixed at 100. Time in years; rates, dividend yields and volatilities are decimals. Vega and correlation sensitivities per unit decimal change; theta is calendar time per year; rho per unit rate.",
+    "strike": 100.0,
+    "seed": 20261010,
+    "training_domain": {
+      "moneyness_1": [
+        0.7,
+        1.3
+      ],
+      "moneyness_2": [
+        0.7,
+        1.3
+      ],
+      "tau": [
+        0.05,
+        2.0
+      ],
+      "volatility_1": [
+        0.1,
+        0.6
+      ],
+      "volatility_2": [
+        0.1,
+        0.6
+      ],
+      "correlation": [
+        -0.8,
+        0.9
+      ],
+      "rate": [
+        -0.02,
+        0.1
+      ],
+      "dividend_1": [
+        0.0,
+        0.06
+      ],
+      "dividend_2": [
+        0.0,
+        0.06
+      ],
+      "weight_1": [
+        0.2,
+        0.8
+      ]
+    },
+    "splits": {
+      "interpolation": {
+        "count": 128,
+        "reason": "inside the training domain"
+      },
+      "short_maturity": {
+        "count": 32,
+        "tau": [
+          0.005,
+          0.05
+        ],
+        "reason": "remaining life below the training domain"
+      },
+      "extrapolation": {
+        "cases_per_value": 4,
+        "reason": "one parameter outside the training domain",
+        "values": {
+          "moneyness_1": [
+            0.55,
+            1.45
+          ],
+          "moneyness_2": [
+            0.55,
+            1.45
+          ],
+          "tau": [
+            2.5,
+            3.0
+          ],
+          "volatility_1": [
+            0.05,
+            0.75
+          ],
+          "volatility_2": [
+            0.05,
+            0.75
+          ],
+          "correlation": [
+            -0.95,
+            0.97
+          ],
+          "rate": [
+            -0.04,
+            0.14
+          ],
+          "dividend_1": [
+            0.09
+          ],
+          "dividend_2": [
+            0.09
+          ],
+          "weight_1": [
+            0.05,
+            0.95
+          ]
+        }
+      },
+      "anchor": {
+        "reason": "hand-chosen regimes",
+        "defaults": {
+          "moneyness_1": 1.0,
+          "moneyness_2": 1.0,
+          "tau": 1.0,
+          "volatility_1": 0.25,
+          "volatility_2": 0.35,
+          "correlation": 0.4,
+          "rate": 0.03,
+          "dividend_1": 0.01,
+          "dividend_2": 0.02,
+          "weight_1": 0.5
+        },
+        "cases": [
+          {
+            "name": "atm_call",
+            "option": "call"
+          },
+          {
+            "name": "atm_put",
+            "option": "put"
+          },
+          {
+            "name": "itm_call",
+            "option": "call",
+            "moneyness_1": 1.2,
+            "moneyness_2": 1.15
+          },
+          {
+            "name": "otm_call",
+            "option": "call",
+            "moneyness_1": 0.85,
+            "moneyness_2": 0.8
+          },
+          {
+            "name": "itm_put",
+            "option": "put",
+            "moneyness_1": 0.85,
+            "moneyness_2": 0.8
+          },
+          {
+            "name": "otm_put",
+            "option": "put",
+            "moneyness_1": 1.2,
+            "moneyness_2": 1.15
+          },
+          {
+            "name": "short_atm_call",
+            "option": "call",
+            "tau": 0.02
+          },
+          {
+            "name": "short_atm_put",
+            "option": "put",
+            "tau": 0.02
+          },
+          {
+            "name": "high_volatility_call",
+            "option": "call",
+            "tau": 2.0,
+            "volatility_1": 0.55,
+            "volatility_2": 0.6
+          },
+          {
+            "name": "negative_correlation_call",
+            "option": "call",
+            "correlation": -0.8
+          },
+          {
+            "name": "high_correlation_put",
+            "option": "put",
+            "correlation": 0.9
+          },
+          {
+            "name": "unequal_weight_call",
+            "option": "call",
+            "weight_1": 0.2,
+            "moneyness_1": 0.8,
+            "moneyness_2": 1.25
+          },
+          {
+            "name": "volatility_dispersion_call",
+            "option": "call",
+            "volatility_1": 0.1,
+            "volatility_2": 0.6
+          },
+          {
+            "name": "negative_rate_put",
+            "option": "put",
+            "rate": -0.02,
+            "dividend_1": 0.04,
+            "dividend_2": 0.02
+          },
+          {
+            "name": "high_dividend_call",
+            "option": "call",
+            "rate": 0.02,
+            "dividend_1": 0.06,
+            "dividend_2": 0.06
+          },
+          {
+            "name": "deep_itm_short_put",
+            "option": "put",
+            "tau": 0.05,
+            "moneyness_1": 0.75,
+            "moneyness_2": 0.7
+          }
+        ]
+      }
+    },
+    "reference": {
+      "method": "Adaptive conditional quadrature of src/basket (shared-factor conditioning); analytic conditional Deltas and spot Hessian; central quadrature bumps for vega, theta, rho and correlation.",
+      "quadrature_atol": 1e-10,
+      "quadrature_rtol": 1e-11,
+      "cross_checks": [
+        "asset conditioning price",
+        "src/pricing Gauss-Hermite engine with 128 nodes, all quantities",
+        "halved reference bumps"
+      ],
+      "gauss_hermite_nodes": 128
+    },
+    "development_case_settings": [
+      "experiments/config/classical/basket_settings.json",
+      "experiments/config/classical/engine_validation_settings.json"
+    ],
+    "rules": [
+      "Train, tune and select models only on data generated with other seeds; never on these cases or references.",
+      "Before evaluating any model on these cases, freeze its checkpoint hash, settings and the evaluation protocol.",
+      "Report every method on every split; do not drop cases after seeing results.",
+      "Once any method is evaluated here, the cases are observed; later model changes need a new test set."
+    ]
+  },
+  "source_sha256": {
+    "experiments/config/protocol/test_set_v1.json": "2ba940aa2bf960ed86ec05eff2a486cc010a3b3540e234363ce695ad77a9f051",
+    "experiments/test_set/freeze_test_set.py": "a34e8f7afafd632f8015381f617493d526eee49a49cf63621db7d5f245fe08b4",
+    "src/basket/__init__.py": "2a702aaa39fe3761fccebb643bc2157891c85863862a0bf679dae617f64a8d4a",
+    "src/basket/adi.py": "65f15cd4af5fcefca9a6c31248f7d561fe24d8f4516970dcf781976561592e95",
+    "src/basket/analytical.py": "2811ca55c188304a42b1659f0bd5ee79ce88c4b2938eed971218c9247def523a",
+    "src/basket/contract.py": "61b55be33377b05654089c2a383c6ad4a871e6b32271d4fe10588e977270c8a1",
+    "src/basket/integration.py": "7cee14c11bccc695f1c197f3f8fffbcbca8f6d4e3bbf6e75d82cb04cfe9c6def",
+    "src/basket/simulation.py": "6fb8a8a5fd2867618ea798f6ecbaae58effd00ff9e628c2e6af9cfd411d121df",
+    "src/black_scholes.py": "0746033b38cb276d51188c010cd33b814031d8bd91f1336ae4ea8d74af5ced15"
+  },
+  "environment": {
+    "python": "3.13.3",
+    "numpy": "2.1.0",
+    "scipy": "1.15.3",
+    "platform": "Windows-11-10.0.26300-SP0"
+  },
+  "outputs_sha256": {
+    "cases.csv": "56f7eca5bfc0642872610663215ce832c8326204b4566eb4de175f7bd68ab3ca",
+    "cases.json": "ce8d53e4b103f5978ff8ce6ef8c0bc628c89063bd7e05f84067d477a721fad4a",
+    "protocol.json": "9d492c261cb823368118e5308b4444c6b75a9e042e826cedf30a5473d76efaa8",
+    "protocol.sha256": "3c38e0b88566db06851caf26b3a3136cd252f70df63582c249da4ec08eb0a892",
+    "reference_checks.csv": "29268e96c4975d3dbcf0e9a28fcd70cc730a5ce598c16142297aef90b4767afe",
+    "references.csv": "beaba1e65c1f37d660a5aa26b4d2beed813863f8c90364007f7bfc49c492967d",
+    "report.md": "7521069ffa2ad2e38521de8f627ee16ce834f797da237f72c549ac0932c316f2"
+  },
+  "provenance_sha256": {
+    "src/pricing/adi.py": "71cee068588842aede8fec9cdb6370e244932348908d97e0f2b0e54b3756dcd1",
+    "src/pricing/conditional.py": "5d821d3369bfbeededded63be502f3726acf7cb6c2172a0352e9ee38e0b7212f",
+    "src/pricing/contract.py": "016aa839645c6f00bb6a85436269a5f4e6044a93e5e07677576e51adc3a2d284",
+    "src/pricing/geometric.py": "036cf2ec2bce681be8dea7621e42d05f29307dccf9593343d3a90af445967d2f",
+    "src/pricing/rqmc.py": "309b557e4711fa5f167faf0583fa1046194bf2517649f6f9451805910a161461",
+    "src/pricing/__init__.py": "44761514e8b9e7095f94213fdfa601e969a2c4ca930d2f8a4526be7338746280",
+    "src/black_scholes.py": "0746033b38cb276d51188c010cd33b814031d8bd91f1336ae4ea8d74af5ced15",
+    "experiments/config/classical/basket_settings.json": "8238701f4813f3e6a5ce52c394b21a6c999fd06a805cf1b30a6cbb3de34d087d",
+    "experiments/config/classical/engine_validation_settings.json": "98e87f0706969467edf853afcef73662ad683f9a4f0ba56087670e307c8b41f1"
+  }
+}

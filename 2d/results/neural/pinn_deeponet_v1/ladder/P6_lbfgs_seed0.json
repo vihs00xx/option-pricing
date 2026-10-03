@@ -1,0 +1,701 @@
+{
+  "level": "P6_lbfgs",
+  "family": "pinn",
+  "seed": 0,
+  "technique": "Quasi-Newton polish: full-batch L-BFGS (strong Wolfe line search) warm-started from P5 on 16,384 RAD-selected collocation points",
+  "settings": {
+    "model": {
+      "layout": "reduced",
+      "output": "levy",
+      "width": 64,
+      "depth": 4,
+      "similarity": "levy"
+    },
+    "loss": {
+      "pde": 1.0,
+      "terminal": 0.0,
+      "boundary": 1.0
+    },
+    "sampling": {
+      "focus": 0.7,
+      "focus_z": [
+        -0.6,
+        0.55
+      ],
+      "tau_power": 2.0,
+      "weight": "time",
+      "rad": {
+        "size": 32768,
+        "pool_factor": 4,
+        "k": 1.0,
+        "c": 1.0,
+        "every": 1000
+      }
+    },
+    "batch": {
+      "collocation": 4096,
+      "terminal": 1024,
+      "boundary": 512
+    },
+    "optimizer": {
+      "adam_steps": 0,
+      "learning_rate": 0.002,
+      "final_learning_rate": 2e-05,
+      "check_every": 500,
+      "lbfgs_iterations": 3000,
+      "lbfgs_chunk": 50,
+      "lbfgs_history": 50,
+      "lbfgs_batch": {
+        "collocation": 16384,
+        "boundary": 2048
+      }
+    },
+    "family": "pinn",
+    "technique": "Quasi-Newton polish: full-batch L-BFGS (strong Wolfe line search) warm-started from P5 on 16,384 RAD-selected collocation points",
+    "computational_domain": {
+      "z": [
+        -3.0,
+        2.5
+      ],
+      "s": [
+        0.01,
+        0.99
+      ],
+      "note": "Spatial extent of the PDE problem in z = log basket forward moneyness and s = first weight share, like a grid solver's far boundary. sigma_1, sigma_2, rho and the maturity cap are the protocol's training domain; tau starts at 0 because the PDE starts at the payoff."
+    },
+    "warm_start": "P5_similarity"
+  },
+  "source_sha256": {
+    "src/neural/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/neural/coordinates.py": "860853c42b6d5e84e5593be59b269819cd7e7c8389a63d30095c9900947d9178",
+    "src/neural/deeponet.py": "485921eb30853335b21f78b7502568dc03929fcbf64f4814cf0b84c3f9003cf7",
+    "src/neural/monte_carlo.py": "6f53a04a0818af7e23586cfd7cc5712de26bb2ef915bbe7d8b1ef1fa56b99c6c",
+    "src/neural/networks.py": "3659ddaecebe59254f515d2fd9e8f0a897b222e1219c047fe605a6ef8528657c",
+    "src/neural/nys_newton_cg.py": "7c18470b0380d681a33b6bd77393a5895be42dd3e2b6f7c62dc67141f892e210",
+    "src/neural/pde.py": "94aef263a203d11f64238d396517cf0406b386718bb207c686232aa15fdbef82",
+    "src/neural/pinn.py": "4ba5bf87d6c317a6d26b42a6be91a6a559551fa79a772c7883ecad3dc3d33a7e",
+    "src/neural/reference.py": "91dabf393cb911d5005e1513b620f87992d45b57fc9e0d39d3836649d72e2c5c",
+    "src/neural/training.py": "7f8eba4db2a96f1f8b82ab67d0d21655a794d5a837f7988fe56d875fbf13589e",
+    "experiments/neural/train.py": "21825ad545f308d7293a9ec46fc0d2a074402db386f5b2df7b17bd9e9c272c4b",
+    "experiments/neural/common.py": "9ed90076e75bf240d8b5d3b5d718a2360b77156fec5e6edd7020ccebf13ac537",
+    "experiments/config/neural/study.json": "edd8e73c4db1f436d57af97536e31a4daf13bdd948757bedf472d4dd1fdb461c",
+    "experiments/config/neural/pinn_ladder.json": "6e869264af258dd1cc705b5f4137e72402b01c62072e8d78ebabdc7105b6e6f1",
+    "experiments/config/neural/deeponet_ladder.json": "c288175fe5b8319ee52ce80c7436dd0994c1b2b3f65bf766ca948f82cbc2d6e2"
+  },
+  "parameters": 13057,
+  "scores": {
+    "validation": {
+      "score": 0.02273763114393754,
+      "ratios": {
+        "price": 0.0034463211952403664,
+        "delta_1": 0.00637477016435983,
+        "delta_2": 0.005876731834624232,
+        "gamma_11": 0.029280548734609384,
+        "gamma_12": 0.02197849403711565,
+        "gamma_22": 0.029900734699628055,
+        "vega_1": 0.03566413008617274,
+        "vega_2": 0.0353438732535676,
+        "theta": 0.010649151973579612,
+        "rho": 0.006151004345915037,
+        "correlation_12": 0.06544818225850045
+      },
+      "rmse": {
+        "price": 0.0593969252700426,
+        "delta_1": 0.002070924617996492,
+        "delta_2": 0.0020505716083100093,
+        "gamma_11": 0.00016859426598979244,
+        "gamma_12": 8.343081621944768e-05,
+        "gamma_22": 0.00017514287023044983,
+        "vega_1": 0.5398175248298046,
+        "vega_2": 0.5350036272647165,
+        "theta": 0.06818377483341148,
+        "rho": 0.42328746073966644,
+        "correlation_12": 0.21761490508384884
+      },
+      "seconds": 0.1712301999941701
+    },
+    "short_validation": {
+      "score": 0.009010445580604504,
+      "ratios": {
+        "price": 0.00037012127575082604,
+        "delta_1": 0.0010592064786400584,
+        "delta_2": 0.0009516439696580777,
+        "gamma_11": 0.006829337076286956,
+        "gamma_12": 0.007219675553367424,
+        "gamma_22": 0.008210856424692558,
+        "vega_1": 0.021467154056143,
+        "vega_2": 0.01860226122662307,
+        "theta": 0.00882619623576469,
+        "rho": 0.0012157028017781755,
+        "correlation_12": 0.02436274628794471
+      },
+      "rmse": {
+        "price": 0.0045644348675535126,
+        "delta_1": 0.0004366248150879885,
+        "delta_2": 0.0004331838313981604,
+        "gamma_11": 9.990668914709932e-05,
+        "gamma_12": 7.762984795124108e-05,
+        "gamma_22": 0.00012555346240594124,
+        "vega_1": 0.030659145737512685,
+        "vega_2": 0.026130054339811037,
+        "theta": 0.17088272854762535,
+        "rho": 0.0029987033036269236,
+        "correlation_12": 0.008201236685641617
+      },
+      "seconds": 0.16420479999214876
+    }
+  },
+  "environment": {
+    "python": "3.13.3",
+    "torch": "2.8.0+cpu",
+    "numpy": "2.1.0",
+    "threads": 4,
+    "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel"
+  },
+  "adam_seconds": 0.0,
+  "total_seconds": 4394.911931800001,
+  "best_monitor": 0.02314356090954157,
+  "best_step": "lbfgs 3000",
+  "history": [
+    {
+      "stage": "lbfgs",
+      "step": 50,
+      "seconds": 69.4,
+      "monitor": 0.039458107952850645,
+      "price_ratio": 0.006913708493602049,
+      "pde": 2.8937371735014833e-06,
+      "boundary": 1.786381899748387e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 100,
+      "seconds": 140.3,
+      "monitor": 0.037731754102431916,
+      "price_ratio": 0.006392147614979263,
+      "pde": 2.620356527889565e-06,
+      "boundary": 1.9706765962647966e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 150,
+      "seconds": 217.6,
+      "monitor": 0.03658836639490795,
+      "price_ratio": 0.006523566000704531,
+      "pde": 2.3335505056275467e-06,
+      "boundary": 2.0297550542642146e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 200,
+      "seconds": 279.2,
+      "monitor": 0.0357618924939499,
+      "price_ratio": 0.006696738724082274,
+      "pde": 2.1140976550193114e-06,
+      "boundary": 1.9303206577089684e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 250,
+      "seconds": 345.6,
+      "monitor": 0.03545537922726163,
+      "price_ratio": 0.006800460668922475,
+      "pde": 1.952572497160927e-06,
+      "boundary": 1.8875640285504816e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 300,
+      "seconds": 407.6,
+      "monitor": 0.034351871530541325,
+      "price_ratio": 0.006066920214877016,
+      "pde": 1.7645916958698987e-06,
+      "boundary": 1.8485778704436022e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 350,
+      "seconds": 472.0,
+      "monitor": 0.03385896629567424,
+      "price_ratio": 0.006033223089107865,
+      "pde": 1.660448568594794e-06,
+      "boundary": 1.6140201662271507e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 400,
+      "seconds": 534.1,
+      "monitor": 0.032690595657334856,
+      "price_ratio": 0.005768080529834308,
+      "pde": 1.549214689483173e-06,
+      "boundary": 1.4598346474718296e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 450,
+      "seconds": 599.2,
+      "monitor": 0.0321917460244143,
+      "price_ratio": 0.005765229037232877,
+      "pde": 1.4734579486869034e-06,
+      "boundary": 1.3098302677283688e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 500,
+      "seconds": 661.7,
+      "monitor": 0.031798950552983256,
+      "price_ratio": 0.005610769238862184,
+      "pde": 1.3941950515080108e-06,
+      "boundary": 1.23049707885857e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 550,
+      "seconds": 731.2,
+      "monitor": 0.03234717977712411,
+      "price_ratio": 0.005564776572792924,
+      "pde": 1.3242423453463623e-06,
+      "boundary": 1.0773825233942125e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 600,
+      "seconds": 804.3,
+      "monitor": 0.032361611974452725,
+      "price_ratio": 0.005420606663120556,
+      "pde": 1.2591137536067705e-06,
+      "boundary": 1.039641504544213e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 650,
+      "seconds": 872.9,
+      "monitor": 0.031932196583390866,
+      "price_ratio": 0.005582247109377774,
+      "pde": 1.2023303693179934e-06,
+      "boundary": 8.601774958265367e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 700,
+      "seconds": 950.8,
+      "monitor": 0.03163959399463148,
+      "price_ratio": 0.005395715293003242,
+      "pde": 1.1225836291705106e-06,
+      "boundary": 8.050462055925368e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 750,
+      "seconds": 1016.8,
+      "monitor": 0.03105125942360717,
+      "price_ratio": 0.005230201193286153,
+      "pde": 1.0597414003468215e-06,
+      "boundary": 7.557645283180818e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 800,
+      "seconds": 1085.6,
+      "monitor": 0.030244971102959563,
+      "price_ratio": 0.005142854193984725,
+      "pde": 1.005470769769248e-06,
+      "boundary": 7.194198746517898e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 850,
+      "seconds": 1152.1,
+      "monitor": 0.028929191535967857,
+      "price_ratio": 0.005018213642953107,
+      "pde": 9.494103625842e-07,
+      "boundary": 6.7553094169825e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 900,
+      "seconds": 1221.8,
+      "monitor": 0.028472408019441366,
+      "price_ratio": 0.005052604639357635,
+      "pde": 9.094664027642944e-07,
+      "boundary": 5.669579829523422e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 950,
+      "seconds": 1287.8,
+      "monitor": 0.028238361824498393,
+      "price_ratio": 0.0049638404955499645,
+      "pde": 8.656443803789114e-07,
+      "boundary": 5.751264299692765e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1000,
+      "seconds": 1354.8,
+      "monitor": 0.028226338535520357,
+      "price_ratio": 0.004930058612459688,
+      "pde": 8.380459915159766e-07,
+      "boundary": 4.8910282453299876e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1050,
+      "seconds": 1423.1,
+      "monitor": 0.027940852857827266,
+      "price_ratio": 0.0048510262643926905,
+      "pde": 8.114188152383833e-07,
+      "boundary": 4.7903540225911326e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1100,
+      "seconds": 1498.2,
+      "monitor": 0.027648811727074007,
+      "price_ratio": 0.004792402841642634,
+      "pde": 7.893516599136619e-07,
+      "boundary": 4.333356969002877e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1150,
+      "seconds": 1573.9,
+      "monitor": 0.027199392538111725,
+      "price_ratio": 0.004666621430717462,
+      "pde": 7.67797666311183e-07,
+      "boundary": 4.238199949684955e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1200,
+      "seconds": 1646.7,
+      "monitor": 0.026903032799506867,
+      "price_ratio": 0.004597148910990396,
+      "pde": 7.419915953628879e-07,
+      "boundary": 4.1167803417905875e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1250,
+      "seconds": 1720.8,
+      "monitor": 0.026835348349505447,
+      "price_ratio": 0.0045101482275340405,
+      "pde": 7.173570122799873e-07,
+      "boundary": 4.402341775339768e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1300,
+      "seconds": 1789.4,
+      "monitor": 0.026471658096739216,
+      "price_ratio": 0.0043736371081360146,
+      "pde": 6.909493826621046e-07,
+      "boundary": 4.794927973989269e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1350,
+      "seconds": 1856.6,
+      "monitor": 0.02593616735241541,
+      "price_ratio": 0.0041302088297330035,
+      "pde": 6.660452069929202e-07,
+      "boundary": 5.033625994964e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1400,
+      "seconds": 1924.8,
+      "monitor": 0.02558285682576682,
+      "price_ratio": 0.004139360641325311,
+      "pde": 6.444031711746506e-07,
+      "boundary": 4.654605948311427e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1450,
+      "seconds": 1992.2,
+      "monitor": 0.02522060976740684,
+      "price_ratio": 0.003921149202744256,
+      "pde": 6.272681989915642e-07,
+      "boundary": 4.260891018981954e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1500,
+      "seconds": 2058.0,
+      "monitor": 0.025141198088631665,
+      "price_ratio": 0.003974548600229238,
+      "pde": 6.04905159101331e-07,
+      "boundary": 3.6683957497909944e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1550,
+      "seconds": 2125.5,
+      "monitor": 0.025313280556467786,
+      "price_ratio": 0.00405188971676471,
+      "pde": 5.904348964115308e-07,
+      "boundary": 3.425083355767061e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1600,
+      "seconds": 2196.9,
+      "monitor": 0.02506573247344153,
+      "price_ratio": 0.003926850563462368,
+      "pde": 5.711878994751687e-07,
+      "boundary": 3.44323597624965e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1650,
+      "seconds": 2264.9,
+      "monitor": 0.024395610973426848,
+      "price_ratio": 0.003696043366594547,
+      "pde": 5.541321734009954e-07,
+      "boundary": 3.4281358281820186e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1700,
+      "seconds": 2336.3,
+      "monitor": 0.02409192708706063,
+      "price_ratio": 0.0035846564780364835,
+      "pde": 5.410673559866401e-07,
+      "boundary": 3.311015548028412e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1750,
+      "seconds": 2420.6,
+      "monitor": 0.024318597016249346,
+      "price_ratio": 0.0036427735703505938,
+      "pde": 5.29873953365478e-07,
+      "boundary": 3.201070251423194e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1800,
+      "seconds": 2499.6,
+      "monitor": 0.024229456151173022,
+      "price_ratio": 0.0035542327159609234,
+      "pde": 5.189909339042739e-07,
+      "boundary": 2.9519298201296126e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1850,
+      "seconds": 2572.6,
+      "monitor": 0.02377281421140708,
+      "price_ratio": 0.0034510340423406127,
+      "pde": 5.057895633333082e-07,
+      "boundary": 2.7100520149758044e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1900,
+      "seconds": 2654.0,
+      "monitor": 0.02360804367062942,
+      "price_ratio": 0.0034342589804355504,
+      "pde": 4.96238756440411e-07,
+      "boundary": 2.7095895624142768e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1950,
+      "seconds": 2727.4,
+      "monitor": 0.02345945437590714,
+      "price_ratio": 0.0034508438488936814,
+      "pde": 4.804914858303972e-07,
+      "boundary": 2.8132363999778994e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2000,
+      "seconds": 2799.8,
+      "monitor": 0.02327539201255121,
+      "price_ratio": 0.003359023087032324,
+      "pde": 4.651869609084164e-07,
+      "boundary": 2.8297229127224073e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2050,
+      "seconds": 2873.7,
+      "monitor": 0.023229725924512182,
+      "price_ratio": 0.003348452578088758,
+      "pde": 4.5643110505066724e-07,
+      "boundary": 2.8959118615971964e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2100,
+      "seconds": 2948.7,
+      "monitor": 0.023220471880976847,
+      "price_ratio": 0.0033484761025817963,
+      "pde": 4.559555420477484e-07,
+      "boundary": 2.8917253350195076e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2150,
+      "seconds": 3022.7,
+      "monitor": 0.02321621206855096,
+      "price_ratio": 0.003347051835718173,
+      "pde": 4.555602090196248e-07,
+      "boundary": 2.8917060950498693e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2200,
+      "seconds": 3096.7,
+      "monitor": 0.023208229814118173,
+      "price_ratio": 0.0033449100371783056,
+      "pde": 4.552394985143375e-07,
+      "boundary": 2.8908060476246924e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2250,
+      "seconds": 3171.9,
+      "monitor": 0.023204317269456983,
+      "price_ratio": 0.0033431053699780606,
+      "pde": 4.5495286570051e-07,
+      "boundary": 2.890917112093928e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2300,
+      "seconds": 3255.1,
+      "monitor": 0.023197123798240734,
+      "price_ratio": 0.0033410258696459786,
+      "pde": 4.5471224404233647e-07,
+      "boundary": 2.8896357951937165e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2350,
+      "seconds": 3339.1,
+      "monitor": 0.023193616253060836,
+      "price_ratio": 0.0033394779603695586,
+      "pde": 4.544882742935781e-07,
+      "boundary": 2.8891108346070145e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2400,
+      "seconds": 3419.7,
+      "monitor": 0.02318711052375795,
+      "price_ratio": 0.0033376273710096997,
+      "pde": 4.542958367706354e-07,
+      "boundary": 2.887318398447966e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2450,
+      "seconds": 3501.3,
+      "monitor": 0.02318402669701852,
+      "price_ratio": 0.0033363259050364327,
+      "pde": 4.5411090759783743e-07,
+      "boundary": 2.886271892033395e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2500,
+      "seconds": 3579.6,
+      "monitor": 0.023178108515664042,
+      "price_ratio": 0.0033346593251395258,
+      "pde": 4.5394932051344864e-07,
+      "boundary": 2.884105750870674e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2550,
+      "seconds": 3664.2,
+      "monitor": 0.023175409394631884,
+      "price_ratio": 0.0033335396412927988,
+      "pde": 4.537900437396569e-07,
+      "boundary": 2.882707638390107e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2600,
+      "seconds": 3754.5,
+      "monitor": 0.023169976143913674,
+      "price_ratio": 0.0033320047525587444,
+      "pde": 4.5364925980016826e-07,
+      "boundary": 2.8802976879546905e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2650,
+      "seconds": 3833.9,
+      "monitor": 0.023167605730912658,
+      "price_ratio": 0.003331016055308495,
+      "pde": 4.535076903043856e-07,
+      "boundary": 2.878675856577156e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2700,
+      "seconds": 3912.1,
+      "monitor": 0.023162568798641946,
+      "price_ratio": 0.0033295758050173986,
+      "pde": 4.533816282586644e-07,
+      "boundary": 2.876114724390371e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2750,
+      "seconds": 3997.9,
+      "monitor": 0.02316047344744536,
+      "price_ratio": 0.0033286840924222267,
+      "pde": 4.5325285817709913e-07,
+      "boundary": 2.8743557964502276e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2800,
+      "seconds": 4082.2,
+      "monitor": 0.023155761617030035,
+      "price_ratio": 0.0033273144971895795,
+      "pde": 4.5313768156104355e-07,
+      "boundary": 2.8717063953605212e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2850,
+      "seconds": 4157.8,
+      "monitor": 0.02315389545588253,
+      "price_ratio": 0.0033264976555247134,
+      "pde": 4.530185584172659e-07,
+      "boundary": 2.8698680395473286e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2900,
+      "seconds": 4232.4,
+      "monitor": 0.023149452804456974,
+      "price_ratio": 0.003325183449246755,
+      "pde": 4.529117493531585e-07,
+      "boundary": 2.8671730504540436e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2950,
+      "seconds": 4307.0,
+      "monitor": 0.023147778137254795,
+      "price_ratio": 0.003324426985448669,
+      "pde": 4.528001713259006e-07,
+      "boundary": 2.865293830389881e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 3000,
+      "seconds": 4384.9,
+      "monitor": 0.02314356090954157,
+      "price_ratio": 0.0033231583705271763,
+      "pde": 4.5270001482992994e-07,
+      "boundary": 2.8625824801312634e-08
+    }
+  ]
+}

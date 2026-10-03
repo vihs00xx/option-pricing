@@ -1,0 +1,416 @@
+{
+  "level": "P0_vanilla",
+  "family": "pinn",
+  "seed": 0,
+  "technique": "Textbook PINN: MLP on the ten raw contract inputs plus a put flag; PDE residual in spot coordinates on the training box; soft payoff loss; Adam",
+  "settings": {
+    "model": {
+      "layout": "raw",
+      "output": "plain",
+      "width": 64,
+      "depth": 4
+    },
+    "loss": {
+      "pde": 1.0,
+      "terminal": 1.0,
+      "boundary": 0.0
+    },
+    "sampling": {
+      "focus": 0.7,
+      "focus_z": [
+        -0.6,
+        0.55
+      ],
+      "tau_power": 1.0,
+      "weight": "none"
+    },
+    "batch": {
+      "collocation": 4096,
+      "terminal": 1024,
+      "boundary": 512
+    },
+    "optimizer": {
+      "adam_steps": 15000,
+      "learning_rate": 0.002,
+      "final_learning_rate": 2e-05,
+      "check_every": 500,
+      "lbfgs_iterations": 0
+    },
+    "family": "pinn",
+    "technique": "Textbook PINN: MLP on the ten raw contract inputs plus a put flag; PDE residual in spot coordinates on the training box; soft payoff loss; Adam",
+    "computational_domain": {
+      "z": [
+        -3.0,
+        2.5
+      ],
+      "s": [
+        0.01,
+        0.99
+      ],
+      "note": "Spatial extent of the PDE problem in z = log basket forward moneyness and s = first weight share, like a grid solver's far boundary. sigma_1, sigma_2, rho and the maturity cap are the protocol's training domain; tau starts at 0 because the PDE starts at the payoff."
+    }
+  },
+  "source_sha256": {
+    "src/neural/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/neural/coordinates.py": "860853c42b6d5e84e5593be59b269819cd7e7c8389a63d30095c9900947d9178",
+    "src/neural/deeponet.py": "d2835384be15727621121a2707e8de593aceefa85c9ff647e6787a3a3a979e5e",
+    "src/neural/monte_carlo.py": "6f53a04a0818af7e23586cfd7cc5712de26bb2ef915bbe7d8b1ef1fa56b99c6c",
+    "src/neural/networks.py": "4f0bbd511ca949a6c552e9f2863f938a35a19fd854a7fdfcbbfdc37291465fe7",
+    "src/neural/nys_newton_cg.py": "7c18470b0380d681a33b6bd77393a5895be42dd3e2b6f7c62dc67141f892e210",
+    "src/neural/pde.py": "94aef263a203d11f64238d396517cf0406b386718bb207c686232aa15fdbef82",
+    "src/neural/pinn.py": "6e9d79b03be157bbff7506be6a74d05a401012f58915c2fbfaab82f3fb8cc8d5",
+    "src/neural/reference.py": "91dabf393cb911d5005e1513b620f87992d45b57fc9e0d39d3836649d72e2c5c",
+    "src/neural/training.py": "7f8eba4db2a96f1f8b82ab67d0d21655a794d5a837f7988fe56d875fbf13589e",
+    "experiments/neural/train.py": "21825ad545f308d7293a9ec46fc0d2a074402db386f5b2df7b17bd9e9c272c4b",
+    "experiments/neural/common.py": "9ed90076e75bf240d8b5d3b5d718a2360b77156fec5e6edd7020ccebf13ac537",
+    "experiments/config/neural/study.json": "edd8e73c4db1f436d57af97536e31a4daf13bdd948757bedf472d4dd1fdb461c",
+    "experiments/config/neural/pinn_ladder.json": "e935e04e274fc21d11c059c942b490a1f79f2b8b6bf5f14de899b6c471aabcfe",
+    "experiments/config/neural/deeponet_ladder.json": "f527184e7d99d1d97d7cfc994e9bdef93a51924305238bd65585a818ac1c7e4f"
+  },
+  "parameters": 13313,
+  "scores": {
+    "validation": {
+      "score": 0.28734988038891474,
+      "ratios": {
+        "price": 0.09392843193198006,
+        "delta_1": 0.20153104008160694,
+        "delta_2": 0.18125742926268013,
+        "gamma_11": 0.417776488144234,
+        "gamma_12": 0.3949853835627709,
+        "gamma_22": 0.40967202586898893,
+        "vega_1": 0.2575749317436634,
+        "vega_2": 0.26597869149517106,
+        "theta": 0.33075881146627745,
+        "rho": 0.30514948434501094,
+        "correlation_12": 0.3022359663756779
+      },
+      "rmse": {
+        "price": 1.6188450629329652,
+        "delta_1": 0.06546990423730037,
+        "delta_2": 0.06324626487998965,
+        "gamma_11": 0.0024055123080127614,
+        "gamma_12": 0.001499372654456825,
+        "gamma_22": 0.0023996445299623473,
+        "vega_1": 3.898692096964353,
+        "vega_2": 4.026145173850629,
+        "theta": 2.117763403239581,
+        "rho": 20.99916421944964,
+        "correlation_12": 1.0049331985416003
+      },
+      "seconds": 0.12329860001045745
+    },
+    "short_validation": {
+      "score": 0.841912400139094,
+      "ratios": {
+        "price": 0.0480490503473545,
+        "delta_1": 0.16928543185299139,
+        "delta_2": 0.14870406923990898,
+        "gamma_11": 0.7342119318305963,
+        "gamma_12": 0.71967117655869,
+        "gamma_22": 0.717973942258973,
+        "vega_1": 1.4797920021960076,
+        "vega_2": 1.3317643192955628,
+        "theta": 0.5959221719140059,
+        "rho": 1.9345899530920458,
+        "correlation_12": 1.3810723529438962
+      },
+      "rmse": {
+        "price": 0.5925537793346094,
+        "delta_1": 0.06978263621914677,
+        "delta_2": 0.06768938858613859,
+        "gamma_11": 0.010740820437197074,
+        "gamma_12": 0.007738292891165138,
+        "gamma_22": 0.010978649449619708,
+        "vega_1": 2.113422139603565,
+        "vega_2": 1.870690536331733,
+        "theta": 11.537564316330853,
+        "rho": 4.77194037474885,
+        "correlation_12": 0.4649106924408395
+      },
+      "seconds": 0.10081459999491926
+    }
+  },
+  "environment": {
+    "python": "3.13.3",
+    "torch": "2.8.0+cpu",
+    "numpy": "2.1.0",
+    "threads": 1,
+    "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel"
+  },
+  "adam_seconds": 5340.055326999995,
+  "total_seconds": 5340.059932300006,
+  "best_monitor": 0.2943075873844696,
+  "best_step": "adam 14500",
+  "history": [
+    {
+      "stage": "adam",
+      "step": 500,
+      "seconds": 236.3,
+      "monitor": 0.6614840010797294,
+      "price_ratio": 0.3703180032450179,
+      "pde": 0.00028168180063477103,
+      "terminal": 0.0006967960480426195
+    },
+    {
+      "stage": "adam",
+      "step": 1000,
+      "seconds": 455.8,
+      "monitor": 0.5011241571128201,
+      "price_ratio": 0.223986039545623,
+      "pde": 0.00016496901072772386,
+      "terminal": 0.00039606324708754416
+    },
+    {
+      "stage": "adam",
+      "step": 1500,
+      "seconds": 638.6,
+      "monitor": 0.430133295078163,
+      "price_ratio": 0.17799348961167683,
+      "pde": 0.00012052589728076332,
+      "terminal": 0.00026868519591222157
+    },
+    {
+      "stage": "adam",
+      "step": 2000,
+      "seconds": 812.8,
+      "monitor": 0.38857806054636884,
+      "price_ratio": 0.13884055285318614,
+      "pde": 0.00010485028870089517,
+      "terminal": 0.00020828949926358144
+    },
+    {
+      "stage": "adam",
+      "step": 2500,
+      "seconds": 993.9,
+      "monitor": 0.36195831701393044,
+      "price_ratio": 0.11558703956991566,
+      "pde": 7.65177268518125e-05,
+      "terminal": 0.0001868188912184339
+    },
+    {
+      "stage": "adam",
+      "step": 3000,
+      "seconds": 1203.9,
+      "monitor": 0.3429147370933929,
+      "price_ratio": 0.10539312559565416,
+      "pde": 6.557450087385128e-05,
+      "terminal": 0.00016709872733690706
+    },
+    {
+      "stage": "adam",
+      "step": 3500,
+      "seconds": 1413.3,
+      "monitor": 0.3378338042190008,
+      "price_ratio": 0.10309167413735038,
+      "pde": 5.632064395208784e-05,
+      "terminal": 0.00014471616757844803
+    },
+    {
+      "stage": "adam",
+      "step": 4000,
+      "seconds": 1623.8,
+      "monitor": 0.3292034403852719,
+      "price_ratio": 0.10387942735805183,
+      "pde": 5.135655476216056e-05,
+      "terminal": 0.00013813976082328416
+    },
+    {
+      "stage": "adam",
+      "step": 4500,
+      "seconds": 1835.2,
+      "monitor": 0.3227707637687475,
+      "price_ratio": 0.10899180143653463,
+      "pde": 4.836431136917038e-05,
+      "terminal": 0.00011697451784892839
+    },
+    {
+      "stage": "adam",
+      "step": 5000,
+      "seconds": 2058.9,
+      "monitor": 0.32077239021435144,
+      "price_ratio": 0.10077144155703972,
+      "pde": 4.5640448076676745e-05,
+      "terminal": 0.00011556819421391133
+    },
+    {
+      "stage": "adam",
+      "step": 5500,
+      "seconds": 2272.3,
+      "monitor": 0.3142826046362639,
+      "price_ratio": 0.09548404007993956,
+      "pde": 4.011500954000119e-05,
+      "terminal": 0.00010645613425363203
+    },
+    {
+      "stage": "adam",
+      "step": 6000,
+      "seconds": 2499.5,
+      "monitor": 0.3132117311135271,
+      "price_ratio": 0.09727612326429773,
+      "pde": 3.8586644593646376e-05,
+      "terminal": 0.00010273984295499095
+    },
+    {
+      "stage": "adam",
+      "step": 6500,
+      "seconds": 2708.5,
+      "monitor": 0.3095437994661574,
+      "price_ratio": 0.09556254870300086,
+      "pde": 3.507515518275946e-05,
+      "terminal": 0.00010758540612146834
+    },
+    {
+      "stage": "adam",
+      "step": 7000,
+      "seconds": 2925.4,
+      "monitor": 0.3048353347851605,
+      "price_ratio": 0.09478644461656878,
+      "pde": 3.214124955137232e-05,
+      "terminal": 9.629311750677225e-05
+    },
+    {
+      "stage": "adam",
+      "step": 7500,
+      "seconds": 3088.4,
+      "monitor": 0.303460757563031,
+      "price_ratio": 0.09405016914147636,
+      "pde": 3.3697462535868465e-05,
+      "terminal": 9.178139709752593e-05
+    },
+    {
+      "stage": "adam",
+      "step": 8000,
+      "seconds": 3246.8,
+      "monitor": 0.30181796464536814,
+      "price_ratio": 0.09423052009358342,
+      "pde": 2.9063519842823745e-05,
+      "terminal": 8.677869399201573e-05
+    },
+    {
+      "stage": "adam",
+      "step": 8500,
+      "seconds": 3396.5,
+      "monitor": 0.3000150186579696,
+      "price_ratio": 0.09423339280299227,
+      "pde": 3.103284488335885e-05,
+      "terminal": 8.624798961794943e-05
+    },
+    {
+      "stage": "adam",
+      "step": 9000,
+      "seconds": 3548.4,
+      "monitor": 0.2995349583264112,
+      "price_ratio": 0.09347221114696462,
+      "pde": 2.7686750120917477e-05,
+      "terminal": 8.169382399881862e-05
+    },
+    {
+      "stage": "adam",
+      "step": 9500,
+      "seconds": 3699.9,
+      "monitor": 0.29871438646379506,
+      "price_ratio": 0.09337208960369543,
+      "pde": 2.954822300314123e-05,
+      "terminal": 8.23151148699567e-05
+    },
+    {
+      "stage": "adam",
+      "step": 10000,
+      "seconds": 3850.0,
+      "monitor": 0.29750845083059263,
+      "price_ratio": 0.09237654641734967,
+      "pde": 3.0082780575891925e-05,
+      "terminal": 7.500935418090727e-05
+    },
+    {
+      "stage": "adam",
+      "step": 10500,
+      "seconds": 4002.7,
+      "monitor": 0.2981812439640818,
+      "price_ratio": 0.09476035016335983,
+      "pde": 2.842540456877067e-05,
+      "terminal": 7.880989596855228e-05
+    },
+    {
+      "stage": "adam",
+      "step": 11000,
+      "seconds": 4152.6,
+      "monitor": 0.29631484006766623,
+      "price_ratio": 0.0927855700257487,
+      "pde": 2.8583331892069885e-05,
+      "terminal": 8.606744326797907e-05
+    },
+    {
+      "stage": "adam",
+      "step": 11500,
+      "seconds": 4298.6,
+      "monitor": 0.2964770919531563,
+      "price_ratio": 0.09384967648700811,
+      "pde": 2.9647766564817485e-05,
+      "terminal": 7.925286243218383e-05
+    },
+    {
+      "stage": "adam",
+      "step": 12000,
+      "seconds": 4440.9,
+      "monitor": 0.29574026147035953,
+      "price_ratio": 0.09245202459721413,
+      "pde": 2.809654311248439e-05,
+      "terminal": 7.368852141897117e-05
+    },
+    {
+      "stage": "adam",
+      "step": 12500,
+      "seconds": 4578.3,
+      "monitor": 0.2953284802586852,
+      "price_ratio": 0.09279001075711303,
+      "pde": 2.6699662119080144e-05,
+      "terminal": 7.017939087023328e-05
+    },
+    {
+      "stage": "adam",
+      "step": 13000,
+      "seconds": 4715.4,
+      "monitor": 0.2950420144004615,
+      "price_ratio": 0.09268096480696437,
+      "pde": 2.9237993553154847e-05,
+      "terminal": 7.489946759043922e-05
+    },
+    {
+      "stage": "adam",
+      "step": 13500,
+      "seconds": 4825.8,
+      "monitor": 0.29540960097628227,
+      "price_ratio": 0.09293845290119823,
+      "pde": 2.5800747597248393e-05,
+      "terminal": 7.22882992419367e-05
+    },
+    {
+      "stage": "adam",
+      "step": 14000,
+      "seconds": 4958.5,
+      "monitor": 0.2947206028807254,
+      "price_ratio": 0.0937669082787744,
+      "pde": 2.5911769120606257e-05,
+      "terminal": 7.140072720521101e-05
+    },
+    {
+      "stage": "adam",
+      "step": 14500,
+      "seconds": 5147.3,
+      "monitor": 0.2943075873844696,
+      "price_ratio": 0.09280644294735763,
+      "pde": 2.6882152690677493e-05,
+      "terminal": 7.196077818906541e-05
+    },
+    {
+      "stage": "adam",
+      "step": 15000,
+      "seconds": 5340.0,
+      "monitor": 0.2943619332316246,
+      "price_ratio": 0.09286438272382588,
+      "pde": 2.8976104098965493e-05,
+      "terminal": 6.722870720919286e-05
+    }
+  ]
+}

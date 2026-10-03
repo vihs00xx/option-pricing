@@ -1,0 +1,124 @@
+{
+  "frozen_at": "2026-10-03T17:36:53.096377+00:00",
+  "selection_rule": "Within each family the level with the lowest validation score is selected. Score = mean over price and the ten Greeks of RMSE / RMS(reference) on the 4,096 validation contracts drawn from the protocol's training domain. A level within 1% of the best score yields to the earlier level.",
+  "selected": {
+    "pinn": {
+      "level": "P10_anchored",
+      "validation_score": 0.012976232886176152,
+      "checkpoint": "results/neural/pinn_deeponet_v1/ladder/P10_anchored_seed0.pt",
+      "checkpoint_sha256": "1b5a87ef1c150a70abb51ddb4f91779a11dd36b6bc02df9691561e532fca0a30"
+    },
+    "deeponet": {
+      "level": "D9_ensemble",
+      "validation_score": 0.006059975134987807,
+      "checkpoint": "results/neural/pinn_deeponet_v1/ladder/D9_ensemble_seed0.pt",
+      "checkpoint_sha256": "bb1b2d1ee46520c3a57c4b3eb96d0c03766e7655545af485fb26ca3ffad06e52"
+    }
+  },
+  "ladder": {
+    "P0_vanilla": {
+      "checkpoint": "results/neural/pinn_deeponet_v1/ladder/P0_vanilla_seed0.pt",
+      "checkpoint_sha256": "8f825b3f3239a99323bfc8b0a469839e75232d610163bd6da2e83b82b922c0be"
+    },
+    "P1_reduced": {
+      "checkpoint": "results/neural/pinn_deeponet_v1/ladder/P1_reduced_seed0.pt",
+      "checkpoint_sha256": "3b8d0a8c0994d0197ab533eb72a22928ff031b3f0fde3966a6864a606684e9eb"
+    },
+    "P2_hard_payoff": {
+      "checkpoint": "results/neural/pinn_deeponet_v1/ladder/P2_hard_payoff_seed0.pt",
+      "checkpoint_sha256": "d5c4e184d92829d0a69444bd058dc58166e1372dc5cbe635d6cfd694b51d41cd"
+    },
+    "P3_time_balanced": {
+      "checkpoint": "results/neural/pinn_deeponet_v1/ladder/P3_time_balanced_seed0.pt",
+      "checkpoint_sha256": "aff0a552e75620042624f8220f627dca3137ec09021cb61f9f825a4a354751af"
+    },
+    "P4_adaptive": {
+      "checkpoint": "results/neural/pinn_deeponet_v1/ladder/P4_adaptive_seed0.pt",
+      "checkpoint_sha256": "a8652fe45b7a80b1be21b6ac0befd6c4775a311a8f77c9de5783332ea2549a4f"
+    },
+    "P5_similarity": {
+      "checkpoint": "results/neural/pinn_deeponet_v1/ladder/P5_similarity_seed0.pt",
+      "checkpoint_sha256": "205f88a2fb774d6a005fcc272513d6b11fe72f7311032d47c3ee427751ce5388"
+    },
+    "P6_lbfgs": {
+      "checkpoint": "results/neural/pinn_deeponet_v1/ladder/P6_lbfgs_seed0.pt",
+      "checkpoint_sha256": "de37cb0c7800dec9b942d58010c2177850f6729c5c92506e18fe05b7f2dbdf5a"
+    },
+    "P7_nncg": {
+      "checkpoint": "results/neural/pinn_deeponet_v1/ladder/P7_nncg_seed0.pt",
+      "checkpoint_sha256": "b46c9a7d38ab84426e2163f78e99d52a872db5f3de798231aedf91d04a2e03a9"
+    },
+    "P8_scale_up": {
+      "checkpoint": "results/neural/pinn_deeponet_v1/ladder/P8_scale_up_seed0.pt",
+      "checkpoint_sha256": "9b183166a590fcdd9f5e20f246457ed64f17f86a9b2764e8cef86c986aac0854"
+    },
+    "P9_envelope": {
+      "checkpoint": "results/neural/pinn_deeponet_v1/ladder/P9_envelope_seed0.pt",
+      "checkpoint_sha256": "ee294c0e4de45a23258ec8e10f21ce5ae5a8b776fbb3ce3bbd1d8a1e4536bb4a"
+    },
+    "P10_anchored": {
+      "checkpoint": "results/neural/pinn_deeponet_v1/ladder/P10_anchored_seed0.pt",
+      "checkpoint_sha256": "1b5a87ef1c150a70abb51ddb4f91779a11dd36b6bc02df9691561e532fca0a30"
+    },
+    "D0_vanilla": {
+      "checkpoint": "results/neural/pinn_deeponet_v1/ladder/D0_vanilla_seed0.pt",
+      "checkpoint_sha256": "489d6e5bbda73c93239fe334a7c2bfa961e1c436e3814f9499b9f0c89a01eae7"
+    },
+    "D1_reduced": {
+      "checkpoint": "results/neural/pinn_deeponet_v1/ladder/D1_reduced_seed0.pt",
+      "checkpoint_sha256": "d4db97d226d15bc7ea88e321dbe4bae7a8cda0022748067cee636edca7fddae5"
+    },
+    "D2_hard_payoff": {
+      "checkpoint": "results/neural/pinn_deeponet_v1/ladder/D2_hard_payoff_seed0.pt",
+      "checkpoint_sha256": "0acb86d517a9667276c0e17cadb768c28e61c02a60ab3e720500a35ee8a78859"
+    },
+    "D3_differential": {
+      "checkpoint": "results/neural/pinn_deeponet_v1/ladder/D3_differential_seed0.pt",
+      "checkpoint_sha256": "dd931cbd54da06e597320dc4524bae38969234e0fc0565f3e217d7953f805914"
+    },
+    "D4_physics": {
+      "checkpoint": "results/neural/pinn_deeponet_v1/ladder/D4_physics_seed0.pt",
+      "checkpoint_sha256": "02bcda76fae2f4a70b0afed85f15269e7e9b13f408e7bc10e8b34417f9796d35"
+    },
+    "D5_similarity": {
+      "checkpoint": "results/neural/pinn_deeponet_v1/ladder/D5_similarity_seed0.pt",
+      "checkpoint_sha256": "99f72230eff2b85b3aed388980cc0b443658b598751fbace583f30d31d98eed7"
+    },
+    "D6_lbfgs": {
+      "checkpoint": "results/neural/pinn_deeponet_v1/ladder/D6_lbfgs_seed0.pt",
+      "checkpoint_sha256": "f93f12e9354fcceabe8c13bdb39a8b515fe5e36386dafc6da33ad63d527bdece"
+    },
+    "D7_scale_up": {
+      "checkpoint": "results/neural/pinn_deeponet_v1/ladder/D7_scale_up_seed0.pt",
+      "checkpoint_sha256": "1710a4326703fa8d714f2c0f32683659554a356a84727e2a74e5224ec346e562"
+    },
+    "D8_envelope": {
+      "checkpoint": "results/neural/pinn_deeponet_v1/ladder/D8_envelope_seed0.pt",
+      "checkpoint_sha256": "858061db4f224ca2b4f33440675467762e298d189fffa5310abf58931243d451"
+    },
+    "D9_ensemble": {
+      "checkpoint": "results/neural/pinn_deeponet_v1/ladder/D9_ensemble_seed0.pt",
+      "checkpoint_sha256": "bb1b2d1ee46520c3a57c4b3eb96d0c03766e7655545af485fb26ca3ffad06e52"
+    }
+  },
+  "settings_sha256": {
+    "experiments/config/neural/study.json": "edd8e73c4db1f436d57af97536e31a4daf13bdd948757bedf472d4dd1fdb461c",
+    "experiments/config/neural/pinn_ladder.json": "2717f2b6e33512ab6b64a778f899fe931b152c0e709bf1c0ace7f33c8bbff685",
+    "experiments/config/neural/deeponet_ladder.json": "3defe9269518fb5c4f58a714f320d2e75c6e361d16dcfdac7d50063d247c1fe0"
+  },
+  "evaluation_sources_sha256": {
+    "experiments/neural/evaluate_test.py": "de36a821c05b9535f88cfa5495d1dddb10fde4191c4709f97ef3fb57305133e5",
+    "experiments/neural/common.py": "9ed90076e75bf240d8b5d3b5d718a2360b77156fec5e6edd7020ccebf13ac537",
+    "experiments/records.py": "7c75827bc491c189b74ea8e4e41971d699e1785cc742c2dff326758aa5cbc6bc",
+    "src/neural/coordinates.py": "860853c42b6d5e84e5593be59b269819cd7e7c8389a63d30095c9900947d9178",
+    "src/neural/networks.py": "3659ddaecebe59254f515d2fd9e8f0a897b222e1219c047fe605a6ef8528657c",
+    "src/neural/pinn.py": "4ba5bf87d6c317a6d26b42a6be91a6a559551fa79a772c7883ecad3dc3d33a7e",
+    "src/neural/deeponet.py": "485921eb30853335b21f78b7502568dc03929fcbf64f4814cf0b84c3f9003cf7",
+    "src/neural/reference.py": "91dabf393cb911d5005e1513b620f87992d45b57fc9e0d39d3836649d72e2c5c"
+  },
+  "test_set": {
+    "folder": "results/test_set_v1",
+    "protocol_sha256": "9d492c261cb823368118e5308b4444c6b75a9e042e826cedf30a5473d76efaa8"
+  },
+  "evaluation_plan": "Score the selected PINN and DeepONet once on every case of every split of the frozen test set, with the Levy approximation and every ladder level alongside for context. Report RMSE, largest absolute error and the test set's floored relative errors for the price and all ten Greeks, by split. No case is dropped."
+}

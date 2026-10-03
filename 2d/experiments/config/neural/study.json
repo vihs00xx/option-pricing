@@ -1,0 +1,23 @@
+{
+  "study_id": "pinn_deeponet_v1",
+  "purpose": "PINN and DeepONet pricers for two-stock arithmetic basket options, each built as a ladder: every level adds one technique to the configuration below it, and every level is scored on the same validation contracts.",
+  "protocol": "experiments/config/protocol/test_set_v1.json",
+  "seeds": {
+    "training": 0,
+    "data": 7001,
+    "anchors": 7002,
+    "monitor": 7201,
+    "validation": 7301,
+    "short_validation": 7302,
+    "development": 7501
+  },
+  "monitor_contracts": 512,
+  "validation_contracts": 4096,
+  "short_validation_tau": [0.005, 0.05],
+  "selection_rule": "Within each family the level with the lowest validation score is selected. Score = mean over price and the ten Greeks of RMSE / RMS(reference) on the 4,096 validation contracts drawn from the protocol's training domain. A level within 1% of the best score yields to the earlier level.",
+  "computational_domain": {
+    "z": [-3.0, 2.5],
+    "s": [0.01, 0.99],
+    "note": "Spatial extent of the PDE problem in z = log basket forward moneyness and s = first weight share, like a grid solver's far boundary. sigma_1, sigma_2, rho and the maturity cap are the protocol's training domain; tau starts at 0 because the PDE starts at the payoff."
+  }
+}

@@ -1,153 +1,123 @@
-from pathlib import Path
-import tempfile
+"""Shared neural-pricer machinery: reference, coordinates, PDE, Monte Carlo, scoring."""
+
 import unittest
 
 import numpy as np
 from numpy.testing import assert_allclose
 import torch
 
-from src.basket import BasketContract, arithmetic_greeks, quadrature_price
-from src.neural.domain import COLUMN, ContractBox, black_call, moment_matched_vol, sample_contracts
-from src.neural.models import BasketPricer, EnsemblePricer, reduced_features
+from src.basket import arithmetic_greeks, quadrature_price
+from src.neural.coordinates import COLUMN, features_from_log_forwards, levy_call, log_forwards, reduced_coordinates
 from src.neural.monte_carlo import monte_carlo_estimates
-from src.neural.reference import QUANTITIES, contract_row, price_and_greeks, reference_values
-from src.neural.training import (LossWeights, Schedule, label_scales, loss_terms, pde_residual,
-                                 reduced_tensor, reference_labels, train)
-
-torch.set_default_dtype(torch.float64)
-
-
-def small_model(output="implied_vol", seed=0):
-    torch.manual_seed(seed)
-    x = sample_contracts(ContractBox(), 256, seed=1)
-    features = reduced_features(*reduced_tensor(x).unbind(-1))
-    model = BasketPricer("reduced", output, width=16, depth=2, mean=features.mean(0), std=features.std(0))
-    for parameter in model.parameters():
-        torch.nn.init.normal_(parameter, std=0.3)
-    return model
+from src.neural.networks import Ensemble, load_model, save_model
+from src.neural.pde import raw_residual, reduced_residual
+from src.neural.reference import QUANTITIES, call_pricer, price_and_greeks, reference_call, reference_labels, \
+    reference_values
+from src.neural.training import score
+from tests.neural_helpers import contract, contracts, small_model
 
 
 class ReferenceTests(unittest.TestCase):
-    def setUp(self):
-        self.contracts = [BasketContract(dividends=(0.01, 0.03)),
-                          BasketContract(spots=(80, 130), weights=(0.3, 0.7), option="put", correlation=-0.7),
-                          BasketContract(tau=0.02, correlation=0.95, volatilities=(0.5, 0.65)),
-                          BasketContract(spots=(60, 140), weights=(0.8, 0.2), tau=2, correlation=-0.95)]
-        rows = [contract_row(c) for c in self.contracts]
-        self.x = np.array([r[0] for r in rows])
-        self.put = np.array([r[1] for r in rows])
-        self.reference = reference_values(self.x, self.put)
+    @classmethod
+    def setUpClass(cls):
+        cls.x, cls.put = contracts(8, seed=11)
+        cls.reference = reference_values(cls.x, cls.put)
 
-    def test_prices_match_adaptive_quadrature(self):
-        expected = [quadrature_price(c).price for c in self.contracts]
-        assert_allclose(self.reference["price"], expected, rtol=0, atol=1e-10)
-
-    def test_greeks_match_repository_greeks(self):
-        for i, contract in enumerate(self.contracts[:2]):
-            expected = arithmetic_greeks(contract)
-            for name in QUANTITIES[1:6]:
+    def test_prices_and_greeks_match_adaptive_quadrature(self):
+        for i in range(3):
+            c = contract(self.x[i], self.put[i])
+            self.assertAlmostEqual(self.reference["price"][i], quadrature_price(c).price, delta=1e-10)
+            expected = arithmetic_greeks(c)
+            for name in ("delta_1", "delta_2", "gamma_11", "gamma_12", "gamma_22"):
                 self.assertAlmostEqual(self.reference[name][i], expected[name], delta=1e-9)
-            for name in QUANTITIES[6:]:
+            for name in ("vega_1", "vega_2", "theta", "rho"):
                 self.assertAlmostEqual(self.reference[name][i], expected[name], delta=5e-5)
+            self.assertAlmostEqual(self.reference["correlation_12"][i], expected["correlation"], delta=5e-5)
 
-    def test_homogeneity_and_parity(self):
-        scaled = self.x.copy()
-        for column in ("spot_1", "spot_2", "strike"):
-            scaled[:, COLUMN[column]] *= 2.5
-        values = reference_values(scaled, self.put)
-        assert_allclose(values["price"], 2.5*self.reference["price"], rtol=1e-12)
-        assert_allclose(values["delta_1"], self.reference["delta_1"], atol=1e-12)
-        calls = reference_values(self.x, np.zeros(len(self.x), bool), greeks=False)["price"]
-        puts = reference_values(self.x, np.ones(len(self.x), bool), greeks=False)["price"]
-        for i, contract in enumerate(self.contracts):
-            parity = contract.forward_value()-contract.strike*np.exp(-contract.rate*contract.tau)
-            self.assertAlmostEqual(calls[i]-puts[i], parity, places=10)
+    def test_reduced_pde_holds_for_reference(self):
+        features, _ = reduced_coordinates(torch.as_tensor(self.x))
+        residual, _ = reduced_residual(reference_call, features)
+        self.assertLess(residual.abs().max().item(), 1e-11)
 
-    def test_labels_satisfy_scale_free_pde(self):
-        r = reduced_tensor(sample_contracts(ContractBox(), 128, seed=3))
-        labels = reference_labels(r, 2)
-        self.assertLess(pde_residual(r, labels["dc"], labels["d2c"]).abs().max().item(), 1e-12)
+    def test_raw_pde_holds_for_reference(self):
+        price = call_pricer(reference_call)
+        residual = raw_residual(lambda x, put: price(x, put)/x[:, COLUMN["strike"]],
+                                torch.as_tensor(self.x), torch.as_tensor(self.put))
+        self.assertLess(residual.abs().max().item(), 1e-10)
 
-    def test_monte_carlo_estimators_are_unbiased(self):
-        estimates = monte_carlo_estimates(self.x[0], False, 400_000, seed=7)
+    def test_labels_satisfy_reduced_pde(self):
+        features, _ = reduced_coordinates(torch.as_tensor(self.x))
+        c, c1, c2, c11, c12, c22, ct = reference_labels(features)[:, :7].T
+        v1, v2, rho = features[:, 3:].T
+        assert_allclose(ct, 0.5*v1*v1*(c11-c1)+rho*v1*v2*c12+0.5*v2*v2*(c22-c2), atol=1e-11)
+
+    def test_coordinate_round_trip(self):
+        features, _ = reduced_coordinates(torch.as_tensor(self.x))
+        y1, y2 = log_forwards(features)
+        torch.testing.assert_close(features_from_log_forwards(y1, y2, features[:, 2:]), features)
+
+    def test_levy_is_exact_at_expiry_and_close_before(self):
+        features, _ = reduced_coordinates(torch.as_tensor(self.x))
+        expiring = features.clone()
+        expiring[:, 2] = 1e-14
+        torch.testing.assert_close(levy_call(expiring), torch.relu(torch.expm1(features[:, 0])), atol=1e-12, rtol=0)
+        self.assertLess((levy_call(features)-reference_call(features)).abs().max().item(), 0.02)
+
+    def test_monte_carlo_is_unbiased(self):
+        estimates = monte_carlo_estimates(self.x[0], self.put[0], 400_000, seed=7)
         z = [(estimates[q][0]-self.reference[q][0])/estimates[q][1] for q in QUANTITIES]
         self.assertLess(max(abs(v) for v in z), 4.5)
 
+    def test_score_is_zero_for_reference(self):
+        self.assertEqual(score(self.reference, self.reference)[0], 0.0)
 
-class ModelTests(unittest.TestCase):
+
+class SharedModelTests(unittest.TestCase):
     def setUp(self):
-        self.x = sample_contracts(ContractBox(), 64, seed=9)
-        self.put = np.arange(64) % 2 == 1
+        self.x, self.put = contracts(32, seed=9)
 
-    def test_zero_network_is_levy_approximation(self):
-        model = BasketPricer("reduced", "implied_vol", width=8, depth=2)
-        r = reduced_tensor(self.x)
-        f1, f2, a1, a2, rho = r.unbind(-1)
-        expected = black_call(f1+f2, moment_matched_vol(f1, f2, a1, a2, rho))
-        torch.testing.assert_close(model.call_from_reduced(f1, f2, a1, a2, rho), expected)
+    def test_reduced_models_keep_parity_and_homogeneity(self):
+        for family in ("pinn", "deeponet"):
+            model = small_model(family)
+            x = torch.as_tensor(self.x)
+            n = len(x)
+            call = model.price(x, torch.zeros(n, dtype=torch.bool))
+            put = model.price(x, torch.ones(n, dtype=torch.bool))
+            w, tau = x[:, COLUMN["weight_1"]], x[:, COLUMN["tau"]]
+            forward = (w*x[:, COLUMN["spot_1"]]*torch.exp(-x[:, COLUMN["dividend_1"]]*tau)
+                       + (1-w)*x[:, COLUMN["spot_2"]]*torch.exp(-x[:, COLUMN["dividend_2"]]*tau))
+            torch.testing.assert_close(call-put, forward-x[:, COLUMN["strike"]]*torch.exp(-x[:, COLUMN["rate"]]*tau))
+            scaled = x.clone()
+            for column in ("spot_1", "spot_2", "strike"):
+                scaled[:, COLUMN[column]] *= 1.7
+            torch.testing.assert_close(model.price(scaled, torch.zeros(n, dtype=torch.bool)), 1.7*call)
 
-    def test_autograd_greeks_match_finite_differences(self):
-        model = small_model()
-        greeks = price_and_greeks(model, self.x, self.put)
-        for name, field, sign in (("delta_1", "spot_1", 1), ("vega_2", "vol_2", 1), ("theta", "tau", -1),
-                                  ("rho", "rate", 1), ("correlation", "correlation", 1)):
-            h = 1e-6
-            up, down = self.x.copy(), self.x.copy()
-            up[:, COLUMN[field]] += h
-            down[:, COLUMN[field]] -= h
-            fd = sign*(price_and_greeks(model, up, self.put, greeks=False)["price"]
-                       - price_and_greeks(model, down, self.put, greeks=False)["price"])/(2*h)
-            assert_allclose(greeks[name], fd, rtol=1e-5, atol=1e-7)
+    def test_levy_output_with_zero_network_is_levy(self):
+        for family, output in (("pinn", "levy"), ("deeponet", "levy"), ("pinn", "levy_envelope")):
+            model = small_model(family, output=output)
+            for parameter in model.parameters():
+                torch.nn.init.zeros_(parameter)
+            features, _ = reduced_coordinates(torch.as_tensor(self.x))
+            torch.testing.assert_close(model.call(features), levy_call(features))
 
-    def test_put_call_parity_is_exact(self):
-        model = small_model("direct")
-        x = torch.as_tensor(self.x)
-        call = model(x, torch.zeros(64, dtype=torch.bool))
-        put = model(x, torch.ones(64, dtype=torch.bool))
-        w1 = x[:, COLUMN["weight_1"]]
-        tau, rate = x[:, COLUMN["tau"]], x[:, COLUMN["rate"]]
-        forward = (w1*x[:, COLUMN["spot_1"]]*torch.exp(-x[:, COLUMN["dividend_1"]]*tau)
-                   + (1-w1)*x[:, COLUMN["spot_2"]]*torch.exp(-x[:, COLUMN["dividend_2"]]*tau))
-        torch.testing.assert_close(call-put, forward-x[:, COLUMN["strike"]]*torch.exp(-rate*tau))
+    def test_save_and_load_round_trip(self):
+        import tempfile
+        from pathlib import Path
+        for model in (small_model("pinn"), small_model("deeponet"),
+                      Ensemble([small_model("deeponet", seed=1), small_model("deeponet", seed=2)])):
+            with tempfile.TemporaryDirectory() as folder:
+                path = Path(folder)/"model.pt"
+                save_model(model, path)
+                loaded = load_model(path)
+            x, put = torch.as_tensor(self.x), torch.as_tensor(self.put)
+            torch.testing.assert_close(loaded.price(x, put), model.price(x, put), rtol=0, atol=0)
 
     def test_ensemble_greeks_are_member_averages(self):
         members = [small_model(seed=s) for s in (1, 2)]
-        ensemble = price_and_greeks(EnsemblePricer(members), self.x, self.put)
-        separate = [price_and_greeks(m, self.x, self.put) for m in members]
+        ensemble = price_and_greeks(Ensemble(members).price, self.x, self.put)
+        separate = [price_and_greeks(m.price, self.x, self.put) for m in members]
         for name in QUANTITIES:
             assert_allclose(ensemble[name], (separate[0][name]+separate[1][name])/2, rtol=1e-12, atol=1e-14)
-
-    def test_sobolev_training_reduces_loss(self):
-        r = reduced_tensor(sample_contracts(ContractBox(), 512, seed=4))
-        data = dict(r=r, **reference_labels(r, 2))
-        model = small_model()
-        weights = LossWeights(first=1, second=0.5, pde=0.1)
-        before = float(loss_terms(model, data, weights, label_scales(data))[0].detach())
-        train(model, data, data, weights, Schedule(epochs=60, batch_size=128, learning_rate=3e-3,
-                                                    evaluate_every=10), seed=0, log=lambda *_: None)
-        after = float(loss_terms(model, data, weights, label_scales(data))[0].detach())
-        self.assertLess(after, 0.5*before)
-
-    def test_interrupted_training_resumes_identically(self):
-        r = reduced_tensor(sample_contracts(ContractBox(), 256, seed=6))
-        data = dict(r=r, **reference_labels(r, 1))
-        weights, schedule = LossWeights(first=1), Schedule(epochs=4, batch_size=64, evaluate_every=2)
-        straight = small_model()
-        train(straight, data, data, weights, schedule, seed=3, log=lambda *_: None)
-
-        def interrupt(message):
-            if message.startswith("adam 2:"):
-                raise KeyboardInterrupt
-
-        with tempfile.TemporaryDirectory() as folder:
-            path = Path(folder)/"resume.pt"
-            resumed = small_model()
-            with self.assertRaises(KeyboardInterrupt):
-                train(resumed, data, data, weights, schedule, seed=3, log=interrupt, resume_path=path, save_every=1)
-            resumed = small_model()
-            train(resumed, data, data, weights, schedule, seed=3, log=lambda *_: None, resume_path=path, save_every=1)
-        for a, b in zip(straight.state_dict().values(), resumed.state_dict().values()):
-            torch.testing.assert_close(a, b, rtol=0, atol=0)
 
 
 if __name__ == "__main__":
