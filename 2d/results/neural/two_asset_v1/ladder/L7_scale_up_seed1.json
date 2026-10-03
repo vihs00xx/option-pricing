@@ -1,0 +1,182 @@
+{
+  "level": {
+    "name": "L7_scale_up",
+    "technique": "Scale up: width 128, 262,144 training contracts, batch 2048 (Adam only)",
+    "model": {
+      "features": "reduced",
+      "output": "implied_vol",
+      "width": 128,
+      "depth": 4,
+      "activation": "tanh",
+      "scale": 0.1
+    },
+    "weights": {
+      "value": 1.0,
+      "first": 1.0,
+      "second": 1.0
+    },
+    "train_count": 262144,
+    "schedule": {
+      "epochs": 300,
+      "batch_size": 2048,
+      "learning_rate": 0.002,
+      "final_learning_rate": 1e-06,
+      "lbfgs_iterations": 0,
+      "lbfgs_chunk": 16384,
+      "evaluate_every": 25
+    },
+    "seeds": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "seed": 1,
+  "training_seconds": 7050.405653797,
+  "history": [
+    {
+      "stage": "adam",
+      "step": 25,
+      "seconds": 900.150933502,
+      "train_loss": 0.0007895457266199901,
+      "validation_loss": 0.00037280042115739857
+    },
+    {
+      "stage": "adam",
+      "step": 50,
+      "seconds": 1685.934516369,
+      "train_loss": 0.0004588216878486877,
+      "validation_loss": 0.00032423301410453996
+    },
+    {
+      "stage": "adam",
+      "step": 75,
+      "seconds": 2229.283510373,
+      "train_loss": 0.0001980221899224496,
+      "validation_loss": 8.881933765934438e-05
+    },
+    {
+      "stage": "adam",
+      "step": 100,
+      "seconds": 2761.992561158,
+      "train_loss": 0.00030292976084792645,
+      "validation_loss": 9.578366330031858e-05
+    },
+    {
+      "stage": "adam",
+      "step": 125,
+      "seconds": 3294.6360366000004,
+      "train_loss": 7.071127503069815e-05,
+      "validation_loss": 6.0427833407640374e-05
+    },
+    {
+      "stage": "adam",
+      "step": 150,
+      "seconds": 3841.0661237500003,
+      "train_loss": 5.668882818710619e-05,
+      "validation_loss": 3.696573738308791e-05
+    },
+    {
+      "stage": "adam",
+      "step": 175,
+      "seconds": 4387.385524959,
+      "train_loss": 2.166819932459357e-05,
+      "validation_loss": 1.4168673631613775e-05
+    },
+    {
+      "stage": "adam",
+      "step": 200,
+      "seconds": 4923.241211788,
+      "train_loss": 2.5829169618595563e-05,
+      "validation_loss": 1.6711180869509938e-05
+    },
+    {
+      "stage": "adam",
+      "step": 225,
+      "seconds": 5458.910450042,
+      "train_loss": 1.9090438076883273e-05,
+      "validation_loss": 1.2064565564408889e-05
+    },
+    {
+      "stage": "adam",
+      "step": 250,
+      "seconds": 5983.197733563,
+      "train_loss": 8.416154236337164e-06,
+      "validation_loss": 6.545370474140131e-06
+    },
+    {
+      "stage": "adam",
+      "step": 275,
+      "seconds": 6506.770524017,
+      "train_loss": 5.999943656225221e-06,
+      "validation_loss": 5.294652388076531e-06
+    },
+    {
+      "stage": "adam",
+      "step": 300,
+      "seconds": 7050.398673926,
+      "train_loss": 5.533137432116923e-06,
+      "validation_loss": 4.3596317962910595e-06
+    }
+  ],
+  "score": 0.000981155348132601,
+  "metrics": {
+    "price": {
+      "rmse": 0.0013550623727380789,
+      "max_abs": 0.01098796858090445,
+      "normalized_rmse": 5.614016225438236e-05
+    },
+    "delta_1": {
+      "rmse": 6.491628351563135e-05,
+      "max_abs": 0.0010423839198612783,
+      "normalized_rmse": 0.00018676545521152207
+    },
+    "delta_2": {
+      "rmse": 6.307318181826994e-05,
+      "max_abs": 0.0005951388562215332,
+      "normalized_rmse": 0.00016617705571881044
+    },
+    "gamma_11": {
+      "rmse": 1.0259990663691484e-05,
+      "max_abs": 0.0005692147345790904,
+      "normalized_rmse": 0.002096818402790438
+    },
+    "gamma_22": {
+      "rmse": 8.444822844720133e-06,
+      "max_abs": 0.0003467291823041202,
+      "normalized_rmse": 0.0017705932532452655
+    },
+    "gamma_12": {
+      "rmse": 4.174168562251643e-06,
+      "max_abs": 0.00010878647079507267,
+      "normalized_rmse": 0.0012984793941800516
+    },
+    "vega_1": {
+      "rmse": 0.017379022153297688,
+      "max_abs": 0.2409237915219161,
+      "normalized_rmse": 0.0012242169293736353
+    },
+    "vega_2": {
+      "rmse": 0.017867480611259784,
+      "max_abs": 0.2863053064119985,
+      "normalized_rmse": 0.0012542261083328902
+    },
+    "theta": {
+      "rmse": 0.004471208107115352,
+      "max_abs": 0.04032832806652564,
+      "normalized_rmse": 0.000670186951611354
+    },
+    "rho": {
+      "rmse": 0.013281631109677314,
+      "max_abs": 0.19456082744602554,
+      "normalized_rmse": 0.00018138929395134063
+    },
+    "correlation": {
+      "rmse": 0.006622055615185112,
+      "max_abs": 0.1365682709758227,
+      "normalized_rmse": 0.0018877158227889187
+    }
+  },
+  "evaluation_seconds": 0.19538196199937374
+}

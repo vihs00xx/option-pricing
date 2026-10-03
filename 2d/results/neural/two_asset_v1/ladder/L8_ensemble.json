@@ -1,0 +1,79 @@
+{
+  "level": {
+    "name": "L8_ensemble",
+    "technique": "Ensemble: average of four independently seeded level-7 networks",
+    "ensemble_of": "L7_scale_up",
+    "seeds": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "members": [
+    "L7_scale_up_seed0.pt",
+    "L7_scale_up_seed1.pt",
+    "L7_scale_up_seed2.pt",
+    "L7_scale_up_seed3.pt"
+  ],
+  "training_seconds": 28303.442872132,
+  "score": 0.000673140175505809,
+  "metrics": {
+    "price": {
+      "rmse": 0.0009816443233985072,
+      "max_abs": 0.012076405154733294,
+      "normalized_rmse": 4.06694722696265e-05
+    },
+    "delta_1": {
+      "rmse": 4.139228025232487e-05,
+      "max_abs": 0.000746572321317307,
+      "normalized_rmse": 0.00011908642400495507
+    },
+    "delta_2": {
+      "rmse": 4.234265162114432e-05,
+      "max_abs": 0.0005844123156616421,
+      "normalized_rmse": 0.0001115589379651512
+    },
+    "gamma_11": {
+      "rmse": 8.553408818955977e-06,
+      "max_abs": 0.0006268311455944614,
+      "normalized_rmse": 0.0017480469140820868
+    },
+    "gamma_22": {
+      "rmse": 5.362335463329315e-06,
+      "max_abs": 0.000272972676174231,
+      "normalized_rmse": 0.0011243000791834093
+    },
+    "gamma_12": {
+      "rmse": 2.5516845486561095e-06,
+      "max_abs": 7.48030001637423e-05,
+      "normalized_rmse": 0.0007937652151474946
+    },
+    "vega_1": {
+      "rmse": 0.011764955135897209,
+      "max_abs": 0.18365941117977355,
+      "normalized_rmse": 0.0008287495765665795
+    },
+    "vega_2": {
+      "rmse": 0.010919341123285888,
+      "max_abs": 0.21489366181047842,
+      "normalized_rmse": 0.0007664943379867215
+    },
+    "theta": {
+      "rmse": 0.003214291292679875,
+      "max_abs": 0.04896082026545745,
+      "normalized_rmse": 0.0004817883738410542
+    },
+    "rho": {
+      "rmse": 0.008217067420307353,
+      "max_abs": 0.12723132766797107,
+      "normalized_rmse": 0.00011222176293046638
+    },
+    "correlation": {
+      "rmse": 0.004482700958579626,
+      "max_abs": 0.0845017831947148,
+      "normalized_rmse": 0.0012778608365863545
+    }
+  },
+  "evaluation_seconds": 0.5042671549999795
+}

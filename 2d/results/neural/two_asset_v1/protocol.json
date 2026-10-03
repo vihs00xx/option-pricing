@@ -1,0 +1,29 @@
+{
+  "study_id": "two_asset_neural_v1",
+  "frozen_at": "2026-10-02T22:14:32.195043+00:00",
+  "statement": "Test contracts and references were generated and hashed before any model was trained. Model and level selection use the validation set only.",
+  "settings_sha256": "b57d147d38fc731fe8adc9775d0b3aa17d47430914962873d351175343eb8244",
+  "test_sets_sha256": "c01bce592814c5aca08e17cfa4384a653e5ab96c22a1c7fb3632f256d16f988d",
+  "source_sha256": {
+    "experiments/neural/prepare_data.py": "190ce489c8daeddfe2f84b7bd62acb175ac76d6a4b4964682e160fbd5c0ee186",
+    "src/neural/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/neural/domain.py": "31596d6aa35b57a4f52d7d5778d90615eb141d24cca60669fef3d845fb587cf8",
+    "src/neural/models.py": "ed3ca17a7eb2987be8f2e72429878596ba90340dbb422ccbb43450bf2a7c434f",
+    "src/neural/monte_carlo.py": "6ac50209a40e7c6e996ede69c4c5050b2783dc367a0bb70f6935d404907166b0",
+    "src/neural/reference.py": "5e6ff13386421912b1b616df2377a8eaa7ba9b2b55c9874f7216080d30d71804",
+    "src/neural/training.py": "d484537cc7df926872c471996285f00db322c7aefba5da453bd8bd8f29a382c3"
+  },
+  "timing": {
+    "train_labels_seconds": 202.60432082600005,
+    "validation_labels_seconds": 28.01351525300015,
+    "test_labels_seconds": 21.666821131999995
+  },
+  "environment": {
+    "python": "3.11.15",
+    "platform": "Linux-6.18.44-fc-v51-x86_64-with-glibc2.39",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "torch": "2.14.1+cu130",
+    "threads": 4
+  }
+}
