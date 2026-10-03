@@ -12,6 +12,7 @@ Validation scores are on 4,096 fresh contracts of the training domain and 4,096 
 | DeepONet `D9_ensemble` | 0.00606 | 0.00294 | 0.032 | 0.000218 | 0.063 | 338 | 58,123 | 120,148 |
 | Plain Monte Carlo, 1,000,000 paths |  |  | 0.0205 | 4.43e-05 | 0.0293 | 3.55e+05 | 0 | 0 |
 | Sobol RQMC engine, 65,536 draws |  |  | 0.00124 | 2.25e-07 | 0.0012 | 8.28e+05 | 0 | 0 |
+| ADI grid, Richardson, 160 intervals |  |  | 5.96e-05 | 3.29e-06 | 0.000182 | 1.56e+08 | 0 | 0 |
 
 ## Findings
 
@@ -28,6 +29,10 @@ Validation scores are on 4,096 fresh contracts of the training domain and 4,096 
 - **The repository's Sobol RQMC engine stays far more accurate** (price RMSE 0.0012 at 65,536
   draws, 0.83 s per contract). The neural pricers win on speed only, and only once their training
   (hours here) is spread over many contracts.
+- **The ADI grid solver is the most accurate method here** (price RMSE 6.0e-5 at 160 intervals with
+  Richardson extrapolation, 3.1e-3 at 40) but the slowest (3 to 156 s per contract with all
+  Greeks), and it is limited to two stocks. Its Theta comes from the PDE itself, so its PDE
+  residual check is zero by construction.
 - **Outside the training domain the errors grow mainly for correlation and volatility.** Rate,
   dividend, moneyness and maturity extrapolate well because the exact reduction maps them back into
   the trained coordinates.
@@ -250,15 +255,15 @@ Test score (mean over price and the ten Greeks of RMSE / RMS of the reference) o
 | `P8_scale_up` | 0.0211 | 0.00995 | 0.0635 | 0.0144 | 0.0363 | 94.8 |
 | `P9_envelope` | 0.0139 | 0.00554 | 0.0507 | 0.0126 | 0.0277 | 80.8 |
 
-## Benchmark against Monte Carlo
+## Benchmark against Monte Carlo, RQMC and ADI
 
-Plain Monte Carlo uses pseudo-random exact GBM draws with pathwise first-order Greeks and likelihood-ratio/pathwise Gammas (`src/neural/monte_carlo.py`); the RQMC engine is `rqmc_estimate` in `src/pricing` (conditional estimator, geometric control, 16 scrambles, bumped parameter sensitivities). Seconds per contract include all Greeks, one thread.
+Plain Monte Carlo uses pseudo-random exact GBM draws with pathwise first-order Greeks and likelihood-ratio/pathwise Gammas (`src/neural/monte_carlo.py`); the RQMC engine is `rqmc_estimate` in `src/pricing` (conditional estimator, geometric control, 16 scrambles, bumped parameter sensitivities). ADI is the two-stock grid solver `adi_values` in `src/pricing` (modified Craig-Sneyd, Richardson extrapolation over the grid and its nested doubling, PDE Theta, bumped Vega, rho and correlation sensitivities), with grid sizes fixed in advance from the engine-validation study (`experiments/neural/benchmark_adi.py`). Seconds per contract include all Greeks, one thread.
 
 Neural evaluation, one thread. PINN: 16.6 microseconds per contract for the price and all ten Greeks in a batch of 4,096, 12.4 ms for a single contract. DeepONet: 128 microseconds per contract for the price and all ten Greeks in a batch of 4,096, 43.8 ms for a single contract.
 
 RMSE against the quadrature reference:
 
-| Method | Normal draws | Price | Delta 1 | Delta 2 | Gamma 11 | Gamma 12 | Gamma 22 | Vega 1 | Vega 2 | Theta | Rate rho | Correlation | Seconds per contract |
+| Method | Draws (ADI: grid intervals) | Price | Delta 1 | Delta 2 | Gamma 11 | Gamma 12 | Gamma 22 | Vega 1 | Vega 2 | Theta | Rate rho | Correlation | Seconds per contract |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | PINN (selected) | 0 | 0.0491 | 0.00224 | 0.00281 | 0.000249 | 0.000209 | 0.000294 | 0.252 | 0.496 | 0.0963 | 0.804 | 0.256 | 7.37e-05 |
 | DeepONet (selected) | 0 | 0.032 | 0.000853 | 0.00127 | 0.000218 | 0.000161 | 0.000197 | 0.217 | 0.315 | 0.063 | 0.297 | 0.286 | 0.000338 |
@@ -268,10 +273,13 @@ RMSE against the quadrature reference:
 | Plain Monte Carlo | 1,000,000 | 0.0205 | 0.000223 | 0.000265 | 4.43e-05 | 4.58e-05 | 7.7e-05 | 0.0332 | 0.0502 | 0.0293 | 0.0464 | 0.0174 | 0.355 |
 | Sobol RQMC engine | 4,096 | 0.00556 | 4.81e-05 | 5.96e-05 | 1.69e-06 | 5.75e-07 | 9.2e-07 | 0.0142 | 0.0228 | 0.00538 | 0.00595 | 0.00604 | 0.336 |
 | Sobol RQMC engine | 65,536 | 0.00124 | 5.4e-06 | 1.11e-05 | 2.25e-07 | 3.94e-08 | 6.28e-08 | 0.00245 | 0.00623 | 0.0012 | 0.000234 | 0.00144 | 0.828 |
+| ADI grid, Richardson | 40 | 0.00308 | 0.000115 | 0.000168 | 6.76e-05 | 6.36e-05 | 5.83e-05 | 0.0133 | 0.00756 | 0.0038 | 0.0207 | 0.085 | 3.28 |
+| ADI grid, Richardson | 80 | 0.000537 | 4.14e-05 | 5.39e-05 | 1.95e-05 | 1.69e-05 | 1.47e-05 | 0.00454 | 0.00257 | 0.00112 | 0.00906 | 0.0166 | 14.8 |
+| ADI grid, Richardson | 160 | 5.96e-05 | 7.88e-06 | 1.04e-05 | 3.29e-06 | 2.78e-06 | 2.22e-06 | 0.000914 | 0.000489 | 0.000182 | 0.00185 | 0.00203 | 156 |
 
 Median absolute error against the quadrature reference:
 
-| Method | Normal draws | Price | Delta 1 | Delta 2 | Gamma 11 | Gamma 12 | Gamma 22 | Vega 1 | Vega 2 | Theta | Rate rho | Correlation |
+| Method | Draws (ADI: grid intervals) | Price | Delta 1 | Delta 2 | Gamma 11 | Gamma 12 | Gamma 22 | Vega 1 | Vega 2 | Theta | Rate rho | Correlation |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | PINN (selected) | 0 | 0.00604 | 0.000364 | 0.00035 | 1.64e-05 | 1.29e-05 | 1.66e-05 | 0.0636 | 0.0609 | 0.0159 | 0.0495 | 0.0169 |
 | DeepONet (selected) | 0 | 0.0032 | 0.000112 | 0.000128 | 1.08e-05 | 5.81e-06 | 1e-05 | 0.0336 | 0.0258 | 0.00629 | 0.0183 | 0.00741 |
@@ -281,10 +289,13 @@ Median absolute error against the quadrature reference:
 | Plain Monte Carlo | 1,000,000 | 0.00571 | 0.000112 | 0.000113 | 8.22e-06 | 6.15e-06 | 7.03e-06 | 0.0105 | 0.0108 | 0.00494 | 0.0152 | 0.00451 |
 | Sobol RQMC engine | 4,096 | 0.000295 | 5.43e-06 | 6.31e-06 | 1.38e-07 | 7.71e-08 | 1.33e-07 | 0.00109 | 0.00101 | 0.000503 | 0.000504 | 0.000546 |
 | Sobol RQMC engine | 65,536 | 1.89e-05 | 2.96e-07 | 3.13e-07 | 6.9e-09 | 3.54e-09 | 8.1e-09 | 6.32e-05 | 5.98e-05 | 2.96e-05 | 2.75e-05 | 3.65e-05 |
+| ADI grid, Richardson | 40 | 0.000115 | 4.97e-06 | 5.52e-06 | 5.09e-07 | 3.32e-07 | 4.32e-07 | 0.000544 | 0.000571 | 0.000205 | 0.000524 | 0.000199 |
+| ADI grid, Richardson | 80 | 1.82e-05 | 8.19e-07 | 8.49e-07 | 6.22e-08 | 4.52e-08 | 4.85e-08 | 8.08e-05 | 7.67e-05 | 2.49e-05 | 5.95e-05 | 2.73e-05 |
+| ADI grid, Richardson | 160 | 2.43e-06 | 1.03e-07 | 9.24e-08 | 7.16e-09 | 6.03e-09 | 7.05e-09 | 1.01e-05 | 1.03e-05 | 3.23e-06 | 7.9e-06 | 3.95e-06 |
 
 RMSE on the 128 interpolation cases only (inside the training domain), where the neural pricers are meant to be used:
 
-| Method | Normal draws | Price | Delta 1 | Delta 2 | Gamma 11 | Gamma 12 | Gamma 22 | Vega 1 | Vega 2 | Theta | Rate rho | Correlation |
+| Method | Draws (ADI: grid intervals) | Price | Delta 1 | Delta 2 | Gamma 11 | Gamma 12 | Gamma 22 | Vega 1 | Vega 2 | Theta | Rate rho | Correlation |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | PINN (selected) | 0 | 0.0149 | 0.000826 | 0.00105 | 8.12e-05 | 5.65e-05 | 9.78e-05 | 0.172 | 0.243 | 0.0572 | 0.197 | 0.0581 |
 | DeepONet (selected) | 0 | 0.00878 | 0.000502 | 0.000524 | 6.43e-05 | 2.52e-05 | 4.44e-05 | 0.105 | 0.114 | 0.0449 | 0.0864 | 0.0237 |
@@ -292,6 +303,9 @@ RMSE on the 128 interpolation cases only (inside the training domain), where the
 | Plain Monte Carlo | 10,000 | 0.192 | 0.0031 | 0.00289 | 0.000215 | 0.000197 | 0.000552 | 0.466 | 0.509 | 0.129 | 0.624 | 0.141 |
 | Plain Monte Carlo | 100,000 | 0.0712 | 0.000773 | 0.000874 | 7.47e-05 | 5.39e-05 | 8.91e-05 | 0.127 | 0.161 | 0.0404 | 0.165 | 0.0626 |
 | Plain Monte Carlo | 1,000,000 | 0.0203 | 0.000214 | 0.000269 | 2.11e-05 | 1.86e-05 | 3.97e-05 | 0.0371 | 0.0574 | 0.0134 | 0.0436 | 0.0166 |
+| ADI grid, Richardson | 40 | 0.000356 | 2.15e-05 | 1.58e-05 | 2.29e-06 | 2.2e-06 | 4.09e-06 | 0.00238 | 0.00248 | 0.000721 | 0.00256 | 0.000692 |
+| ADI grid, Richardson | 80 | 6.8e-05 | 4.95e-06 | 2.36e-06 | 2.95e-07 | 2.42e-07 | 3.78e-07 | 0.000307 | 0.000338 | 8.42e-05 | 0.000428 | 9.3e-05 |
+| ADI grid, Richardson | 160 | 1.66e-05 | 7.12e-07 | 4.28e-07 | 5.81e-08 | 2.6e-08 | 3.43e-08 | 6.64e-05 | 5.79e-05 | 1.11e-05 | 7.39e-05 | 2.37e-05 |
 
 Plain Monte Carlo paths needed to match each neural RMSE, extrapolated from 1,000,000 paths with the 1/sqrt(N) law:
 
@@ -347,6 +361,9 @@ Identity and no-arbitrage checks of the Greeks. The PDE residual uses each price
 | validation | deeponet | 4,096 | 0.00874 | 0 (2.13e-09) | 60 (0.000155) | 1 (0.008) | 0 |
 | short_validation | pinn | 4,096 | 0.00485 | 0 (8.57e-07) | 2 (4.4e-07) | 0 (1.1e-06) | 0 |
 | short_validation | deeponet | 4,096 | 0.00336 | 0 (4.59e-07) | 1 (1.14e-07) | 0 (1.66e-06) | 0 |
+| test | adi_40 | 248 | 2.44e-16 | 0 (1.25e-07) | 12 (0.000151) | 0 (1.78e-07) | 0 |
+| test | adi_80 | 248 | 2.23e-16 | 0 (1.1e-09) | 4 (9.33e-06) | 0 (2.25e-09) | 0 |
+| test | adi_160 | 248 | 2.17e-16 | 0 (1.05e-11) | 1 (1.1e-06) | 0 (1.49e-11) | 0 |
 
 ![Monte Carlo benchmark](monte_carlo_benchmark.png)
 

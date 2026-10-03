@@ -148,11 +148,14 @@ def maturity_figure(rows, path):
 def benchmark_figure(rows, path):
     fig, axes = plt.subplots(1, 3, figsize=(13, 4))
     for axis, q in zip(axes, ("price", "gamma_11", "theta")):
-        for method, style in (("plain_monte_carlo", "o-"), ("sobol_rqmc_engine", "s-")):
+        for method, style, label in (("plain_monte_carlo", "o-", "plain Monte Carlo"),
+                                     ("sobol_rqmc_engine", "s-", "Sobol RQMC engine"),
+                                     ("adi_richardson", "^-", "ADI grid, Richardson")):
             part = sorted((r for r in rows if r["method"] == method and r["quantity"] == q),
                           key=lambda r: float(r["seconds_per_contract"]))
-            axis.plot([float(r["seconds_per_contract"]) for r in part], [float(r["rmse"]) for r in part],
-                      style, label="plain Monte Carlo" if method == "plain_monte_carlo" else "Sobol RQMC engine")
+            if part:
+                axis.plot([float(r["seconds_per_contract"]) for r in part], [float(r["rmse"]) for r in part],
+                          style, label=label)
         for method, marker, label in (("pinn_selected", "*", "PINN"), ("deeponet_selected", "D", "DeepONet")):
             for r in rows:
                 if r["method"] == method and r["quantity"] == q:
@@ -196,6 +199,8 @@ def main():
     panel = "test" if (RESULTS/"monte_carlo_benchmark.csv").exists() else "development"
     prefix = "" if panel == "test" else "development_"
     benchmark = read_csv(RESULTS/f"{prefix}monte_carlo_benchmark.csv")
+    if panel == "test" and (RESULTS/"adi_benchmark.csv").exists():
+        benchmark += read_csv(RESULTS/"adi_benchmark.csv")
     benchmark_figure(benchmark, RESULTS/"monte_carlo_benchmark.png")
     write_manifest(records, settings)
     from experiments.neural.report_text import report

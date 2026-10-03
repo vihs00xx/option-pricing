@@ -102,6 +102,9 @@ def benchmark_section(prefix, panel):
     rows = read_csv(RESULTS/f"{prefix}monte_carlo_benchmark.csv")
     coverage = read_csv(RESULTS/f"{prefix}greek_coverage.csv")
     identities = read_csv(RESULTS/f"{prefix}greek_identities.csv")
+    if panel == "test" and (RESULTS/"adi_benchmark.csv").exists():
+        rows = rows+read_csv(RESULTS/"adi_benchmark.csv")
+        identities = identities+read_csv(RESULTS/"adi_identities.csv")
     throughput = json.loads((RESULTS/f"{prefix}neural_throughput.json").read_text(encoding="utf-8"))["models"]
     lead = " ".join(f"{FAMILY[family]}: {g(t['seconds_per_contract']*1e6)} microseconds per contract for the price "
                     f"and all ten Greeks in a batch of {n(t['batch'])}, {g(t['single_contract_seconds']*1e3)} ms "
@@ -112,7 +115,8 @@ def benchmark_section(prefix, panel):
         if key not in methods:
             methods.append(key)
     name = {"pinn_selected": "PINN (selected)", "deeponet_selected": "DeepONet (selected)",
-            "plain_monte_carlo": "Plain Monte Carlo", "sobol_rqmc_engine": "Sobol RQMC engine"}
+            "plain_monte_carlo": "Plain Monte Carlo", "sobol_rqmc_engine": "Sobol RQMC engine",
+            "adi_richardson": "ADI grid, Richardson"}
     get = {(r["method"], int(r["draws"]), r["quantity"]): r for r in rows}
     out = [f"Neural evaluation, one thread. {lead}\n"]
     for statistic, title in (("rmse", "RMSE"), ("median_abs", "Median absolute error")):
@@ -121,7 +125,7 @@ def benchmark_section(prefix, panel):
             body.append([name[method], n(draws) if draws else "0"]
                         + [g(get[(method, draws, q)][statistic]) for q in QUANTITIES]
                         + ([g(get[(method, draws, "price")]["seconds_per_contract"])] if statistic == "rmse" else []))
-        header = ["Method", "Normal draws"]+[LABEL[q] for q in QUANTITIES]+(["Seconds per contract"]
+        header = ["Method", "Draws (ADI: grid intervals)"]+[LABEL[q] for q in QUANTITIES]+(["Seconds per contract"]
                                                                             if statistic == "rmse" else [])
         out.append(f"{title} against the quadrature reference:\n")
         out.append(table(header, body))
@@ -178,16 +182,21 @@ def interpolation_table(rows, name):
     mask = test["split"] == "interpolation"
     values = np.load(RESULTS/"benchmark_values.npz")
     body = []
+    if (RESULTS/"adi_values.npz").exists():
+        values = dict(values, **np.load(RESULTS/"adi_values.npz"))
     for key, label, draws in [("pinn", "pinn_selected", 0), ("deeponet", "deeponet_selected", 0)]+[
             (f"mc{d}", "plain_monte_carlo", d) for d in sorted({int(r["draws"]) for r in rows
-                                                                 if r["method"] == "plain_monte_carlo"})]:
+                                                                 if r["method"] == "plain_monte_carlo"})]+[
+            (f"adi{d}", "adi_richardson", d) for d in sorted({int(r["draws"]) for r in rows
+                                                              if r["method"] == "adi_richardson"})]:
         cells = [name[label], n(draws) if draws else "0"]
         for q in QUANTITIES:
             error = values[f"{key}_{q}"][mask]-test["reference"][q][mask]
             cells.append(g(np.sqrt(np.mean(error**2))))
         body.append(cells)
     return ("RMSE on the 128 interpolation cases only (inside the training domain), where the neural pricers "
-            "are meant to be used:\n\n"+table(["Method", "Normal draws"]+[LABEL[q] for q in QUANTITIES], body))
+            "are meant to be used:\n\n"+table(["Method", "Draws (ADI: grid intervals)"]
+                                               + [LABEL[q] for q in QUANTITIES], body))
 
 
 def maturity_section(maturity):
@@ -210,6 +219,10 @@ def domain_table(settings):
 
 def glance_section(settings, records, selection, panel, prefix):
     benchmark = read_csv(RESULTS/f"{prefix}monte_carlo_benchmark.csv")
+    classical = [("plain_monte_carlo", "Plain Monte Carlo, {} paths"), ("sobol_rqmc_engine", "Sobol RQMC engine, {} draws")]
+    if panel == "test" and (RESULTS/"adi_benchmark.csv").exists():
+        benchmark = benchmark+read_csv(RESULTS/"adi_benchmark.csv")
+        classical.append(("adi_richardson", "ADI grid, Richardson, {} intervals"))
     get = {(r["method"], int(r["draws"]), r["quantity"]): r for r in benchmark}
     rows = []
     for family in ("pinn", "deeponet"):
@@ -222,8 +235,7 @@ def glance_section(settings, records, selection, panel, prefix):
                      g(get[(f"{family}_selected", 0, "theta")]["rmse"]),
                      g(float(get[(f"{family}_selected", 0, "price")]["seconds_per_contract"])*1e6),
                      n(chain_seconds(settings, records, level)), n(ladder_seconds(settings, records, family))])
-    for method, label in (("plain_monte_carlo", "Plain Monte Carlo, {} paths"),
-                          ("sobol_rqmc_engine", "Sobol RQMC engine, {} draws")):
+    for method, label in classical:
         draws = max(int(r["draws"]) for r in benchmark if r["method"] == method)
         label = label.format(n(draws))
         rows.append([label, "", "", g(get[(method, draws, "price")]["rmse"]), g(get[(method, draws, "gamma_11")]["rmse"]),
@@ -374,6 +386,10 @@ FINDINGS = """\
 - **The repository's Sobol RQMC engine stays far more accurate** (price RMSE 0.0012 at 65,536
   draws, 0.83 s per contract). The neural pricers win on speed only, and only once their training
   (hours here) is spread over many contracts.
+- **The ADI grid solver is the most accurate method here** (price RMSE 6.0e-5 at 160 intervals with
+  Richardson extrapolation, 3.1e-3 at 40) but the slowest (3 to 156 s per contract with all
+  Greeks), and it is limited to two stocks. Its Theta comes from the PDE itself, so its PDE
+  residual check is zero by construction.
 - **Outside the training domain the errors grow mainly for correlation and volatility.** Rate,
   dividend, moneyness and maturity extrapolate well because the exact reduction maps them back into
   the trained coordinates.
@@ -465,11 +481,15 @@ def report(settings, records, selection, maturity, panel, prefix):
                    "agree to about 1e-12).\n")
         out.append(test_section(selection))
         out.append("")
-    out.append("## Benchmark against Monte Carlo\n")
+    out.append("## Benchmark against Monte Carlo, RQMC and ADI\n")
     out.append("Plain Monte Carlo uses pseudo-random exact GBM draws with pathwise first-order Greeks and "
                "likelihood-ratio/pathwise Gammas (`src/neural/monte_carlo.py`); the RQMC engine is "
                "`rqmc_estimate` in `src/pricing` (conditional estimator, geometric control, 16 scrambles, "
-               "bumped parameter sensitivities). Seconds per contract include all Greeks, one thread.\n")
+               "bumped parameter sensitivities). ADI is the two-stock grid solver `adi_values` in `src/pricing` "
+               "(modified Craig-Sneyd, Richardson extrapolation over the grid and its nested doubling, PDE Theta, "
+               "bumped Vega, rho and correlation sensitivities), with grid sizes fixed in advance from the "
+               "engine-validation study (`experiments/neural/benchmark_adi.py`). Seconds per contract include "
+               "all Greeks, one thread.\n")
     out.append(benchmark_section(prefix, panel))
     out.append("")
     out.append("![Monte Carlo benchmark](monte_carlo_benchmark.png)\n")

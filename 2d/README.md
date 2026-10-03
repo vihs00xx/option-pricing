@@ -1,8 +1,9 @@
 # Option Pricing — 2D (two-stock baskets)
 
 European arithmetic basket options on two correlated stocks under risk-neutral
-GBM, priced with a PINN, a DeepONet, plain Monte Carlo and a Sobol RQMC engine,
-with the price and all ten Greeks. Higher dimensions live in sibling folders.
+GBM, priced with a PINN, a DeepONet, plain Monte Carlo, a Sobol RQMC engine and
+an ADI grid solver, with the price and all ten Greeks. Higher dimensions live
+in sibling folders.
 
 ## Best results
 
@@ -17,6 +18,7 @@ price and all ten Greeks on one CPU thread.
 |---|---|---:|---:|---:|---:|---:|---:|---:|
 | Plain Monte Carlo | 1,000,000 paths | 0.0205 | 2.2e-4 | 4.4e-5 | 0.033 | 0.029 | 0.017 | 0.36 s |
 | Sobol RQMC engine | 65,536 draws, geometric control | 0.0012 | 5.4e-6 | 2.3e-7 | 0.0025 | 0.0012 | 0.0014 | 0.83 s |
+| ADI grid | 160 intervals, Richardson | 6.0e-5 | 7.9e-6 | 3.3e-6 | 9.1e-4 | 1.8e-4 | 0.0020 | 156 s |
 | PINN | `P10_anchored` | 0.049 | 0.0022 | 2.5e-4 | 0.25 | 0.096 | 0.26 | 17 µs |
 | DeepONet | `D9_ensemble` | 0.032 | 8.5e-4 | 2.2e-4 | 0.22 | 0.063 | 0.29 | 128 µs |
 
@@ -25,7 +27,8 @@ training domain the price RMSE is 0.015 for the PINN and 0.0088 for the
 DeepONet, both below plain Monte Carlo with 1,000,000 paths (0.020); most of
 the neural error above comes from correlations and volatilities outside the
 training domain. Training took hours on a laptop CPU, so the networks pay off
-only when many contracts are priced. Full ladders, splits, Greek validation and
+only when many contracts are priced; ADI is the most accurate but works for two
+stocks only. Full ladders, splits, Greek validation and
 limits are in the [neural study report](results/neural/pinn_deeponet_v1/report.md).
 
 ## Code
