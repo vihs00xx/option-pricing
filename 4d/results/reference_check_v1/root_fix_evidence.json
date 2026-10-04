@@ -1,0 +1,22 @@
+{
+ "patch": "4d/src/pricing/conditional.py _root: 2-cycle detection plus noise-floor acceptance (CRLF kept)",
+ "unpatched_code": "byte-identical to 2d/src/pricing/conditional.py at d9b99e0, run from a temporary copy",
+ "tests": {
+  "tests/test_root.py::test_short_maturity_converges_to_rounding_level": {"unpatched": "RuntimeError: Conditional strike root did not converge", "patched": "pass"},
+  "tests/test_root.py::test_near_singular_correlation_long_maturity": {"unpatched": "RuntimeError: Conditional strike root did not converge", "patched": "pass"},
+  "full 4d suite (patched)": "20 passed"
+ },
+ "cstar_tau0.001": {
+  "max_abs_diff_16_vs_32_first15": 3.747e-16,
+  "max_rel_diff_16_vs_32_first15": 1.09e-14,
+  "root_residual_32_nodes_mpmath_40_digits": 1.123e-15,
+  "residual_in_ulps_of_log_K": 1.26,
+  "note": "np.longdouble is float64 on Windows, so the residual was recomputed in mpmath (40 digits) instead"
+ },
+ "bitwise_identity": {
+  "cases": "C* at tau {0.02,0.05,1,2} x nodes {16,32,48} with greeks, plus 10 random 4-stock domain contracts (seed 404001) at 32 nodes with greeks",
+  "n_cases": 22,
+  "old_code_failures": 0,
+  "max_abs_difference": 0.0
+ }
+}
