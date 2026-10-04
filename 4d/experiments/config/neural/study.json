@@ -1,0 +1,34 @@
+{
+  "study_id": "four_stock_pinn_deeponet_v1",
+  "purpose": "PINN and DeepONet pricers for four-stock arithmetic basket options, each built as a ladder: every level adds one technique to the configuration below it, and every level is scored on the same validation contracts. Level names keep the two-stock numbering; levels dropped from the two-stock ladders are absent.",
+  "protocol": "experiments/config/protocol/four_stock_test_v1.json",
+  "seeds": {
+    "training": 0,
+    "data": 8001,
+    "anchors": 8002,
+    "monitor": 8201,
+    "validation": 8301,
+    "short_validation": 8302,
+    "development": 8501
+  },
+  "monitor_contracts": 512,
+  "validation_contracts": 4096,
+  "short_validation_tau": [
+    0.005,
+    0.05
+  ],
+  "selection_rule": "Within each family the level with the lowest validation score is selected. Score = mean over price and the 26 Greeks of RMSE / RMS(reference) on the 4,096 validation contracts drawn from the protocol's training domain. A level within 1% of the best score yields to the earlier level.",
+  "computational_domain": {
+    "z": [
+      -3.0,
+      2.5
+    ],
+    "share_floor": 0.01,
+    "note": "Spatial extent of the PDE problem in z = log basket forward moneyness and the forward shares s_i >= share_floor (the simplex), like a grid solver's far boundary. The training domain maps into z in [-0.52, 0.46] and shares of at least about 0.04. sigma, the correlation matrices (entries in [-0.5, 0.9], smallest eigenvalue >= 0.05) and the maturity cap are the protocol's training domain; tau starts at 0 because the PDE starts at the payoff."
+  },
+  "reference_nodes": {
+    "labels": 32,
+    "evaluation": 40,
+    "note": "Conditional Gauss-Hermite nodes per residual axis of the torch reference (src/neural/reference.py): 32 for training labels and anchors, 40 for the monitor and validation contracts. Phase 0 accepted 91% of random domain contracts at 32 nodes and 96% by 40 under the 1e-8 rule."
+  }
+}

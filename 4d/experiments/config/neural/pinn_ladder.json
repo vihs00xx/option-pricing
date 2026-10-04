@@ -1,0 +1,165 @@
+{
+  "family": "pinn",
+  "defaults": {
+    "model": {
+      "layout": "reduced",
+      "output": "plain",
+      "width": 64,
+      "depth": 4
+    },
+    "loss": {
+      "pde": 1.0,
+      "terminal": 1.0,
+      "boundary": 1.0
+    },
+    "sampling": {
+      "focus": 0.7,
+      "focus_z": [
+        -0.6,
+        0.55
+      ],
+      "tau_power": 1.0,
+      "weight": "none"
+    },
+    "batch": {
+      "collocation": 4096,
+      "terminal": 1024,
+      "boundary": 512
+    },
+    "optimizer": {
+      "adam_steps": 15000,
+      "learning_rate": 0.002,
+      "final_learning_rate": 2e-05,
+      "check_every": 500,
+      "lbfgs_iterations": 0
+    }
+  },
+  "levels": {
+    "P0_vanilla": {
+      "technique": "Textbook PINN: MLP on the 23 raw contract inputs plus a put flag; PDE residual in spot coordinates on the training box; soft payoff loss; Adam",
+      "model": {
+        "layout": "raw"
+      },
+      "loss": {
+        "pde": 1.0,
+        "terminal": 1.0,
+        "boundary": 0.0
+      }
+    },
+    "P1_reduced": {
+      "technique": "Exact symmetry reduction: forward log-moneyness z, forward shares s_1..s_3, tau and (sigma_1..sigma_4, rho_12..rho_34); driftless PDE; put-call parity; far boundary at Levy values"
+    },
+    "P2_hard_payoff": {
+      "technique": "Hard terminal condition: c = Levy + tau * N(z, s, sqrt(tau), sigma, rho), so the payoff holds exactly and the network learns the correction",
+      "base": "P1_reduced",
+      "model": {
+        "output": "levy"
+      },
+      "loss": {
+        "terminal": 0.0
+      }
+    },
+    "P4_adaptive": {
+      "technique": "Residual-based adaptive sampling (RAD) on the time-balanced residual: every 1000 steps keep 32,768 of 131,072 candidates drawn with probability proportional to |residual| / mean + 1, the residual weighted by tau / tau_max with collocation tau = tau_max u^2 (the two-stock P3 settings, kept without their own level)",
+      "base": "P2_hard_payoff",
+      "sampling": {
+        "weight": "time",
+        "tau_power": 2.0,
+        "rad": {
+          "size": 32768,
+          "pool_factor": 4,
+          "k": 1.0,
+          "c": 1.0,
+          "every": 1000
+        }
+      }
+    },
+    "P5_similarity": {
+      "technique": "Boundary-layer coordinate: the network also sees tanh(d / 3) with d = z / (Levy total volatility), the variable in which the near-expiry correction to Levy settles",
+      "base": "P4_adaptive",
+      "model": {
+        "similarity": "levy"
+      }
+    },
+    "P6_lbfgs": {
+      "technique": "Quasi-Newton polish: full-batch L-BFGS (strong Wolfe line search) warm-started from P5 on 16,384 RAD-selected collocation points",
+      "base": "P5_similarity",
+      "warm_start": "P5_similarity",
+      "optimizer": {
+        "adam_steps": 0,
+        "lbfgs_iterations": 3000,
+        "lbfgs_chunk": 50,
+        "lbfgs_history": 50,
+        "lbfgs_batch": {
+          "collocation": 16384,
+          "boundary": 2048
+        }
+      }
+    },
+    "P7_nncg": {
+      "technique": "Second-order refinement: Nystrom-preconditioned Newton-CG (Rathore et al., 2024; from the 1D study) warm-started from P6",
+      "base": "P6_lbfgs",
+      "warm_start": "P6_lbfgs",
+      "optimizer": {
+        "lbfgs_iterations": 0,
+        "nncg_steps": 40,
+        "nncg_check_every": 5,
+        "nncg_rank": 32,
+        "nncg_cg_steps": 30,
+        "nncg_batch": {
+          "collocation": 4096,
+          "boundary": 512
+        }
+      }
+    },
+    "P9_envelope": {
+      "technique": "Enveloped correction: c = Levy + tau * phi(d_2) * N, which fades like the time value away from the strike; trained from a fresh start through the Adam, L-BFGS and Newton-CG stages",
+      "base": "P7_nncg",
+      "warm_start": null,
+      "model": {
+        "output": "levy_envelope"
+      },
+      "optimizer": {
+        "adam_steps": 15000,
+        "lbfgs_iterations": 3000,
+        "lbfgs_chunk": 50,
+        "lbfgs_history": 50,
+        "lbfgs_batch": {
+          "collocation": 16384,
+          "boundary": 2048
+        }
+      }
+    },
+    "P10_anchored": {
+      "technique": "Anchored (hybrid) PINN, as in the 1D study: fine-tune P9 with the PDE residual plus reference prices at 4,096 anchor contracts of the training domain (their own seed), then L-BFGS",
+      "base": "P9_envelope",
+      "warm_start": "P9_envelope",
+      "loss": {
+        "price": 1.0
+      },
+      "data_contracts": 4096,
+      "data_seed": "anchors",
+      "batch": {
+        "data": 1024
+      },
+      "optimizer": {
+        "adam_steps": 5000,
+        "learning_rate": 0.0002,
+        "final_learning_rate": 2e-06,
+        "lbfgs_iterations": 1000,
+        "lbfgs_batch": {
+          "collocation": 16384,
+          "boundary": 2048,
+          "data": 4096
+        },
+        "nncg_steps": 0
+      }
+    },
+    "P11_permutation": {
+      "technique": "Stock-permutation augmentation: every anchor draw is presented under a random relabelling of the four stocks (shares, volatilities and correlations moved together), under which the price is unchanged; otherwise as P10, fine-tuned from P9",
+      "base": "P10_anchored",
+      "warm_start": "P9_envelope",
+      "augment": "permutation"
+    }
+  }
+}

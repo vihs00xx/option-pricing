@@ -1,0 +1,111 @@
+{
+  "protocol_id": "four_stock_test_v1",
+  "purpose": "Final assessment of four-stock pricing methods, neural and classical. No training, tuning or model selection may use these cases or their references.",
+  "conventions": "Strike fixed at 100. Time in years; rates, dividend yields and volatilities are decimals. Vega and correlation sensitivities per unit decimal change; theta is calendar time per year; rho per unit rate.",
+  "strike": 100.0,
+  "seed": 20261004,
+  "training_domain": {
+    "moneyness_1": [0.7, 1.3],
+    "moneyness_2": [0.7, 1.3],
+    "moneyness_3": [0.7, 1.3],
+    "moneyness_4": [0.7, 1.3],
+    "tau": [0.05, 2.0],
+    "volatility_1": [0.1, 0.6],
+    "volatility_2": [0.1, 0.6],
+    "volatility_3": [0.1, 0.6],
+    "volatility_4": [0.1, 0.6],
+    "rate": [-0.02, 0.10],
+    "dividend_1": [0.0, 0.06],
+    "dividend_2": [0.0, 0.06],
+    "dividend_3": [0.0, 0.06],
+    "dividend_4": [0.0, 0.06],
+    "weight": [0.1, 0.7],
+    "correlation": [-0.5, 0.9]
+  },
+  "domain_constraints": {
+    "weights": "On the simplex with every weight >= 0.1, uniform: w = 0.1 + 0.6 * D with D ~ Dirichlet(1, 1, 1, 1).",
+    "correlation": "The 6 off-diagonal entries each in [-0.5, 0.9] and the smallest eigenvalue of the matrix >= 0.05; uniform on that set (box draws with rejection).",
+    "min_eigenvalue": 0.05
+  },
+  "sampling": {
+    "box_parameters": ["moneyness_1", "moneyness_2", "moneyness_3", "moneyness_4", "tau", "volatility_1", "volatility_2", "volatility_3", "volatility_4", "rate", "dividend_1", "dividend_2", "dividend_3", "dividend_4"],
+    "latin_hypercube": "scipy.stats.qmc.LatinHypercube(d=17, seed=seed + split offset): columns 1-14 scale to the box parameters, columns 15-17 are three uniforms whose sorted spacings (0, u(1), u(2), u(3), 1) are a uniform Dirichlet(1, 1, 1, 1) draw for the weights.",
+    "correlation_stream": "numpy.random.Generator(PCG64(seed + 100 + split offset)); per case, 6 uniforms on [-0.5, 0.9] in the order (12, 13, 14, 23, 24, 34), redrawn until the smallest eigenvalue >= 0.05.",
+    "split_offsets": {"interpolation": 0, "short_maturity": 1, "extrapolation": 2},
+    "options": "Calls and puts alternate within each split, starting with a call.",
+    "replacement_draws": "Spare cases continue the same streams: after the split's batch, each spare takes the next engine.random(1) row of the same Latin hypercube engine and the next accepted correlation of the same generator."
+  },
+  "splits": {
+    "interpolation": {"count": 128, "reason": "inside the training domain"},
+    "short_maturity": {"count": 32, "tau": [0.005, 0.05], "reason": "remaining life below the training domain; tau = 0.005 + 0.045 * (the tau column's uniform)"},
+    "extrapolation": {
+      "cases_per_value": 4,
+      "reason": "one parameter outside the training domain",
+      "stock_rotation": "Single-stock parameters move stock 1, 2, 3, 4 across the 4 cases of each value.",
+      "correlation_pairs": [[1, 2], [3, 4], [1, 3], [2, 4]],
+      "correlation_min_eigenvalue": 0.01,
+      "values": {
+        "moneyness": [0.55, 1.45],
+        "tau": [2.5, 3.0],
+        "volatility": [0.05, 0.75],
+        "rate": [-0.04, 0.14],
+        "dividend": [0.09],
+        "weight": [0.03, 0.8],
+        "correlation": [-0.7, 0.97]
+      },
+      "notes": "A weight value goes to the affected stock and the other weights are rescaled proportionally to sum to 1. A correlation value fixes the pair listed for that case; the other 5 entries are redrawn from the domain box until the smallest eigenvalue >= 0.01."
+    },
+    "anchor": {
+      "reason": "hand-chosen regimes",
+      "defaults": {"moneyness": 1.0, "tau": 1.0, "volatilities": [0.2, 0.3, 0.4, 0.25], "dividends": [0.01, 0.02, 0.0, 0.03], "weights": [0.25, 0.25, 0.25, 0.25], "rate": 0.03, "correlation": 0.4},
+      "cases": [
+        {"name": "atm_call", "option": "call"},
+        {"name": "atm_put", "option": "put"},
+        {"name": "itm_call", "option": "call", "moneyness": 1.15},
+        {"name": "otm_call", "option": "call", "moneyness": 0.85},
+        {"name": "itm_put", "option": "put", "moneyness": 0.85},
+        {"name": "otm_put", "option": "put", "moneyness": 1.15},
+        {"name": "short_atm_call", "option": "call", "tau": 0.02},
+        {"name": "short_atm_put", "option": "put", "tau": 0.02},
+        {"name": "high_volatility_call", "option": "call", "volatilities": [0.55, 0.6, 0.5, 0.6], "tau": 2.0},
+        {"name": "high_equicorrelation_put", "option": "put", "correlation": 0.85},
+        {"name": "two_sector_call", "option": "call", "correlation": [[1.0, 0.8, 0.1, 0.1], [0.8, 1.0, 0.1, 0.1], [0.1, 0.1, 1.0, 0.8], [0.1, 0.1, 0.8, 1.0]]},
+        {"name": "negative_pair_call", "option": "call", "correlation": [[1.0, -0.5, 0.4, 0.4], [-0.5, 1.0, 0.4, 0.4], [0.4, 0.4, 1.0, 0.4], [0.4, 0.4, 0.4, 1.0]], "note": "smallest eigenvalue 0.032, just below the domain's 0.05"},
+        {"name": "negative_equicorrelation_call", "option": "call", "correlation": -0.3, "note": "the hardest in-domain regime of Phase 0"},
+        {"name": "low_eigenvalue_call", "option": "call", "correlation": [[1.0, 0.8538543439842087, 0.5848784015593753, 0.19751610627687147], [0.8538543439842087, 1.0, 0.8538543439842087, 0.5848784015593753], [0.5848784015593753, 0.8538543439842087, 1.0, 0.8538543439842087], [0.19751610627687147, 0.5848784015593753, 0.8538543439842087, 1.0]], "note": "0.95 * cos(a_i - a_j) + 0.05 * I with angles 0, 26, 52, 78 degrees: all entries positive, smallest eigenvalue 0.05 (twice)"},
+        {"name": "dominant_weight_call", "option": "call", "weights": [0.7, 0.1, 0.1, 0.1]},
+        {"name": "volatility_dispersion_call", "option": "call", "volatilities": [0.1, 0.6, 0.1, 0.6]},
+        {"name": "negative_rate_put", "option": "put", "rate": -0.02, "dividends": [0.04, 0.02, 0.03, 0.01]},
+        {"name": "high_dividend_call", "option": "call", "rate": 0.02, "dividends": [0.06, 0.06, 0.06, 0.06]},
+        {"name": "deep_itm_short_put", "option": "put", "tau": 0.05, "moneyness": 0.75}
+      ]
+    }
+  },
+  "reference": {
+    "method": "Conditional estimator of src/pricing (one Gaussian factor in closed form, direction \"volatility\") integrated over the three residual factors by tensor Gauss-Hermite; analytic conditional Deltas and spot Hessian; central common-random-number bumps for vega, theta, rho and correlation sensitivities. Includes the Phase 0 root-solver fix.",
+    "direction": "volatility",
+    "node_ladder": [24, 32, 40, 48, 64, 80, 96, 128],
+    "tolerance": 1e-8,
+    "acceptance": "Accept at the first ladder level whose largest absolute change over all 27 quantities against the previous level is below the tolerance and keep that level's values; the next level must confirm (change below the tolerance). A failed confirmation resumes the climb.",
+    "replacement_rule": "A generated case (interpolation, short maturity, extrapolation) not accepted by 128 nodes is replaced by the next spare draw of its own split stream and logged with its parameters. An anchor that is not accepted stops the build.",
+    "cross_checks": {
+      "equal_direction": "direction \"equal\" at the accepted level; maximum relative difference over the 27 quantities.",
+      "rqmc": "rqmc_estimate with 65536 points x 16 replicates, direction volatility, greeks and geometric control, seed = 20261004 + 10000 + case index; z = (rqmc - reference) / standard error per quantity; |z| > 5 is flagged for a look.",
+      "bump_halving": "bump_scale 0.5 at the accepted level; maximum relative change of the bumped quantities.",
+      "relative_floors": "Relative differences divide by max(|reference|, floor) with floor 1e-7 for Gammas and 1e-4 otherwise.",
+      "use": "Recorded only; never used to change a reference."
+    }
+  },
+  "separation": {
+    "development_contracts": "experiments/config/reference/dev_contracts_v1.json",
+    "metric": "For a test case and a development contract, the largest over parameters of |difference| / domain width (moneyness, tau, volatility, rate, dividend, weight and the 6 correlations; widths from the training domain). The reported separation is the minimum over all pairs.",
+    "duplicates": "No test case may equal a development contract (same option and all contract fields within 1e-9)."
+  },
+  "rules": [
+    "Train, tune and select models only on data generated with other seeds; never on these cases or references.",
+    "Development and training data must use seeds other than 20261004 and its offsets and must keep a positive minimum distance from every test case under the separation metric; report that distance.",
+    "Before evaluating any model on these cases, freeze its checkpoint hash, settings and the evaluation protocol.",
+    "Report every method on every split; do not drop cases after seeing results.",
+    "Once any method is evaluated here, the cases are observed; later model changes need a new test set."
+  ]
+}
