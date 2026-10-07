@@ -1,0 +1,16 @@
+{
+ "pinn": {
+  "level": "P4_variance_boundary",
+  "loaded_seconds_per_step": 0.30823833188666416,
+  "alone_seconds_per_step": 0.1062,
+  "factor": 0.3445385891818561,
+  "pilot_steps": 300
+ },
+ "deeponet": {
+  "level": "D4_physics",
+  "loaded_seconds_per_step": 0.5699546155533365,
+  "alone_seconds_per_step": 0.2004,
+  "factor": 0.3516069429588583,
+  "pilot_steps": 300
+ }
+}

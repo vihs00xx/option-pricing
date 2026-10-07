@@ -1,0 +1,37 @@
+D4_physics_seed0: Physics-informed DeepONet: PDE residual on unlabelled collocation over the computational box (tau from 0, v to v_hi = 3 packed near 0, sqrt(v + 0.01) in the trunk), the degenerate equation on v = 0, c_v = 0 at v_hi and the far x boundary
+parameters: 33857; threads 4
+adam 500: monitor 0.1728 price 0.0135 pde 0.000169 boundary 0.000745 zero_variance 0.000167 variance_cap 0.00135 price 0.000155 derivatives 0.0663 [337s]
+adam 1000: monitor 0.1599 price 0.0109 pde 0.000115 boundary 0.000825 zero_variance 6.83e-05 variance_cap 0.00173 price 0.0001 derivatives 0.0596 [677s]
+adam 1500: monitor 0.155 price 0.0103 pde 9.5e-05 boundary 0.000606 zero_variance 3.45e-05 variance_cap 0.00158 price 8.78e-05 derivatives 0.0529 [1011s]
+adam 2000: monitor 0.1442 price 0.00856 pde 0.000117 boundary 0.000483 zero_variance 4.75e-05 variance_cap 0.00155 price 8.11e-05 derivatives 0.0478 [1344s]
+adam 2500: monitor 0.1386 price 0.00833 pde 0.000187 boundary 0.000219 zero_variance 0.000106 variance_cap 0.0016 price 0.000169 derivatives 0.0867 [1674s]
+adam 3000: monitor 0.1359 price 0.00829 pde 0.000282 boundary 0.000183 zero_variance 7.14e-05 variance_cap 0.00168 price 6.24e-05 derivatives 0.0603 [1984s]
+adam 3500: monitor 0.1315 price 0.00775 pde 0.000258 boundary 0.000288 zero_variance 7.16e-05 variance_cap 0.00196 price 7.7e-05 derivatives 0.0648 [2292s]
+adam 4000: monitor 0.1324 price 0.0102 pde 0.000342 boundary 0.000174 zero_variance 6.39e-05 variance_cap 0.00172 price 0.000108 derivatives 0.0673 [2604s]
+adam 4500: monitor 0.1297 price 0.00904 pde 0.000284 boundary 0.000189 zero_variance 4.03e-05 variance_cap 0.00164 price 7.48e-05 derivatives 0.0301 [2917s]
+adam 5000: monitor 0.1286 price 0.0113 pde 0.000407 boundary 0.000147 zero_variance 0.000132 variance_cap 0.00176 price 0.000108 derivatives 0.0508 [3227s]
+adam 5500: monitor 0.1215 price 0.00666 pde 0.000265 boundary 6.4e-05 zero_variance 7.82e-05 variance_cap 0.00174 price 5.07e-05 derivatives 0.0234 [3538s]
+adam 6000: monitor 0.1184 price 0.00753 pde 0.00031 boundary 0.000171 zero_variance 4.16e-05 variance_cap 0.00177 price 4.99e-05 derivatives 0.0435 [3848s]
+adam 6500: monitor 0.1168 price 0.00639 pde 0.000389 boundary 0.000159 zero_variance 4.96e-05 variance_cap 0.00168 price 5.3e-05 derivatives 0.0671 [4092s]
+adam 7000: monitor 0.1124 price 0.00675 pde 0.000388 boundary 0.000232 zero_variance 4.64e-05 variance_cap 0.00182 price 3.41e-05 derivatives 0.0281 [4403s]
+adam 7500: monitor 0.1114 price 0.00608 pde 0.000308 boundary 0.000136 zero_variance 0.000116 variance_cap 0.00151 price 8.08e-05 derivatives 0.0333 [4812s]
+adam 8000: monitor 0.1107 price 0.00724 pde 0.000658 boundary 0.000121 zero_variance 6.18e-05 variance_cap 0.00161 price 4.26e-05 derivatives 0.0245 [5219s]
+adam 8500: monitor 0.1124 price 0.0143 pde 0.000362 boundary 0.000128 zero_variance 4.86e-05 variance_cap 0.00185 price 0.000116 derivatives 0.0201 [5630s]
+adam 9000: monitor 0.1059 price 0.00581 pde 0.000486 boundary 0.000111 zero_variance 4.09e-05 variance_cap 0.00159 price 4.03e-05 derivatives 0.03 [6017s]
+D4_physics_seed0: Physics-informed DeepONet: PDE residual on unlabelled collocation over the computational box (tau from 0, v to v_hi = 3 packed near 0, sqrt(v + 0.01) in the trunk), the degenerate equation on v = 0, c_v = 0 at v_hi and the far x boundary
+parameters: 33857; threads 4
+resumed after step 9000
+adam 9500: monitor 0.1061 price 0.00637 pde 0.000518 boundary 0.000175 zero_variance 5.15e-05 variance_cap 0.00152 price 2.62e-05 derivatives 0.0216 [6231s]
+adam 10000: monitor 0.1062 price 0.00841 pde 0.000377 boundary 0.000147 zero_variance 4.84e-05 variance_cap 0.00158 price 6.06e-05 derivatives 0.0319 [6440s]
+adam 10500: monitor 0.1047 price 0.00772 pde 0.000479 boundary 0.000141 zero_variance 6.28e-05 variance_cap 0.0018 price 7.96e-05 derivatives 0.0259 [6650s]
+adam 11000: monitor 0.101 price 0.00459 pde 0.000497 boundary 6.7e-05 zero_variance 3.87e-05 variance_cap 0.00153 price 2.42e-05 derivatives 0.0454 [6859s]
+adam 11500: monitor 0.102 price 0.00578 pde 0.00056 boundary 9.84e-05 zero_variance 6.47e-05 variance_cap 0.00146 price 5.19e-05 derivatives 0.047 [7067s]
+adam 12000: monitor 0.09983 price 0.00508 pde 0.000616 boundary 6.95e-05 zero_variance 6e-05 variance_cap 0.00165 price 3.2e-05 derivatives 0.0253 [7276s]
+adam 12500: monitor 0.0976 price 0.00511 pde 0.000509 boundary 9.12e-05 zero_variance 4.08e-05 variance_cap 0.00184 price 2.8e-05 derivatives 0.0508 [7485s]
+adam 13000: monitor 0.09675 price 0.00688 pde 0.000632 boundary 6.12e-05 zero_variance 5.54e-05 variance_cap 0.00175 price 5.11e-05 derivatives 0.0221 [7696s]
+adam 13500: monitor 0.09473 price 0.00441 pde 0.000484 boundary 7.09e-05 zero_variance 4.2e-05 variance_cap 0.00187 price 2.34e-05 derivatives 0.0222 [7911s]
+adam 14000: monitor 0.09409 price 0.00508 pde 0.000566 boundary 0.0001 zero_variance 3.86e-05 variance_cap 0.00143 price 2.1e-05 derivatives 0.0215 [8122s]
+adam 14500: monitor 0.09401 price 0.00458 pde 0.00037 boundary 8.8e-05 zero_variance 3.8e-05 variance_cap 0.00202 price 2.12e-05 derivatives 0.0254 [8333s]
+adam 15000: monitor 0.09275 price 0.00399 pde 0.000495 boundary 8.45e-05 zero_variance 6.66e-05 variance_cap 0.00163 price 1.75e-05 derivatives 0.0196 [8549s]
+validation: score 0.1103 price RMSE 0.000899
+short_validation: score 0.3739 price RMSE 0.000353

@@ -1,0 +1,313 @@
+{
+ "name": "heston_test_v1",
+ "purpose": "Frozen one-stock Heston test set: European calls and puts, price and 11 sensitivities. Built, referenced and sealed before any network trains.",
+ "seed": 20261007,
+ "domain_file": "experiments/config/domain.json",
+ "units": "per unit strike (K = 1, S = moneyness); vega and volga with respect to v0; theta_cal = -dV/dtau per year",
+ "quantities": [
+  "price",
+  "delta",
+  "gamma",
+  "vega",
+  "vanna",
+  "volga",
+  "theta_cal",
+  "rho_rate",
+  "d_kappa",
+  "d_theta",
+  "d_xi",
+  "d_rho"
+ ],
+ "sampling": {
+  "method": "scipy.stats.qmc.LatinHypercube over (S, tau, r, q, v0, theta, kappa, xi, rho) inside the domain, seed + split offset; calls and puts alternate by slot",
+  "split_offsets": {
+   "interpolation": 0,
+   "short_maturity": 1,
+   "extrapolation": 2
+  }
+ },
+ "splits": {
+  "interpolation": {
+   "count": 128,
+   "reason": "inside the training domain"
+  },
+  "short_maturity": {
+   "count": 32,
+   "tau": [
+    0.005,
+    0.05
+   ],
+   "reason": "remaining life below the training domain (short-maturity panel)"
+  },
+  "extrapolation": {
+   "cases_per_value": 2,
+   "reason": "one input outside the training domain, the rest a domain draw",
+   "values": {
+    "S": [
+     0.6,
+     0.65,
+     1.35,
+     1.4
+    ],
+    "tau": [
+     2.25,
+     2.5,
+     3.0,
+     3.5
+    ],
+    "v0": [
+     0.005,
+     0.0075,
+     0.42,
+     0.49
+    ],
+    "theta": [
+     0.005,
+     0.0075,
+     0.42,
+     0.49
+    ],
+    "kappa": [
+     0.25,
+     0.375,
+     6.0,
+     7.0
+    ],
+    "xi": [
+     0.05,
+     0.075,
+     1.15,
+     1.3
+    ],
+    "rho": [
+     -0.95,
+     -0.925,
+     0.4,
+     0.5
+    ],
+    "r": [
+     -0.04,
+     -0.03,
+     0.12,
+     0.14
+    ],
+    "q": [
+     -0.02,
+     -0.01,
+     0.07,
+     0.08
+    ]
+   }
+  },
+  "anchor": {
+   "reason": "hand-picked regimes and literature parameter sets",
+   "defaults": {
+    "S": 1.0,
+    "tau": 1.0,
+    "r": 0.02,
+    "q": 0.0,
+    "v0": 0.04,
+    "theta": 0.04,
+    "kappa": 2.0,
+    "xi": 0.5,
+    "rho": -0.7
+   },
+   "cases": [
+    {
+     "name": "atm_call",
+     "call": true
+    },
+    {
+     "name": "atm_put",
+     "call": false
+    },
+    {
+     "name": "itm_call",
+     "S": 1.2,
+     "call": true
+    },
+    {
+     "name": "otm_call",
+     "S": 0.8,
+     "call": true
+    },
+    {
+     "name": "itm_put",
+     "S": 0.8,
+     "call": false
+    },
+    {
+     "name": "otm_put",
+     "S": 1.2,
+     "call": false
+    },
+    {
+     "name": "feller_strong_violation",
+     "kappa": 0.5,
+     "theta": 0.02,
+     "xi": 1.0,
+     "v0": 0.02,
+     "call": true,
+     "note": "2 kappa theta / xi^2 = 0.02"
+    },
+    {
+     "name": "feller_violation_otm_put",
+     "S": 1.15,
+     "kappa": 0.6,
+     "theta": 0.03,
+     "xi": 0.9,
+     "v0": 0.03,
+     "call": false
+    },
+    {
+     "name": "rho_minus_0p9",
+     "rho": -0.9,
+     "xi": 0.8,
+     "call": false,
+     "S": 1.1
+    },
+    {
+     "name": "xi_near_zero",
+     "xi": 0.1,
+     "rho": 0.0,
+     "call": true,
+     "note": "close to the Black-Scholes limit"
+    },
+    {
+     "name": "high_v0_short_tau",
+     "v0": 0.36,
+     "theta": 0.09,
+     "tau": 0.05,
+     "call": true
+    },
+    {
+     "name": "v0_far_above_theta",
+     "v0": 0.36,
+     "theta": 0.01,
+     "kappa": 1.0,
+     "call": true
+    },
+    {
+     "name": "v0_far_below_theta",
+     "v0": 0.01,
+     "theta": 0.36,
+     "kappa": 1.0,
+     "call": false
+    },
+    {
+     "name": "fast_mean_reversion",
+     "kappa": 5.0,
+     "call": true
+    },
+    {
+     "name": "slow_mean_reversion",
+     "kappa": 0.5,
+     "tau": 2.0,
+     "call": false
+    },
+    {
+     "name": "heston1993",
+     "v0": 0.01,
+     "theta": 0.01,
+     "kappa": 2.0,
+     "xi": 0.1,
+     "rho": 0.0,
+     "tau": 0.5,
+     "r": 0.0,
+     "call": true,
+     "note": "Heston (1993) base case"
+    },
+    {
+     "name": "bakshi_cao_chen",
+     "v0": 0.04,
+     "theta": 0.04,
+     "kappa": 1.15,
+     "xi": 0.39,
+     "rho": -0.64,
+     "call": true
+    },
+    {
+     "name": "fang_oosterlee",
+     "v0": 0.0175,
+     "theta": 0.0398,
+     "kappa": 1.5768,
+     "xi": 0.5751,
+     "rho": -0.5711,
+     "r": 0.0,
+     "call": true,
+     "note": "Fang and Oosterlee (2008) test parameters"
+    },
+    {
+     "name": "andersen_hard",
+     "v0": 0.04,
+     "theta": 0.04,
+     "kappa": 0.5,
+     "xi": 1.0,
+     "rho": -0.9,
+     "tau": 2.0,
+     "r": 0.0,
+     "S": 1.0,
+     "call": true,
+     "note": "Andersen (2008) case with tau cut to the domain"
+    },
+    {
+     "name": "schoutens",
+     "v0": 0.0654,
+     "theta": 0.0707,
+     "kappa": 0.6067,
+     "xi": 0.2928,
+     "rho": -0.7571,
+     "r": 0.03,
+     "q": 0.0,
+     "call": false
+    }
+   ]
+  }
+ },
+ "reference": {
+  "method": "Lewis single integral with the little-trap characteristic function (src/heston/reference.py), all 12 quantities from closed-form integrands, adaptive Gauss-Legendre with a per-case convergence ladder (levels 0-3)",
+  "acceptance": "two consecutive levels agree to 1e-9 on every quantity",
+  "replacement_rule": "a generated case whose ladder does not reach 1e-9 agreement by level 3, or whose torch twin disagrees with the NumPy reference by more than 1e-8 on any quantity, is replaced by the next draw of its split's Latin hypercube stream (same slot, draw + 1); an anchor that fails stops the build",
+  "cross_checks": "torch twin (autograd) max difference; QE-RQMC 2^12 points x 16 scrambles, Brownian bridge, dt = 1/32, z-scores per quantity (recorded, never used to change a reference)"
+ },
+ "separation": {
+  "metric": "max over the 9 inputs of |difference| / domain width, against every Phase 0 development contract; the nearest distance is recorded"
+ },
+ "rules": [
+  "No training, tuning or selection on these cases.",
+  "Every split is reported.",
+  "Any later model change gets a new test set."
+ ],
+ "frozen_at": "2026-10-06T18:56:35+00:00",
+ "case_counts": {
+  "interpolation": 128,
+  "short_maturity": 32,
+  "extrapolation": 72,
+  "anchor": 20
+ },
+ "total_cases": 252,
+ "replacements": [],
+ "feller_violations": {
+  "interpolation": 42,
+  "short_maturity": 6,
+  "extrapolation": 29,
+  "anchor": 14
+ },
+ "separation_result": {
+  "minimum": 0.09766789457197149,
+  "by_split": {
+   "interpolation": 0.10683825292971132,
+   "short_maturity": 0.09766789457197149,
+   "extrapolation": 0.15255941984343435,
+   "anchor": 0.18730228140864455
+  }
+ },
+ "reference_build_seconds": 166.5256729000248,
+ "rqmc_summary": {
+  "rms_z": 10524608.70259526,
+  "inside_1p96": 0.8849206349206349,
+  "max_abs_z": 578757792.4729942
+ },
+ "cases_sha256": "d306832445fb3cc6db920c890fd2c5c9b69cff25ddf8dca9bf7bc49223a90661",
+ "references_sha256": "ecac55b6c6cb585a901cf0c8b50a4ebb77195411d625f7ec0b98fb6e34a8ef9f"
+}

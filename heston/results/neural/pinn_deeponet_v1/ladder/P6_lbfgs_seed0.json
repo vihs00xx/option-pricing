@@ -1,0 +1,841 @@
+{
+ "level": "P6_lbfgs",
+ "family": "pinn",
+ "seed": 0,
+ "technique": "Quasi-Newton polish: full-batch L-BFGS (strong Wolfe line search) warm-started from P5 on 16,384 RAD-selected collocation points",
+ "settings": {
+  "model": {
+   "layout": "reduced",
+   "output": "bs",
+   "width": 64,
+   "depth": 4,
+   "v_input": "sqrt"
+  },
+  "loss": {
+   "pde": 1.0,
+   "terminal": 0.0,
+   "boundary": 1.0,
+   "zero_variance": 1.0,
+   "variance_cap": 1.0
+  },
+  "sampling": {
+   "focus": 0.7,
+   "tau_power": 2.0,
+   "v_power": 2.0,
+   "weight": "time",
+   "rad": {
+    "size": 32768,
+    "pool_factor": 4,
+    "k": 1.0,
+    "c": 1.0,
+    "every": 1000
+   }
+  },
+  "batch": {
+   "collocation": 4096,
+   "terminal": 1024,
+   "boundary": 512,
+   "zero_variance": 512,
+   "variance_cap": 256
+  },
+  "optimizer": {
+   "adam_steps": 0,
+   "learning_rate": 0.002,
+   "final_learning_rate": 2e-05,
+   "check_every": 500,
+   "lbfgs_iterations": 3000,
+   "lbfgs_chunk": 50,
+   "lbfgs_history": 50,
+   "lbfgs_batch": {
+    "collocation": 16384,
+    "boundary": 2048,
+    "zero_variance": 2048,
+    "variance_cap": 1024
+   }
+  },
+  "computational_domain": {
+   "x": [
+    -3.0,
+    2.5
+   ],
+   "v": [
+    0.0,
+    3.0
+   ],
+   "note": "Spatial extent of the PDE problem in x = log forward moneyness and v, like a grid solver's far boundary. kappa, theta, xi, rho and the maturity cap are the training domain; tau starts at 0 because the PDE starts at the payoff. P4 and the physics-informed DeepONet levels extend v to v_hi = 3 with c_v = 0 there, pack collocation near v = 0 and feed sqrt(v + 0.01). The ADI v_max = 15.28 (Phase 0 check 7) is not used for the networks: with the ADI solver at a fixed fine grid, c_v = 0 at v_hi = 3 moves prices at v0 <= 0.49 by at most 4e-7 against the full domain (results/neural/variance_cap_study)."
+  },
+  "family": "pinn",
+  "technique": "Quasi-Newton polish: full-batch L-BFGS (strong Wolfe line search) warm-started from P5 on 16,384 RAD-selected collocation points",
+  "variance_cap_condition": "zero_slope",
+  "warm_start": "P5_adaptive",
+  "cap": "default"
+ },
+ "source_sha256": {
+  "src/neural/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "src/neural/coordinates.py": "195a21d3346ca9f198dba31b2399fd2cb2e4f68a41c76cf7af932a9fe9db50cb",
+  "src/neural/deeponet.py": "b74716ff52bec67aa9beb1f52c15111c9024a2c90af8230f09b7d62e78ab8fd5",
+  "src/neural/networks.py": "1e4ce1b891017b831b1925fb444300be3e12b432c1242f11c07bf10c5c9523a9",
+  "src/neural/nys_newton_cg.py": "ed35565688cda8e0733d2506babe5cc8abd49f87caa90208f9d83f2094fff6d3",
+  "src/neural/pde.py": "787a21c9f5b90c8e0ce1e5cf2f3f914b7108c76cb6c68bb832731738c629bec7",
+  "src/neural/pinn.py": "0136793a468ac67a441c9d97d2b3cc4506e9adf05da2b64a493aeee9db12add6",
+  "src/neural/reference.py": "1afb66b1b1d0d9c3b60f82abd1ab7405f728efac3e8b59584f34fc85ca755acf",
+  "src/neural/training.py": "2cd9a7cac185239161389a1b505dbe4e66921ab1771317a274cf861ac282af3a",
+  "experiments/neural/train.py": "931f570d5dac0f57e1792c7143b7c5d16d6979e25de7f6f7e24e5d338170ef18",
+  "experiments/neural/common.py": "78eed441fe8df8ff0910103b596812c31c12b09c91e5b045fd662cd8cdf95089",
+  "experiments/config/neural/study.json": "aba56c84118213502a0837d0a0e3cf9385a21eec3aa20709e24966ffb5ecd605",
+  "experiments/config/neural/pinn_ladder.json": "afbc98a6e95aa9b8f0408c816ea9fe78bd3d099b7040d5eadbba62bd4de2cbc4",
+  "experiments/config/neural/deeponet_ladder.json": "dca1da581a113aecdddadec24175f5f54378251a6ab4fa290ad8c741d80675ef",
+  "experiments/config/domain.json": "e523d51f6283eb05ab83d98c298464fd45a39eaad7e5cf6303ff4cc288d51310"
+ },
+ "parameters": 13057,
+ "scores": {
+  "validation": {
+   "score": 0.19273026460493545,
+   "ratios": {
+    "price": 0.010645763458366434,
+    "delta": 0.025489713948021936,
+    "gamma": 0.1261341572482347,
+    "vega": 0.0632931404841743,
+    "vanna": 0.2572275831331164,
+    "volga": 0.5808986205972018,
+    "theta_cal": 0.035811684672701266,
+    "rho_rate": 0.026893299469494442,
+    "d_kappa": 0.16515002867037404,
+    "d_theta": 0.04934808815931804,
+    "d_xi": 0.5274168508414031,
+    "d_rho": 0.4444542445768193
+   },
+   "rmse": {
+    "price": 0.0021322456426467354,
+    "delta": 0.014229707395392007,
+    "gamma": 0.14698669930052316,
+    "vega": 0.010416991687692218,
+    "vanna": 0.10458467266762589,
+    "volga": 0.23017790050620165,
+    "theta_cal": 0.0031314665848671853,
+    "rho_rate": 0.013972512826623307,
+    "d_kappa": 0.0016287993162337536,
+    "d_theta": 0.015247613693048017,
+    "d_xi": 0.007146394259828383,
+    "d_rho": 0.004869193309748583
+   },
+   "seconds": 0.11459650000324473
+  },
+  "short_validation": {
+   "score": 0.2948318706035314,
+   "ratios": {
+    "price": 0.0023503503925823544,
+    "delta": 0.007340559912466546,
+    "gamma": 0.066491740206947,
+    "vega": 0.04070384082786976,
+    "vanna": 0.18732850486582386,
+    "volga": 0.31140731335787775,
+    "theta_cal": 0.04074310849421885,
+    "rho_rate": 0.009055520927300413,
+    "d_kappa": 0.5650243290136573,
+    "d_theta": 0.13601584037936748,
+    "d_xi": 1.2770031815489238,
+    "d_rho": 0.8945181573153419
+   },
+   "rmse": {
+    "price": 0.000290715191981072,
+    "delta": 0.004857281004122472,
+    "gamma": 0.20032239082194947,
+    "vega": 0.001552835684949637,
+    "vanna": 0.11165117318331497,
+    "volga": 0.0908628087388029,
+    "theta_cal": 0.010783427760258474,
+    "rho_rate": 0.0001775559154742631,
+    "d_kappa": 5.717591504197232e-05,
+    "d_theta": 0.00029210019411266957,
+    "d_xi": 0.000598814773508,
+    "d_rho": 0.0005371586205642418
+   },
+   "seconds": 0.11126050003804266
+  }
+ },
+ "label_seconds": 0.0,
+ "wall_seconds": 3450.6434295999934,
+ "process_cpu_seconds": 8198.515625,
+ "environment": {
+  "python": "3.13.3",
+  "torch": "2.8.0+cpu",
+  "numpy": "2.1.0",
+  "threads": 4,
+  "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel"
+ },
+ "adam_seconds": 0.0,
+ "total_seconds": 3450.339385500003,
+ "best_monitor": 0.1750213284875901,
+ "best_step": "lbfgs 2950",
+ "history": [
+  {
+   "stage": "start",
+   "step": 0,
+   "seconds": 0.0,
+   "monitor": 0.23432597982486003,
+   "price_ratio": 0.023408103674080617
+  },
+  {
+   "stage": "lbfgs",
+   "step": 50,
+   "seconds": 55.6,
+   "monitor": 0.2438867919689156,
+   "price_ratio": 0.02379524634207658,
+   "pde": 0.0001323860214369999,
+   "boundary": 3.2129715719494e-06,
+   "zero_variance": 4.054310218195887e-06,
+   "variance_cap": 3.8719179791185195e-05
+  },
+  {
+   "stage": "lbfgs",
+   "step": 100,
+   "seconds": 109.0,
+   "monitor": 0.24097533091481885,
+   "price_ratio": 0.02251027537976742,
+   "pde": 0.00011819715179529551,
+   "boundary": 3.441263223821214e-06,
+   "zero_variance": 3.706020332344371e-06,
+   "variance_cap": 3.274030661996713e-05
+  },
+  {
+   "stage": "lbfgs",
+   "step": 150,
+   "seconds": 168.5,
+   "monitor": 0.2524188601326137,
+   "price_ratio": 0.022232254568518763,
+   "pde": 0.00010562822262789816,
+   "boundary": 3.623991217072208e-06,
+   "zero_variance": 3.9193315829762515e-06,
+   "variance_cap": 2.7466408307224976e-05
+  },
+  {
+   "stage": "lbfgs",
+   "step": 200,
+   "seconds": 228.5,
+   "monitor": 0.24035008539250233,
+   "price_ratio": 0.02152563721552223,
+   "pde": 9.562691598476411e-05,
+   "boundary": 3.053331330847218e-06,
+   "zero_variance": 3.715631940521421e-06,
+   "variance_cap": 2.5612183205607455e-05
+  },
+  {
+   "stage": "lbfgs",
+   "step": 250,
+   "seconds": 286.2,
+   "monitor": 0.2336862170059765,
+   "price_ratio": 0.022077119441990624,
+   "pde": 8.86120037135751e-05,
+   "boundary": 3.1182756403562777e-06,
+   "zero_variance": 3.9132760452472766e-06,
+   "variance_cap": 2.317841433950288e-05
+  },
+  {
+   "stage": "lbfgs",
+   "step": 300,
+   "seconds": 344.8,
+   "monitor": 0.22000559037470627,
+   "price_ratio": 0.018985656053022004,
+   "pde": 8.393240539255197e-05,
+   "boundary": 3.035181610733854e-06,
+   "zero_variance": 4.476164867418394e-06,
+   "variance_cap": 2.0771168075951684e-05
+  },
+  {
+   "stage": "lbfgs",
+   "step": 350,
+   "seconds": 401.5,
+   "monitor": 0.21571550094094283,
+   "price_ratio": 0.01783565768007995,
+   "pde": 7.985490100349417e-05,
+   "boundary": 3.034628621720631e-06,
+   "zero_variance": 4.817168060970403e-06,
+   "variance_cap": 1.8477351542637153e-05
+  },
+  {
+   "stage": "lbfgs",
+   "step": 400,
+   "seconds": 460.0,
+   "monitor": 0.215954533418364,
+   "price_ratio": 0.018713414480554486,
+   "pde": 7.67109186467206e-05,
+   "boundary": 2.9522930769297143e-06,
+   "zero_variance": 4.410431282953547e-06,
+   "variance_cap": 1.61805639982585e-05
+  },
+  {
+   "stage": "lbfgs",
+   "step": 450,
+   "seconds": 518.0,
+   "monitor": 0.21209809405896385,
+   "price_ratio": 0.01842177918259342,
+   "pde": 7.469221493396563e-05,
+   "boundary": 2.2969403235627317e-06,
+   "zero_variance": 4.021854751063474e-06,
+   "variance_cap": 1.4905859946814882e-05
+  },
+  {
+   "stage": "lbfgs",
+   "step": 500,
+   "seconds": 579.0,
+   "monitor": 0.21633339221235617,
+   "price_ratio": 0.01865557907240298,
+   "pde": 7.206043917977193e-05,
+   "boundary": 2.080134897353302e-06,
+   "zero_variance": 4.071096103620955e-06,
+   "variance_cap": 1.3682412706598e-05
+  },
+  {
+   "stage": "lbfgs",
+   "step": 550,
+   "seconds": 640.8,
+   "monitor": 0.2166412675590815,
+   "price_ratio": 0.019292053301511673,
+   "pde": 6.973187033502805e-05,
+   "boundary": 2.0943428891147417e-06,
+   "zero_variance": 3.963645586448185e-06,
+   "variance_cap": 1.2853042151590793e-05
+  },
+  {
+   "stage": "lbfgs",
+   "step": 600,
+   "seconds": 702.6,
+   "monitor": 0.21339250703543797,
+   "price_ratio": 0.01804680738434832,
+   "pde": 6.658943750464765e-05,
+   "boundary": 1.8775594680598987e-06,
+   "zero_variance": 4.2733774206679315e-06,
+   "variance_cap": 1.2144831886787403e-05
+  },
+  {
+   "stage": "lbfgs",
+   "step": 650,
+   "seconds": 757.4,
+   "monitor": 0.21087424305524627,
+   "price_ratio": 0.017211814427167065,
+   "pde": 6.470075164102755e-05,
+   "boundary": 1.785246604300389e-06,
+   "zero_variance": 4.467626287312671e-06,
+   "variance_cap": 1.1213340916553802e-05
+  },
+  {
+   "stage": "lbfgs",
+   "step": 700,
+   "seconds": 814.6,
+   "monitor": 0.20525975382901193,
+   "price_ratio": 0.017039199588768143,
+   "pde": 6.265333197787108e-05,
+   "boundary": 1.9865955963111405e-06,
+   "zero_variance": 4.565630896448319e-06,
+   "variance_cap": 1.047886946190992e-05
+  },
+  {
+   "stage": "lbfgs",
+   "step": 750,
+   "seconds": 870.6,
+   "monitor": 0.20728440566171244,
+   "price_ratio": 0.017331517261427103,
+   "pde": 6.041534547969744e-05,
+   "boundary": 2.022667339196347e-06,
+   "zero_variance": 4.098816223232325e-06,
+   "variance_cap": 9.950239893799252e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 800,
+   "seconds": 925.6,
+   "monitor": 0.20796972430440697,
+   "price_ratio": 0.016962045650544377,
+   "pde": 5.8712615974209305e-05,
+   "boundary": 1.9071419097743336e-06,
+   "zero_variance": 4.138359740621417e-06,
+   "variance_cap": 9.482534495024644e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 850,
+   "seconds": 981.6,
+   "monitor": 0.2065959175158246,
+   "price_ratio": 0.016118456469501913,
+   "pde": 5.6155760717818084e-05,
+   "boundary": 1.963918755068281e-06,
+   "zero_variance": 4.136771427734909e-06,
+   "variance_cap": 9.016189118960314e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 900,
+   "seconds": 1040.2,
+   "monitor": 0.20203901791706405,
+   "price_ratio": 0.015774542786271165,
+   "pde": 5.448858988728834e-05,
+   "boundary": 1.6662424932779243e-06,
+   "zero_variance": 4.073083352454465e-06,
+   "variance_cap": 8.726740531031794e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 950,
+   "seconds": 1095.5,
+   "monitor": 0.2027451622640639,
+   "price_ratio": 0.015081096181870902,
+   "pde": 5.2064811350643566e-05,
+   "boundary": 1.6464130837557365e-06,
+   "zero_variance": 4.006978805068299e-06,
+   "variance_cap": 8.828781371900182e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 1000,
+   "seconds": 1153.4,
+   "monitor": 0.20113143978448966,
+   "price_ratio": 0.014950750866692224,
+   "pde": 4.997399416889032e-05,
+   "boundary": 1.7231688440893248e-06,
+   "zero_variance": 4.110316500617357e-06,
+   "variance_cap": 8.689463012260247e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 1050,
+   "seconds": 1207.2,
+   "monitor": 0.19890149919606714,
+   "price_ratio": 0.014123084319297086,
+   "pde": 4.878886461820505e-05,
+   "boundary": 1.6452057505202542e-06,
+   "zero_variance": 3.8130221094025535e-06,
+   "variance_cap": 8.15424888321496e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 1100,
+   "seconds": 1263.1,
+   "monitor": 0.2007027717047852,
+   "price_ratio": 0.014281463490375974,
+   "pde": 4.639059146954603e-05,
+   "boundary": 1.5330794790145198e-06,
+   "zero_variance": 3.845277451234733e-06,
+   "variance_cap": 8.081981667120398e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 1150,
+   "seconds": 1320.1,
+   "monitor": 0.20343830200207783,
+   "price_ratio": 0.01498201888689932,
+   "pde": 4.460919908309234e-05,
+   "boundary": 1.4664620827623082e-06,
+   "zero_variance": 4.016604461154751e-06,
+   "variance_cap": 7.91865334087235e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 1200,
+   "seconds": 1374.7,
+   "monitor": 0.20413014610797972,
+   "price_ratio": 0.014273922010581854,
+   "pde": 4.333152501251161e-05,
+   "boundary": 1.4312188998214996e-06,
+   "zero_variance": 3.97926725927702e-06,
+   "variance_cap": 7.541551185722389e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 1250,
+   "seconds": 1433.3,
+   "monitor": 0.20322704051189677,
+   "price_ratio": 0.014696718679281085,
+   "pde": 4.1869413557587916e-05,
+   "boundary": 1.277318922875546e-06,
+   "zero_variance": 3.8099382783379618e-06,
+   "variance_cap": 7.4433796861303854e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 1300,
+   "seconds": 1494.9,
+   "monitor": 0.20025017867845996,
+   "price_ratio": 0.013900361173864272,
+   "pde": 4.0200266869604704e-05,
+   "boundary": 1.3696241647513038e-06,
+   "zero_variance": 3.68998454017035e-06,
+   "variance_cap": 7.098804059489441e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 1350,
+   "seconds": 1555.0,
+   "monitor": 0.19915460832654697,
+   "price_ratio": 0.01292133146448707,
+   "pde": 3.8815359714106375e-05,
+   "boundary": 1.3358653009443165e-06,
+   "zero_variance": 3.6153822526314873e-06,
+   "variance_cap": 6.992090638484461e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 1400,
+   "seconds": 1613.6,
+   "monitor": 0.19675436158826565,
+   "price_ratio": 0.012437402924309787,
+   "pde": 3.7523046969302945e-05,
+   "boundary": 1.3513456853442174e-06,
+   "zero_variance": 3.7257007099500018e-06,
+   "variance_cap": 6.8577623755975515e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 1450,
+   "seconds": 1671.8,
+   "monitor": 0.19820963578033604,
+   "price_ratio": 0.012766552659635761,
+   "pde": 3.636152893444175e-05,
+   "boundary": 1.4592479099799868e-06,
+   "zero_variance": 3.639242598852872e-06,
+   "variance_cap": 6.726680944920495e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 1500,
+   "seconds": 1730.8,
+   "monitor": 0.19732465546139666,
+   "price_ratio": 0.012125979107061625,
+   "pde": 3.53161350864347e-05,
+   "boundary": 1.4801376357125526e-06,
+   "zero_variance": 3.5760159553872894e-06,
+   "variance_cap": 6.595656811683553e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 1550,
+   "seconds": 1786.7,
+   "monitor": 0.19665504372432374,
+   "price_ratio": 0.011958575474805189,
+   "pde": 3.445376686410877e-05,
+   "boundary": 1.3145580730333023e-06,
+   "zero_variance": 3.5019352284763796e-06,
+   "variance_cap": 6.450226376992163e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 1600,
+   "seconds": 1844.8,
+   "monitor": 0.19438648434024816,
+   "price_ratio": 0.011473017440036577,
+   "pde": 3.356401677257398e-05,
+   "boundary": 1.210198264294337e-06,
+   "zero_variance": 3.44672473784454e-06,
+   "variance_cap": 6.249844358781643e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 1650,
+   "seconds": 1903.4,
+   "monitor": 0.19320752831180976,
+   "price_ratio": 0.011525600362222875,
+   "pde": 3.2578127297128193e-05,
+   "boundary": 1.1329097967432449e-06,
+   "zero_variance": 3.4459778957649712e-06,
+   "variance_cap": 6.185469983948339e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 1700,
+   "seconds": 1960.8,
+   "monitor": 0.19304595685979367,
+   "price_ratio": 0.01175791686712777,
+   "pde": 3.156888189101484e-05,
+   "boundary": 1.1003145917074258e-06,
+   "zero_variance": 3.364113603916937e-06,
+   "variance_cap": 6.0292551924786246e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 1750,
+   "seconds": 2018.5,
+   "monitor": 0.1906947884546177,
+   "price_ratio": 0.010869864747226112,
+   "pde": 3.072507996778306e-05,
+   "boundary": 1.0580998879820396e-06,
+   "zero_variance": 3.336663968635679e-06,
+   "variance_cap": 5.921879409210667e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 1800,
+   "seconds": 2074.2,
+   "monitor": 0.1914051864251578,
+   "price_ratio": 0.011912409361548814,
+   "pde": 3.0018994317571424e-05,
+   "boundary": 1.0442267913640285e-06,
+   "zero_variance": 3.2560325361009143e-06,
+   "variance_cap": 5.75082493400077e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 1850,
+   "seconds": 2129.6,
+   "monitor": 0.1926949157780782,
+   "price_ratio": 0.011575133255369505,
+   "pde": 2.9071831963562793e-05,
+   "boundary": 1.0993887402388758e-06,
+   "zero_variance": 3.3071103814209046e-06,
+   "variance_cap": 5.671168569423918e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 1900,
+   "seconds": 2189.1,
+   "monitor": 0.1926903042514796,
+   "price_ratio": 0.01142316858142803,
+   "pde": 2.8272240533725976e-05,
+   "boundary": 1.1261014720577642e-06,
+   "zero_variance": 3.2708430991780555e-06,
+   "variance_cap": 5.540419845384063e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 1950,
+   "seconds": 2249.5,
+   "monitor": 0.19185339537991095,
+   "price_ratio": 0.01110534956489729,
+   "pde": 2.7777786965354097e-05,
+   "boundary": 1.199897633951186e-06,
+   "zero_variance": 3.1495777167234453e-06,
+   "variance_cap": 5.423453124277071e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 2000,
+   "seconds": 2307.2,
+   "monitor": 0.19136274771334935,
+   "price_ratio": 0.011324339360705796,
+   "pde": 2.717168244298659e-05,
+   "boundary": 1.1871324578276875e-06,
+   "zero_variance": 3.027786436971847e-06,
+   "variance_cap": 5.3748089343187455e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 2050,
+   "seconds": 2364.3,
+   "monitor": 0.1903605016930876,
+   "price_ratio": 0.010938580378568359,
+   "pde": 2.6565258494331067e-05,
+   "boundary": 1.118985246964172e-06,
+   "zero_variance": 2.9784292375480585e-06,
+   "variance_cap": 5.236213106984262e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 2100,
+   "seconds": 2421.5,
+   "monitor": 0.18861007657552412,
+   "price_ratio": 0.011131559551968569,
+   "pde": 2.5869654866709524e-05,
+   "boundary": 1.0976724810836868e-06,
+   "zero_variance": 2.9018305682474194e-06,
+   "variance_cap": 5.150459641521978e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 2150,
+   "seconds": 2480.7,
+   "monitor": 0.18594329069403467,
+   "price_ratio": 0.011114813217328424,
+   "pde": 2.5201136916093573e-05,
+   "boundary": 1.1684156768157154e-06,
+   "zero_variance": 2.8398989120841053e-06,
+   "variance_cap": 5.075623502829726e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 2200,
+   "seconds": 2540.4,
+   "monitor": 0.1843931135632064,
+   "price_ratio": 0.010891851964204212,
+   "pde": 2.4730382549239426e-05,
+   "boundary": 1.1215122715563055e-06,
+   "zero_variance": 2.740782903518641e-06,
+   "variance_cap": 5.037608922783947e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 2250,
+   "seconds": 2598.5,
+   "monitor": 0.18339303358826045,
+   "price_ratio": 0.010381782293432085,
+   "pde": 2.4239607627534984e-05,
+   "boundary": 1.132553818480591e-06,
+   "zero_variance": 2.7187778763551884e-06,
+   "variance_cap": 4.930322016132301e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 2300,
+   "seconds": 2654.6,
+   "monitor": 0.18271549659498945,
+   "price_ratio": 0.010230679694222857,
+   "pde": 2.3550141068476612e-05,
+   "boundary": 1.2000249655484144e-06,
+   "zero_variance": 2.698940548422727e-06,
+   "variance_cap": 4.846496726850173e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 2350,
+   "seconds": 2708.0,
+   "monitor": 0.1813355574341136,
+   "price_ratio": 0.010069123079600534,
+   "pde": 2.3036255176611227e-05,
+   "boundary": 1.181463849932489e-06,
+   "zero_variance": 2.6619408595717625e-06,
+   "variance_cap": 4.737575769603582e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 2400,
+   "seconds": 2759.6,
+   "monitor": 0.1811591012435664,
+   "price_ratio": 0.010166670860896225,
+   "pde": 2.2828087613442077e-05,
+   "boundary": 1.1435929333968193e-06,
+   "zero_variance": 2.5185588353694734e-06,
+   "variance_cap": 4.616578076141894e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 2450,
+   "seconds": 2817.4,
+   "monitor": 0.18071088586295392,
+   "price_ratio": 0.009881943336275624,
+   "pde": 2.2515621638577342e-05,
+   "boundary": 1.1128516530271974e-06,
+   "zero_variance": 2.4649484579289366e-06,
+   "variance_cap": 4.522364923535998e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 2500,
+   "seconds": 2872.0,
+   "monitor": 0.1796765163782514,
+   "price_ratio": 0.009604915584839313,
+   "pde": 2.2127372482328984e-05,
+   "boundary": 1.0993679788557778e-06,
+   "zero_variance": 2.4519870471487603e-06,
+   "variance_cap": 4.424146594194151e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 2550,
+   "seconds": 2928.7,
+   "monitor": 0.1786864536902187,
+   "price_ratio": 0.009656135037756253,
+   "pde": 2.1826663738010514e-05,
+   "boundary": 1.0714384811347265e-06,
+   "zero_variance": 2.4205443211453247e-06,
+   "variance_cap": 4.350944933038667e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 2600,
+   "seconds": 2987.8,
+   "monitor": 0.17933834953046046,
+   "price_ratio": 0.010303992920003115,
+   "pde": 2.167764454758347e-05,
+   "boundary": 1.0428933045733486e-06,
+   "zero_variance": 2.3168114690480543e-06,
+   "variance_cap": 4.225073997361269e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 2650,
+   "seconds": 3046.6,
+   "monitor": 0.1781536994268241,
+   "price_ratio": 0.010043793512553743,
+   "pde": 2.1340713717153858e-05,
+   "boundary": 1.0290987678088022e-06,
+   "zero_variance": 2.3023328098255648e-06,
+   "variance_cap": 4.162020731009354e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 2700,
+   "seconds": 3102.4,
+   "monitor": 0.17692684373916825,
+   "price_ratio": 0.01036193646893163,
+   "pde": 2.1038146269727048e-05,
+   "boundary": 1.0117182375697467e-06,
+   "zero_variance": 2.2390606452440325e-06,
+   "variance_cap": 4.127066819931849e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 2750,
+   "seconds": 3160.2,
+   "monitor": 0.17586557661992633,
+   "price_ratio": 0.010469881917285342,
+   "pde": 2.059932555032917e-05,
+   "boundary": 1.0579233359480837e-06,
+   "zero_variance": 2.2407847524735007e-06,
+   "variance_cap": 4.0932905606601e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 2800,
+   "seconds": 3215.6,
+   "monitor": 0.17560218707297912,
+   "price_ratio": 0.010339398696486616,
+   "pde": 2.031520191085586e-05,
+   "boundary": 1.0213252283835896e-06,
+   "zero_variance": 2.1789029814266803e-06,
+   "variance_cap": 3.969367352912141e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 2850,
+   "seconds": 3270.6,
+   "monitor": 0.17640877155681003,
+   "price_ratio": 0.009969058726005352,
+   "pde": 1.9975968440487042e-05,
+   "boundary": 9.625326727961475e-07,
+   "zero_variance": 2.171752337585296e-06,
+   "variance_cap": 3.9175640934275234e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 2900,
+   "seconds": 3326.0,
+   "monitor": 0.17625883594758948,
+   "price_ratio": 0.009935722520960394,
+   "pde": 1.9611862647328515e-05,
+   "boundary": 9.838986087476917e-07,
+   "zero_variance": 2.1427685971705314e-06,
+   "variance_cap": 3.851080260136039e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 2950,
+   "seconds": 3384.7,
+   "monitor": 0.1750213284875901,
+   "price_ratio": 0.009955428231354788,
+   "pde": 1.9358113152054776e-05,
+   "boundary": 9.608358674228003e-07,
+   "zero_variance": 2.1033809510889085e-06,
+   "variance_cap": 3.7510444164618277e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 3000,
+   "seconds": 3442.5,
+   "monitor": 0.1751125456771766,
+   "price_ratio": 0.009743815779304147,
+   "pde": 1.90854219765722e-05,
+   "boundary": 8.931211367210246e-07,
+   "zero_variance": 2.088062215806523e-06,
+   "variance_cap": 3.670511184334974e-06
+  }
+ ],
+ "stopped_early": null
+}

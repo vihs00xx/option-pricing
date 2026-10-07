@@ -1,0 +1,76 @@
+{
+  "family": "deeponet",
+  "defaults": {
+    "model": {"layout": "reduced", "output": "plain", "width": 64, "depth": 4, "rank": 64},
+    "loss": {"price": 1.0},
+    "sampling": {"focus": 0.7, "tau_power": 1.0, "v_power": 1.0, "weight": "none"},
+    "data_contracts": 32768,
+    "batch": {"data": 1024, "collocation": 2048, "boundary": 256, "zero_variance": 256, "variance_cap": 128},
+    "optimizer": {"adam_steps": 15000, "learning_rate": 0.002, "final_learning_rate": 2e-05, "check_every": 500,
+                  "lbfgs_iterations": 0}
+  },
+  "levels": {
+    "D0_vanilla": {
+      "technique": "Textbook DeepONet: branch on (r, q, kappa, theta, xi, rho) plus a put flag, trunk on (S/K, v0, tau); price labels from the reference; Adam",
+      "model": {"layout": "raw"}
+    },
+    "D1_reduced": {
+      "technique": "Exact reduction: branch on (kappa, theta, xi, rho), trunk on (x, v, tau); put-call parity"
+    },
+    "D2_hard_payoff": {
+      "technique": "Black-Scholes at the expected average variance as the base: c = BS + tau <branch, trunk(x, v, sqrt(tau))>",
+      "base": "D1_reduced",
+      "model": {"output": "bs"}
+    },
+    "D3_differential": {
+      "technique": "Differential (Sobolev) training: add the 10 derivative labels c_x, c_v, c_tau, c_kappa, c_theta, c_xi, c_rho, c_xx, c_xv, c_vv",
+      "base": "D2_hard_payoff",
+      "loss": {"derivatives": 1.0}
+    },
+    "D4_physics": {
+      "technique": "Physics-informed DeepONet: PDE residual on unlabelled collocation over the computational box (tau from 0, v to v_hi = 3 packed near 0, sqrt(v + 0.01) in the trunk), the degenerate equation on v = 0, c_v = 0 at v_hi and the far x boundary",
+      "base": "D3_differential",
+      "computational_domain": {"v": [0.0, 3.0]},
+      "model": {"v_input": "sqrt"},
+      "variance_cap_condition": "zero_slope",
+      "loss": {"pde": 1.0, "boundary": 1.0, "zero_variance": 1.0, "variance_cap": 1.0},
+      "sampling": {"weight": "time", "tau_power": 2.0, "v_power": 2.0}
+    },
+    "D5_short_maturity": {
+      "technique": "Short maturities: 25% of the labelled contracts and of the collocation drawn with tau in 0.005 to 0.05",
+      "base": "D4_physics",
+      "data_short_share": 0.25,
+      "sampling": {"short_share": 0.25, "short_tau": [0.005, 0.05]}
+    },
+    "D6_lbfgs": {
+      "technique": "Quasi-Newton polish: full-batch L-BFGS warm-started from D5 on 4,096 labelled contracts and 4,096 collocation points",
+      "base": "D5_short_maturity",
+      "warm_start": "D5_short_maturity",
+      "optimizer": {"adam_steps": 0, "lbfgs_iterations": 1000, "lbfgs_chunk": 50, "lbfgs_history": 50,
+                    "lbfgs_batch": {"data": 4096, "collocation": 4096, "boundary": 512, "zero_variance": 512, "variance_cap": 256}}
+    },
+    "D7_scale_up": {
+      "technique": "Scale up: width and rank 128 and 131,072 labelled contracts from a fresh start, then the L-BFGS stage of D6",
+      "base": "D5_short_maturity",
+      "cap": "scale_up",
+      "model": {"width": 128, "rank": 128},
+      "data_contracts": 131072,
+      "optimizer": {"adam_steps": 15000, "lbfgs_iterations": 500, "lbfgs_chunk": 50, "lbfgs_history": 50,
+                    "lbfgs_batch": {"data": 4096, "collocation": 4096, "boundary": 512, "zero_variance": 512, "variance_cap": 256}}
+    },
+    "D8_envelope": {
+      "cap": "scale_up",
+      "technique": "Enveloped correction as an implied-volatility output: c = BS(x, sqrt(w tau) e^N), whose first-order correction fades like the time value near expiry and away from the strike, with a drift split N = <branch(xi, rho), trunk_1> + (tau / tau_max) <branch(kappa, theta, xi, rho), trunk_2> so that kappa and theta drop out as tau -> 0 (the implied-volatility output without the split is reported as a variant); trained from a fresh start through the Adam and L-BFGS stages",
+      "base": "D6_lbfgs",
+      "warm_start": null,
+      "model": {"output": "bs_vol", "drift_split": true},
+      "optimizer": {"adam_steps": 15000}
+    },
+    "D9_ensemble": {
+      "technique": "Ensemble: average of four independently seeded D8 trainings (seeds 0-3); Greeks are member averages",
+      "base": "D8_envelope",
+      "members_of": "D8_envelope",
+      "seeds": [0, 1, 2, 3]
+    }
+  }
+}

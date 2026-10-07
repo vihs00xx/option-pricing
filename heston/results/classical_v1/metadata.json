@@ -1,0 +1,29 @@
+{
+ "generated": "2026-10-07T11:46:51+00:00",
+ "git_head": "7040c9fe4b293172a598ae581a42681d4be5389d",
+ "environment": {
+  "python": "3.13.3",
+  "numpy": "2.1.0",
+  "scipy": "1.15.3",
+  "torch": "2.8.0+cpu",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel"
+ },
+ "files_sha256": {
+  "benchmark.csv": "1094fa992d5f9b396aa22c1ce48b84cbabe1f8e65bd94b3a5646e1b7b113da5f",
+  "benchmark_by_split.csv": "b098b6e7a276ffc663c7d96a2ecc2983d429e734efe0d11748425d5e71b64c45",
+  "report.md": "0124a8d68cc0f8086b4f4a1ebd0dda19cbb6e632b4ec509e31331fd948b7f88e",
+  "settings.json": "5672dfc594cac410111abe508942d33ee5ddbf2bb60f39429876de94599f4c52",
+  "time_step_bias.csv": "8d03cf27ef6bc3d0031aa42d6c6358dfc6ad1b15038354bc38f242dc524b161a",
+  "timing.json": "07e036436e812b4f499b80e15f9022e86550937c17bb711b1a6ebb40aee9a068",
+  "values.npz": "8f74ba4f7f43f2a8a785f952cebe6b8325732dffef493375c467e2f299d36fdf"
+ },
+ "sources_sha256": {
+  "experiments/classical/benchmark.py": "5de7d6c1e0a6de4d18dde97f6ebe5b04d0e6e42cb510233bf4350c08057389a4",
+  "experiments/classical/timing.py": "f4494ac71dcc02cd22892c6e23f750bb091c75088fe39313468216c4275ca5cc",
+  "experiments/classical/make_report.py": "287df685e5cf71a9617962c064373bd4b9aa68a619a5a475a4076db944971d75",
+  "src/heston/cos.py": "c62d79cedb4f1cc8bc390106d5a13544706364d8dfe24f8bda6fcf59572cb517",
+  "src/heston/adi.py": "2b2f4631596a08f24badf8ce2696e361e332a4674b0b7a534c491fcc499cebec",
+  "src/heston/monte_carlo.py": "b59a3b1435fef921d431041d2655723e78e0a8c5e3b75ea693133bcbb219fad4"
+ }
+}

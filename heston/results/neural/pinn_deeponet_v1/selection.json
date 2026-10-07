@@ -1,0 +1,130 @@
+{
+ "frozen_at": "2026-10-07T11:06:26+00:00",
+ "selection_rule": "Within each family the level with the lowest selection score is selected. Selection score = mean of the validation score and the short-maturity validation score, each the mean over price and the 11 sensitivities of RMSE / RMS(reference) on 4,096 contracts (training domain; tau 0.005 to 0.05). A level within 1% of the best yields to the earlier level.",
+ "selected": {
+  "pinn": {
+   "level": "P10_anchored",
+   "selection_score": 0.12243436710407525,
+   "validation_score": 0.10095407206554519,
+   "short_validation_score": 0.14391466214260532,
+   "checkpoint": "results/neural/pinn_deeponet_v1/ladder/P10_anchored_seed0.pt",
+   "checkpoint_sha256": "d8cb72f6aab4de14e5afe469ed51bbdcd4b4882fcf996b0578075108902b320f"
+  },
+  "deeponet": {
+   "level": "D9_ensemble",
+   "selection_score": 0.06018720445074541,
+   "validation_score": 0.04521066260192225,
+   "short_validation_score": 0.07516374629956857,
+   "checkpoint": "results/neural/pinn_deeponet_v1/ladder/D9_ensemble_seed0.pt",
+   "checkpoint_sha256": "232502a069d2aaa7ee264a1e4d464281dde002117a0ef30b192838a1dd22676f"
+  }
+ },
+ "ladder": {
+  "P0_vanilla": {
+   "checkpoint": "results/neural/pinn_deeponet_v1/ladder/P0_vanilla_seed0.pt",
+   "checkpoint_sha256": "4d4c5c7330741108912ec374ab5fec31d115d6cd549d80a2a5c9703a45531d2c"
+  },
+  "P1_reduced": {
+   "checkpoint": "results/neural/pinn_deeponet_v1/ladder/P1_reduced_seed0.pt",
+   "checkpoint_sha256": "77f15ecc82b0aa853216684ef6c5004e7850a7dcef472c9bae9e065461491331"
+  },
+  "P2_hard_payoff": {
+   "checkpoint": "results/neural/pinn_deeponet_v1/ladder/P2_hard_payoff_seed0.pt",
+   "checkpoint_sha256": "a3dc1293e3837dbfdfb9fc427fc5ca1cbe50e01b25b6591be930145d59bd38c4"
+  },
+  "P3_time_balanced": {
+   "checkpoint": "results/neural/pinn_deeponet_v1/ladder/P3_time_balanced_seed0.pt",
+   "checkpoint_sha256": "9971a7884a7d5e6e497e092baf3de89e8127196b6945db2c518df3b4ebc684c1"
+  },
+  "P4_variance_boundary": {
+   "checkpoint": "results/neural/pinn_deeponet_v1/ladder/P4_variance_boundary_seed0.pt",
+   "checkpoint_sha256": "e47503058b4796b20b20a1917deee86e194c823af238be3e702c6f453005d0c9"
+  },
+  "P5_adaptive": {
+   "checkpoint": "results/neural/pinn_deeponet_v1/ladder/P5_adaptive_seed0.pt",
+   "checkpoint_sha256": "41308bcdf1ae87f88f449d139339e6aefb41b0f0a004a3122ad1452029b67891"
+  },
+  "P6_lbfgs": {
+   "checkpoint": "results/neural/pinn_deeponet_v1/ladder/P6_lbfgs_seed0.pt",
+   "checkpoint_sha256": "4b49b5f8ba5e751eebe9f6e3266fbc505f43840432bd4d611159a055275d0a7b"
+  },
+  "P7_nncg": {
+   "checkpoint": "results/neural/pinn_deeponet_v1/ladder/P7_nncg_seed0.pt",
+   "checkpoint_sha256": "32089f87e5dab67aa458548c0d58b036d4ec1e48badb1ca8c396fbc8772a379e"
+  },
+  "P8_scale_up": {
+   "checkpoint": "results/neural/pinn_deeponet_v1/ladder/P8_scale_up_seed0.pt",
+   "checkpoint_sha256": "b705d61b191857ae3a82335b831909b7fd079c88c513f956a582c5faff7b03df"
+  },
+  "P9_envelope": {
+   "checkpoint": "results/neural/pinn_deeponet_v1/ladder/P9_envelope_seed0.pt",
+   "checkpoint_sha256": "7773b1e2721e84261194d3ab3fc10de011b983fef4e3fff5573f1808db7f82b8"
+  },
+  "P10_anchored": {
+   "checkpoint": "results/neural/pinn_deeponet_v1/ladder/P10_anchored_seed0.pt",
+   "checkpoint_sha256": "d8cb72f6aab4de14e5afe469ed51bbdcd4b4882fcf996b0578075108902b320f"
+  },
+  "D0_vanilla": {
+   "checkpoint": "results/neural/pinn_deeponet_v1/ladder/D0_vanilla_seed0.pt",
+   "checkpoint_sha256": "f0bf70a389b4d40b18e6fb1a0d8e5898245f67defcda648e3d6c12b66ca14264"
+  },
+  "D1_reduced": {
+   "checkpoint": "results/neural/pinn_deeponet_v1/ladder/D1_reduced_seed0.pt",
+   "checkpoint_sha256": "51eb0e6df761c5484091a5697c23adf38a805219df33bf875fc13f41798d4275"
+  },
+  "D2_hard_payoff": {
+   "checkpoint": "results/neural/pinn_deeponet_v1/ladder/D2_hard_payoff_seed0.pt",
+   "checkpoint_sha256": "4ed738f3ec0cf6fbfe43e934a11e84b3c492ee81ea92188aa362ac4f2182b26e"
+  },
+  "D3_differential": {
+   "checkpoint": "results/neural/pinn_deeponet_v1/ladder/D3_differential_seed0.pt",
+   "checkpoint_sha256": "d4d6d4359387a559d9cf48c0a1eee1587a05e5d92494a4809b76638ce429f092"
+  },
+  "D4_physics": {
+   "checkpoint": "results/neural/pinn_deeponet_v1/ladder/D4_physics_seed0.pt",
+   "checkpoint_sha256": "64007520f82693c939bbecc21e5a40ea259cad686e03ddf7ccb81b3b2927a0b2"
+  },
+  "D5_short_maturity": {
+   "checkpoint": "results/neural/pinn_deeponet_v1/ladder/D5_short_maturity_seed0.pt",
+   "checkpoint_sha256": "d2944a1c10e280495d84e86233169371f54d6d20504cab4f1ca7a1a4f4c7ac08"
+  },
+  "D6_lbfgs": {
+   "checkpoint": "results/neural/pinn_deeponet_v1/ladder/D6_lbfgs_seed0.pt",
+   "checkpoint_sha256": "71df281de7773140dce7c2bcb1a3fa799d8efe77d57b8985cc21d8c8692f4892"
+  },
+  "D7_scale_up": {
+   "checkpoint": "results/neural/pinn_deeponet_v1/ladder/D7_scale_up_seed0.pt",
+   "checkpoint_sha256": "dfb280e1de1306b725487f303047aaaa0871586806abd2056232f02778991d11"
+  },
+  "D8_envelope": {
+   "checkpoint": "results/neural/pinn_deeponet_v1/ladder/D8_envelope_seed0.pt",
+   "checkpoint_sha256": "8d771dde0fef8a6ab6a93cd8696ae6259b20adba3e56bb120d4a133b35d4d4f6"
+  },
+  "D9_ensemble": {
+   "checkpoint": "results/neural/pinn_deeponet_v1/ladder/D9_ensemble_seed0.pt",
+   "checkpoint_sha256": "232502a069d2aaa7ee264a1e4d464281dde002117a0ef30b192838a1dd22676f"
+  }
+ },
+ "settings_sha256": {
+  "experiments/config/neural/study.json": "4044a21c8e5a18a0b6dd2ea6c585799b02d70d847af325847ca4951249b0ceb2",
+  "experiments/config/neural/pinn_ladder.json": "9c9ddbc96ef14be51618a1cb192045d5ae3c54aba7a62186359712f14314f37e",
+  "experiments/config/neural/deeponet_ladder.json": "21681e15c518a16e6610e581090be522ee0044329c7c51cd8815fcbe93c83665",
+  "experiments/config/domain.json": "e523d51f6283eb05ab83d98c298464fd45a39eaad7e5cf6303ff4cc288d51310"
+ },
+ "evaluation_sources_sha256": {
+  "experiments/neural/evaluate_test.py": "df02b129b89fc0f902fe97aa9446fa4fb254a0a091c1cc4065435421284adb93",
+  "experiments/neural/common.py": "78eed441fe8df8ff0910103b596812c31c12b09c91e5b045fd662cd8cdf95089",
+  "experiments/records.py": "4b0412d9de5a57deaf5c1d162c8dfc736df3593ab241f6d6961ddeb00b8baa8f",
+  "experiments/test_set/load.py": "fb0bb32b177654d5b8a4b54333f6c85f86a7bc37fdf9bb15d2166bbef2624843",
+  "src/neural/coordinates.py": "195a21d3346ca9f198dba31b2399fd2cb2e4f68a41c76cf7af932a9fe9db50cb",
+  "src/neural/networks.py": "5ef32440ba16bfa95f8b28958560a087b4aaa5ff3e2de5111db14e8c9b46305d",
+  "src/neural/pinn.py": "4266db7d1c63bd14f3068bd57ded3b8a76650da99ff5d7fc2104af14b6ac3df1",
+  "src/neural/deeponet.py": "c11243f34ed28610bcf2cb8e727434992aaf78a80b3f5ecc88aac405d9b9381d",
+  "src/neural/reference.py": "1afb66b1b1d0d9c3b60f82abd1ab7405f728efac3e8b59584f34fc85ca755acf"
+ },
+ "test_set": {
+  "folder": "results/test_set_v1",
+  "protocol_sha256": "956e8e0725874dffe910490196e856ec8e5a307ed85bc16150083fc6a9e89754"
+ },
+ "evaluation_plan": "Score the selected PINN and DeepONet once on every case of every split of heston_test_v1, with the Black-Scholes base and every ladder level alongside for context. Report RMSE, median and largest absolute error for the price and all 11 sensitivities, by split. No case is dropped."
+}

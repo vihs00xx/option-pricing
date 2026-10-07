@@ -1,0 +1,24 @@
+{
+  "study_id": "pinn_deeponet_v1",
+  "purpose": "PINN and DeepONet pricers for one-stock Heston European options with the four Heston parameters as inputs, each built as a ladder: every level adds one technique to the configuration below it, and every level is scored on the same validation panels.",
+  "domain": "experiments/config/domain.json",
+  "test_set": "results/test_set_v1",
+  "seeds": {
+    "training": 0,
+    "data": 8001,
+    "anchors": 8002,
+    "monitor": 8201,
+    "validation": 8301,
+    "short_validation": 8302
+  },
+  "monitor_contracts": 512,
+  "validation_contracts": 4096,
+  "short_validation_tau": [0.005, 0.05],
+  "selection_rule": "Within each family the level with the lowest selection score is selected. Selection score = mean of the validation score and the short-maturity validation score, each the mean over price and the 11 sensitivities of RMSE / RMS(reference) on 4,096 contracts (training domain; tau 0.005 to 0.05). A level within 1% of the best yields to the earlier level.",
+  "wall_clock_cap_seconds": {"default": 14400, "scale_up": 21600, "ensemble_member": 21600, "note": "raised from 7200 / 14400 / 14400 after P0-P10 and D0-D3 had run, when the CPU was shared by 3 levels plus pilots; levels started before the change ran with the old caps"},
+  "computational_domain": {
+    "x": [-3.0, 2.5],
+    "v": [0.0, 1.0],
+    "note": "Spatial extent of the PDE problem in x = log forward moneyness and v, like a grid solver's far boundary. kappa, theta, xi, rho and the maturity cap are the training domain; tau starts at 0 because the PDE starts at the payoff. P4 and the physics-informed DeepONet levels extend v to v_hi = 3 with c_v = 0 there, pack collocation near v = 0 and feed sqrt(v + 0.01). The ADI v_max = 15.28 (Phase 0 check 7) is not used for the networks: with the ADI solver at a fixed fine grid, c_v = 0 at v_hi = 3 moves prices at v0 <= 0.49 by at most 4e-7 against the full domain (results/neural/variance_cap_study)."
+  }
+}

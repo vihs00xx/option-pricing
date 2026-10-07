@@ -1,0 +1,92 @@
+{
+  "family": "pinn",
+  "defaults": {
+    "model": {"layout": "reduced", "output": "plain", "width": 64, "depth": 4},
+    "loss": {"pde": 1.0, "terminal": 1.0, "boundary": 1.0},
+    "sampling": {"focus": 0.7, "tau_power": 1.0, "v_power": 1.0, "weight": "none"},
+    "batch": {"collocation": 4096, "terminal": 1024, "boundary": 512, "zero_variance": 512, "variance_cap": 256},
+    "optimizer": {"adam_steps": 15000, "learning_rate": 0.002, "final_learning_rate": 2e-05, "check_every": 500,
+                  "lbfgs_iterations": 0}
+  },
+  "levels": {
+    "P0_vanilla": {
+      "technique": "Textbook PINN: MLP on the 9 raw contract inputs plus a put flag; Heston PDE residual in (S, v, tau) on the training box; soft payoff loss; Adam",
+      "model": {"layout": "raw"},
+      "loss": {"pde": 1.0, "terminal": 1.0, "boundary": 0.0}
+    },
+    "P1_reduced": {
+      "technique": "Exact reduction to (x, v, tau) and (kappa, theta, xi, rho); driftless reduced PDE; put-call parity; far x boundary at the Black-Scholes base"
+    },
+    "P2_hard_payoff": {
+      "technique": "Hard terminal condition: c = BS(x, w tau) + tau N(x, v, sqrt(tau), kappa, theta, xi, rho) with w the expected average variance, so the payoff holds exactly and the network learns the correction",
+      "base": "P1_reduced",
+      "model": {"output": "bs"},
+      "loss": {"terminal": 0.0}
+    },
+    "P3_time_balanced": {
+      "technique": "Loss balancing: residual weighted by tau / tau_max against the 1/sqrt(tau) blow-up at the strike, with collocation tau = tau_max u^2",
+      "base": "P2_hard_payoff",
+      "sampling": {"weight": "time", "tau_power": 2.0}
+    },
+    "P4_variance_boundary": {
+      "technique": "Variance boundary (new): the degenerate PDE c_tau = kappa theta c_v as a residual on v = 0; v extended to v_hi = 3 with c_v = 0 there (moves interior prices by at most 4e-7, results/neural/variance_cap_study); collocation packed near v = 0 (v = v_hi u^2) and sqrt(v + 0.01) as the network input",
+      "base": "P3_time_balanced",
+      "computational_domain": {"v": [0.0, 3.0]},
+      "model": {"v_input": "sqrt"},
+      "variance_cap_condition": "zero_slope",
+      "sampling": {"v_power": 2.0},
+      "loss": {"zero_variance": 1.0, "variance_cap": 1.0}
+    },
+    "P5_adaptive": {
+      "technique": "Residual-based adaptive sampling (RAD): every 1000 steps keep 32,768 of 131,072 candidates drawn with probability proportional to |residual| / mean + 1",
+      "base": "P4_variance_boundary",
+      "sampling": {"rad": {"size": 32768, "pool_factor": 4, "k": 1.0, "c": 1.0, "every": 1000}}
+    },
+    "P6_lbfgs": {
+      "technique": "Quasi-Newton polish: full-batch L-BFGS (strong Wolfe line search) warm-started from P5 on 16,384 RAD-selected collocation points",
+      "base": "P5_adaptive",
+      "warm_start": "P5_adaptive",
+      "optimizer": {"adam_steps": 0, "lbfgs_iterations": 3000, "lbfgs_chunk": 50, "lbfgs_history": 50,
+                    "lbfgs_batch": {"collocation": 16384, "boundary": 2048, "zero_variance": 2048, "variance_cap": 1024}}
+    },
+    "P7_nncg": {
+      "technique": "Second-order refinement: Nystrom-preconditioned Newton-CG (Rathore et al., 2024) warm-started from P6",
+      "base": "P6_lbfgs",
+      "warm_start": "P6_lbfgs",
+      "optimizer": {"lbfgs_iterations": 0, "nncg_steps": 40, "nncg_check_every": 5, "nncg_rank": 32, "nncg_cg_steps": 30,
+                    "nncg_batch": {"collocation": 4096, "boundary": 512, "zero_variance": 512, "variance_cap": 256}}
+    },
+    "P8_scale_up": {
+      "technique": "Scale up: width 128 and 25,000 Adam steps from a fresh start, then 1,000 L-BFGS iterations and 20 Newton-CG steps",
+      "base": "P5_adaptive",
+      "cap": "scale_up",
+      "model": {"width": 128},
+      "optimizer": {"adam_steps": 25000, "lbfgs_iterations": 1000, "lbfgs_chunk": 50, "lbfgs_history": 50,
+                    "lbfgs_batch": {"collocation": 16384, "boundary": 2048, "zero_variance": 2048, "variance_cap": 1024},
+                    "nncg_steps": 20, "nncg_check_every": 5, "nncg_rank": 32, "nncg_cg_steps": 30,
+                    "nncg_batch": {"collocation": 4096, "boundary": 512, "zero_variance": 512, "variance_cap": 256}}
+    },
+    "P9_envelope": {
+      "cap": "scale_up",
+      "technique": "Enveloped correction as an implied-volatility output: c = BS(x, sqrt(w tau) e^N), whose first-order correction sqrt(w tau) phi(d_2) N fades like the time value near expiry and away from the strike, with kappa and theta fed as kappa tau and kappa theta tau so that their effect vanishes as tau -> 0 (two earlier variants are reported: the additive tau phi(d_2) N envelope, and the implied-volatility output with plain kappa, theta inputs); trained from a fresh start through the Adam, L-BFGS and Newton-CG stages",
+      "base": "P7_nncg",
+      "warm_start": null,
+      "model": {"output": "bs_vol", "drift_inputs": "time_scaled"},
+      "optimizer": {"adam_steps": 15000, "lbfgs_iterations": 3000, "lbfgs_chunk": 50, "lbfgs_history": 50,
+                    "lbfgs_batch": {"collocation": 16384, "boundary": 2048, "zero_variance": 2048, "variance_cap": 1024}}
+    },
+    "P10_anchored": {
+      "cap": "scale_up",
+      "technique": "Anchored (hybrid) PINN: fine-tune P9 with the PDE residual plus reference prices at 4,096 anchor contracts of the training domain (their own seed), then L-BFGS",
+      "base": "P9_envelope",
+      "warm_start": "P9_envelope",
+      "loss": {"price": 1.0},
+      "data_contracts": 4096,
+      "data_seed": "anchors",
+      "batch": {"data": 1024},
+      "optimizer": {"adam_steps": 5000, "learning_rate": 0.0002, "final_learning_rate": 2e-06, "lbfgs_iterations": 1000,
+                    "lbfgs_batch": {"collocation": 16384, "boundary": 2048, "zero_variance": 2048, "variance_cap": 1024, "data": 4096},
+                    "nncg_steps": 0}
+    }
+  }
+}

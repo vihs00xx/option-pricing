@@ -1,0 +1,52 @@
+{
+ "networks": {
+  "pinn": {
+   "level": "P10_anchored",
+   "chain": [
+    "P10_anchored",
+    "P9_envelope"
+   ],
+   "wall_seconds": 9940.36104680004,
+   "scaled_seconds": 3424.837971022764,
+   "cpu_seconds": 20996.65625,
+   "label_seconds": 1.7999146999791265,
+   "total_seconds": 3426.6378857227432,
+   "seconds_per_contract": {
+    "batch": 1.2685888677310686e-05,
+    "single": 0.0050650339998537675
+   }
+  },
+  "deeponet": {
+   "level": "D9_ensemble",
+   "chain": [
+    "D9_ensemble"
+   ],
+   "wall_seconds": 60484.08942169987,
+   "scaled_seconds": 21266.62577921411,
+   "cpu_seconds": NaN,
+   "label_seconds": 14.739594899991062,
+   "total_seconds": 21281.365374114102,
+   "seconds_per_contract": {
+    "batch": 0.00024460214844168604,
+    "single": 0.029226191999623553
+   }
+  }
+ },
+ "load_factor": {
+  "pinn": {
+   "level": "P4_variance_boundary",
+   "loaded_seconds_per_step": 0.30823833188666416,
+   "alone_seconds_per_step": 0.1062,
+   "factor": 0.3445385891818561,
+   "pilot_steps": 300
+  },
+  "deeponet": {
+   "level": "D4_physics",
+   "loaded_seconds_per_step": 0.5699546155533365,
+   "alone_seconds_per_step": 0.2004,
+   "factor": 0.3516069429588583,
+   "pilot_steps": 300
+  }
+ },
+ "note": "scaled_seconds = ladder wall-clock x load factor; label_seconds = torch-twin labelling of the training data"
+}
