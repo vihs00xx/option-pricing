@@ -1,0 +1,25 @@
+{
+  "version": "heston_domain_v1",
+  "model": "dS = (r-q) S dt + sqrt(v) S dW1, dv = kappa (theta - v) dt + xi sqrt(v) dW2, d<W1,W2> = rho dt",
+  "units": "prices and Greeks per unit strike (K = 1, S = moneyness S/K); time in years; vega and volga are d/dv0 and d2/dv0^2",
+  "feller_imposed": false,
+  "ranges": {
+    "moneyness": [0.7, 1.3],
+    "tau": [0.05, 2.0],
+    "tau_short": [0.005, 0.05],
+    "r": [-0.02, 0.10],
+    "q": [0.0, 0.06],
+    "v0": [0.01, 0.36],
+    "theta": [0.01, 0.36],
+    "kappa": [0.5, 5.0],
+    "xi": [0.1, 1.0],
+    "rho": [-0.9, 0.3]
+  },
+  "option_types": ["call", "put"],
+  "development_sample": {
+    "seed": 20261006,
+    "n_domain": 4096,
+    "n_short": 512,
+    "sampling": "independent uniform draws in each coordinate, call or put with probability 1/2; the short split draws tau from tau_short and everything else from ranges"
+  }
+}

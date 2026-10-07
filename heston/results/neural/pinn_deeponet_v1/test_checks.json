@@ -1,0 +1,278 @@
+{
+ "seal_verified": "956e8e0725874dffe910490196e856ec8e5a307ed85bc16150083fc6a9e89754",
+ "opened_at": "2026-10-07T11:41:17+00:00",
+ "no_arbitrage": {
+  "bs_base": {
+   "price_below_intrinsic": 0,
+   "delta_out_of_bounds": 0,
+   "negative_gamma": 0,
+   "negative_vega": 0,
+   "cases": 252
+  },
+  "pinn_selected": {
+   "price_below_intrinsic": 0,
+   "delta_out_of_bounds": 0,
+   "negative_gamma": 0,
+   "negative_vega": 0,
+   "cases": 252
+  },
+  "deeponet_selected": {
+   "price_below_intrinsic": 0,
+   "delta_out_of_bounds": 0,
+   "negative_gamma": 0,
+   "negative_vega": 0,
+   "cases": 252
+  },
+  "P0_vanilla": {
+   "price_below_intrinsic": 26,
+   "delta_out_of_bounds": 14,
+   "negative_gamma": 18,
+   "negative_vega": 11,
+   "cases": 252
+  },
+  "P1_reduced": {
+   "price_below_intrinsic": 16,
+   "delta_out_of_bounds": 0,
+   "negative_gamma": 0,
+   "negative_vega": 6,
+   "cases": 252
+  },
+  "P2_hard_payoff": {
+   "price_below_intrinsic": 6,
+   "delta_out_of_bounds": 3,
+   "negative_gamma": 1,
+   "negative_vega": 3,
+   "cases": 252
+  },
+  "P3_time_balanced": {
+   "price_below_intrinsic": 5,
+   "delta_out_of_bounds": 2,
+   "negative_gamma": 1,
+   "negative_vega": 5,
+   "cases": 252
+  },
+  "P4_variance_boundary": {
+   "price_below_intrinsic": 0,
+   "delta_out_of_bounds": 2,
+   "negative_gamma": 1,
+   "negative_vega": 1,
+   "cases": 252
+  },
+  "P5_adaptive": {
+   "price_below_intrinsic": 1,
+   "delta_out_of_bounds": 2,
+   "negative_gamma": 1,
+   "negative_vega": 1,
+   "cases": 252
+  },
+  "P6_lbfgs": {
+   "price_below_intrinsic": 6,
+   "delta_out_of_bounds": 3,
+   "negative_gamma": 1,
+   "negative_vega": 3,
+   "cases": 252
+  },
+  "P7_nncg": {
+   "price_below_intrinsic": 5,
+   "delta_out_of_bounds": 3,
+   "negative_gamma": 1,
+   "negative_vega": 4,
+   "cases": 252
+  },
+  "P8_scale_up": {
+   "price_below_intrinsic": 6,
+   "delta_out_of_bounds": 2,
+   "negative_gamma": 1,
+   "negative_vega": 3,
+   "cases": 252
+  },
+  "P9_envelope": {
+   "price_below_intrinsic": 0,
+   "delta_out_of_bounds": 0,
+   "negative_gamma": 0,
+   "negative_vega": 0,
+   "cases": 252
+  },
+  "D0_vanilla": {
+   "price_below_intrinsic": 19,
+   "delta_out_of_bounds": 1,
+   "negative_gamma": 26,
+   "negative_vega": 10,
+   "cases": 252
+  },
+  "D1_reduced": {
+   "price_below_intrinsic": 19,
+   "delta_out_of_bounds": 0,
+   "negative_gamma": 18,
+   "negative_vega": 3,
+   "cases": 252
+  },
+  "D2_hard_payoff": {
+   "price_below_intrinsic": 6,
+   "delta_out_of_bounds": 4,
+   "negative_gamma": 1,
+   "negative_vega": 5,
+   "cases": 252
+  },
+  "D3_differential": {
+   "price_below_intrinsic": 7,
+   "delta_out_of_bounds": 4,
+   "negative_gamma": 1,
+   "negative_vega": 4,
+   "cases": 252
+  },
+  "D4_physics": {
+   "price_below_intrinsic": 12,
+   "delta_out_of_bounds": 4,
+   "negative_gamma": 1,
+   "negative_vega": 1,
+   "cases": 252
+  },
+  "D5_short_maturity": {
+   "price_below_intrinsic": 7,
+   "delta_out_of_bounds": 3,
+   "negative_gamma": 1,
+   "negative_vega": 3,
+   "cases": 252
+  },
+  "D6_lbfgs": {
+   "price_below_intrinsic": 7,
+   "delta_out_of_bounds": 4,
+   "negative_gamma": 2,
+   "negative_vega": 4,
+   "cases": 252
+  },
+  "D7_scale_up": {
+   "price_below_intrinsic": 6,
+   "delta_out_of_bounds": 5,
+   "negative_gamma": 3,
+   "negative_vega": 4,
+   "cases": 252
+  },
+  "D8_envelope": {
+   "price_below_intrinsic": 0,
+   "delta_out_of_bounds": 0,
+   "negative_gamma": 0,
+   "negative_vega": 0,
+   "cases": 252
+  },
+  "pinn_selected_validation": {
+   "price_below_intrinsic": 0,
+   "delta_out_of_bounds": 0,
+   "negative_gamma": 0,
+   "negative_vega": 0,
+   "cases": 4096
+  },
+  "deeponet_selected_validation": {
+   "price_below_intrinsic": 0,
+   "delta_out_of_bounds": 0,
+   "negative_gamma": 0,
+   "negative_vega": 0,
+   "cases": 4096
+  },
+  "pinn_selected_short_validation": {
+   "price_below_intrinsic": 0,
+   "delta_out_of_bounds": 0,
+   "negative_gamma": 0,
+   "negative_vega": 0,
+   "cases": 4096
+  },
+  "deeponet_selected_short_validation": {
+   "price_below_intrinsic": 0,
+   "delta_out_of_bounds": 0,
+   "negative_gamma": 0,
+   "negative_vega": 0,
+   "cases": 4096
+  }
+ },
+ "monte_carlo_coverage_95": {
+  "mc_100000_dt32": {
+   "reference": {
+    "price": 0.9563492063492064,
+    "delta": 0.9484126984126984,
+    "gamma": 0.9404761904761905,
+    "vega": 0.9484126984126984,
+    "vanna": 0.9365079365079365,
+    "volga": 0.9285714285714286,
+    "theta_cal": 0.9484126984126984,
+    "rho_rate": 0.9365079365079365,
+    "d_kappa": 0.9007936507936508,
+    "d_theta": 0.9404761904761905,
+    "d_xi": 0.9484126984126984,
+    "d_rho": 0.9404761904761905
+   },
+   "pinn_selected": {
+    "price": 0.7301587301587301,
+    "delta": 0.6309523809523809,
+    "gamma": 0.7698412698412699,
+    "vega": 0.6190476190476191,
+    "vanna": 0.7658730158730159,
+    "volga": 0.8015873015873016,
+    "theta_cal": 0.6547619047619048,
+    "rho_rate": 0.5357142857142857,
+    "d_kappa": 0.3968253968253968,
+    "d_theta": 0.6071428571428571,
+    "d_xi": 0.4126984126984127,
+    "d_rho": 0.6626984126984127
+   },
+   "deeponet_selected": {
+    "price": 0.7777777777777778,
+    "delta": 0.75,
+    "gamma": 0.7777777777777778,
+    "vega": 0.8015873015873016,
+    "vanna": 0.8531746031746031,
+    "volga": 0.8611111111111112,
+    "theta_cal": 0.7261904761904762,
+    "rho_rate": 0.6706349206349206,
+    "d_kappa": 0.4880952380952381,
+    "d_theta": 0.6388888888888888,
+    "d_xi": 0.746031746031746,
+    "d_rho": 0.8214285714285714
+   }
+  },
+  "mc_1000000_dt32": {
+   "reference": {
+    "price": 0.9682539682539683,
+    "delta": 0.9246031746031746,
+    "gamma": 0.9126984126984127,
+    "vega": 0.9484126984126984,
+    "vanna": 0.9365079365079365,
+    "volga": 0.9484126984126984,
+    "theta_cal": 0.9484126984126984,
+    "rho_rate": 0.9285714285714286,
+    "d_kappa": 0.8333333333333334,
+    "d_theta": 0.9126984126984127,
+    "d_xi": 0.9285714285714286,
+    "d_rho": 0.9206349206349206
+   },
+   "pinn_selected": {
+    "price": 0.5515873015873016,
+    "delta": 0.3373015873015873,
+    "gamma": 0.5436507936507936,
+    "vega": 0.29365079365079366,
+    "vanna": 0.5714285714285714,
+    "volga": 0.5396825396825397,
+    "theta_cal": 0.38095238095238093,
+    "rho_rate": 0.23809523809523808,
+    "d_kappa": 0.17063492063492064,
+    "d_theta": 0.29365079365079366,
+    "d_xi": 0.19047619047619047,
+    "d_rho": 0.38095238095238093
+   },
+   "deeponet_selected": {
+    "price": 0.48412698412698413,
+    "delta": 0.4801587301587302,
+    "gamma": 0.5714285714285714,
+    "vega": 0.49206349206349204,
+    "vanna": 0.7023809523809523,
+    "volga": 0.6626984126984127,
+    "theta_cal": 0.47619047619047616,
+    "rho_rate": 0.3611111111111111,
+    "d_kappa": 0.29365079365079366,
+    "d_theta": 0.36507936507936506,
+    "d_xi": 0.43253968253968256,
+    "d_rho": 0.7182539682539683
+   }
+  }
+ }
+}

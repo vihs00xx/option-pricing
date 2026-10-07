@@ -1,0 +1,179 @@
+{
+ "level": "D9_ensemble",
+ "family": "deeponet",
+ "seed": 0,
+ "technique": "Ensemble: average of four independently seeded D8 trainings (seeds 0-3); Greeks are member averages",
+ "settings": {
+  "model": {
+   "layout": "reduced",
+   "output": "bs_vol",
+   "width": 64,
+   "depth": 4,
+   "rank": 64,
+   "v_input": "sqrt",
+   "drift_split": true
+  },
+  "loss": {
+   "price": 1.0,
+   "derivatives": 1.0,
+   "pde": 1.0,
+   "boundary": 1.0,
+   "zero_variance": 1.0,
+   "variance_cap": 1.0
+  },
+  "sampling": {
+   "focus": 0.7,
+   "tau_power": 2.0,
+   "v_power": 2.0,
+   "weight": "time",
+   "short_share": 0.25,
+   "short_tau": [
+    0.005,
+    0.05
+   ]
+  },
+  "data_contracts": 32768,
+  "batch": {
+   "data": 1024,
+   "collocation": 2048,
+   "boundary": 256,
+   "zero_variance": 256,
+   "variance_cap": 128
+  },
+  "optimizer": {
+   "adam_steps": 15000,
+   "learning_rate": 0.002,
+   "final_learning_rate": 2e-05,
+   "check_every": 500,
+   "lbfgs_iterations": 1000,
+   "lbfgs_chunk": 50,
+   "lbfgs_history": 50,
+   "lbfgs_batch": {
+    "data": 4096,
+    "collocation": 4096,
+    "boundary": 512,
+    "zero_variance": 512,
+    "variance_cap": 256
+   }
+  },
+  "computational_domain": {
+   "x": [
+    -3.0,
+    2.5
+   ],
+   "v": [
+    0.0,
+    3.0
+   ],
+   "note": "Spatial extent of the PDE problem in x = log forward moneyness and v, like a grid solver's far boundary. kappa, theta, xi, rho and the maturity cap are the training domain; tau starts at 0 because the PDE starts at the payoff. P4 and the physics-informed DeepONet levels extend v to v_hi = 3 with c_v = 0 there, pack collocation near v = 0 and feed sqrt(v + 0.01). The ADI v_max = 15.28 (Phase 0 check 7) is not used for the networks: with the ADI solver at a fixed fine grid, c_v = 0 at v_hi = 3 moves prices at v0 <= 0.49 by at most 4e-7 against the full domain (results/neural/variance_cap_study)."
+  },
+  "family": "deeponet",
+  "technique": "Ensemble: average of four independently seeded D8 trainings (seeds 0-3); Greeks are member averages",
+  "variance_cap_condition": "zero_slope",
+  "data_short_share": 0.25,
+  "warm_start": null,
+  "members_of": "D8_envelope",
+  "seeds": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "cap": "default"
+ },
+ "members": {
+  "results/neural/pinn_deeponet_v1/ladder/D8_envelope_seed0.pt": "8d771dde0fef8a6ab6a93cd8696ae6259b20adba3e56bb120d4a133b35d4d4f6",
+  "results/neural/pinn_deeponet_v1/ladder/D8_envelope_seed1.pt": "c5be5fc388947731cee6ad3bb442230a54849aea3b14f0e5428e3f2e4eeaa1ba",
+  "results/neural/pinn_deeponet_v1/ladder/D8_envelope_seed2.pt": "9acdde8a6ac8326516a6b2144617c2b7078986968f0d7c5d78e509408e91867d",
+  "results/neural/pinn_deeponet_v1/ladder/D8_envelope_seed3.pt": "e24727d551bc2ccaae319c25edb5f9496889bfae4cb9a6d81cf01be8ee80ce32"
+ },
+ "parameters": 219396,
+ "scores": {
+  "validation": {
+   "score": 0.04521066260192225,
+   "ratios": {
+    "price": 0.0028946691841725382,
+    "delta": 0.005232320059222945,
+    "gamma": 0.04259639991763779,
+    "vega": 0.012924730591052213,
+    "vanna": 0.0979513561697456,
+    "volga": 0.21432014846560715,
+    "theta_cal": 0.011067446786588995,
+    "rho_rate": 0.0057018650540484285,
+    "d_kappa": 0.02726137632522617,
+    "d_theta": 0.01764946223094268,
+    "d_xi": 0.0424392925361621,
+    "d_rho": 0.06248888390266036
+   },
+   "rmse": {
+    "price": 0.0005797748352190774,
+    "delta": 0.0029209579830361543,
+    "gamma": 0.04963845133286671,
+    "vega": 0.002127194354755024,
+    "vanna": 0.0398254743818102,
+    "volga": 0.08492318635440141,
+    "theta_cal": 0.0009677662502824934,
+    "rho_rate": 0.0029624249971163742,
+    "d_kappa": 0.0002688665056591955,
+    "d_theta": 0.005453345651783693,
+    "d_xi": 0.0005750440398098061,
+    "d_rho": 0.0006845934292340856
+   },
+   "seconds": 0.6816530000069179
+  },
+  "short_validation": {
+   "score": 0.07516374629956857,
+   "ratios": {
+    "price": 0.0005096946503631046,
+    "delta": 0.00195372567009075,
+    "gamma": 0.0341182691963735,
+    "vega": 0.019681431818407473,
+    "vanna": 0.11506693630851772,
+    "volga": 0.14968217551043886,
+    "theta_cal": 0.00929870609018639,
+    "rho_rate": 0.002152873404717991,
+    "d_kappa": 0.10462683929545512,
+    "d_theta": 0.08918083318122247,
+    "d_xi": 0.21558942880569135,
+    "d_rho": 0.16010404166335815
+   },
+   "rmse": {
+    "price": 6.304420762098916e-05,
+    "delta": 0.001292788928604974,
+    "gamma": 0.10278950791259836,
+    "vega": 0.0007508389635211192,
+    "vanna": 0.06858197284314979,
+    "volga": 0.04367444919118781,
+    "theta_cal": 0.0024610769549316125,
+    "rho_rate": 4.2212415093921355e-05,
+    "d_kappa": 1.0587394148336641e-05,
+    "d_theta": 0.00019151988923281484,
+    "d_xi": 0.00010109460716018836,
+    "d_rho": 9.614256062141798e-05
+   },
+   "seconds": 0.5465543000027537
+  }
+ },
+ "member_scores": [
+  0.057276650904171854,
+  0.04754904733546811,
+  0.051568774187387284,
+  0.054650256302656526
+ ],
+ "label_seconds": 14.739594899991062,
+ "environment": {
+  "python": "3.13.3",
+  "torch": "2.8.0+cpu",
+  "numpy": "2.1.0",
+  "threads": 4,
+  "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel"
+ },
+ "total_seconds": 60484.08942169987,
+ "history": [],
+ "stopped_early": [
+  null,
+  null,
+  null,
+  null
+ ]
+}

@@ -1,0 +1,31 @@
+{
+ "generated": "2026-10-06T18:56:35+00:00",
+ "git_head": "7040c9fe4b293172a598ae581a42681d4be5389d",
+ "environment": {
+  "python": "3.13.3",
+  "numpy": "2.1.0",
+  "scipy": "1.15.3",
+  "torch": "2.8.0+cpu",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel"
+ },
+ "files_sha256": {
+  "cases.csv": "523e0435c23f1887c82922360327684190c3d88381d2dba794ebfa68b421ea35",
+  "cases.json": "d306832445fb3cc6db920c890fd2c5c9b69cff25ddf8dca9bf7bc49223a90661",
+  "protocol.json": "956e8e0725874dffe910490196e856ec8e5a307ed85bc16150083fc6a9e89754",
+  "protocol.sha256": "2f8d45a6afbfcc4ea00b2fe62e518d2b432af93444d86b4f66a3b4ebd24b715e",
+  "reference_checks.csv": "c6f23a0ce420bf2f91c856d57e86544d63a6b83a2eaf80f524cb04b0b2f5ed8f",
+  "references.csv": "ecac55b6c6cb585a901cf0c8b50a4ebb77195411d625f7ec0b98fb6e34a8ef9f",
+  "report.md": "2b8353465395bccc9012fc6fa75292429548b7e4d6df3c91caab4ac07865ad8c",
+  "rqmc_crosscheck.json": "beec9db0a5e8a0cea2031c959dc4415ee2f6a3164179f1be1f21ca9562bf3add"
+ },
+ "sources_sha256": {
+  "experiments/config/protocol/heston_test_v1.json": "e9457da93a1d8007fb1c55e2cc5503af1e18f49690bfa8b785ff74a5a509dee4",
+  "experiments/test_set/freeze_test_set.py": "7289bc33fc3f950f403a48f92cbbac95ff2e2ce701685c55cf8f7453d90d604e",
+  "src/heston/reference.py": "53f18bb1383d05dbaa1df5f725f0d731606036650d5505ffec26cd7ce9136492",
+  "src/heston/characteristic.py": "e19d2f134c37fb7a1ec5ae64934b56a4075a2de0b8501e822a1f8aa7889f4163",
+  "src/heston/model.py": "a82cafb56b8642050d83bc9927d2fae22fa67f44220efdfa11dd4bc5fc9f25e6",
+  "src/heston/torch_reference.py": "72922827fba8a110e5b84b59f1fd04cd1d62c389f1dff8ce36b0e3751ec35c78",
+  "src/heston/monte_carlo.py": "b59a3b1435fef921d431041d2655723e78e0a8c5e3b75ea693133bcbb219fad4"
+ }
+}

@@ -1,0 +1,13 @@
+P7_nncg_seed0: Second-order refinement: Nystrom-preconditioned Newton-CG (Rathore et al., 2024) warm-started from P6
+parameters: 13057; threads 4
+start 0: monitor 0.175 price 0.00996  [0s]
+nncg 5: monitor 0.1696 price 0.00875 pde 2.37e-05 boundary 1.12e-06 zero_variance 2.06e-06 variance_cap 4.5e-06 [109s]
+nncg 10: monitor 0.1697 price 0.00826 pde 2.06e-05 boundary 1.35e-06 zero_variance 1.83e-06 variance_cap 3.39e-06 [220s]
+nncg 15: monitor 0.1687 price 0.00833 pde 1.97e-05 boundary 1.21e-06 zero_variance 1.79e-06 variance_cap 3.07e-06 [328s]
+nncg 20: monitor 0.1682 price 0.00817 pde 1.8e-05 boundary 1.16e-06 zero_variance 1.73e-06 variance_cap 2.91e-06 [438s]
+nncg 25: monitor 0.1673 price 0.00812 pde 1.72e-05 boundary 9.88e-07 zero_variance 1.72e-06 variance_cap 2.61e-06 [551s]
+nncg 30: monitor 0.166 price 0.00812 pde 1.64e-05 boundary 9.08e-07 zero_variance 1.67e-06 variance_cap 2.5e-06 [665s]
+nncg 35: monitor 0.165 price 0.00827 pde 1.57e-05 boundary 8.08e-07 zero_variance 1.61e-06 variance_cap 2.22e-06 [783s]
+nncg 40: monitor 0.1619 price 0.00793 pde 1.46e-05 boundary 7.17e-07 zero_variance 1.58e-06 variance_cap 2.01e-06 [905s]
+validation: score 0.1791 price RMSE 0.00172
+short_validation: score 0.2988 price RMSE 0.000286

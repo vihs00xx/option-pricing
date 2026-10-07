@@ -1,0 +1,7 @@
+# Runtime used for every heston/ result: Python 3.13.3, CPU, float64/complex128.
+numpy==2.1.0
+scipy==1.15.3
+torch==2.8.0
+pytest==9.1.1
+# Optional: only Phase 0 check 4 (cross-check against QuantLib's analytic engine).
+QuantLib==1.43

@@ -1,0 +1,21 @@
+network,level,method,matched_on,setting,classical_seconds,classical_batch_seconds,break_even_batch,break_even_single
+pinn,P10_anchored,COS,price,cos_32,0.0030431000001650923,8.742207340955723e-05,"45,849,783",never (classical is faster)
+pinn,P10_anchored,COS,all 12,cos_64,0.003105949998522798,0.0001568688491990167,"23,765,900",never (classical is faster)
+pinn,P10_anchored,ADI,price,adi_40x20x20,0.1234937500024292,0.1234937500024292,"27,750","28,934"
+pinn,P10_anchored,ADI,all 12,adi_80x40x40,0.36833570833550766,0.36833570833550766,"9,303","9,433"
+pinn,P10_anchored,"QE Monte Carlo, dt 1/8",price,mc_100000_dt8,1.1958689999980077,1.1958689999980077,"2,865","2,878"
+pinn,P10_anchored,"QE Monte Carlo, dt 1/8",all 12,none reaches it,nan,,classical never matches,classical never matches
+pinn,P10_anchored,"QE Monte Carlo, dt 1/32",price,mc_100000_dt32,5.300746441663553,5.300746441663553,646,647
+pinn,P10_anchored,"QE Monte Carlo, dt 1/32",all 12,none reaches it,nan,,classical never matches,classical never matches
+pinn,P10_anchored,"QE-RQMC, dt 1/32",price,rqmc_2^10x16_dt32,1.0726789749993866,1.0726789749993866,"3,195","3,210"
+pinn,P10_anchored,"QE-RQMC, dt 1/32",all 12,none reaches it,nan,,classical never matches,classical never matches
+deeponet,D9_ensemble,COS,price,cos_32,0.0030431000001650923,8.742207340955723e-05,never (classical is faster),never (classical is faster)
+deeponet,D9_ensemble,COS,all 12,cos_128,0.0034607916701740273,0.00041700858135242477,"123,437,189",never (classical is faster)
+deeponet,D9_ensemble,ADI,price,adi_40x20x20,0.1234937500024292,0.1234937500024292,"172,669","225,755"
+deeponet,D9_ensemble,ADI,all 12,adi_80x40x40,0.36833570833550766,0.36833570833550766,"57,815","62,757"
+deeponet,D9_ensemble,"QE Monte Carlo, dt 1/8",price,mc_1000000_dt8,12.863006916663531,12.863006916663531,"1,654","1,658"
+deeponet,D9_ensemble,"QE Monte Carlo, dt 1/8",all 12,none reaches it,nan,,classical never matches,classical never matches
+deeponet,D9_ensemble,"QE Monte Carlo, dt 1/32",price,mc_1000000_dt32,57.96126201666872,57.96126201666872,367,367
+deeponet,D9_ensemble,"QE Monte Carlo, dt 1/32",all 12,none reaches it,nan,,classical never matches,classical never matches
+deeponet,D9_ensemble,"QE-RQMC, dt 1/32",price,rqmc_2^10x16_dt32,1.0726789749993866,1.0726789749993866,"19,844","20,395"
+deeponet,D9_ensemble,"QE-RQMC, dt 1/32",all 12,none reaches it,nan,,classical never matches,classical never matches

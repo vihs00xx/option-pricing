@@ -1,0 +1,756 @@
+{
+ "level": "P9_envelope",
+ "family": "pinn",
+ "seed": 0,
+ "technique": "Enveloped correction: c = BS + tau phi(d_2) N, which fades like the time value away from the strike; trained from a fresh start through the Adam, L-BFGS and Newton-CG stages",
+ "settings": {
+  "model": {
+   "layout": "reduced",
+   "output": "bs_envelope",
+   "width": 64,
+   "depth": 4,
+   "v_input": "sqrt"
+  },
+  "loss": {
+   "pde": 1.0,
+   "terminal": 0.0,
+   "boundary": 1.0,
+   "zero_variance": 1.0,
+   "variance_cap": 1.0
+  },
+  "sampling": {
+   "focus": 0.7,
+   "tau_power": 2.0,
+   "v_power": 2.0,
+   "weight": "time",
+   "rad": {
+    "size": 32768,
+    "pool_factor": 4,
+    "k": 1.0,
+    "c": 1.0,
+    "every": 1000
+   }
+  },
+  "batch": {
+   "collocation": 4096,
+   "terminal": 1024,
+   "boundary": 512,
+   "zero_variance": 512,
+   "variance_cap": 256
+  },
+  "optimizer": {
+   "adam_steps": 15000,
+   "learning_rate": 0.002,
+   "final_learning_rate": 2e-05,
+   "check_every": 500,
+   "lbfgs_iterations": 3000,
+   "lbfgs_chunk": 50,
+   "lbfgs_history": 50,
+   "lbfgs_batch": {
+    "collocation": 16384,
+    "boundary": 2048,
+    "zero_variance": 2048,
+    "variance_cap": 1024
+   },
+   "nncg_steps": 40,
+   "nncg_check_every": 5,
+   "nncg_rank": 32,
+   "nncg_cg_steps": 30,
+   "nncg_batch": {
+    "collocation": 4096,
+    "boundary": 512,
+    "zero_variance": 512,
+    "variance_cap": 256
+   }
+  },
+  "computational_domain": {
+   "x": [
+    -3.0,
+    2.5
+   ],
+   "v": [
+    0.0,
+    3.0
+   ],
+   "note": "Spatial extent of the PDE problem in x = log forward moneyness and v, like a grid solver's far boundary. kappa, theta, xi, rho and the maturity cap are the training domain; tau starts at 0 because the PDE starts at the payoff. P4 and the physics-informed DeepONet levels extend v to v_hi = 3 with c_v = 0 there, pack collocation near v = 0 and feed sqrt(v + 0.01). The ADI v_max = 15.28 (Phase 0 check 7) is not used for the networks: with the ADI solver at a fixed fine grid, c_v = 0 at v_hi = 3 moves prices at v0 <= 0.49 by at most 4e-7 against the full domain (results/neural/variance_cap_study)."
+  },
+  "family": "pinn",
+  "technique": "Enveloped correction: c = BS + tau phi(d_2) N, which fades like the time value away from the strike; trained from a fresh start through the Adam, L-BFGS and Newton-CG stages",
+  "variance_cap_condition": "zero_slope",
+  "warm_start": null,
+  "cap": "default"
+ },
+ "source_sha256": {
+  "src/neural/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "src/neural/coordinates.py": "195a21d3346ca9f198dba31b2399fd2cb2e4f68a41c76cf7af932a9fe9db50cb",
+  "src/neural/deeponet.py": "b74716ff52bec67aa9beb1f52c15111c9024a2c90af8230f09b7d62e78ab8fd5",
+  "src/neural/networks.py": "1e4ce1b891017b831b1925fb444300be3e12b432c1242f11c07bf10c5c9523a9",
+  "src/neural/nys_newton_cg.py": "ed35565688cda8e0733d2506babe5cc8abd49f87caa90208f9d83f2094fff6d3",
+  "src/neural/pde.py": "787a21c9f5b90c8e0ce1e5cf2f3f914b7108c76cb6c68bb832731738c629bec7",
+  "src/neural/pinn.py": "0136793a468ac67a441c9d97d2b3cc4506e9adf05da2b64a493aeee9db12add6",
+  "src/neural/reference.py": "1afb66b1b1d0d9c3b60f82abd1ab7405f728efac3e8b59584f34fc85ca755acf",
+  "src/neural/training.py": "2cd9a7cac185239161389a1b505dbe4e66921ab1771317a274cf861ac282af3a",
+  "experiments/neural/train.py": "931f570d5dac0f57e1792c7143b7c5d16d6979e25de7f6f7e24e5d338170ef18",
+  "experiments/neural/common.py": "78eed441fe8df8ff0910103b596812c31c12b09c91e5b045fd662cd8cdf95089",
+  "experiments/config/neural/study.json": "aba56c84118213502a0837d0a0e3cf9385a21eec3aa20709e24966ffb5ecd605",
+  "experiments/config/neural/pinn_ladder.json": "afbc98a6e95aa9b8f0408c816ea9fe78bd3d099b7040d5eadbba62bd4de2cbc4",
+  "experiments/config/neural/deeponet_ladder.json": "dca1da581a113aecdddadec24175f5f54378251a6ab4fa290ad8c741d80675ef",
+  "experiments/config/domain.json": "e523d51f6283eb05ab83d98c298464fd45a39eaad7e5cf6303ff4cc288d51310"
+ },
+ "parameters": 13057,
+ "scores": {
+  "validation": {
+   "score": 0.16999937184955013,
+   "ratios": {
+    "price": 0.009391128565615109,
+    "delta": 0.020182191813048325,
+    "gamma": 0.10246395368627381,
+    "vega": 0.04507067932544868,
+    "vanna": 0.21974871481812827,
+    "volga": 0.5061748660696019,
+    "theta_cal": 0.03152208478939151,
+    "rho_rate": 0.021646014790326695,
+    "d_kappa": 0.16129993918336263,
+    "d_theta": 0.03846244114037878,
+    "d_xi": 0.45515239034268495,
+    "d_rho": 0.4288780576703408
+   },
+   "rmse": {
+    "price": 0.0018809541506232905,
+    "delta": 0.011266767633523803,
+    "gamma": 0.1194033295833341,
+    "vega": 0.007417879541136588,
+    "vanna": 0.08934635674935355,
+    "volga": 0.20056902156374307,
+    "theta_cal": 0.0027563728460553313,
+    "rho_rate": 0.011246266738158744,
+    "d_kappa": 0.0015908276417849444,
+    "d_theta": 0.011884157341754195,
+    "d_xi": 0.006167225079181693,
+    "d_rho": 0.004698549276078409
+   },
+   "seconds": 0.17008449998684227
+  },
+  "short_validation": {
+   "score": 0.28541105702418945,
+   "ratios": {
+    "price": 0.001869796051705447,
+    "delta": 0.006303440210499069,
+    "gamma": 0.063326540833204,
+    "vega": 0.03864797869576993,
+    "vanna": 0.19074931694501684,
+    "volga": 0.32810597946473685,
+    "theta_cal": 0.03549286991528128,
+    "rho_rate": 0.007653619550636493,
+    "d_kappa": 0.6974548272087864,
+    "d_theta": 0.12406060339041479,
+    "d_xi": 1.042313980661729,
+    "d_rho": 0.8889537313624932
+   },
+   "rmse": {
+    "price": 0.00023127535360366607,
+    "delta": 0.004171014304110609,
+    "gamma": 0.19078646494600005,
+    "vega": 0.001474405344786862,
+    "vanna": 0.11369003898302397,
+    "volga": 0.09573516606496807,
+    "theta_cal": 0.009393853657238603,
+    "rho_rate": 0.00015006816691329794,
+    "d_kappa": 7.057681571998144e-05,
+    "d_theta": 0.0002664257797547829,
+    "d_xi": 0.0004887638647047982,
+    "d_rho": 0.0005338171798739437
+   },
+   "seconds": 0.1260051999706775
+  }
+ },
+ "label_seconds": 0.0,
+ "wall_seconds": 7222.403632299975,
+ "process_cpu_seconds": 14606.953125,
+ "environment": {
+  "python": "3.13.3",
+  "torch": "2.8.0+cpu",
+  "numpy": "2.1.0",
+  "threads": 4,
+  "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel"
+ },
+ "adam_seconds": 5400.142404600047,
+ "total_seconds": 7216.0185602000565,
+ "best_monitor": 0.1589005436690732,
+ "best_step": "nncg 25",
+ "history": [
+  {
+   "stage": "adam",
+   "step": 500,
+   "seconds": 189.6,
+   "monitor": 0.3183224417291673,
+   "price_ratio": 0.0516706145274485,
+   "pde": 0.00028293718235567844,
+   "boundary": 1.6245874049981823e-06,
+   "zero_variance": 1.4215624308649752e-05,
+   "variance_cap": 0.0009020294796411789
+  },
+  {
+   "stage": "adam",
+   "step": 1000,
+   "seconds": 377.4,
+   "monitor": 0.2663556384714542,
+   "price_ratio": 0.028218230153370005,
+   "pde": 0.00045652895844818973,
+   "boundary": 1.9918941607992606e-06,
+   "zero_variance": 3.1980069938204018e-06,
+   "variance_cap": 0.00017741389766870252
+  },
+  {
+   "stage": "adam",
+   "step": 1500,
+   "seconds": 561.1,
+   "monitor": 0.23228076179731452,
+   "price_ratio": 0.022391737257956533,
+   "pde": 0.00017702938994007113,
+   "boundary": 1.8692955945217447e-06,
+   "zero_variance": 3.1499464150047053e-06,
+   "variance_cap": 0.0001059084656564862
+  },
+  {
+   "stage": "adam",
+   "step": 2000,
+   "seconds": 749.7,
+   "monitor": 0.23464427195144302,
+   "price_ratio": 0.025422870218059064,
+   "pde": 0.00015101717475874654,
+   "boundary": 6.43124129450313e-07,
+   "zero_variance": 2.848651557760572e-06,
+   "variance_cap": 0.00010358201715026931
+  },
+  {
+   "stage": "adam",
+   "step": 2500,
+   "seconds": 927.4,
+   "monitor": 0.23848499765883577,
+   "price_ratio": 0.020366939946824907,
+   "pde": 0.00014646606981924933,
+   "boundary": 1.0826055058592793e-06,
+   "zero_variance": 1.769116640459896e-06,
+   "variance_cap": 5.5157675103976805e-05
+  },
+  {
+   "stage": "adam",
+   "step": 3000,
+   "seconds": 1123.8,
+   "monitor": 0.23267664484190956,
+   "price_ratio": 0.01974079908882877,
+   "pde": 0.0001302388186883954,
+   "boundary": 1.1608644472750884e-06,
+   "zero_variance": 2.0274478825409674e-06,
+   "variance_cap": 2.8202308213111512e-05
+  },
+  {
+   "stage": "adam",
+   "step": 3500,
+   "seconds": 1319.5,
+   "monitor": 0.22189679645202218,
+   "price_ratio": 0.017662066861556833,
+   "pde": 0.00010838900077970448,
+   "boundary": 2.2322743309955378e-06,
+   "zero_variance": 6.066525170662641e-06,
+   "variance_cap": 5.321243340784259e-05
+  },
+  {
+   "stage": "adam",
+   "step": 4000,
+   "seconds": 1517.3,
+   "monitor": 0.21707166331396496,
+   "price_ratio": 0.018053301819936682,
+   "pde": 0.00012619597561652383,
+   "boundary": 1.0624872339088902e-06,
+   "zero_variance": 7.354182823504108e-07,
+   "variance_cap": 1.817996633149129e-05
+  },
+  {
+   "stage": "adam",
+   "step": 4500,
+   "seconds": 1717.0,
+   "monitor": 0.21884847862181567,
+   "price_ratio": 0.016857478470580844,
+   "pde": 8.86791162357303e-05,
+   "boundary": 1.924153669824799e-06,
+   "zero_variance": 7.775474555836307e-07,
+   "variance_cap": 1.780798701477422e-05
+  },
+  {
+   "stage": "adam",
+   "step": 5000,
+   "seconds": 1916.6,
+   "monitor": 0.21600265017815737,
+   "price_ratio": 0.01633128003155091,
+   "pde": 7.509987660975727e-05,
+   "boundary": 6.903088017068616e-07,
+   "zero_variance": 2.2978692082623347e-06,
+   "variance_cap": 5.119062400083223e-05
+  },
+  {
+   "stage": "adam",
+   "step": 5500,
+   "seconds": 2113.0,
+   "monitor": 0.21260969513271358,
+   "price_ratio": 0.018805029202007637,
+   "pde": 6.664731428483192e-05,
+   "boundary": 1.4241550427442208e-06,
+   "zero_variance": 1.2124041315652663e-06,
+   "variance_cap": 3.797800165339895e-05
+  },
+  {
+   "stage": "adam",
+   "step": 6000,
+   "seconds": 2311.3,
+   "monitor": 0.20919823288672998,
+   "price_ratio": 0.016662478153251278,
+   "pde": 9.154588909712571e-05,
+   "boundary": 1.3202036970267318e-06,
+   "zero_variance": 1.0968477868688715e-06,
+   "variance_cap": 3.1253386074567336e-05
+  },
+  {
+   "stage": "adam",
+   "step": 6500,
+   "seconds": 2510.8,
+   "monitor": 0.20799028264783267,
+   "price_ratio": 0.015586589670698198,
+   "pde": 8.32766835145231e-05,
+   "boundary": 2.4054765546943353e-06,
+   "zero_variance": 1.1597727993432593e-06,
+   "variance_cap": 1.2148533654341525e-05
+  },
+  {
+   "stage": "adam",
+   "step": 7000,
+   "seconds": 2709.1,
+   "monitor": 0.20570073630149746,
+   "price_ratio": 0.015521565570981999,
+   "pde": 9.08970769844825e-05,
+   "boundary": 1.3884245020182727e-06,
+   "zero_variance": 1.3235944430999886e-06,
+   "variance_cap": 1.2390383388113115e-05
+  },
+  {
+   "stage": "adam",
+   "step": 7500,
+   "seconds": 2907.2,
+   "monitor": 0.20348374406345215,
+   "price_ratio": 0.016490874512458682,
+   "pde": 8.505246333601071e-05,
+   "boundary": 2.1146306358091764e-06,
+   "zero_variance": 2.0046916146171058e-06,
+   "variance_cap": 1.9505699160593523e-05
+  },
+  {
+   "stage": "adam",
+   "step": 8000,
+   "seconds": 3108.1,
+   "monitor": 0.20250328706335308,
+   "price_ratio": 0.0146821657865876,
+   "pde": 0.00012235664406949878,
+   "boundary": 7.867547220742508e-07,
+   "zero_variance": 2.2961425004385406e-06,
+   "variance_cap": 1.0840434412093494e-05
+  },
+  {
+   "stage": "adam",
+   "step": 8500,
+   "seconds": 3304.5,
+   "monitor": 0.20131799415897714,
+   "price_ratio": 0.01445946001014981,
+   "pde": 8.690950982859929e-05,
+   "boundary": 1.348430207690991e-06,
+   "zero_variance": 8.641838264128387e-07,
+   "variance_cap": 1.753226314137494e-05
+  },
+  {
+   "stage": "adam",
+   "step": 9000,
+   "seconds": 3501.6,
+   "monitor": 0.20217474697949508,
+   "price_ratio": 0.014755977196410112,
+   "pde": 7.362961998849534e-05,
+   "boundary": 2.590042455572047e-06,
+   "zero_variance": 1.3357897858321373e-06,
+   "variance_cap": 1.6566202679660605e-05
+  },
+  {
+   "stage": "adam",
+   "step": 9500,
+   "seconds": 3696.8,
+   "monitor": 0.19864053124912853,
+   "price_ratio": 0.014351820697154396,
+   "pde": 9.256367947362395e-05,
+   "boundary": 2.083057000112321e-06,
+   "zero_variance": 8.764284921203663e-07,
+   "variance_cap": 1.6556740801202034e-05
+  },
+  {
+   "stage": "adam",
+   "step": 10000,
+   "seconds": 3893.7,
+   "monitor": 0.19592540898137942,
+   "price_ratio": 0.014455314147522512,
+   "pde": 5.704529928798668e-05,
+   "boundary": 1.0271433898831835e-06,
+   "zero_variance": 9.619377679048615e-07,
+   "variance_cap": 1.0228004689924128e-05
+  },
+  {
+   "stage": "adam",
+   "step": 10500,
+   "seconds": 4088.2,
+   "monitor": 0.1976383584594392,
+   "price_ratio": 0.01457692306303654,
+   "pde": 5.506152481068059e-05,
+   "boundary": 1.1708912376194843e-06,
+   "zero_variance": 1.2624638051593803e-06,
+   "variance_cap": 1.6042798060549557e-05
+  },
+  {
+   "stage": "adam",
+   "step": 11000,
+   "seconds": 4282.6,
+   "monitor": 0.19609552804848904,
+   "price_ratio": 0.013960304621689528,
+   "pde": 4.703834034025691e-05,
+   "boundary": 1.2263917276930673e-06,
+   "zero_variance": 9.70786583977977e-07,
+   "variance_cap": 8.927578853804558e-06
+  },
+  {
+   "stage": "adam",
+   "step": 11500,
+   "seconds": 4479.3,
+   "monitor": 0.19755250097909452,
+   "price_ratio": 0.015360857039342132,
+   "pde": 4.578042136681735e-05,
+   "boundary": 2.1762428169556093e-06,
+   "zero_variance": 1.8130828952189023e-06,
+   "variance_cap": 6.86807223245766e-06
+  },
+  {
+   "stage": "adam",
+   "step": 12000,
+   "seconds": 4678.8,
+   "monitor": 0.19535137600849858,
+   "price_ratio": 0.014817673155733194,
+   "pde": 5.8092569873318604e-05,
+   "boundary": 7.401608649211715e-07,
+   "zero_variance": 1.1180805538004589e-06,
+   "variance_cap": 1.1231516316930397e-05
+  },
+  {
+   "stage": "adam",
+   "step": 12500,
+   "seconds": 4874.2,
+   "monitor": 0.19076634898319378,
+   "price_ratio": 0.014065716260239077,
+   "pde": 4.9132899243221454e-05,
+   "boundary": 1.013830939892699e-06,
+   "zero_variance": 1.537086901974108e-06,
+   "variance_cap": 1.3419389391929916e-05
+  },
+  {
+   "stage": "adam",
+   "step": 13000,
+   "seconds": 5072.1,
+   "monitor": 0.19154349894288059,
+   "price_ratio": 0.013574565398831551,
+   "pde": 7.949424245518502e-05,
+   "boundary": 1.6211671053624863e-06,
+   "zero_variance": 1.1846909497868415e-06,
+   "variance_cap": 1.2064704924436006e-05
+  },
+  {
+   "stage": "adam",
+   "step": 13500,
+   "seconds": 5265.3,
+   "monitor": 0.19006719667438673,
+   "price_ratio": 0.013543515130468668,
+   "pde": 6.1013701372418646e-05,
+   "boundary": 9.653717972105959e-07,
+   "zero_variance": 9.050505481879488e-07,
+   "variance_cap": 1.2886853580549906e-05
+  },
+  {
+   "stage": "adam",
+   "step": 13870,
+   "seconds": 5400.1,
+   "monitor": 0.19124101347895395,
+   "price_ratio": 0.01368377615561126,
+   "pde": 5.753551463470958e-05,
+   "boundary": 1.7665022334311812e-06,
+   "zero_variance": 1.2127817524936264e-06,
+   "variance_cap": 1.0764881239744072e-05
+  },
+  {
+   "stage": "lbfgs",
+   "step": 50,
+   "seconds": 55.4,
+   "monitor": 0.18639730613660477,
+   "price_ratio": 0.013817037028384781,
+   "pde": 5.2374595428301164e-05,
+   "boundary": 2.119911432445545e-06,
+   "zero_variance": 9.013664892796589e-07,
+   "variance_cap": 1.3370798766215984e-05
+  },
+  {
+   "stage": "lbfgs",
+   "step": 100,
+   "seconds": 113.6,
+   "monitor": 0.18385248097436638,
+   "price_ratio": 0.014076949663389106,
+   "pde": 4.4077536995968164e-05,
+   "boundary": 2.139012860568928e-06,
+   "zero_variance": 1.1021434294263507e-06,
+   "variance_cap": 1.1951789390748143e-05
+  },
+  {
+   "stage": "lbfgs",
+   "step": 150,
+   "seconds": 173.4,
+   "monitor": 0.1891532963912216,
+   "price_ratio": 0.014742907047678258,
+   "pde": 3.8574425000727415e-05,
+   "boundary": 2.227436104687022e-06,
+   "zero_variance": 8.758270220595348e-07,
+   "variance_cap": 1.0950046821068808e-05
+  },
+  {
+   "stage": "lbfgs",
+   "step": 200,
+   "seconds": 231.7,
+   "monitor": 0.1815029979174835,
+   "price_ratio": 0.014372158024850382,
+   "pde": 3.462153524008418e-05,
+   "boundary": 2.0007327496823836e-06,
+   "zero_variance": 9.911434498290143e-07,
+   "variance_cap": 9.50280304435378e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 250,
+   "seconds": 292.8,
+   "monitor": 0.18321279005953142,
+   "price_ratio": 0.014930615889465716,
+   "pde": 3.217314171013132e-05,
+   "boundary": 1.7832123439545986e-06,
+   "zero_variance": 9.32497510006325e-07,
+   "variance_cap": 8.043626541457643e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 300,
+   "seconds": 355.4,
+   "monitor": 0.18194465026252485,
+   "price_ratio": 0.01445195643494311,
+   "pde": 2.9777831539408436e-05,
+   "boundary": 1.8726591851499148e-06,
+   "zero_variance": 9.845754990994461e-07,
+   "variance_cap": 6.622920232615634e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 350,
+   "seconds": 415.0,
+   "monitor": 0.18321151829611124,
+   "price_ratio": 0.013981371079962005,
+   "pde": 2.7435078897006875e-05,
+   "boundary": 1.964931914619546e-06,
+   "zero_variance": 1.0518591164331152e-06,
+   "variance_cap": 5.184444823634034e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 400,
+   "seconds": 476.5,
+   "monitor": 0.17703511721989637,
+   "price_ratio": 0.01360401581643916,
+   "pde": 2.530797400320376e-05,
+   "boundary": 1.880603897043123e-06,
+   "zero_variance": 1.0323778187219237e-06,
+   "variance_cap": 4.844610115180306e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 450,
+   "seconds": 535.1,
+   "monitor": 0.17467850976029284,
+   "price_ratio": 0.01246658904796791,
+   "pde": 2.3639707045041684e-05,
+   "boundary": 1.9801985568685196e-06,
+   "zero_variance": 9.46534395988189e-07,
+   "variance_cap": 4.44280007739374e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 500,
+   "seconds": 597.7,
+   "monitor": 0.17274950278337864,
+   "price_ratio": 0.01191441505908967,
+   "pde": 2.2376350356399204e-05,
+   "boundary": 2.0351139522617035e-06,
+   "zero_variance": 9.614865171278642e-07,
+   "variance_cap": 3.933365524962051e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 550,
+   "seconds": 660.6,
+   "monitor": 0.171372265240746,
+   "price_ratio": 0.011514240510511975,
+   "pde": 2.1184980693217653e-05,
+   "boundary": 2.0450350433648104e-06,
+   "zero_variance": 9.328710858549554e-07,
+   "variance_cap": 3.5345317830368917e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 600,
+   "seconds": 721.5,
+   "monitor": 0.1728807260438844,
+   "price_ratio": 0.011390005373207265,
+   "pde": 2.032617563204642e-05,
+   "boundary": 1.9448980550682756e-06,
+   "zero_variance": 9.277875529067312e-07,
+   "variance_cap": 2.9946797893135836e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 650,
+   "seconds": 784.5,
+   "monitor": 0.1761417740990512,
+   "price_ratio": 0.01174152643519122,
+   "pde": 1.9252319177384512e-05,
+   "boundary": 2.017372111560772e-06,
+   "zero_variance": 8.976449187743171e-07,
+   "variance_cap": 2.9826777200998846e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 700,
+   "seconds": 846.7,
+   "monitor": 0.17090795722718796,
+   "price_ratio": 0.010422128266350793,
+   "pde": 1.80961426634511e-05,
+   "boundary": 2.1134636959648466e-06,
+   "zero_variance": 1.0232463038694335e-06,
+   "variance_cap": 2.864432034821556e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 750,
+   "seconds": 907.8,
+   "monitor": 0.16992436224416393,
+   "price_ratio": 0.010337429062934528,
+   "pde": 1.729099875706646e-05,
+   "boundary": 2.0305682566711653e-06,
+   "zero_variance": 1.000842659008808e-06,
+   "variance_cap": 2.7625159566570296e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 800,
+   "seconds": 969.7,
+   "monitor": 0.16920755197967888,
+   "price_ratio": 0.010406413186688621,
+   "pde": 1.67521678441458e-05,
+   "boundary": 1.947027971386884e-06,
+   "zero_variance": 9.338804227822468e-07,
+   "variance_cap": 2.5739173359100293e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 850,
+   "seconds": 1031.0,
+   "monitor": 0.16756332009005206,
+   "price_ratio": 0.010164154028574452,
+   "pde": 1.6141246606226935e-05,
+   "boundary": 1.8325773503102144e-06,
+   "zero_variance": 9.481808357485361e-07,
+   "variance_cap": 2.520537031228021e-06
+  },
+  {
+   "stage": "lbfgs",
+   "step": 900,
+   "seconds": 1092.9,
+   "monitor": 0.16596902158542706,
+   "price_ratio": 0.010033310711239198,
+   "pde": 1.5564062755454315e-05,
+   "boundary": 1.8864539289575172e-06,
+   "zero_variance": 9.034674092647131e-07,
+   "variance_cap": 2.2810409597875563e-06
+  },
+  {
+   "stage": "nncg",
+   "step": 5,
+   "seconds": 108.0,
+   "monitor": 0.16531030632114221,
+   "price_ratio": 0.011897223044425248,
+   "pde": 1.5192948644783935e-05,
+   "boundary": 2.0729976396125483e-06,
+   "zero_variance": 9.913231840883629e-07,
+   "variance_cap": 1.521560713765141e-06
+  },
+  {
+   "stage": "nncg",
+   "step": 10,
+   "seconds": 215.1,
+   "monitor": 0.16166733521749713,
+   "price_ratio": 0.00983338837381765,
+   "pde": 1.3172896149632744e-05,
+   "boundary": 1.7782827092005764e-06,
+   "zero_variance": 7.868701661986009e-07,
+   "variance_cap": 1.0987147039897985e-06
+  },
+  {
+   "stage": "nncg",
+   "step": 15,
+   "seconds": 326.5,
+   "monitor": 0.16148629579106158,
+   "price_ratio": 0.01054245296498357,
+   "pde": 1.2300515935957866e-05,
+   "boundary": 1.6678798465896964e-06,
+   "zero_variance": 7.27716124413646e-07,
+   "variance_cap": 9.260936306050529e-07
+  },
+  {
+   "stage": "nncg",
+   "step": 20,
+   "seconds": 438.3,
+   "monitor": 0.15899896724875365,
+   "price_ratio": 0.010214448888265103,
+   "pde": 1.1203998739888207e-05,
+   "boundary": 1.599712603754112e-06,
+   "zero_variance": 6.645847048492797e-07,
+   "variance_cap": 7.872009847608201e-07
+  },
+  {
+   "stage": "nncg",
+   "step": 25,
+   "seconds": 553.3,
+   "monitor": 0.1589005436690732,
+   "price_ratio": 0.00935477205666305,
+   "pde": 1.0462017411324175e-05,
+   "boundary": 1.4288150914113052e-06,
+   "zero_variance": 6.256632337554161e-07,
+   "variance_cap": 6.63148177305935e-07
+  },
+  {
+   "stage": "nncg",
+   "step": 30,
+   "seconds": 671.3,
+   "monitor": 0.15997684601766282,
+   "price_ratio": 0.01003822640897956,
+   "pde": 9.65159354571372e-06,
+   "boundary": 1.382099626850331e-06,
+   "zero_variance": 5.769971707661941e-07,
+   "variance_cap": 6.489581101598528e-07
+  }
+ ],
+ "stopped_early": "adam stopped at step 13870 of 15000: wall-clock cap"
+}

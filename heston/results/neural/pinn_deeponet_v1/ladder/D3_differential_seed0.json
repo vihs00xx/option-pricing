@@ -1,0 +1,425 @@
+{
+ "level": "D3_differential",
+ "family": "deeponet",
+ "seed": 0,
+ "technique": "Differential (Sobolev) training: add the 10 derivative labels c_x, c_v, c_tau, c_kappa, c_theta, c_xi, c_rho, c_xx, c_xv, c_vv",
+ "settings": {
+  "model": {
+   "layout": "reduced",
+   "output": "bs",
+   "width": 64,
+   "depth": 4,
+   "rank": 64
+  },
+  "loss": {
+   "price": 1.0,
+   "derivatives": 1.0
+  },
+  "sampling": {
+   "focus": 0.7,
+   "tau_power": 1.0,
+   "v_power": 1.0,
+   "weight": "none"
+  },
+  "data_contracts": 32768,
+  "batch": {
+   "data": 1024,
+   "collocation": 2048,
+   "boundary": 256,
+   "zero_variance": 256,
+   "variance_cap": 128
+  },
+  "optimizer": {
+   "adam_steps": 15000,
+   "learning_rate": 0.002,
+   "final_learning_rate": 2e-05,
+   "check_every": 500,
+   "lbfgs_iterations": 0
+  },
+  "computational_domain": {
+   "x": [
+    -3.0,
+    2.5
+   ],
+   "v": [
+    0.0,
+    1.0
+   ],
+   "note": "Spatial extent of the PDE problem in x = log forward moneyness and v, like a grid solver's far boundary. kappa, theta, xi, rho and the maturity cap are the training domain; tau starts at 0 because the PDE starts at the payoff. P4 and the physics-informed DeepONet levels extend v to v_hi = 3 with c_v = 0 there, pack collocation near v = 0 and feed sqrt(v + 0.01). The ADI v_max = 15.28 (Phase 0 check 7) is not used for the networks: with the ADI solver at a fixed fine grid, c_v = 0 at v_hi = 3 moves prices at v0 <= 0.49 by at most 4e-7 against the full domain (results/neural/variance_cap_study)."
+  },
+  "family": "deeponet",
+  "technique": "Differential (Sobolev) training: add the 10 derivative labels c_x, c_v, c_tau, c_kappa, c_theta, c_xi, c_rho, c_xx, c_xv, c_vv",
+  "cap": "default"
+ },
+ "source_sha256": {
+  "src/neural/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "src/neural/coordinates.py": "195a21d3346ca9f198dba31b2399fd2cb2e4f68a41c76cf7af932a9fe9db50cb",
+  "src/neural/deeponet.py": "b74716ff52bec67aa9beb1f52c15111c9024a2c90af8230f09b7d62e78ab8fd5",
+  "src/neural/networks.py": "1e4ce1b891017b831b1925fb444300be3e12b432c1242f11c07bf10c5c9523a9",
+  "src/neural/nys_newton_cg.py": "ed35565688cda8e0733d2506babe5cc8abd49f87caa90208f9d83f2094fff6d3",
+  "src/neural/pde.py": "787a21c9f5b90c8e0ce1e5cf2f3f914b7108c76cb6c68bb832731738c629bec7",
+  "src/neural/pinn.py": "0136793a468ac67a441c9d97d2b3cc4506e9adf05da2b64a493aeee9db12add6",
+  "src/neural/reference.py": "1afb66b1b1d0d9c3b60f82abd1ab7405f728efac3e8b59584f34fc85ca755acf",
+  "src/neural/training.py": "2cd9a7cac185239161389a1b505dbe4e66921ab1771317a274cf861ac282af3a",
+  "experiments/neural/train.py": "931f570d5dac0f57e1792c7143b7c5d16d6979e25de7f6f7e24e5d338170ef18",
+  "experiments/neural/common.py": "78eed441fe8df8ff0910103b596812c31c12b09c91e5b045fd662cd8cdf95089",
+  "experiments/config/neural/study.json": "aba56c84118213502a0837d0a0e3cf9385a21eec3aa20709e24966ffb5ecd605",
+  "experiments/config/neural/pinn_ladder.json": "afbc98a6e95aa9b8f0408c816ea9fe78bd3d099b7040d5eadbba62bd4de2cbc4",
+  "experiments/config/neural/deeponet_ladder.json": "dca1da581a113aecdddadec24175f5f54378251a6ab4fa290ad8c741d80675ef",
+  "experiments/config/domain.json": "e523d51f6283eb05ab83d98c298464fd45a39eaad7e5cf6303ff4cc288d51310"
+ },
+ "parameters": 33857,
+ "scores": {
+  "validation": {
+   "score": 0.1095955495692773,
+   "ratios": {
+    "price": 0.0036792289813971156,
+    "delta": 0.01909530021522983,
+    "gamma": 0.13728054176800134,
+    "vega": 0.038940422037374356,
+    "vanna": 0.24299306709259463,
+    "volga": 0.5062416473220511,
+    "theta_cal": 0.023492892286805112,
+    "rho_rate": 0.020749537073885344,
+    "d_kappa": 0.0634340070568753,
+    "d_theta": 0.03504988485713112,
+    "d_xi": 0.10082184707712581,
+    "d_rho": 0.12336821906285664
+   },
+   "rmse": {
+    "price": 0.000736914735571946,
+    "delta": 0.010660007218753927,
+    "gamma": 0.1599758079245305,
+    "vega": 0.006408941783825399,
+    "vanna": 0.09879714326449177,
+    "volga": 0.2005954832696878,
+    "theta_cal": 0.0020542794300345626,
+    "rho_rate": 0.010780498437546644,
+    "d_kappa": 0.0006256206441624444,
+    "d_theta": 0.010829742837493023,
+    "d_xi": 0.0013661161338850145,
+    "d_rho": 0.0013515535383589608
+   },
+   "seconds": 0.20649280003271997
+  },
+  "short_validation": {
+   "score": 0.3639915169992016,
+   "ratios": {
+    "price": 0.0026216193136995064,
+    "delta": 0.00731772927327482,
+    "gamma": 0.06641740189602648,
+    "vega": 0.045609027427571384,
+    "vanna": 0.18650419405324967,
+    "volga": 0.3114835692316802,
+    "theta_cal": 0.04133937481969536,
+    "rho_rate": 0.00890066538385845,
+    "d_kappa": 1.1783773959596116,
+    "d_theta": 0.39379934635112185,
+    "d_xi": 1.0879326335497457,
+    "d_rho": 1.0375952467308847
+   },
+   "rmse": {
+    "price": 0.00032426848545167854,
+    "delta": 0.004842173869056438,
+    "gamma": 0.20009842874595457,
+    "vega": 0.001739966644545424,
+    "vanna": 0.11115986904699293,
+    "volga": 0.0908850587714107,
+    "theta_cal": 0.010941240825689232,
+    "rho_rate": 0.0001745195890163109,
+    "d_kappa": 0.00011924230943538504,
+    "d_theta": 0.0008457019799294939,
+    "d_xi": 0.0005101554506394111,
+    "d_rho": 0.000623076487469772
+   },
+   "seconds": 0.19914570002583787
+  }
+ },
+ "label_seconds": 13.375082599988673,
+ "wall_seconds": 3877.1641120000277,
+ "process_cpu_seconds": 6225.578125,
+ "environment": {
+  "python": "3.13.3",
+  "torch": "2.8.0+cpu",
+  "numpy": "2.1.0",
+  "threads": 4,
+  "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel"
+ },
+ "adam_seconds": 3870.245183799998,
+ "total_seconds": 3870.247079199995,
+ "best_monitor": 0.09402344926040042,
+ "best_step": "adam 15000",
+ "history": [
+  {
+   "stage": "adam",
+   "step": 500,
+   "seconds": 127.1,
+   "monitor": 0.16928583712747433,
+   "price_ratio": 0.011053103361235403,
+   "price": 0.00011452295050513013,
+   "derivatives": 0.06509611442512034
+  },
+  {
+   "stage": "adam",
+   "step": 1000,
+   "seconds": 252.1,
+   "monitor": 0.15793540959638042,
+   "price_ratio": 0.010192097687283925,
+   "price": 0.00011146110433514066,
+   "derivatives": 0.1284787630328458
+  },
+  {
+   "stage": "adam",
+   "step": 1500,
+   "seconds": 378.2,
+   "monitor": 0.15168046622851658,
+   "price_ratio": 0.009580659418120117,
+   "price": 0.0001126491812765913,
+   "derivatives": 0.05477717793996549
+  },
+  {
+   "stage": "adam",
+   "step": 2000,
+   "seconds": 506.6,
+   "monitor": 0.1440824105600129,
+   "price_ratio": 0.009194992798852698,
+   "price": 0.00011239069090876461,
+   "derivatives": 0.1288615654065282
+  },
+  {
+   "stage": "adam",
+   "step": 2500,
+   "seconds": 633.1,
+   "monitor": 0.13850841950954926,
+   "price_ratio": 0.007760781877545306,
+   "price": 7.433221092359949e-05,
+   "derivatives": 0.11472107823623953
+  },
+  {
+   "stage": "adam",
+   "step": 3000,
+   "seconds": 759.3,
+   "monitor": 0.13365596417863693,
+   "price_ratio": 0.007559240627756571,
+   "price": 5.7790034302899104e-05,
+   "derivatives": 0.04912091799286081
+  },
+  {
+   "stage": "adam",
+   "step": 3500,
+   "seconds": 884.4,
+   "monitor": 0.13040564903443172,
+   "price_ratio": 0.0070237733946700775,
+   "price": 3.9017796239898515e-05,
+   "derivatives": 0.053139957892878766
+  },
+  {
+   "stage": "adam",
+   "step": 4000,
+   "seconds": 1007.2,
+   "monitor": 0.12713398605589196,
+   "price_ratio": 0.007062363886026956,
+   "price": 6.041931154471805e-05,
+   "derivatives": 0.21020631242709534
+  },
+  {
+   "stage": "adam",
+   "step": 4500,
+   "seconds": 1133.5,
+   "monitor": 0.12418633963162773,
+   "price_ratio": 0.006938567789769403,
+   "price": 7.650626897832985e-05,
+   "derivatives": 0.08817810164300505
+  },
+  {
+   "stage": "adam",
+   "step": 5000,
+   "seconds": 1266.9,
+   "monitor": 0.12259879538091974,
+   "price_ratio": 0.00690670752892195,
+   "price": 3.26362283655363e-05,
+   "derivatives": 0.0335697116182291
+  },
+  {
+   "stage": "adam",
+   "step": 5500,
+   "seconds": 1393.8,
+   "monitor": 0.11893461414359531,
+   "price_ratio": 0.005867433814263858,
+   "price": 3.892616120631117e-05,
+   "derivatives": 0.034613205469581514
+  },
+  {
+   "stage": "adam",
+   "step": 6000,
+   "seconds": 1515.6,
+   "monitor": 0.11793894007454137,
+   "price_ratio": 0.007194918584299078,
+   "price": 4.686900483981954e-05,
+   "derivatives": 0.06260393279446368
+  },
+  {
+   "stage": "adam",
+   "step": 6500,
+   "seconds": 1638.4,
+   "monitor": 0.11348773052916561,
+   "price_ratio": 0.006008644944022796,
+   "price": 2.1479430603623246e-05,
+   "derivatives": 0.02713423530783359
+  },
+  {
+   "stage": "adam",
+   "step": 7000,
+   "seconds": 1759.7,
+   "monitor": 0.11026325851596556,
+   "price_ratio": 0.00609537721288322,
+   "price": 2.8125870187445544e-05,
+   "derivatives": 0.06376877127567468
+  },
+  {
+   "stage": "adam",
+   "step": 7500,
+   "seconds": 1890.7,
+   "monitor": 0.10862858656951659,
+   "price_ratio": 0.005250016798127277,
+   "price": 2.608326923861921e-05,
+   "derivatives": 0.03237064517532638
+  },
+  {
+   "stage": "adam",
+   "step": 8000,
+   "seconds": 2015.2,
+   "monitor": 0.10750011171025187,
+   "price_ratio": 0.006502192089811328,
+   "price": 6.172448394812801e-05,
+   "derivatives": 0.06279219340823687
+  },
+  {
+   "stage": "adam",
+   "step": 8500,
+   "seconds": 2140.1,
+   "monitor": 0.1051383815513819,
+   "price_ratio": 0.005210235165456717,
+   "price": 1.828206712349649e-05,
+   "derivatives": 0.02524775268884018
+  },
+  {
+   "stage": "adam",
+   "step": 9000,
+   "seconds": 2265.7,
+   "monitor": 0.10335280359169093,
+   "price_ratio": 0.004099656335667319,
+   "price": 1.449358977084397e-05,
+   "derivatives": 0.06832545125724156
+  },
+  {
+   "stage": "adam",
+   "step": 9500,
+   "seconds": 2389.3,
+   "monitor": 0.10354358126483942,
+   "price_ratio": 0.005007129718888942,
+   "price": 1.960420239635015e-05,
+   "derivatives": 0.046429972969707765
+  },
+  {
+   "stage": "adam",
+   "step": 10000,
+   "seconds": 2519.6,
+   "monitor": 0.1022406741081524,
+   "price_ratio": 0.00531086018195136,
+   "price": 3.134210323588622e-05,
+   "derivatives": 0.02106735065403584
+  },
+  {
+   "stage": "adam",
+   "step": 10500,
+   "seconds": 2649.1,
+   "monitor": 0.10091585113252743,
+   "price_ratio": 0.004488177713862342,
+   "price": 3.675288572993379e-05,
+   "derivatives": 0.018572827033574706
+  },
+  {
+   "stage": "adam",
+   "step": 11000,
+   "seconds": 2780.2,
+   "monitor": 0.10048174404498351,
+   "price_ratio": 0.004334227863740025,
+   "price": 1.570177964759038e-05,
+   "derivatives": 0.025824972406343273
+  },
+  {
+   "stage": "adam",
+   "step": 11500,
+   "seconds": 2915.0,
+   "monitor": 0.09851003564274623,
+   "price_ratio": 0.004392299391311447,
+   "price": 1.6155805487561508e-05,
+   "derivatives": 0.014368748332927516
+  },
+  {
+   "stage": "adam",
+   "step": 12000,
+   "seconds": 3050.0,
+   "monitor": 0.09839019601186422,
+   "price_ratio": 0.0038362253341423422,
+   "price": 1.4643664799941552e-05,
+   "derivatives": 0.020997695372810245
+  },
+  {
+   "stage": "adam",
+   "step": 12500,
+   "seconds": 3189.1,
+   "monitor": 0.09847247627273542,
+   "price_ratio": 0.004389241179700751,
+   "price": 1.9078414976944185e-05,
+   "derivatives": 0.04349357778360247
+  },
+  {
+   "stage": "adam",
+   "step": 13000,
+   "seconds": 3327.2,
+   "monitor": 0.0964719195345794,
+   "price_ratio": 0.0053331099516470745,
+   "price": 2.070092184108843e-05,
+   "derivatives": 0.025457818134172704
+  },
+  {
+   "stage": "adam",
+   "step": 13500,
+   "seconds": 3463.7,
+   "monitor": 0.09562857594196106,
+   "price_ratio": 0.0035846970529220387,
+   "price": 1.475286604120629e-05,
+   "derivatives": 0.049407368812571885
+  },
+  {
+   "stage": "adam",
+   "step": 14000,
+   "seconds": 3600.1,
+   "monitor": 0.09491993212423128,
+   "price_ratio": 0.0034911591476815946,
+   "price": 1.4988515377270248e-05,
+   "derivatives": 0.03350315468817559
+  },
+  {
+   "stage": "adam",
+   "step": 14500,
+   "seconds": 3737.6,
+   "monitor": 0.09455756942958271,
+   "price_ratio": 0.003912478015493522,
+   "price": 1.6982862901771935e-05,
+   "derivatives": 0.020659523900225334
+  },
+  {
+   "stage": "adam",
+   "step": 15000,
+   "seconds": 3870.2,
+   "monitor": 0.09402344926040042,
+   "price_ratio": 0.003293151690766904,
+   "price": 1.0027048146884355e-05,
+   "derivatives": 0.02854725145024973
+  }
+ ],
+ "stopped_early": null
+}

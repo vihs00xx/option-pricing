@@ -1,0 +1,51 @@
+{
+ "true": {
+  "v0": 0.04,
+  "kappa": 1.5,
+  "theta": 0.06,
+  "xi": 0.6,
+  "rho": -0.65
+ },
+ "market": {
+  "r": 0.02,
+  "q": 0.01
+ },
+ "options": 100,
+ "starts": 8,
+ "seed": 20261008,
+ "summary": {
+  "cos_128": {
+   "seconds_mean": 1.7064217624792946,
+   "iterations_mean": 12.0,
+   "median_max_rel_param_error": 3.1654593839365586e-06,
+   "recovered_within_1pct": 8,
+   "recovered_within_10pct": 8,
+   "median_fit_rmse": 1.7868938760209304e-08
+  },
+  "cos_256": {
+   "seconds_mean": 3.8082399499908206,
+   "iterations_mean": 11.875,
+   "median_max_rel_param_error": 3.166351668706935e-06,
+   "recovered_within_1pct": 8,
+   "recovered_within_10pct": 8,
+   "median_fit_rmse": 1.756212612637246e-08
+  },
+  "pinn_P10_anchored": {
+   "seconds_mean": 0.2543694374980987,
+   "iterations_mean": 86.5,
+   "median_max_rel_param_error": 1.9621659600142098,
+   "recovered_within_1pct": 0,
+   "recovered_within_10pct": 0,
+   "median_fit_rmse": 0.0004821608636734258
+  },
+  "deeponet_D9_ensemble": {
+   "seconds_mean": 0.3237927875088644,
+   "iterations_mean": 10.5,
+   "median_max_rel_param_error": 0.28160033390965744,
+   "recovered_within_1pct": 0,
+   "recovered_within_10pct": 0,
+   "median_fit_rmse": 0.00013724052014790265
+  }
+ },
+ "target": "Lewis reference prices"
+}
