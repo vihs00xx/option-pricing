@@ -5,6 +5,10 @@ Usage: python -m experiments.neural.train P2_hard_payoff [--seed 0] [--threads 1
 Levels are defined in ``experiments/config/neural/pinn_ladder.json`` (P...) and
 ``deeponet_ladder.json`` (D...). An interrupted run resumes from its last check, provided the
 settings and code are unchanged; otherwise it stops and asks for the resume file to be deleted.
+
+For training times that can be compared, run one level at a time on an otherwise idle
+machine with a fixed --threads. The summary records other training runs and the CPU busy
+share at the start and end (``machine_load``).
 """
 
 import argparse
@@ -17,7 +21,7 @@ import torch
 
 from experiments.neural.common import (CACHE, LADDER, SETTINGS_FILES, STOCKS, checkpoint_path, domain,
                                        evaluation_set, keep_full_speed, level_settings, load_settings,
-                                       training_data)
+                                       machine_load, training_data)
 from experiments.records import ROOT, digest, relative
 from src.neural.networks import build_model, load_model, save_model
 from src.neural.training import Trainer, evaluate, raw_box, reduced_box, score
@@ -80,7 +84,11 @@ def main():
         log_file.write(message+"\n")
         log_file.flush()
 
+    load_at_start = machine_load()
     log(f"{name}: {settings['technique']}")
+    if load_at_start and load_at_start["other_training_runs"]:
+        log(f"note: {load_at_start['other_training_runs']} other training run(s) active; "
+            "this run's seconds are not an idle-machine training time")
     log(f"parameters: {sum(p.numel() for p in model.parameters())}")
     trainer = Trainer(model, settings, box, strike, evaluation_set("monitor"), data, log)
     record = trainer.run(seed, resume)
@@ -102,6 +110,7 @@ def main():
                    environment=dict(python=platform.python_version(), torch=torch.__version__,
                                     numpy=np.__version__, threads=args.threads,
                                     processor=platform.processor()),
+                   machine_load=dict(start=load_at_start, end=machine_load()),
                    **record)
     (LADDER/f"{name}.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
     log_file.close()

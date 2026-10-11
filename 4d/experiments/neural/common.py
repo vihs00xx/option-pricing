@@ -50,6 +50,25 @@ def keep_full_speed():
     kernel.SetProcessInformation(kernel.GetCurrentProcess(), 4, ctypes.byref(state), ctypes.sizeof(state))
 
 
+def machine_load():
+    """Other neural training runs on this machine and the CPU busy share over one second.
+
+    Training times are compared only between runs made one at a time on an otherwise idle
+    machine; train.py records this at the start and end of each run so that a contended
+    timing shows in its summary instead of needing a correction factor afterwards.
+    """
+    try:
+        import psutil
+    except ImportError:
+        return None
+    me, others = psutil.Process().pid, 0
+    for process in psutil.process_iter(["pid", "cmdline"]):
+        modules = [a for a in process.info["cmdline"] or [] if a.startswith("experiments.neural.")]
+        if process.info["pid"] != me and modules:
+            others += 1
+    return dict(other_training_runs=others, cpu_percent=psutil.cpu_percent(interval=1.0))
+
+
 def load_settings():
     """The study settings with both ladders: ``defaults`` per family and every level."""
     settings = json.loads(STUDY.read_text(encoding="utf-8"))
