@@ -12,6 +12,8 @@ import sys
 import numpy as np
 import scipy
 
+from experiments.records import ROOT, digest, pricing_sources, relative
+
 from .common import CONTRACTS, NODE_LEVELS, OUTPUT, TOLERANCE, read_jsonl
 
 NOTES = OUTPUT / "report_notes.md"
@@ -89,6 +91,17 @@ def metadata():
                 platform=platform.platform(), cpu=cpu, cores_physical_logical=cores, memory_gib=memory,
                 blas_threads=1, packages=packages, contracts_file=CONTRACTS.relative_to(OUTPUT.parents[1]).as_posix(),
                 seeds="development range 404000-404999 only", file_timestamps_utc=stamps)
+
+
+def pin(meta):
+    """Add the source and output hashes ``python -m experiments.verify`` checks.
+
+    Call after every other output (report.md included) is written.
+    """
+    sources = sorted((ROOT/"experiments/reference").glob("*.py"))+sorted(pricing_sources())+[CONTRACTS]
+    return dict(meta, source_sha256={relative(p): digest(p) for p in sources},
+                outputs_sha256={p.name: digest(p) for p in sorted(OUTPUT.iterdir())
+                                if p.is_file() and p.name != "metadata.json"})
 
 
 def main():
@@ -181,7 +194,7 @@ def main():
                       dict(excess_kurtosis=".2f", excess_kurtosis_standardized=".2f", skewness=".2f",
                            price_coverage_95=".2f", mean_minus_reference_over_se=".2f")), ""]
     (OUTPUT / "report.md").write_text("\n".join(out), encoding="utf-8")
-    (OUTPUT / "metadata.json").write_text(json.dumps(metadata(), indent=1), encoding="utf-8")
+    (OUTPUT / "metadata.json").write_text(json.dumps(pin(metadata()), indent=1), encoding="utf-8")
     print("wrote", OUTPUT / "report.md")
 
 

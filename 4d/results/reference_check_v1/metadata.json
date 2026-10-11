@@ -36,5 +36,39 @@
   "rqmc_tails.csv": "2026-10-04T02:37:57+00:00",
   "rqmc_tails.jsonl": "2026-10-04T02:37:54+00:00",
   "summary_by_contract.csv": "2026-10-04T01:55:13+00:00"
+ },
+ "hashes_note": "source_sha256 and outputs_sha256 were added on 2026-10-11 at commit 1d2ba35, after the run: 4d/ was untracked when the study ran, so they pin the committed sources and the saved outputs as they are now, not a record taken at run time.",
+ "source_sha256": {
+  "experiments/reference/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "experiments/reference/common.py": "81e2411cb1630506b3f9d00d697f34f7cc6c17cedaae7d34100af9cc38979ee3",
+  "experiments/reference/convergence_study.py": "521af63d4f8c6ed77884aff860b25fa0dc23dfcb5191b2a383f704421aeb6374",
+  "experiments/reference/dev_contracts.py": "843f765d7f0c98787036131b6d7ce826f8b2ef360b02bd6227e4c18025b4a05c",
+  "experiments/reference/dimension_cost.py": "ffe2eaadeba011bf477fcb648baba5da019bc69e7fc6bf9f9198b8c5febe07fd",
+  "experiments/reference/make_report.py": "2c996362d8fe2014b736719574f1709951e95bf5f83fdcf8dd7a93cfb6248894",
+  "experiments/reference/rqmc_check.py": "992f9e6f4fb4fb121f9a287a6852a51b502643bf2d5f37166cec063f1aee2538",
+  "src/black_scholes.py": "0746033b38cb276d51188c010cd33b814031d8bd91f1336ae4ea8d74af5ced15",
+  "src/pricing/__init__.py": "44761514e8b9e7095f94213fdfa601e969a2c4ca930d2f8a4526be7338746280",
+  "src/pricing/adi.py": "71cee068588842aede8fec9cdb6370e244932348908d97e0f2b0e54b3756dcd1",
+  "src/pricing/conditional.py": "f97b21c261d7659676d23ce04faeb75a604f43235839318750e590c83b14c80e",
+  "src/pricing/contract.py": "016aa839645c6f00bb6a85436269a5f4e6044a93e5e07677576e51adc3a2d284",
+  "src/pricing/geometric.py": "036cf2ec2bce681be8dea7621e42d05f29307dccf9593343d3a90af445967d2f",
+  "src/pricing/rqmc.py": "309b557e4711fa5f167faf0583fa1046194bf2517649f6f9451805910a161461",
+  "experiments/config/reference/dev_contracts_v1.json": "ca87a94ba34d8c8bb500d471694bfac3dacd13939c8d0d0d3f7fa2d9cf1bd53b"
+ },
+ "outputs_sha256": {
+  "convergence.csv": "1e7a3ae7ddc57ad8ec7434985d96dd2626be9f2435a69eba7519d30ac1305ae3",
+  "convergence.jsonl": "eebe01a4f02e6d5694ed8ff00a5ab2c8409b45a6aa6f543cdd5b4c913a8b3826",
+  "dimension_cost.csv": "aef0e994bc2128bbbc295b1cb50eead99110a6ac0c7593b71391749133669b86",
+  "dimension_cost.jsonl": "ed55243b474f1cadee691e2cfc6761ba207542cda2f0f02871a60d4718ae74fc",
+  "report.md": "d30d52edb5c2e435e1ddeb89053c9e3c16bab528d4b102fff85723b1ca49b441",
+  "report_notes.md": "b6faf51eb3ca15b79ef4afedb423d2043106c8e881ba0d52cdc73330d8ffd8ab",
+  "root_fix_evidence.json": "67be5ea89c22ddf11954ebe1190b7e218f6ad571ac68e0a86f5e0020728cb1b1",
+  "rqmc.jsonl": "d146b877925b08f16c212e72bfa24cdf80cc86641fa854e59c569901695b35db",
+  "rqmc_by_contract.csv": "2933d1b0840b8cc110544e3345034ad5650e9e0f43f1d0a643299d04a1e4642f",
+  "rqmc_coverage.csv": "0a60480db941333cf65a43a0a2907557845f7a5872c6a4981e01e7fdd24ed48a",
+  "rqmc_coverage_by_group.csv": "ccd4d4fad87d3035abf53911d4a53496bc388b7b2bf7a29638dc7ba552a66f75",
+  "rqmc_tails.csv": "8431cab67363472e6aea1ce87dc1c7feb741317d9e65b2633c87969d11780ea3",
+  "rqmc_tails.jsonl": "cd0c8eb60ae37a2dc93845643086150fc1207889a1bbfba89823733a6a3cd236",
+  "summary_by_contract.csv": "4ede0c0885d147a17814e927224db39c37b5b97ffdb68e323bc251a01a69c189"
  }
 }
