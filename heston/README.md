@@ -38,6 +38,18 @@ parameters in calibration (COS recovers them to 3e-6).
 - `results/`: `reference_check_v1` (Phase 0), `test_set_v1` (sealed), `classical_v1` (Phase 1),
   `neural/pinn_deeponet_v1` (Phase 2) and `neural/variance_cap_study`. Each has a `report.md`.
 
+## Known limitations
+
+- **Exactly at expiry the selected networks return NaN at the money.** At tau = 0 the
+  Black-Scholes base divides zero log-moneyness by zero total volatility. Away from the strike they
+  return the payoff, and no test or validation contract has tau = 0. The four-stock code
+  returns the payoff explicitly; this study's code is left as it was sealed.
+- **`evaluate_test` checks less than it freezes.** Its `verify_selection()` checks the
+  evaluation sources and the two selected checkpoints, but not the recorded settings hashes or
+  the other ladder checkpoints it also scores. `verify_results` checks the saved outputs and
+  sources afterwards. The four-stock evaluator should use the two-stock check, which covers all
+  three.
+
 ## Reproduce (from this folder; Python 3.13, CPU)
 
 ```bash
