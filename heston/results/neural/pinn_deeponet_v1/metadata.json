@@ -17,7 +17,7 @@
   "ladder.csv": "b987939f1f4656292e426c7ff8f894ce82fbac99ba6227cf8d2ba589a85ef62a",
   "load_factor.json": "f698dc0303cca58d240162f2f3b55d30380c4b463fb3690314a79124b2e90058",
   "neural_timing.json": "542cf61d19d6cfab78ee3db5a823d3a1acf338cdfd4663b6b4dd2dc88f1c851f",
-  "report.md": "758eeb9dc6c4c1cb220314cdf6c4485c2e156ab47c159731d6909144f3e660e5",
+  "report.md": "20e77b0553f7b55360843f2a39029e47037910bc481215f82c055cee766a47bc",
   "selection.json": "70e43dbd168bd77c5ecc8c54b76903edc476b1abf6982b301a773cd9e9fc84c9",
   "test_checks.json": "1166b64fd62c65ee4cc6a005a194d285734e1709d704a850fd3236ebf0edfe63",
   "test_metrics.csv": "a8e09e4db3993caab3945a7ae7b7029929476940715e9623d8b36af320fae4f2",
@@ -124,5 +124,12 @@
   "P9_envelope_seed0.json": "9b2cdfc7b3851eb288828ce2f2dc258647d7bc83f87cf105eedb2a854d2adc1c",
   "P9_envelope_seed0.log": "32caec0aeb09c78377ae65da7ee0df3967ce725ef9887bb7dc13fa34bd4066a5",
   "P9_envelope_seed0.pt": "7773b1e2721e84261194d3ab3fc10de011b983fef4e3fff5573f1808db7f82b8"
- }
+ },
+ "revisions": [
+  {
+   "date": "2026-10-11",
+   "file": "report.md",
+   "change": "Findings wording only (experiments/neural/report_findings.md): short maturities no longer called extrapolation, the no-arbitrage guarantee limited to price bounds, timings and training costs labelled as 12-quantity and estimated. No result, source or other output changed; report.md regenerated with make_report and only its hash updated here."
+  }
+ ]
 }
