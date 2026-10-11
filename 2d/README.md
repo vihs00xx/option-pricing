@@ -31,6 +31,18 @@ only when many contracts are priced; ADI is the most accurate but works for two
 stocks only. Full ladders, splits, Greek validation and
 limits are in the [neural study report](results/neural/pinn_deeponet_v1/report.md).
 
+The ADI time is the mean single-threaded duration per contract while 12 worker
+processes ran at once (`experiments/neural/benchmark_adi.py`), so it was measured
+under contention, unlike the isolated neural times; read the ratio between them
+as approximate.
+
+## Known limitations
+
+- **Exactly at expiry the selected networks return NaN at the money.** At tau = 0 the
+  Levy base divides zero log-moneyness by zero total volatility, and the similarity coordinate does the same. Away from the strike they
+  return the payoff, and no test or validation contract has tau = 0. The four-stock code
+  returns the payoff explicitly; this study's code is left as it was sealed.
+
 ## Code
 
 | Path | Contents |

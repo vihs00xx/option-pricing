@@ -1,12 +1,15 @@
 """Settings, cached data sets and paths shared by the four-stock PINN and DeepONet ladder scripts."""
 
 import copy
+import hashlib
+import inspect
 import json
 import sys
 
 import torch
 
-from experiments.records import ROOT
+from experiments.records import ROOT, digest
+from src.neural import coordinates, reference
 from src.neural.coordinates import Stocks, protocol_domain, sample_domain
 from src.neural.reference import reference_values
 from src.neural.training import labelled_data
@@ -45,6 +48,25 @@ def keep_full_speed():
     # ProcessPowerThrottling = 4; control the execution-speed bit and leave it off.
     state = PowerThrottlingState(1, 0x1, 0x0)
     kernel.SetProcessInformation(kernel.GetCurrentProcess(), 4, ctypes.byref(state), ctypes.sizeof(state))
+
+
+def machine_load():
+    """Other neural training runs on this machine and the CPU busy share over one second.
+
+    Training times are compared only between runs made one at a time on an otherwise idle
+    machine; train.py records this at the start and end of each run so that a contended
+    timing shows in its summary instead of needing a correction factor afterwards.
+    """
+    try:
+        import psutil
+    except ImportError:
+        return None
+    me, others = psutil.Process().pid, 0
+    for process in psutil.process_iter(["pid", "cmdline"]):
+        modules = [a for a in process.info["cmdline"] or [] if a.startswith("experiments.neural.")]
+        if process.info["pid"] != me and modules:
+            others += 1
+    return dict(other_training_runs=others, cpu_percent=psutil.cpu_percent(interval=1.0))
 
 
 def load_settings():
@@ -87,12 +109,29 @@ def domain():
     return protocol_domain(ROOT/load_settings()["protocol"])
 
 
-def _cached(name, build):
+def label_sources():
+    """What the reference labels are computed with: the sampler, the reference and labelled_data."""
+    return dict(coordinates=digest(coordinates.__file__), reference=digest(reference.__file__),
+                labelled_data=hashlib.sha256(inspect.getsource(labelled_data).encode()).hexdigest())
+
+
+def _cached(name, identity, build):
+    """Load ``name`` from the cache if it was built from ``identity``, else build and save it.
+
+    ``identity`` holds every setting and source the data set depends on. Its fingerprint
+    is part of the file name, so a changed node count, domain or reference code builds a
+    new file instead of loading old labels; the identity is also stored and checked.
+    """
     CACHE.mkdir(parents=True, exist_ok=True)
-    path = CACHE/name
+    identity = json.loads(json.dumps(dict(identity, sources=label_sources())))
+    fingerprint = hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()
+    path = CACHE/f"{name}_{fingerprint[:12]}.pt"
     if path.exists():
-        return torch.load(path, weights_only=False)
-    value = build()
+        value = torch.load(path, weights_only=False)
+        if value.get("identity") != identity:
+            raise RuntimeError(f"{path.name} was built from different settings or sources; delete it")
+        return value
+    value = dict(build(), identity=identity)
     torch.save(value, path)
     return value
 
@@ -104,12 +143,13 @@ def evaluation_set(kind):
     count = settings["monitor_contracts"] if kind == "monitor" else settings["validation_contracts"]
     seed = settings["seeds"][kind]
     tau = settings["short_validation_tau"] if kind == "short_validation" else None
+    nodes = settings["reference_nodes"]["evaluation"]
 
     def build():
         x, put = sample_domain(STOCKS, box, strike, count, seed, tau)
-        nodes = settings["reference_nodes"]["evaluation"]
         return dict(inputs=(x, put), reference=reference_values(STOCKS, x, put, nodes=nodes))
-    return _cached(f"{kind}_{count}_{seed}.pt", build)
+    identity = dict(kind=kind, count=count, seed=seed, tau=tau, nodes=nodes, domain=box, strike=strike, d=STOCKS.d)
+    return _cached(f"{kind}_{count}_{seed}", identity, build)
 
 
 def training_data(count, seed_name="data"):
@@ -118,7 +158,9 @@ def training_data(count, seed_name="data"):
     box, strike = domain()
     seed = settings["seeds"][seed_name]
     nodes = settings["reference_nodes"]["labels"]
-    return _cached(f"{seed_name}_{count}_{seed}.pt", lambda: labelled_data(STOCKS, box, strike, count, seed, nodes))
+    identity = dict(kind=seed_name, count=count, seed=seed, nodes=nodes, domain=box, strike=strike, d=STOCKS.d)
+    return _cached(f"{seed_name}_{count}_{seed}", identity,
+                   lambda: labelled_data(STOCKS, box, strike, count, seed, nodes))
 
 
 def checkpoint_path(level, seed):
