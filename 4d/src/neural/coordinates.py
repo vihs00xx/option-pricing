@@ -206,8 +206,12 @@ def levy_volatility(stocks, features):
 
 def black_call(z, total_vol):
     """Undiscounted Black call with unit strike on forward exp(z)."""
+    # Zero total volatility (expiry) is the payoff; the stand-in volatility avoids 0 / 0.
+    live = total_vol > 0
+    total_vol = torch.where(live, total_vol, torch.ones_like(total_vol))
     d1 = z/total_vol+total_vol/2
-    return torch.exp(z)*torch.special.ndtr(d1)-torch.special.ndtr(d1-total_vol)
+    value = torch.exp(z)*torch.special.ndtr(d1)-torch.special.ndtr(d1-total_vol)
+    return torch.where(live, value, torch.relu(torch.expm1(z)))
 
 
 def levy_call(stocks, features):

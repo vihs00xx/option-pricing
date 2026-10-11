@@ -227,5 +227,49 @@ class TrainerTests(unittest.TestCase):
                        dict(price=1.0, derivatives=1.0, pde=1.0, boundary=1.0), augment="permutation")
 
 
+class ExpiryTests(unittest.TestCase):
+    """At tau = 0 the reduced-layout outputs return the payoff instead of 0 / 0."""
+
+    MODELS = (dict(family="pinn", output="levy"), dict(family="pinn", output="levy_envelope", similarity="levy"),
+              dict(family="deeponet", output="levy", similarity=0.3))
+
+    @classmethod
+    def setUpClass(cls):
+        base = row(c_star(tau=0.0))
+        col = STOCKS.column
+        basket = sum(base[col[f"weight_{i}"]]*base[col[f"spot_{i}"]] for i in range(1, 4))
+        basket += (1-sum(base[col[f"weight_{i}"]] for i in range(1, 4)))*base[col["spot_4"]]
+        rows = []
+        for strike in (0.9*basket, basket, 1.1*basket):      # in, at and out of the money for a call
+            r = base.copy()
+            r[col["strike"]] = strike
+            rows.append(r)
+        cls.x = np.array(rows*2)
+        cls.put = np.array([False]*3+[True]*3)
+        strikes = cls.x[:, col["strike"]]
+        cls.payoff = np.where(cls.put, np.maximum(strikes-basket, 0), np.maximum(basket-strikes, 0))
+
+    def test_price_is_the_payoff(self):
+        for settings in self.MODELS:
+            model = small_model(**settings)
+            with torch.no_grad():
+                price = model.price(torch.as_tensor(self.x), torch.as_tensor(self.put)).numpy()
+            assert_allclose(price, self.payoff, atol=1e-12, err_msg=str(settings))
+
+    def test_greeks_are_finite(self):
+        for settings in self.MODELS:
+            values = price_and_greeks(STOCKS, small_model(**settings).price, self.x, self.put)
+            for name, value in values.items():
+                self.assertTrue(np.all(np.isfinite(value)), f"{settings} {name}")
+
+    def test_positive_maturities_are_unchanged(self):
+        x, _ = contracts(8, seed=5)
+        features, _ = reduced_coordinates(STOCKS, torch.as_tensor(x))
+        for settings in self.MODELS:
+            model = small_model(**settings)
+            with torch.no_grad():
+                self.assertTrue(torch.equal(model.call(features), model._call(features)), str(settings))
+
+
 if __name__ == "__main__":
     unittest.main()

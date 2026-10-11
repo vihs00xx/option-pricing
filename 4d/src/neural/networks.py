@@ -119,6 +119,20 @@ class NeuralPricer(nn.Module):
         """Normalized call c(z, s, tau; sigma, rho) (reduced layout)."""
         if self.layout != "reduced":
             raise TypeError("call() needs the reduced layout")
+        t = self.stocks.tau
+        tau = features[:, t]
+        expired = tau <= 0
+        if self.output == "plain" or not bool(expired.any()):
+            return self._call(features)
+        # At expiry the call is its payoff (e^z - 1)^+. The output's expressions divide by
+        # sqrt(tau), so they are evaluated at a stand-in maturity and the payoff selected:
+        # neither the values nor autograd see 0 / 0. Greeks at tau = 0 are the payoff's
+        # (Delta a step, Gamma zero) and are undefined exactly at the strike.
+        standin = torch.cat((features[:, :t], torch.where(expired, torch.ones_like(tau), tau)[:, None],
+                             features[:, t+1:]), dim=1)
+        return torch.where(expired, torch.relu(torch.expm1(features[:, 0])), self._call(standin))
+
+    def _call(self, features):
         if self.output == "plain":
             return self.network(self.scaler(features), None)
         t = self.stocks.tau
