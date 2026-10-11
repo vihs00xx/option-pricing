@@ -3,7 +3,8 @@
 Usage: python -m experiments.neural.train P2_hard_payoff [--seed 0] [--threads 1]
 
 Levels are defined in ``experiments/config/neural/pinn_ladder.json`` (P...) and
-``deeponet_ladder.json`` (D...). An interrupted run resumes from its last check.
+``deeponet_ladder.json`` (D...). An interrupted run resumes from its last check, provided the
+settings and code are unchanged; otherwise it stops and asks for the resume file to be deleted.
 """
 
 import argparse
@@ -60,6 +61,18 @@ def main():
         data = training_data(settings["data_contracts"], settings.get("data_seed", "data"))
     resume = CACHE/"resume"/f"{name}.pt"
     resume.parent.mkdir(parents=True, exist_ok=True)
+    # A resume file continues only the run it was written by: same settings, same code.
+    pin = dict(settings=settings, source_sha256=source_sha256)
+    if settings.get("warm_start"):
+        pin["warm_start_sha256"] = digest(checkpoint_path(settings["warm_start"], seed))
+    pin = json.loads(json.dumps(pin))
+    pin_file = resume.with_suffix(".json")
+    if resume.exists():
+        if not pin_file.exists() or json.loads(pin_file.read_text(encoding="utf-8")) != pin:
+            raise RuntimeError(f"{resume} was written under different settings or code; "
+                               "delete it (and its .json) to start this level afresh")
+    else:
+        pin_file.write_text(json.dumps(pin, indent=2), encoding="utf-8")
     log_file = (LADDER/f"{name}.log").open("a" if resume.exists() else "w", encoding="utf-8")
 
     def log(message):
@@ -93,6 +106,7 @@ def main():
     (LADDER/f"{name}.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
     log_file.close()
     resume.unlink(missing_ok=True)
+    pin_file.unlink(missing_ok=True)
 
 
 if __name__ == "__main__":
