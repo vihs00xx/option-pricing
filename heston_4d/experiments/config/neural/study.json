@@ -1,0 +1,46 @@
+{
+  "study_id": "heston_four_stock_pinn_deeponet_v1",
+  "purpose": "PINN and DeepONet pricers for four-stock Heston basket options with every Heston parameter and both correlations as inputs, each built as a ladder: every level adds one technique to the configuration below it, and every level is scored on the same validation contracts. Levels follow the four-stock ladders (4d/) with the one-stock Heston variance boundary (heston/).",
+  "seeds": {
+    "data": 9101,
+    "anchors": 9102,
+    "monitor": 9111,
+    "validation": 9121,
+    "short_validation": 9122,
+    "label_normals": 9131,
+    "evaluation_normals": 9141,
+    "training": 0
+  },
+  "monitor_contracts": 256,
+  "validation_contracts": 1024,
+  "short_validation_tau": [
+    0.005,
+    0.05
+  ],
+  "selection_rule": "Within each family the level with the lowest validation score is selected. Score = mean over price and every Greek of RMSE / RMS(reference) on the validation contracts drawn from the protocol's training domain. A level within 1% of the best score yields to the earlier level. The references are simulations, so each summary also records the noise floor RMS(reference standard error) / RMS(reference) per quantity; a level is not better than another by less than that floor.",
+  "computational_domain": {
+    "z": [
+      -3.0,
+      2.5
+    ],
+    "share_floor": 0.01,
+    "v": [
+      0.0,
+      1.5
+    ],
+    "note": "Spatial extent of the PDE problem in z = log basket forward moneyness, the forward shares s_i >= share_floor and each variance v_i in [0, v_hi], like a grid solver's far boundaries. The Heston parameters, the correlations and the maturity cap are the protocol's training domain; tau starts at 0 because the PDE starts at the payoff. Initial variances of the domain lie in [0.01, 0.36]; v_hi = 1.5 leaves room for the variance to wander, with c_v = 0 imposed there from P4 and D4 on."
+  },
+  "reference": {
+    "labels": {
+      "points": 1024,
+      "steps": 32,
+      "note": "Training labels and anchors: one shared Sobol net of 1,024 conditional QE paths with 32 time steps for every contract (src/neural/reference.py reference_labels), seeded by seeds.label_normals. Price and the first and second derivatives in the log forwards."
+    },
+    "evaluation": {
+      "points": 1024,
+      "replicates": 8,
+      "dt": 0.03125,
+      "note": "Monitor and validation references: heston_estimate per contract (8 replicates of 1,024 Sobol paths, QE step 1/32, every quantity with its standard error), contract k seeded by seeds.evaluation_normals + k for the validation panel and + 100000 + k for the monitor and short panels. Built in worker processes."
+    }
+  }
+}

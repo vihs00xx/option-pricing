@@ -267,22 +267,25 @@ def reference_job(task):
                price_standard_errors={str(p): float(v[1][0]) for p, v in levels.items()},
                reference_seconds=seconds, values=reference.tolist(), standard_errors=se.tolist(),
                max_relative_se=float(relative_se[k]), max_relative_se_quantity=names[k])
+    # The cross-checks run at check_points (at most the accepted level) and compare with the
+    # combined standard error, so a cheaper check is still a fair one.
+    check = min(accepted, settings["check_points"])
     start = perf_counter()
-    second, second_se = estimate(c, accepted, check_seed, settings)
+    second, second_se = estimate(c, check, check_seed, settings)
     z = z_scores(second, second_se, reference, se)
     k = int(np.argmax(np.abs(z)))
-    row.update(check_seed=check_seed, check_seconds=perf_counter() - start,
+    row.update(check_seed=check_seed, check_points=check, check_seconds=perf_counter() - start,
                check_max_abs_z=float(np.abs(z[k])), check_worst_quantity=names[k],
                check_rms_z=float(np.sqrt(np.mean(z ** 2))), check_count_abs_z_over_5=int(np.sum(np.abs(z) > 5)))
-    coarse, _ = estimate(c, accepted, seed, settings, dt=2 * settings["dt"])
-    with np.errstate(divide="ignore", invalid="ignore"):
-        steps = np.where(se > 0, (coarse - reference) / se, 0.0)
+    coarse, coarse_se = estimate(c, check, seed, settings, dt=2 * settings["dt"])
+    steps = z_scores(coarse, coarse_se, reference, se)
     k = int(np.argmax(np.abs(steps)))
     row.update(time_step_max_abs=float(np.abs(steps[k])), time_step_worst_quantity=names[k],
                time_step_price_difference=float(coarse[0] - reference[0]))
-    half, _ = estimate(c, accepted, seed, settings, bump_scale=0.5)
+    half, _ = estimate(c, check, seed, settings, bump_scale=0.5)
+    base, _ = levels[check] if check in levels else estimate(c, check, seed, settings)
     bumped = [q for q in names if not q.startswith(("price", "delta", "gamma", "rho"))]
-    rel = {q: v for q, v in relative_differences(half, reference, names).items() if q in bumped}
+    rel = {q: v for q, v in relative_differences(half, base, names).items() if q in bumped}
     worst = max(rel, key=rel.get)
     row.update(bump_halving_max_relative=rel[worst], bump_halving_worst_quantity=worst)
     return save(row)
@@ -488,12 +491,12 @@ def report(output, protocol, checks, quantities):
                      f"{c['price_standard_error']:.1e} |")
     total = sum(c["check_count_abs_z_over_5"] for c in checks)
     lines += ["", "## Cross-checks (recorded, never used to change a reference)", "",
-              f"Independent run (own seed, same points): RMS z over all cases and quantities "
+              f"Independent run (own seed, check points): RMS z over all cases and quantities "
               f"{np.sqrt(np.mean([c['check_rms_z'] ** 2 for c in checks])):.3f}; {total} of "
               f"{quantities * len(checks)} z-values exceed 5 in magnitude.", "",
               "| Check | Worst value | Case | Quantity |", "|---|---:|---|---|"]
     for label, key, quantity in (("Independent run max abs z", "check_max_abs_z", "check_worst_quantity"),
-                                 ("Doubled time step, max abs difference / SE", "time_step_max_abs",
+                                 ("Doubled time step, max abs z", "time_step_max_abs",
                                   "time_step_worst_quantity"),
                                  ("Bump halving relative change", "bump_halving_max_relative",
                                   "bump_halving_worst_quantity")):
