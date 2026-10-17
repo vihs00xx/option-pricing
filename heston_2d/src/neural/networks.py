@@ -1,0 +1,231 @@
+"""Shared machinery of the PINN and DeepONet pricers: inputs, outputs, saving and loading.
+
+Every pricer exposes ``price(x, put)`` on contract rows (``Stocks(d).fields``), so
+prices and all Greeks come from one autograd routine. Two input layouts:
+
+``raw``      the contract inputs (spots over strike, maturity, rate, dividends, the Heston
+             parameters of every stock, both correlation matrices, the first d - 1
+             weights) plus a put flag; the network returns price over strike.
+``reduced``  the exact reduction of ``coordinates``: (z, s, v, tau; kappa, theta, xi,
+             leverage, rho, eta); the network returns the normalized call and puts follow
+             by parity. With ``v_input = "sqrt"`` the network sees sqrt(v + 0.01) for each
+             variance, which resolves the square-root behaviour of prices near v = 0.
+
+Three outputs for the reduced layout:
+
+``plain``    c = N(features).
+``levy``     c = Levy(features) + tau * N(features); the payoff at tau = 0 holds exactly
+             and the network learns the correction to the moment-matched lognormal at the
+             expected variances. Its maturity feature is sqrt(tau). Optionally the network
+             also sees the boundary-layer coordinate tanh(z / (3 total volatility)).
+``levy_envelope``  c = Levy + tau * phi(d_2) * N: the correction is scaled by the Levy
+             call's sensitivity to total volatility, so it fades with the time value.
+
+``pinn.PINN`` and ``deeponet.DeepONet`` supply the network N. The module layout follows
+the four-stock study (4d/src/neural/networks.py).
+"""
+
+import math
+
+import torch
+from torch import nn
+
+from .coordinates import Stocks, levy_call, levy_volatility, price_from_call, reduced_coordinates
+
+
+def raw_inputs(stocks):
+    """Raw network inputs: the contract fields without the strike, spots as moneyness."""
+    return tuple(f for f in stocks.fields if f != "strike")
+
+
+def mlp(inputs, width, depth, outputs):
+    """tanh multilayer perceptron with Xavier-normal weights and zero biases."""
+    layers = []
+    for _ in range(depth):
+        layers += [nn.Linear(inputs, width, dtype=torch.float64), nn.Tanh()]
+        inputs = width
+    layers.append(nn.Linear(inputs, outputs, dtype=torch.float64))
+    network = nn.Sequential(*layers)
+    for layer in network:
+        if isinstance(layer, nn.Linear):
+            nn.init.xavier_normal_(layer.weight)
+            nn.init.zeros_(layer.bias)
+    return network
+
+
+class Scaler(nn.Module):
+    """Affine map of each input from its [low, high] box onto [-1, 1]."""
+
+    def __init__(self, low, high):
+        super().__init__()
+        low = torch.as_tensor(low, dtype=torch.float64)
+        high = torch.as_tensor(high, dtype=torch.float64)
+        self.register_buffer("center", (high+low)/2)
+        self.register_buffer("radius", (high-low)/2)
+
+    def forward(self, values):
+        return (values-self.center)/self.radius
+
+
+class NeuralPricer(nn.Module):
+    """Base class: input scaling, output construction and the currency price.
+
+    ``boxes`` gives [low, high] per input: for ``raw`` keyed by ``raw_inputs(stocks)``
+    (spots as moneyness), for ``reduced`` keyed by ``stocks.features``. Subclasses
+    implement ``network(scaled_inputs, put_flag)``; the flag is None for ``reduced``.
+    """
+
+    family = None
+
+    def __init__(self, d, layout, output, boxes, similarity=None, v_input="plain"):
+        super().__init__()
+        if layout not in ("raw", "reduced") or output not in ("plain", "levy", "levy_envelope"):
+            raise ValueError(f"unknown layout {layout!r} or output {output!r}")
+        if layout == "raw" and (output != "plain" or v_input != "plain"):
+            raise ValueError("the raw layout has a plain output and plain inputs")
+        if similarity is not None and output == "plain":
+            raise ValueError("the similarity coordinate needs the levy output")
+        if v_input not in ("plain", "sqrt"):
+            raise ValueError(f"unknown v_input {v_input!r}")
+        self.stocks = Stocks(d)
+        self.layout, self.output, self.similarity, self.v_input = layout, output, similarity, v_input
+        base = raw_inputs(self.stocks) if layout == "raw" else self.stocks.features
+        low = [boxes[n][0] for n in base]
+        high = [boxes[n][1] for n in base]
+        if layout == "reduced":
+            if output != "plain":
+                # The network sees sqrt(tau) on [0, sqrt(tau_max)].
+                t = self.stocks.tau
+                low[t], high[t] = math.sqrt(low[t]), math.sqrt(high[t])
+            if v_input == "sqrt":
+                for k in range(self.stocks.v.start, self.stocks.v.stop):
+                    low[k], high[k] = math.sqrt(low[k]+0.01), math.sqrt(high[k]+0.01)
+        self.scaler = Scaler(low, high)
+        self.inputs = base+(("similarity",) if similarity is not None else ())
+
+    def network(self, inputs, flag):
+        raise NotImplementedError
+
+    def similarity_coordinate(self, features):
+        """Bounded boundary-layer coordinate tanh(d / 3) with d = z / (total volatility).
+
+        ``similarity = "levy"`` uses the Levy total volatility of the contract; a number
+        uses that fixed volatility times sqrt(tau), which depends on the coordinates
+        only (for a DeepONet trunk).
+        """
+        z, tau = features[:, 0], features[:, self.stocks.tau]
+        if self.similarity == "levy":
+            scale = levy_volatility(self.stocks, features)
+        else:
+            scale = float(self.similarity)*torch.sqrt(tau)
+        return torch.tanh(z/(3*scale))
+
+    def network_inputs(self, features):
+        """Scaled network inputs of reduced features: sqrt(tau) for the levy outputs, sqrt(v + 0.01)."""
+        t, v = self.stocks.tau, self.stocks.v
+        columns = list(features.unbind(1))
+        if self.output != "plain":
+            # sqrt(tau) has an infinite slope at 0; collocation keeps tau > 0.
+            columns[t] = torch.sqrt(columns[t])
+        if self.v_input == "sqrt":
+            for k in range(v.start, v.stop):
+                columns[k] = torch.sqrt(columns[k]+0.01)
+        scaled = self.scaler(torch.stack(columns, dim=1))
+        if self.similarity is not None:
+            scaled = torch.cat((scaled, self.similarity_coordinate(features)[:, None]), dim=1)
+        return scaled
+
+    def call(self, features):
+        """Normalized call c(z, s, v, tau; parameters) (reduced layout)."""
+        if self.layout != "reduced":
+            raise TypeError("call() needs the reduced layout")
+        t = self.stocks.tau
+        tau = features[:, t]
+        expired = tau <= 0
+        if self.output == "plain" or not bool(expired.any()):
+            return self._call(features)
+        # At expiry the call is its payoff (e^z - 1)^+. The output's expressions divide by
+        # sqrt(tau), so they are evaluated at a stand-in maturity and the payoff selected:
+        # neither the values nor autograd see 0 / 0.
+        standin = torch.cat((features[:, :t], torch.where(expired, torch.ones_like(tau), tau)[:, None],
+                             features[:, t+1:]), dim=1)
+        return torch.where(expired, torch.relu(torch.expm1(features[:, 0])), self._call(standin))
+
+    def _call(self, features):
+        scaled = self.network_inputs(features)
+        if self.output == "plain":
+            return self.network(scaled, None)
+        tau = features[:, self.stocks.tau]
+        correction = tau*self.network(scaled, None)
+        if self.output == "levy_envelope":
+            # phi(d_2) = exp(z) phi(d_1) is the Levy call's sensitivity to its total volatility:
+            # the correction fades like the time value away from the strike.
+            total_vol = levy_volatility(self.stocks, features)
+            correction = correction*torch.exp(-0.5*(features[:, 0]/total_vol-total_vol/2)**2)/math.sqrt(2*math.pi)
+        return levy_call(self.stocks, features)+correction
+
+    def normalized_price(self, x, put):
+        """Price over strike from contract rows (raw layout)."""
+        col = self.stocks.column
+        strike = x[:, col["strike"]]
+        values = torch.stack([x[:, col[n]]/strike if n.startswith("spot") else x[:, col[n]]
+                              for n in raw_inputs(self.stocks)], dim=1)
+        return self.network(self.scaler(values), put.to(x.dtype))
+
+    def price(self, x, put):
+        """Currency price of contract rows ``x``; ``put`` is a boolean tensor."""
+        if self.layout == "raw":
+            return x[:, self.stocks.column["strike"]]*self.normalized_price(x, put)
+        features, scale = reduced_coordinates(self.stocks, x)
+        return price_from_call(self.call(features), features, scale, put)
+
+    def forward(self, x, put):
+        return self.price(x, put)
+
+
+class Ensemble(nn.Module):
+    """Average of member prices; Greeks are member averages by linearity."""
+
+    def __init__(self, members):
+        super().__init__()
+        self.members = nn.ModuleList(members)
+        self.family = members[0].family
+        self.stocks = members[0].stocks
+
+    def price(self, x, put):
+        return torch.stack([m.price(x, put) for m in self.members]).mean(0)
+
+    def forward(self, x, put):
+        return self.price(x, put)
+
+
+def build_model(family, **settings):
+    from .deeponet import DeepONet
+    from .pinn import PINN
+    return {"pinn": PINN, "deeponet": DeepONet}[family](**settings)
+
+
+def _record(model):
+    return dict(family=model.family, settings=model.settings, state_dict=model.state_dict())
+
+
+def save_model(model, path, extra=None):
+    """One self-contained checkpoint; an ensemble stores every member in the same file."""
+    if isinstance(model, Ensemble):
+        record = dict(family=model.family, ensemble=[_record(m) for m in model.members])
+    else:
+        record = _record(model)
+    torch.save(dict(record, **(extra or {})), path)
+
+
+def _restore(record):
+    model = build_model(record["family"], **record["settings"])
+    model.load_state_dict(record["state_dict"])
+    return model.eval()
+
+
+def load_model(path):
+    checkpoint = torch.load(path, map_location="cpu", weights_only=False)
+    if "ensemble" in checkpoint:
+        return Ensemble([_restore(member) for member in checkpoint["ensemble"]]).eval()
+    return _restore(checkpoint)
