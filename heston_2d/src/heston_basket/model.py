@@ -180,9 +180,10 @@ BUMPS = {"v0": 0.02, "kappa": 0.02, "theta": 0.02, "xi": 0.02, "leverage": 0.02,
          "vol_correlation": 0.01, "tau": 0.02}
 
 
-def _valid(contract):
+def _valid(contract, field, step, index):
+    """Whether the contract bumped by ``step`` is valid (the bump itself validates it)."""
     try:
-        HestonBasket(**{k: getattr(contract, k) for k in contract.__dataclass_fields__})
+        contract.bumped(field, step, index)
         return True
     except ValueError:
         return False
@@ -213,7 +214,7 @@ def parameter_bumps(c, scale=1.0):
     checked = []
     for name, field, index, step in out:
         for _ in range(30):
-            if _valid(c.bumped(field, step, index)) and _valid(c.bumped(field, -step, index)):
+            if _valid(c, field, step, index) and _valid(c, field, -step, index):
                 break
             step /= 2
         else:

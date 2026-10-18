@@ -146,8 +146,11 @@ def label_settings():
                 seed=settings["seeds"]["label_normals"])
 
 
-def evaluation_set(kind, workers=None):
-    """Monitor, validation or short-validation contracts with engine references and standard errors."""
+def evaluation_set(kind, workers=4):
+    """Monitor, validation or short-validation contracts with engine references and standard errors.
+
+    Each reference worker holds its paths in memory; four keep a 16 GB machine clear of the
+    other jobs."""
     settings = load_settings()
     box, strike = domain()
     count = settings["monitor_contracts"] if kind == "monitor" else settings["validation_contracts"]
