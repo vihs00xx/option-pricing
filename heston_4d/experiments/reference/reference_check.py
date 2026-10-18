@@ -29,6 +29,7 @@ from time import perf_counter
 import numpy as np
 
 from experiments.records import pricing_sources, write_metadata
+from experiments.neural.common import keep_full_speed
 from src.heston_basket.engine import heston_estimate
 from src.heston_basket.model import HestonBasket, quantity_names
 from src.neural.coordinates import protocol_path
@@ -39,6 +40,8 @@ STUDY = ROOT/"experiments/config/neural/study.json"
 OUTPUT = ROOT/"results/reference_check_v1"
 STEPS = (1/8, 1/16, 1/32, 1/64, 1/128)
 WORKERS = 8
+
+keep_full_speed()   # Windows throttles windowless processes; this module also loads in pool workers
 
 
 def read_jsonl(path):

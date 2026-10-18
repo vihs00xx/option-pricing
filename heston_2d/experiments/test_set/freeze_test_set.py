@@ -25,6 +25,7 @@ import numpy as np
 from scipy.stats import qmc
 
 from experiments.records import ROOT, digest, pricing_sources, prepare_output, relative, write_csv, write_metadata
+from experiments.neural.common import keep_full_speed
 from src.heston_basket.engine import heston_estimate
 from src.heston_basket.model import HestonBasket, quantity_names
 from src.neural.coordinates import matrices, protocol_path, stock_correlation
@@ -35,6 +36,8 @@ FLOORS = {"price": 1e-4, "delta": 1e-4, "gamma": 1e-7, "vega": 1e-4, "theta": 1e
           "d": 1e-4, "correlation": 1e-4, "vol": 1e-4}
 PER_STOCK = ("v0", "kappa", "theta", "xi", "leverage")
 WORKERS = 8
+
+keep_full_speed()   # Windows throttles windowless processes; this module also loads in pool workers
 
 
 def pairs(d):

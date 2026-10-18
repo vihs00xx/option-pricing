@@ -56,13 +56,17 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--parallel", type=int, default=1)
     ap.add_argument("--threads", type=int, default=8)
-    ap.add_argument("--only", default=None, help="comma-separated level names to run (others skipped)")
+    ap.add_argument("--only", default=None,
+                    help="comma-separated level names to run, in this order of priority (others skipped)")
+    ap.add_argument("--stop-at", default=None,
+                    help="local time (YYYY-MM-DDTHH:MM) after which no new level starts; running ones finish")
     args = ap.parse_args()
     settings = load_settings()
+    stop = datetime.fromisoformat(args.stop_at) if args.stop_at else None
     pending = jobs(settings)
     if args.only:
-        keep = set(args.only.split(","))
-        pending = [j for j in pending if j[0][0] in keep]
+        order = args.only.split(",")
+        pending = sorted((j for j in pending if j[0][0] in order), key=lambda j: order.index(j[0][0]))
     done = lambda key: checkpoint_path(*key).exists()
     pending = [j for j in pending if not done(j[0])]
     running = {}
@@ -77,6 +81,9 @@ def main():
                 else:
                     failed.add(key)
                     log(f"FAILED {key} (exit {proc.returncode})")
+        if stop is not None and datetime.now() >= stop and pending:
+            log(f"stop time reached; not starting {[j[0] for j in pending]}")
+            pending = []
         for job in list(pending):
             if len(running) >= args.parallel:
                 break

@@ -365,8 +365,7 @@
     "dt": 0.015625,
     "points_ladder": [
       4096,
-      16384,
-      65536
+      16384
     ],
     "price_standard_error_target": 0.0005,
     "acceptance": "Climb the points per replicate until the price standard error is at most the target (currency units, strike 100); keep the first level that meets it. A case still above the target at the last level keeps that level and is flagged; no case is replaced.",
@@ -379,7 +378,7 @@
       "use": "Recorded only; never used to change a reference.",
       "points": "Every cross-check runs at min(accepted points, 16384) per replicate; the z-scores use both runs' standard errors. The bump-halving change is measured against the production seed at the same points."
     },
-    "check_points": 16384
+    "check_points": 4096
   },
   "separation": {
     "development_contracts": "experiments/config/reference/dev_contracts_v1.json",
@@ -393,5 +392,6 @@
     "Report every method on every split; do not drop cases after seeing results.",
     "Every reference carries a standard error and a time-step bias check; report method errors next to them, and do not read differences below about three reference standard errors as differences.",
     "Once any method is evaluated here, the cases are observed; later model changes need a new test set."
-  ]
+  ],
+  "laptop_edition": "Laptop edition (18 Oct 2026, for the CSE Tech Day poster): the build was cut to fit a laptop before anything was sealed. Points per replicate stop at 16,384 (65,536 for the lab PC) and the cross-checks run at 4,096."
 }

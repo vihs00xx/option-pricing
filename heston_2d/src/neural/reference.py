@@ -41,7 +41,19 @@ def labels(stocks):
 
 
 # ---------------------------------------------------------------- engine references
+def _full_speed():
+    """Opt this worker out of Windows power throttling, as train.py does for itself."""
+    if os.name == "nt" and not getattr(_full_speed, "done", False):
+        try:
+            from experiments.neural.common import keep_full_speed
+            keep_full_speed()
+        except ImportError:
+            pass
+        _full_speed.done = True
+
+
 def _estimate(task):
+    _full_speed()
     row, put, settings, seed, d = task
     from .coordinates import Stocks
     c = contract_of(Stocks(d), row, put)
