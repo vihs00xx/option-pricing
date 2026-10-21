@@ -1,0 +1,73 @@
+D5_similarity_seed0: Boundary-layer coordinate in the trunk: tanh(z / (3 sigma_ref sqrt(tau))) with sigma_ref = 0.35, so the trunk still sees coordinates only
+note: 7 other training run(s) active; this run's seconds are not an idle-machine training time
+parameters: 34433
+adam 500: monitor 0.06379 price 0.0138 pde 1.23e-05 boundary 6.23e-05 price 0.000223 derivatives 0.0064 [248s]
+adam 1000: monitor 0.05715 price 0.0121 pde 1.13e-05 boundary 2.75e-05 price 0.000135 derivatives 0.00362 [498s]
+adam 1500: monitor 0.05385 price 0.011 pde 1.04e-05 boundary 3.32e-05 price 0.000131 derivatives 0.00372 [743s]
+adam 2000: monitor 0.05063 price 0.0102 pde 1.3e-05 boundary 4.25e-05 price 0.000107 derivatives 0.00311 [991s]
+adam 2500: monitor 0.04743 price 0.00899 pde 1.52e-05 boundary 3.05e-05 price 8.85e-05 derivatives 0.00304 [1241s]
+adam 3000: monitor 0.04546 price 0.0095 pde 1.29e-05 boundary 3.58e-05 price 7.87e-05 derivatives 0.00254 [1488s]
+adam 3500: monitor 0.04348 price 0.00843 pde 9.09e-06 boundary 2.64e-05 price 7.88e-05 derivatives 0.00238 [1733s]
+adam 4000: monitor 0.04201 price 0.00802 pde 6.78e-06 boundary 2.74e-05 price 6.96e-05 derivatives 0.00239 [1979s]
+adam 4500: monitor 0.04098 price 0.00865 pde 5.59e-06 boundary 2.44e-05 price 7.54e-05 derivatives 0.00215 [2229s]
+adam 5000: monitor 0.04006 price 0.0082 pde 5.18e-06 boundary 1.81e-05 price 8.44e-05 derivatives 0.00227 [2480s]
+adam 5500: monitor 0.039 price 0.00753 pde 4.74e-06 boundary 1.34e-05 price 8.18e-05 derivatives 0.00218 [2728s]
+adam 6000: monitor 0.03832 price 0.00727 pde 4.5e-06 boundary 1.44e-05 price 6.09e-05 derivatives 0.00184 [2978s]
+adam 6500: monitor 0.03761 price 0.00766 pde 3.79e-06 boundary 1.21e-05 price 6.1e-05 derivatives 0.00192 [3226s]
+adam 7000: monitor 0.03685 price 0.00732 pde 3.45e-06 boundary 1.42e-05 price 7.5e-05 derivatives 0.00179 [3476s]
+adam 7500: monitor 0.03668 price 0.00703 pde 3.92e-06 boundary 7.02e-06 price 6.92e-05 derivatives 0.00191 [3726s]
+adam 8000: monitor 0.03617 price 0.007 pde 2.96e-06 boundary 8.23e-06 price 6.15e-05 derivatives 0.00177 [3977s]
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\LNMIIT\Documents\option-pricing\4d\experiments\neural\train.py", line 122, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\4d\experiments\neural\train.py", line 94, in main
+    record = trainer.run(seed, resume)
+  File "C:\Users\LNMIIT\Documents\option-pricing\4d\src\neural\training.py", line 431, in run
+    adam_seconds = self.adam(seed, resume_path)
+  File "C:\Users\LNMIIT\Documents\option-pricing\4d\src\neural\training.py", line 346, in adam
+    total, terms = self.losses(generator, batch)
+                   ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\4d\src\neural\training.py", line 288, in losses
+    predicted = derivative_labels(self.stocks, self.model.call, features, create_graph=True)
+  File "C:\Users\LNMIIT\Documents\option-pricing\4d\src\neural\reference.py", line 179, in derivative_labels
+    return _derivatives(stocks, call_fn, features, True)
+  File "C:\Users\LNMIIT\Documents\option-pricing\4d\src\neural\reference.py", line 193, in _derivatives
+    row, = torch.autograd.grad(first[:, i].sum(), y, create_graph=create_graph, retain_graph=True)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\.venv\Lib\site-packages\torch\autograd\__init__.py", line 503, in grad
+    result = _engine_run_backward(
+        outputs,
+    ...<5 lines>...
+        accumulate_grad=False,
+    )
+  File "C:\Users\LNMIIT\Documents\option-pricing\.venv\Lib\site-packages\torch\autograd\graph.py", line 829, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        t_outputs, *args, **kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )  # Calls into the C++ engine to run the backward pass
+    ^
+KeyboardInterrupt
+D5_similarity_seed0: Boundary-layer coordinate in the trunk: tanh(z / (3 sigma_ref sqrt(tau))) with sigma_ref = 0.35, so the trunk still sees coordinates only
+note: 17 other training run(s) active; this run's seconds are not an idle-machine training time
+parameters: 34433
+resumed after step 8000
+adam 8500: monitor 0.03555 price 0.00652 pde 3.88e-06 boundary 8.29e-06 price 6.61e-05 derivatives 0.00176 [5167s]
+adam 9000: monitor 0.03517 price 0.00636 pde 2.99e-06 boundary 6.43e-06 price 5.42e-05 derivatives 0.00175 [6526s]
+adam 9500: monitor 0.03504 price 0.00645 pde 3.23e-06 boundary 7.81e-06 price 5.71e-05 derivatives 0.00175 [7762s]
+adam 10000: monitor 0.03467 price 0.0062 pde 3.51e-06 boundary 8.75e-06 price 5.02e-05 derivatives 0.00167 [8998s]
+adam 10500: monitor 0.03444 price 0.00629 pde 2.94e-06 boundary 9.34e-06 price 4.77e-05 derivatives 0.00156 [10228s]
+adam 11000: monitor 0.03418 price 0.00622 pde 3.19e-06 boundary 8.14e-06 price 4.03e-05 derivatives 0.00167 [11467s]
+adam 11500: monitor 0.03385 price 0.00587 pde 3.64e-06 boundary 1.04e-05 price 4.72e-05 derivatives 0.00164 [12705s]
+adam 12000: monitor 0.03355 price 0.00599 pde 3.94e-06 boundary 7.32e-06 price 4.74e-05 derivatives 0.00144 [13944s]
+adam 12500: monitor 0.03342 price 0.00602 pde 2.84e-06 boundary 8.06e-06 price 4.04e-05 derivatives 0.00138 [15177s]
+adam 13000: monitor 0.03329 price 0.00589 pde 3.1e-06 boundary 6.9e-06 price 4.12e-05 derivatives 0.00152 [16410s]
+adam 13500: monitor 0.03309 price 0.00614 pde 3.48e-06 boundary 9.53e-06 price 5.09e-05 derivatives 0.00139 [17684s]
+adam 14000: monitor 0.03294 price 0.00572 pde 3.11e-06 boundary 8.96e-06 price 4.27e-05 derivatives 0.00141 [18948s]
+adam 14500: monitor 0.03285 price 0.00576 pde 3.37e-06 boundary 6.13e-06 price 3.94e-05 derivatives 0.00144 [20229s]
+adam 15000: monitor 0.03282 price 0.00582 pde 3.87e-06 boundary 8.4e-06 price 4.28e-05 derivatives 0.0014 [21521s]
+validation: score 0.03333 price RMSE 0.0722
+short_validation: score 0.01357 price RMSE 0.00484

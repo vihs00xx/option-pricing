@@ -1,0 +1,106 @@
+D6_lbfgs_seed0: Quasi-Newton polish: full-batch L-BFGS warm-started from D5 on 4,096 labelled contracts and 4,096 collocation points
+note: 23 other training run(s) active; this run's seconds are not an idle-machine training time
+parameters: 34433
+start 0: monitor 0.03282 price 0.00582  [0s]
+lbfgs 50: monitor 0.03321 price 0.00564 pde 3.44e-06 boundary 5.56e-06 price 3.39e-05 derivatives 0.00133 [336s]
+lbfgs 100: monitor 0.03336 price 0.00574 pde 3.52e-06 boundary 5.1e-06 price 3.28e-05 derivatives 0.00127 [651s]
+lbfgs 150: monitor 0.03328 price 0.00565 pde 3.59e-06 boundary 4.78e-06 price 3.07e-05 derivatives 0.00122 [990s]
+lbfgs 200: monitor 0.03316 price 0.00549 pde 3.77e-06 boundary 4.59e-06 price 2.89e-05 derivatives 0.00117 [1323s]
+lbfgs 250: monitor 0.0331 price 0.00545 pde 3.7e-06 boundary 4.35e-06 price 2.79e-05 derivatives 0.00113 [1661s]
+lbfgs 300: monitor 0.03278 price 0.00537 pde 3.6e-06 boundary 4.24e-06 price 2.66e-05 derivatives 0.00109 [1993s]
+lbfgs 350: monitor 0.03246 price 0.00533 pde 3.62e-06 boundary 4.48e-06 price 2.43e-05 derivatives 0.00105 [2320s]
+lbfgs 400: monitor 0.03197 price 0.00509 pde 3.65e-06 boundary 4.34e-06 price 2.31e-05 derivatives 0.00101 [2658s]
+D6_lbfgs_seed0: Quasi-Newton polish: full-batch L-BFGS warm-started from D5 on 4,096 labelled contracts and 4,096 collocation points
+note: 9 other training run(s) active; this run's seconds are not an idle-machine training time
+parameters: 34433
+start 0: monitor 0.03282 price 0.00582  [0s]
+lbfgs 50: monitor 0.03321 price 0.00564 pde 3.44e-06 boundary 5.56e-06 price 3.39e-05 derivatives 0.00133 [187s]
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\LNMIIT\Documents\option-pricing\4d\experiments\neural\train.py", line 122, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\4d\experiments\neural\train.py", line 94, in main
+    record = trainer.run(seed, resume)
+  File "C:\Users\LNMIIT\Documents\option-pricing\4d\src\neural\training.py", line 435, in run
+    self.lbfgs(seed)
+    ~~~~~~~~~~^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\4d\src\neural\training.py", line 387, in lbfgs
+    loss = optimizer.step(closure)
+  File "C:\Users\LNMIIT\Documents\option-pricing\.venv\Lib\site-packages\torch\optim\optimizer.py", line 516, in wrapper
+    out = func(*args, **kwargs)
+  File "C:\Users\LNMIIT\Documents\option-pricing\.venv\Lib\site-packages\torch\utils\_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+  File "C:\Users\LNMIIT\Documents\option-pricing\.venv\Lib\site-packages\torch\optim\lbfgs.py", line 444, in step
+    loss, flat_grad, t, ls_func_evals = _strong_wolfe(
+                                        ~~~~~~~~~~~~~^
+        obj_func, x_init, t, d, loss, flat_grad, gtd
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\LNMIIT\Documents\option-pricing\.venv\Lib\site-packages\torch\optim\lbfgs.py", line 48, in _strong_wolfe
+    f_new, g_new = obj_func(x, t, d)
+                   ~~~~~~~~^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\.venv\Lib\site-packages\torch\optim\lbfgs.py", line 442, in obj_func
+    return self._directional_evaluate(closure, x, t, d)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\.venv\Lib\site-packages\torch\optim\lbfgs.py", line 296, in _directional_evaluate
+    loss = float(closure())
+                 ~~~~~~~^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\.venv\Lib\site-packages\torch\utils\_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+  File "C:\Users\LNMIIT\Documents\option-pricing\4d\src\neural\training.py", line 380, in closure
+    total.backward()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\.venv\Lib\site-packages\torch\_tensor.py", line 647, in backward
+    torch.autograd.backward(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        self, gradient, retain_graph, create_graph, inputs=inputs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\LNMIIT\Documents\option-pricing\.venv\Lib\site-packages\torch\autograd\__init__.py", line 354, in backward
+    _engine_run_backward(
+    ~~~~~~~~~~~~~~~~~~~~^
+        tensors,
+        ^^^^^^^^
+    ...<5 lines>...
+        accumulate_grad=True,
+        ^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\LNMIIT\Documents\option-pricing\.venv\Lib\site-packages\torch\autograd\graph.py", line 829, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        t_outputs, *args, **kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )  # Calls into the C++ engine to run the backward pass
+    ^
+KeyboardInterrupt
+D6_lbfgs_seed0: Quasi-Newton polish: full-batch L-BFGS warm-started from D5 on 4,096 labelled contracts and 4,096 collocation points
+note: 21 other training run(s) active; this run's seconds are not an idle-machine training time
+parameters: 34433
+start 0: monitor 0.03282 price 0.00582  [0s]
+lbfgs 50: monitor 0.03321 price 0.00564 pde 3.44e-06 boundary 5.56e-06 price 3.39e-05 derivatives 0.00133 [492s]
+lbfgs 100: monitor 0.03336 price 0.00574 pde 3.52e-06 boundary 5.1e-06 price 3.28e-05 derivatives 0.00127 [977s]
+lbfgs 150: monitor 0.03328 price 0.00563 pde 3.6e-06 boundary 4.75e-06 price 3.05e-05 derivatives 0.00122 [1488s]
+lbfgs 200: monitor 0.03319 price 0.00558 pde 3.74e-06 boundary 4.51e-06 price 2.89e-05 derivatives 0.00117 [2002s]
+lbfgs 250: monitor 0.03308 price 0.00545 pde 3.68e-06 boundary 4.31e-06 price 2.76e-05 derivatives 0.00113 [2531s]
+lbfgs 300: monitor 0.03275 price 0.00533 pde 3.61e-06 boundary 4.3e-06 price 2.62e-05 derivatives 0.00108 [3069s]
+lbfgs 350: monitor 0.03246 price 0.00522 pde 3.64e-06 boundary 4.51e-06 price 2.38e-05 derivatives 0.00104 [3598s]
+lbfgs 400: monitor 0.03187 price 0.00512 pde 3.66e-06 boundary 4.2e-06 price 2.3e-05 derivatives 0.000999 [4156s]
+lbfgs 450: monitor 0.03174 price 0.00495 pde 3.79e-06 boundary 4.24e-06 price 2.15e-05 derivatives 0.000966 [4695s]
+lbfgs 500: monitor 0.03145 price 0.00497 pde 3.67e-06 boundary 4.36e-06 price 2.08e-05 derivatives 0.000935 [5215s]
+lbfgs 550: monitor 0.03111 price 0.00492 pde 3.63e-06 boundary 4.42e-06 price 1.98e-05 derivatives 0.000902 [5752s]
+lbfgs 600: monitor 0.03079 price 0.00483 pde 3.47e-06 boundary 4.2e-06 price 1.92e-05 derivatives 0.000872 [6307s]
+lbfgs 650: monitor 0.03052 price 0.00471 pde 3.36e-06 boundary 4.15e-06 price 1.75e-05 derivatives 0.000843 [6812s]
+lbfgs 700: monitor 0.03035 price 0.00469 pde 3.29e-06 boundary 3.86e-06 price 1.69e-05 derivatives 0.000818 [7336s]
+lbfgs 750: monitor 0.03004 price 0.00457 pde 3.19e-06 boundary 3.84e-06 price 1.63e-05 derivatives 0.000794 [7874s]
+lbfgs 800: monitor 0.02978 price 0.00451 pde 3.14e-06 boundary 4.03e-06 price 1.55e-05 derivatives 0.00077 [8400s]
+lbfgs 850: monitor 0.02951 price 0.00448 pde 3.05e-06 boundary 3.7e-06 price 1.49e-05 derivatives 0.000747 [8902s]
+lbfgs 900: monitor 0.02926 price 0.00437 pde 3.02e-06 boundary 3.61e-06 price 1.42e-05 derivatives 0.000728 [9405s]
+lbfgs 950: monitor 0.02898 price 0.00426 pde 3.02e-06 boundary 3.58e-06 price 1.37e-05 derivatives 0.000708 [9939s]
+lbfgs 1000: monitor 0.02887 price 0.00422 pde 2.92e-06 boundary 3.26e-06 price 1.32e-05 derivatives 0.000692 [10464s]
+validation: score 0.0286 price RMSE 0.0536
+short_validation: score 0.0132 price RMSE 0.0056

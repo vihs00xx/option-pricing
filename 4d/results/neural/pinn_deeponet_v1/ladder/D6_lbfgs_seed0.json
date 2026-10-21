@@ -1,0 +1,456 @@
+{
+  "level": "D6_lbfgs",
+  "family": "deeponet",
+  "seed": 0,
+  "technique": "Quasi-Newton polish: full-batch L-BFGS warm-started from D5 on 4,096 labelled contracts and 4,096 collocation points",
+  "settings": {
+    "model": {
+      "layout": "reduced",
+      "output": "levy",
+      "width": 64,
+      "depth": 4,
+      "rank": 64,
+      "similarity": 0.35
+    },
+    "loss": {
+      "price": 1.0,
+      "derivatives": 1.0,
+      "pde": 1.0,
+      "boundary": 1.0
+    },
+    "sampling": {
+      "focus": 0.7,
+      "focus_z": [
+        -0.6,
+        0.55
+      ],
+      "tau_power": 2.0,
+      "weight": "time"
+    },
+    "data_contracts": 32768,
+    "batch": {
+      "data": 1024,
+      "collocation": 2048,
+      "boundary": 256
+    },
+    "optimizer": {
+      "adam_steps": 0,
+      "learning_rate": 0.002,
+      "final_learning_rate": 2e-05,
+      "check_every": 500,
+      "lbfgs_iterations": 1000,
+      "lbfgs_chunk": 50,
+      "lbfgs_history": 50,
+      "lbfgs_batch": {
+        "data": 4096,
+        "collocation": 4096,
+        "boundary": 512
+      }
+    },
+    "family": "deeponet",
+    "technique": "Quasi-Newton polish: full-batch L-BFGS warm-started from D5 on 4,096 labelled contracts and 4,096 collocation points",
+    "computational_domain": {
+      "z": [
+        -3.0,
+        2.5
+      ],
+      "share_floor": 0.01,
+      "note": "Spatial extent of the PDE problem in z = log basket forward moneyness and the forward shares s_i >= share_floor (the simplex), like a grid solver's far boundary. The training domain maps into z in [-0.52, 0.46] and shares of at least about 0.04. sigma, the correlation matrices (entries in [-0.5, 0.9], smallest eigenvalue >= 0.05) and the maturity cap are the protocol's training domain; tau starts at 0 because the PDE starts at the payoff."
+    },
+    "warm_start": "D5_similarity"
+  },
+  "source_sha256": {
+    "src/neural/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/neural/coordinates.py": "e7fef60b480b625a0b6d4dfbb65946346397d390f08e9cb2f3d2cc729c0f11e7",
+    "src/neural/deeponet.py": "a83222460641d6ef4b99ab1d6e364e6260476ca03558d31c574b56887a49d1b1",
+    "src/neural/monte_carlo.py": "9f1c1d8768e31b95cfe2d8eb8539849ee44dc622f835ea726de058b38ee4244c",
+    "src/neural/networks.py": "e1ff20083e05a94044e5fb2429cd4c75eda1e96cd8b041557692771bc6c452f5",
+    "src/neural/nys_newton_cg.py": "ed35565688cda8e0733d2506babe5cc8abd49f87caa90208f9d83f2094fff6d3",
+    "src/neural/pde.py": "1bc47a5c6f776f58eb926ffecf5c378bcbf30fd4ace598237134abd653db4039",
+    "src/neural/pinn.py": "93e9373b1f161bca1a22087a87e9070828e6f47b05b21d844055a441f32e9c91",
+    "src/neural/reference.py": "6cd04a636e3994dd633fe03dbdda1562674cb8b931f287363087f2093995493f",
+    "src/neural/training.py": "eda985726bbdb5d6b070b9c9dcb01694b602603039e33b58b97c09b548f0b5ed",
+    "experiments/neural/train.py": "7f4336c5631c657ed737026955718b874aebef349075f35953c370de8c8d6cb1",
+    "experiments/neural/common.py": "48c04578807cfb9ee9951e26e716d75c7e344cbebfb24474d816b0493281f0fc",
+    "experiments/config/neural/study.json": "5e86969facdce5726a82705eb074599f1cf935ba6123be2f96e8a8532aebc261",
+    "experiments/config/neural/pinn_ladder.json": "4a613ffb8d67b6246138635a5c9495f5cb65267351a87b6f7c50fceea206a445",
+    "experiments/config/neural/deeponet_ladder.json": "dd12b836f3bc01e3f6a4da89e684a611dec7310430a4e1344e1bbef42fc19a32"
+  },
+  "parameters": 34433,
+  "scores": {
+    "validation": {
+      "score": 0.02859882138321991,
+      "ratios": {
+        "price": 0.004144991562145211,
+        "delta_1": 0.00805688954258663,
+        "delta_2": 0.007460122397690862,
+        "delta_3": 0.008012992492428688,
+        "delta_4": 0.009270552724357447,
+        "gamma_11": 0.027404654162779565,
+        "gamma_12": 0.02406487992502573,
+        "gamma_13": 0.023497353339260577,
+        "gamma_14": 0.024283046309748445,
+        "gamma_22": 0.026789959491105925,
+        "gamma_23": 0.023651759377424534,
+        "gamma_24": 0.023079159006987027,
+        "gamma_33": 0.0271458883084748,
+        "gamma_34": 0.024164230282516894,
+        "gamma_44": 0.029354220194547666,
+        "vega_1": 0.046252336703329525,
+        "vega_2": 0.045253979073372225,
+        "vega_3": 0.047358032079829644,
+        "vega_4": 0.05133279509055836,
+        "theta": 0.011672551624181833,
+        "rho": 0.008168872862078257,
+        "correlation_12": 0.04396970391338278,
+        "correlation_13": 0.04323743916914186,
+        "correlation_14": 0.04527485393963972,
+        "correlation_23": 0.04448530820880762,
+        "correlation_24": 0.04760067580706065,
+        "correlation_34": 0.04718092975847521
+      },
+      "rmse": {
+        "price": 0.05359791166819528,
+        "delta_1": 0.001299639100301361,
+        "delta_2": 0.0012633665092530411,
+        "delta_3": 0.001297447598600503,
+        "delta_4": 0.0014808661713656794,
+        "gamma_11": 5.857393325907361e-05,
+        "gamma_12": 3.140932047854703e-05,
+        "gamma_13": 3.081404129549408e-05,
+        "gamma_14": 3.140353442659547e-05,
+        "gamma_22": 5.7963444794700604e-05,
+        "gamma_23": 3.1330641226836724e-05,
+        "gamma_24": 3.023475805046077e-05,
+        "gamma_33": 5.8761724369229105e-05,
+        "gamma_34": 3.1540713247144654e-05,
+        "gamma_44": 6.342102499455296e-05,
+        "vega_1": 0.3256055339156868,
+        "vega_2": 0.31910772742088106,
+        "vega_3": 0.3348808331025729,
+        "vega_4": 0.36311768079843304,
+        "theta": 0.06458853404392799,
+        "rho": 0.5213069836717846,
+        "correlation_12": 0.054090561467453085,
+        "correlation_13": 0.053335424568297714,
+        "correlation_14": 0.05577675484817968,
+        "correlation_23": 0.05494047750001075,
+        "correlation_24": 0.059001642190887535,
+        "correlation_34": 0.05790974235388192
+      },
+      "seconds": 1.4918394999986049
+    },
+    "short_validation": {
+      "score": 0.013203810827663821,
+      "ratios": {
+        "price": 0.000657414667243983,
+        "delta_1": 0.00108340782340727,
+        "delta_2": 0.0010265458947507666,
+        "delta_3": 0.001208529823358013,
+        "delta_4": 0.0011550040818476771,
+        "gamma_11": 0.006062663349567708,
+        "gamma_12": 0.005449559275023309,
+        "gamma_13": 0.005874809772713153,
+        "gamma_14": 0.00551143902599645,
+        "gamma_22": 0.005865280080575008,
+        "gamma_23": 0.0054353070923541125,
+        "gamma_24": 0.005442586706466871,
+        "gamma_33": 0.005729968202630315,
+        "gamma_34": 0.005539082561694014,
+        "gamma_44": 0.0052915260730746205,
+        "vega_1": 0.036775679406209016,
+        "vega_2": 0.030131116867088453,
+        "vega_3": 0.03280602827376602,
+        "vega_4": 0.034079633367222466,
+        "theta": 0.010759134173790135,
+        "rho": 0.0013211654358927139,
+        "correlation_12": 0.02644629024971023,
+        "correlation_13": 0.02516879361496517,
+        "correlation_14": 0.02441174553073445,
+        "correlation_23": 0.023628453139466446,
+        "correlation_24": 0.02540811448896947,
+        "correlation_34": 0.0242336133684054
+      },
+      "rmse": {
+        "price": 0.005603044164597372,
+        "delta_1": 0.00022243523193331491,
+        "delta_2": 0.00022952756010613624,
+        "delta_3": 0.0002476203492402744,
+        "delta_4": 0.00023679969905101924,
+        "gamma_11": 3.6889200326995015e-05,
+        "gamma_12": 2.0750640734148653e-05,
+        "gamma_13": 2.2347052549604697e-05,
+        "gamma_14": 2.117404915593032e-05,
+        "gamma_22": 3.46374553017565e-05,
+        "gamma_23": 2.119731374234241e-05,
+        "gamma_24": 2.10569421463244e-05,
+        "gamma_33": 3.381369382321722e-05,
+        "gamma_34": 2.146532478333177e-05,
+        "gamma_44": 3.2213717769027846e-05,
+        "vega_1": 0.02539500212156014,
+        "vega_2": 0.020564338981502873,
+        "vega_3": 0.023302004770420492,
+        "vega_4": 0.02396155976117281,
+        "theta": 0.17489371918524343,
+        "rho": 0.0030119247807888607,
+        "correlation_12": 0.0035303235928933197,
+        "correlation_13": 0.003392088779481196,
+        "correlation_14": 0.0032523066524750904,
+        "correlation_23": 0.0031572060108623194,
+        "correlation_24": 0.003390639584100714,
+        "correlation_34": 0.0032573681274508767
+      },
+      "seconds": 1.4070038000063505
+    }
+  },
+  "environment": {
+    "python": "3.13.16",
+    "torch": "2.8.0+cpu",
+    "numpy": "2.1.0",
+    "threads": 2,
+    "processor": "Intel64 Family 6 Model 151 Stepping 2, GenuineIntel"
+  },
+  "machine_load": {
+    "start": {
+      "other_training_runs": 21,
+      "cpu_percent": 27.5
+    },
+    "end": {
+      "other_training_runs": 29,
+      "cpu_percent": 85.2
+    }
+  },
+  "adam_seconds": 0.0,
+  "total_seconds": 10466.958626299995,
+  "best_monitor": 0.028872867261991373,
+  "best_step": "lbfgs 1000",
+  "history": [
+    {
+      "stage": "start",
+      "step": 0,
+      "seconds": 0.0,
+      "monitor": 0.03281539348249626,
+      "price_ratio": 0.005816819294276131
+    },
+    {
+      "stage": "lbfgs",
+      "step": 50,
+      "seconds": 492.2,
+      "monitor": 0.0332149128209995,
+      "price_ratio": 0.005641159637398446,
+      "pde": 3.439326061482677e-06,
+      "boundary": 5.558121390967859e-06,
+      "price": 3.393774382077095e-05,
+      "derivatives": 0.0013256663474196103
+    },
+    {
+      "stage": "lbfgs",
+      "step": 100,
+      "seconds": 977.5,
+      "monitor": 0.03336240391660397,
+      "price_ratio": 0.005736786685231934,
+      "pde": 3.5183129493838267e-06,
+      "boundary": 5.098837514249027e-06,
+      "price": 3.275142882110609e-05,
+      "derivatives": 0.0012710505770220032
+    },
+    {
+      "stage": "lbfgs",
+      "step": 150,
+      "seconds": 1487.8,
+      "monitor": 0.03327990418926999,
+      "price_ratio": 0.005632792819224705,
+      "pde": 3.6035477117034772e-06,
+      "boundary": 4.7467633517284676e-06,
+      "price": 3.049342211837326e-05,
+      "derivatives": 0.001217056702549538
+    },
+    {
+      "stage": "lbfgs",
+      "step": 200,
+      "seconds": 2001.7,
+      "monitor": 0.03319345644777693,
+      "price_ratio": 0.005581141487096245,
+      "pde": 3.7422993028317456e-06,
+      "boundary": 4.505384975709869e-06,
+      "price": 2.8932976806383684e-05,
+      "derivatives": 0.0011678162008003038
+    },
+    {
+      "stage": "lbfgs",
+      "step": 250,
+      "seconds": 2530.5,
+      "monitor": 0.0330830294203532,
+      "price_ratio": 0.005447495200917663,
+      "pde": 3.6826441505556794e-06,
+      "boundary": 4.309504855562809e-06,
+      "price": 2.7630455141407227e-05,
+      "derivatives": 0.0011251694979242033
+    },
+    {
+      "stage": "lbfgs",
+      "step": 300,
+      "seconds": 3068.6,
+      "monitor": 0.0327538554986251,
+      "price_ratio": 0.005330075219064865,
+      "pde": 3.606860059249881e-06,
+      "boundary": 4.296765964640304e-06,
+      "price": 2.624315109567624e-05,
+      "derivatives": 0.0010798405680395174
+    },
+    {
+      "stage": "lbfgs",
+      "step": 350,
+      "seconds": 3597.9,
+      "monitor": 0.032459441556714555,
+      "price_ratio": 0.0052160838529192784,
+      "pde": 3.638483469591489e-06,
+      "boundary": 4.505075551008706e-06,
+      "price": 2.382299507528679e-05,
+      "derivatives": 0.0010371090764676454
+    },
+    {
+      "stage": "lbfgs",
+      "step": 400,
+      "seconds": 4156.3,
+      "monitor": 0.0318672619033162,
+      "price_ratio": 0.005117819734033821,
+      "pde": 3.6565390475226417e-06,
+      "boundary": 4.195610376665518e-06,
+      "price": 2.3032052493853884e-05,
+      "derivatives": 0.000998806304618984
+    },
+    {
+      "stage": "lbfgs",
+      "step": 450,
+      "seconds": 4695.1,
+      "monitor": 0.03173804584893193,
+      "price_ratio": 0.004951854974045417,
+      "pde": 3.7894133755948166e-06,
+      "boundary": 4.235012671504358e-06,
+      "price": 2.14796847032215e-05,
+      "derivatives": 0.0009661960976741273
+    },
+    {
+      "stage": "lbfgs",
+      "step": 500,
+      "seconds": 5215.1,
+      "monitor": 0.03144869022352602,
+      "price_ratio": 0.004968621006547497,
+      "pde": 3.6652055950560204e-06,
+      "boundary": 4.357215752821384e-06,
+      "price": 2.0750338936122345e-05,
+      "derivatives": 0.0009350479100063027
+    },
+    {
+      "stage": "lbfgs",
+      "step": 550,
+      "seconds": 5752.4,
+      "monitor": 0.03110648447832565,
+      "price_ratio": 0.004915113637829533,
+      "pde": 3.6327823489345925e-06,
+      "boundary": 4.4217389531817145e-06,
+      "price": 1.975061604571777e-05,
+      "derivatives": 0.0009022788454801539
+    },
+    {
+      "stage": "lbfgs",
+      "step": 600,
+      "seconds": 6306.5,
+      "monitor": 0.030792318055829233,
+      "price_ratio": 0.004828005059658578,
+      "pde": 3.470515625245465e-06,
+      "boundary": 4.203166547898062e-06,
+      "price": 1.9176476627685146e-05,
+      "derivatives": 0.0008719901761334389
+    },
+    {
+      "stage": "lbfgs",
+      "step": 650,
+      "seconds": 6811.6,
+      "monitor": 0.030520357087351298,
+      "price_ratio": 0.004710378342037512,
+      "pde": 3.3620488841649195e-06,
+      "boundary": 4.147590157465665e-06,
+      "price": 1.754268029475469e-05,
+      "derivatives": 0.0008434432205710169
+    },
+    {
+      "stage": "lbfgs",
+      "step": 700,
+      "seconds": 7336.1,
+      "monitor": 0.030353392175422513,
+      "price_ratio": 0.004691270682286998,
+      "pde": 3.2911174396679032e-06,
+      "boundary": 3.864703891612862e-06,
+      "price": 1.6887591884142765e-05,
+      "derivatives": 0.0008177675599570054
+    },
+    {
+      "stage": "lbfgs",
+      "step": 750,
+      "seconds": 7874.2,
+      "monitor": 0.030038506423489084,
+      "price_ratio": 0.004573011467133511,
+      "pde": 3.1906421124599993e-06,
+      "boundary": 3.837893489790654e-06,
+      "price": 1.6262253601424407e-05,
+      "derivatives": 0.0007942295354992669
+    },
+    {
+      "stage": "lbfgs",
+      "step": 800,
+      "seconds": 8400.3,
+      "monitor": 0.029782852196103944,
+      "price_ratio": 0.004512731938839746,
+      "pde": 3.1433199392099795e-06,
+      "boundary": 4.03320310209435e-06,
+      "price": 1.553756822356454e-05,
+      "derivatives": 0.0007699303273981809
+    },
+    {
+      "stage": "lbfgs",
+      "step": 850,
+      "seconds": 8902.2,
+      "monitor": 0.02950758301436737,
+      "price_ratio": 0.004478707308057546,
+      "pde": 3.0472662003291687e-06,
+      "boundary": 3.699215831653995e-06,
+      "price": 1.48532964157542e-05,
+      "derivatives": 0.0007467349893803276
+    },
+    {
+      "stage": "lbfgs",
+      "step": 900,
+      "seconds": 9405.2,
+      "monitor": 0.029255995292186882,
+      "price_ratio": 0.0043727082643001906,
+      "pde": 3.021351395994388e-06,
+      "boundary": 3.606942950795181e-06,
+      "price": 1.4192388240390814e-05,
+      "derivatives": 0.0007278024051792349
+    },
+    {
+      "stage": "lbfgs",
+      "step": 950,
+      "seconds": 9938.7,
+      "monitor": 0.028980206964049574,
+      "price_ratio": 0.004260487408304262,
+      "pde": 3.023761719002304e-06,
+      "boundary": 3.583105428285878e-06,
+      "price": 1.3712234254359171e-05,
+      "derivatives": 0.0007083845492517145
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1000,
+      "seconds": 10464.3,
+      "monitor": 0.028872867261991373,
+      "price_ratio": 0.004224256797223868,
+      "pde": 2.923191503091451e-06,
+      "boundary": 3.2602764322827472e-06,
+      "price": 1.3218826910086692e-05,
+      "derivatives": 0.0006919490850231836
+    }
+  ]
+}

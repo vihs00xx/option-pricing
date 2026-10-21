@@ -1,0 +1,130 @@
+D8_envelope_seed2: Enveloped correction: c = Levy + tau * phi(d_2) * <branch, trunk>, trained from a fresh start through the Adam and L-BFGS stages
+note: 23 other training run(s) active; this run's seconds are not an idle-machine training time
+parameters: 34433
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\experiments\neural\train.py", line 123, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\experiments\neural\train.py", line 94, in main
+    record = trainer.run(seed, resume)
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\neural\training.py", line 479, in run
+    adam_seconds = self.adam(seed, resume_path)
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\neural\training.py", line 394, in adam
+    total, terms = self.losses(generator, batch)
+                   ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\neural\training.py", line 296, in losses
+    terms["pde"] = self._residual(self._collocation(generator, batch["collocation"])).pow(2).mean()
+                   ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\neural\training.py", line 258, in _residual
+    residual, _ = reduced_residual(self.stocks, self.model.call, points)
+                  ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\neural\pde.py", line 69, in reduced_residual
+    g = reduced_derivatives(stocks, call_fn, features)
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\neural\pde.py", line 42, in reduced_derivatives
+    row_y, row_v = torch.autograd.grad(cy[:, i].sum(), (y, v), create_graph=True)
+                   ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\.venv\Lib\site-packages\torch\autograd\__init__.py", line 503, in grad
+    result = _engine_run_backward(
+        outputs,
+    ...<5 lines>...
+        accumulate_grad=False,
+    )
+  File "C:\Users\LNMIIT\Documents\option-pricing\.venv\Lib\site-packages\torch\autograd\graph.py", line 829, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        t_outputs, *args, **kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )  # Calls into the C++ engine to run the backward pass
+    ^
+KeyboardInterrupt
+D8_envelope_seed2: Enveloped correction: c = Levy + tau * phi(d_2) * <branch, trunk>, trained from a fresh start through the Adam and L-BFGS stages
+note: 23 other training run(s) active; this run's seconds are not an idle-machine training time
+parameters: 34433
+adam 500: monitor 0.2229 price 0.019 pde 0.000152 boundary 4.43e-07 zero_variance 0.000105 variance_cap 0.000831 price 0.000197 derivatives 0.00136 [2006s]
+adam 1000: monitor 0.174 price 0.012 pde 0.000158 boundary 1.19e-07 zero_variance 0.000155 variance_cap 0.000662 price 0.000205 derivatives 0.00087 [3908s]
+adam 1500: monitor 0.167 price 0.01 pde 0.000123 boundary 1.59e-07 zero_variance 0.000128 variance_cap 0.000591 price 0.000159 derivatives 0.000437 [5807s]
+adam 2000: monitor 0.1473 price 0.00885 pde 0.000147 boundary 1.46e-08 zero_variance 8.31e-05 variance_cap 0.000439 price 0.00017 derivatives 0.000651 [7701s]
+adam 2500: monitor 0.1552 price 0.0102 pde 0.000114 boundary 6.17e-07 zero_variance 7.67e-05 variance_cap 0.000216 price 0.000123 derivatives 0.000426 [9599s]
+adam 3000: monitor 0.1367 price 0.0098 pde 0.000115 boundary 2.43e-09 zero_variance 5.78e-05 variance_cap 0.000229 price 7.56e-05 derivatives 0.000494 [11492s]
+adam 3500: monitor 0.1363 price 0.00807 pde 0.000157 boundary 1.38e-07 zero_variance 6.06e-05 variance_cap 0.000162 price 0.0001 derivatives 0.00047 [13419s]
+adam 4000: monitor 0.1349 price 0.0074 pde 0.000125 boundary 5.47e-09 zero_variance 3.82e-05 variance_cap 0.000163 price 7.92e-05 derivatives 0.00042 [15349s]
+adam 4500: monitor 0.1277 price 0.00705 pde 0.000126 boundary 5.42e-09 zero_variance 5.5e-05 variance_cap 0.000108 price 7.09e-05 derivatives 0.000336 [17324s]
+adam 5000: monitor 0.1308 price 0.00665 pde 0.000137 boundary 2.07e-07 zero_variance 4.7e-05 variance_cap 0.000101 price 5.79e-05 derivatives 0.000346 [19375s]
+D8_envelope_seed2: Enveloped correction: c = Levy + tau * phi(d_2) * <branch, trunk>, trained from a fresh start through the Adam and L-BFGS stages
+note: 19 other training run(s) active; this run's seconds are not an idle-machine training time
+parameters: 34433
+resumed after step 5000
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\experiments\neural\train.py", line 123, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\experiments\neural\train.py", line 94, in main
+    record = trainer.run(seed, resume)
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\neural\training.py", line 479, in run
+    adam_seconds = self.adam(seed, resume_path)
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\neural\training.py", line 394, in adam
+    total, terms = self.losses(generator, batch)
+                   ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\neural\training.py", line 314, in losses
+    points, _ = sample_variance_face(self.stocks, generator, batch["zero_variance"], self.box, self.sampling,
+                ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                     self.box["v_1"][0])
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\neural\training.py", line 146, in sample_variance_face
+    features = sample_reduced(stocks, generator, count, box, sampling)
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\neural\training.py", line 123, in sample_reduced
+    z = _uniform(generator, count, *box["z"])
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\neural\training.py", line 82, in _uniform
+    return low+(high-low)*torch.rand(count, generator=generator, dtype=torch.float64)
+                          ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+D8_envelope_seed2: Enveloped correction: c = Levy + tau * phi(d_2) * <branch, trunk>, trained from a fresh start through the Adam and L-BFGS stages
+note: 23 other training run(s) active; this run's seconds are not an idle-machine training time
+parameters: 34433
+resumed after step 5000
+adam 5500: monitor 0.1265 price 0.007 pde 0.00013 boundary 1.32e-07 zero_variance 4.72e-05 variance_cap 0.000129 price 4.85e-05 derivatives 0.000259 [20981s]
+adam 6000: monitor 0.1226 price 0.00553 pde 0.000132 boundary 3.17e-09 zero_variance 4.79e-05 variance_cap 8.41e-05 price 5.06e-05 derivatives 0.000242 [22603s]
+adam 6500: monitor 0.1212 price 0.00574 pde 9.14e-05 boundary 5.55e-07 zero_variance 3.25e-05 variance_cap 9.73e-05 price 6.19e-05 derivatives 0.000249 [24226s]
+adam 7000: monitor 0.1244 price 0.00528 pde 8.56e-05 boundary 2.27e-07 zero_variance 3.56e-05 variance_cap 0.000113 price 5.22e-05 derivatives 0.000301 [25854s]
+adam 7500: monitor 0.1193 price 0.0059 pde 0.000112 boundary 1.2e-06 zero_variance 6.54e-05 variance_cap 9.28e-05 price 3.96e-05 derivatives 0.00026 [27500s]
+adam 8000: monitor 0.1245 price 0.006 pde 8.2e-05 boundary 1.62e-09 zero_variance 2.93e-05 variance_cap 0.000107 price 3.91e-05 derivatives 0.000245 [28865s]
+adam 8500: monitor 0.1206 price 0.00543 pde 0.000118 boundary 7.1e-08 zero_variance 7.39e-05 variance_cap 7.96e-05 price 4.12e-05 derivatives 0.000377 [30225s]
+adam 9000: monitor 0.1193 price 0.00599 pde 9.06e-05 boundary 5.45e-08 zero_variance 4.09e-05 variance_cap 5.78e-05 price 4.59e-05 derivatives 0.000274 [31618s]
+adam 9500: monitor 0.1187 price 0.00525 pde 0.000102 boundary 1.69e-07 zero_variance 6.5e-05 variance_cap 9.39e-05 price 6.45e-05 derivatives 0.000292 [33002s]
+adam 10000: monitor 0.1179 price 0.00524 pde 0.000146 boundary 4.67e-08 zero_variance 4.42e-05 variance_cap 5.95e-05 price 3.32e-05 derivatives 0.000213 [34406s]
+adam 10500: monitor 0.1166 price 0.00509 pde 9.76e-05 boundary 2.65e-08 zero_variance 2.54e-05 variance_cap 7.71e-05 price 3.25e-05 derivatives 0.000254 [35821s]
+adam 11000: monitor 0.1203 price 0.00556 pde 0.000116 boundary 2.43e-08 zero_variance 6.1e-05 variance_cap 9.03e-05 price 2.96e-05 derivatives 0.000204 [37239s]
+adam 11500: monitor 0.119 price 0.00516 pde 8.8e-05 boundary 1.11e-08 zero_variance 3.04e-05 variance_cap 8.08e-05 price 3.39e-05 derivatives 0.000243 [38666s]
+adam 12000: monitor 0.1147 price 0.00486 pde 0.000105 boundary 1.02e-07 zero_variance 2.95e-05 variance_cap 8.05e-05 price 2.91e-05 derivatives 0.000209 [40075s]
+adam 12500: monitor 0.1162 price 0.00518 pde 8.99e-05 boundary 6.57e-09 zero_variance 5.96e-05 variance_cap 6.97e-05 price 3.47e-05 derivatives 0.000215 [41474s]
+adam 13000: monitor 0.1163 price 0.00509 pde 9.59e-05 boundary 8.34e-10 zero_variance 4.03e-05 variance_cap 5.8e-05 price 2.82e-05 derivatives 0.000265 [42874s]
+adam 13500: monitor 0.1164 price 0.00499 pde 0.000113 boundary 3.47e-07 zero_variance 2.29e-05 variance_cap 6.64e-05 price 3.28e-05 derivatives 0.000242 [44278s]
+adam 14000: monitor 0.1161 price 0.00488 pde 0.00012 boundary 4.7e-08 zero_variance 5.7e-05 variance_cap 6.06e-05 price 2.87e-05 derivatives 0.0002 [45718s]
+adam 14500: monitor 0.1163 price 0.0049 pde 0.000108 boundary 1.28e-08 zero_variance 2.93e-05 variance_cap 4.65e-05 price 2.73e-05 derivatives 0.000195 [47303s]
+adam 15000: monitor 0.1161 price 0.00485 pde 0.000109 boundary 4.9e-07 zero_variance 4.48e-05 variance_cap 7.31e-05 price 3.22e-05 derivatives 0.00025 [48886s]
+lbfgs 50: monitor 0.1245 price 0.00565 pde 9.08e-05 boundary 3.61e-08 zero_variance 1.26e-05 variance_cap 4.37e-05 price 3.15e-05 derivatives 0.000184 [403s]
+lbfgs 100: monitor 0.1285 price 0.00598 pde 7.39e-05 boundary 2.9e-08 zero_variance 1.09e-05 variance_cap 3.33e-05 price 3.05e-05 derivatives 0.000164 [818s]
+lbfgs 150: monitor 0.127 price 0.0061 pde 6.38e-05 boundary 2.29e-08 zero_variance 9.61e-06 variance_cap 2.58e-05 price 2.94e-05 derivatives 0.000152 [1237s]
+lbfgs 200: monitor 0.1292 price 0.00622 pde 5.57e-05 boundary 2.89e-08 zero_variance 8.62e-06 variance_cap 2.24e-05 price 2.87e-05 derivatives 0.00014 [1651s]
+lbfgs 250: monitor 0.1308 price 0.0065 pde 5.11e-05 boundary 2.28e-08 zero_variance 7.45e-06 variance_cap 1.92e-05 price 2.74e-05 derivatives 0.000131 [2070s]
+lbfgs 300: monitor 0.1315 price 0.00648 pde 4.64e-05 boundary 2.55e-08 zero_variance 6.39e-06 variance_cap 1.77e-05 price 2.64e-05 derivatives 0.000124 [2484s]
+lbfgs 350: monitor 0.1324 price 0.00643 pde 4.28e-05 boundary 2.76e-08 zero_variance 6.61e-06 variance_cap 1.54e-05 price 2.53e-05 derivatives 0.000117 [2883s]
+lbfgs 400: monitor 0.1329 price 0.00652 pde 3.96e-05 boundary 2.31e-08 zero_variance 5.56e-06 variance_cap 1.43e-05 price 2.46e-05 derivatives 0.000112 [3280s]
+lbfgs 450: monitor 0.1307 price 0.00648 pde 3.76e-05 boundary 2.31e-08 zero_variance 5.19e-06 variance_cap 1.27e-05 price 2.33e-05 derivatives 0.000107 [3693s]
+lbfgs 500: monitor 0.1321 price 0.0064 pde 3.56e-05 boundary 2.14e-08 zero_variance 4.95e-06 variance_cap 1.12e-05 price 2.26e-05 derivatives 0.000103 [4119s]
+lbfgs 550: monitor 0.1319 price 0.0062 pde 3.39e-05 boundary 2.09e-08 zero_variance 4.75e-06 variance_cap 9.77e-06 price 2.18e-05 derivatives 9.89e-05 [4563s]
+lbfgs 600: monitor 0.132 price 0.00598 pde 3.22e-05 boundary 2.25e-08 zero_variance 4.64e-06 variance_cap 8.67e-06 price 2.14e-05 derivatives 9.38e-05 [5014s]
+lbfgs 650: monitor 0.1315 price 0.00588 pde 3e-05 boundary 2.22e-08 zero_variance 4.28e-06 variance_cap 8.24e-06 price 2.11e-05 derivatives 9e-05 [5441s]
+lbfgs 700: monitor 0.1309 price 0.00588 pde 2.83e-05 boundary 2.16e-08 zero_variance 4.11e-06 variance_cap 7.61e-06 price 2.03e-05 derivatives 8.64e-05 [5846s]
+lbfgs 750: monitor 0.1314 price 0.00582 pde 2.63e-05 boundary 2.08e-08 zero_variance 4.02e-06 variance_cap 7.35e-06 price 1.96e-05 derivatives 8.34e-05 [6022s]
+lbfgs 800: monitor 0.1325 price 0.00587 pde 2.51e-05 boundary 1.96e-08 zero_variance 3.85e-06 variance_cap 6.74e-06 price 1.93e-05 derivatives 8e-05 [6187s]
+lbfgs 850: monitor 0.1336 price 0.00585 pde 2.38e-05 boundary 1.86e-08 zero_variance 3.75e-06 variance_cap 6.08e-06 price 1.86e-05 derivatives 7.7e-05 [6358s]
+lbfgs 900: monitor 0.1328 price 0.00598 pde 2.24e-05 boundary 1.8e-08 zero_variance 3.53e-06 variance_cap 5.67e-06 price 1.81e-05 derivatives 7.46e-05 [6525s]
+lbfgs 950: monitor 0.132 price 0.00599 pde 2.16e-05 boundary 1.8e-08 zero_variance 3.33e-06 variance_cap 5.2e-06 price 1.74e-05 derivatives 7.26e-05 [6698s]
+lbfgs 1000: monitor 0.1325 price 0.00614 pde 2.07e-05 boundary 1.78e-08 zero_variance 3.15e-06 variance_cap 4.83e-06 price 1.68e-05 derivatives 7.09e-05 [6862s]
+validation: score 0.1238 price RMSE 0.0999
+short_validation: score 0.2202 price RMSE 0.0094

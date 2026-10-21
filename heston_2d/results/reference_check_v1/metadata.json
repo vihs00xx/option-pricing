@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-10-18T05:20:03.138088+00:00",
+  "created_at": "2026-10-19T07:14:43.139192+00:00",
   "settings": {
     "protocol_id": "heston_two_stock_test_v1",
     "stocks": 2,
@@ -408,10 +408,10 @@
     "src/neural/reference.py": "d1b0c568abb581bbcd0e8774e2e27da8ce78db8623ccd12353e7f53308eb62d5"
   },
   "environment": {
-    "python": "3.13.3",
+    "python": "3.13.16",
     "numpy": "2.1.0",
     "scipy": "1.15.3",
-    "platform": "Windows-11-10.0.26300-SP0"
+    "platform": "Windows-11-10.0.26200-SP0"
   },
   "outputs_sha256": {
     "engine.jsonl": "8ca542c9caef4d998c32bd22220a4fea1ee0cd0369b543041d9b3f4d6c92714e",

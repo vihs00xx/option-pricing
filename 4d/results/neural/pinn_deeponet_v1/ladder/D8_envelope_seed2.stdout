@@ -1,0 +1,106 @@
+D8_envelope_seed2: Enveloped correction: c = Levy + tau * phi(d_2) * <branch, trunk>, trained from a fresh start through the Adam and L-BFGS stages
+note: 17 other training run(s) active; this run's seconds are not an idle-machine training time
+parameters: 34433
+adam 500: monitor 0.047 price 0.0115 pde 2.1e-06 boundary 3.61e-15 price 0.000137 derivatives 0.00352 [1579s]
+adam 1000: monitor 0.04115 price 0.00921 pde 2.41e-06 boundary 2.46e-16 price 0.000106 derivatives 0.00274 [3207s]
+adam 1500: monitor 0.03736 price 0.00783 pde 1.96e-06 boundary 1.11e-13 price 0.000112 derivatives 0.00232 [4772s]
+adam 2000: monitor 0.03621 price 0.00914 pde 1.93e-06 boundary 2.02e-11 price 0.000106 derivatives 0.00194 [6343s]
+adam 2500: monitor 0.03492 price 0.00707 pde 1.8e-06 boundary 1.49e-12 price 6.04e-05 derivatives 0.00188 [7904s]
+adam 3000: monitor 0.03432 price 0.0088 pde 1.51e-06 boundary 7.1e-13 price 6.48e-05 derivatives 0.00223 [9477s]
+adam 3500: monitor 0.03355 price 0.00822 pde 1.77e-06 boundary 2.38e-14 price 4.93e-05 derivatives 0.00152 [11045s]
+adam 4000: monitor 0.03273 price 0.00667 pde 1.75e-06 boundary 1.09e-15 price 6.05e-05 derivatives 0.00155 [12616s]
+adam 4500: monitor 0.03143 price 0.00643 pde 1.5e-06 boundary 3.68e-14 price 4.66e-05 derivatives 0.00143 [14211s]
+adam 5000: monitor 0.03099 price 0.00635 pde 1.67e-06 boundary 3.17e-11 price 5.28e-05 derivatives 0.00128 [15805s]
+adam 5500: monitor 0.02977 price 0.00592 pde 1.48e-06 boundary 1.49e-14 price 3.8e-05 derivatives 0.00121 [17420s]
+adam 6000: monitor 0.02893 price 0.00569 pde 1.28e-06 boundary 8.83e-17 price 4.26e-05 derivatives 0.00127 [19112s]
+forrtl: error (200): program aborting due to window-CLOSE event
+Image              PC                Routine            Line        Source             
+KERNELBASE.dll     00007FFF730C3E3D  Unknown               Unknown  Unknown
+KERNEL32.DLL       00007FFF7511E957  Unknown               Unknown  Unknown
+ntdll.dll          00007FFF75D0AD6C  Unknown               Unknown  Unknown
+D8_envelope_seed2: Enveloped correction: c = Levy + tau * phi(d_2) * <branch, trunk>, trained from a fresh start through the Adam and L-BFGS stages
+note: 9 other training run(s) active; this run's seconds are not an idle-machine training time
+parameters: 34433
+resumed after step 6000
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\LNMIIT\Documents\option-pricing\4d\experiments\neural\train.py", line 122, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\4d\experiments\neural\train.py", line 94, in main
+    record = trainer.run(seed, resume)
+  File "C:\Users\LNMIIT\Documents\option-pricing\4d\src\neural\training.py", line 431, in run
+    adam_seconds = self.adam(seed, resume_path)
+  File "C:\Users\LNMIIT\Documents\option-pricing\4d\src\neural\training.py", line 347, in adam
+    total.backward()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\.venv\Lib\site-packages\torch\_tensor.py", line 647, in backward
+    torch.autograd.backward(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        self, gradient, retain_graph, create_graph, inputs=inputs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\LNMIIT\Documents\option-pricing\.venv\Lib\site-packages\torch\autograd\__init__.py", line 354, in backward
+    _engine_run_backward(
+    ~~~~~~~~~~~~~~~~~~~~^
+        tensors,
+        ^^^^^^^^
+    ...<5 lines>...
+        accumulate_grad=True,
+        ^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\LNMIIT\Documents\option-pricing\.venv\Lib\site-packages\torch\autograd\graph.py", line 829, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        t_outputs, *args, **kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )  # Calls into the C++ engine to run the backward pass
+    ^
+KeyboardInterrupt
+D8_envelope_seed2: Enveloped correction: c = Levy + tau * phi(d_2) * <branch, trunk>, trained from a fresh start through the Adam and L-BFGS stages
+note: 11 other training run(s) active; this run's seconds are not an idle-machine training time
+parameters: 34433
+resumed after step 6000
+adam 6500: monitor 0.0282 price 0.00555 pde 1.61e-06 boundary 1.87e-14 price 3.74e-05 derivatives 0.0012 [20687s]
+adam 7000: monitor 0.02768 price 0.00516 pde 1.05e-06 boundary 1.1e-14 price 3.28e-05 derivatives 0.00106 [22302s]
+adam 7500: monitor 0.02732 price 0.00507 pde 1.53e-06 boundary 3.34e-16 price 3.08e-05 derivatives 0.000986 [23922s]
+adam 8000: monitor 0.02728 price 0.00484 pde 1.51e-06 boundary 7.81e-10 price 3e-05 derivatives 0.00107 [25544s]
+adam 8500: monitor 0.02657 price 0.00496 pde 1.21e-06 boundary 3.48e-11 price 2.56e-05 derivatives 0.000963 [27185s]
+adam 9000: monitor 0.02656 price 0.00505 pde 1.11e-06 boundary 4.67e-14 price 2.9e-05 derivatives 0.000987 [28541s]
+adam 9500: monitor 0.02606 price 0.00475 pde 9.74e-07 boundary 4.14e-14 price 2.14e-05 derivatives 0.00118 [29870s]
+adam 10000: monitor 0.02599 price 0.00472 pde 1.73e-06 boundary 4.67e-18 price 3.39e-05 derivatives 0.00103 [31243s]
+adam 10500: monitor 0.02604 price 0.00463 pde 1.18e-06 boundary 4.35e-17 price 2.63e-05 derivatives 0.000997 [32597s]
+adam 11000: monitor 0.0257 price 0.00482 pde 1.04e-06 boundary 9.38e-12 price 2.49e-05 derivatives 0.000898 [33983s]
+adam 11500: monitor 0.02563 price 0.0046 pde 1.16e-06 boundary 4.84e-14 price 2.25e-05 derivatives 0.000878 [35380s]
+adam 12000: monitor 0.02531 price 0.0043 pde 9.16e-07 boundary 4.51e-14 price 2.14e-05 derivatives 0.000942 [36789s]
+adam 12500: monitor 0.02518 price 0.00421 pde 9.18e-07 boundary 7.33e-11 price 2.22e-05 derivatives 0.000826 [38207s]
+adam 13000: monitor 0.02507 price 0.00427 pde 1.12e-06 boundary 2.05e-14 price 2.31e-05 derivatives 0.000883 [39599s]
+adam 13500: monitor 0.02497 price 0.00423 pde 1.16e-06 boundary 3.93e-14 price 2.1e-05 derivatives 0.000822 [40982s]
+adam 14000: monitor 0.02489 price 0.00413 pde 9.68e-07 boundary 1.14e-13 price 2.14e-05 derivatives 0.00083 [42359s]
+adam 14500: monitor 0.02485 price 0.00412 pde 1.37e-06 boundary 6.22e-14 price 1.73e-05 derivatives 0.000953 [43750s]
+adam 15000: monitor 0.02482 price 0.00406 pde 8.27e-07 boundary 4.7e-11 price 1.83e-05 derivatives 0.000793 [45145s]
+lbfgs 50: monitor 0.02503 price 0.00394 pde 1.14e-06 boundary 4.47e-13 price 1.6e-05 derivatives 0.000768 [425s]
+lbfgs 100: monitor 0.02536 price 0.00417 pde 1.12e-06 boundary 3.81e-13 price 1.49e-05 derivatives 0.000717 [871s]
+lbfgs 150: monitor 0.02524 price 0.00397 pde 1.05e-06 boundary 3.03e-13 price 1.34e-05 derivatives 0.000668 [1332s]
+lbfgs 200: monitor 0.02511 price 0.00399 pde 1.04e-06 boundary 3.17e-13 price 1.23e-05 derivatives 0.000627 [1803s]
+lbfgs 250: monitor 0.02493 price 0.00406 pde 9.92e-07 boundary 3.25e-13 price 1.12e-05 derivatives 0.000588 [2249s]
+lbfgs 300: monitor 0.02464 price 0.00388 pde 1e-06 boundary 3.46e-13 price 1.07e-05 derivatives 0.000553 [2728s]
+lbfgs 350: monitor 0.02437 price 0.00386 pde 1.02e-06 boundary 4.08e-13 price 1.01e-05 derivatives 0.000522 [3173s]
+lbfgs 400: monitor 0.02369 price 0.00379 pde 9.99e-07 boundary 4.39e-13 price 9.59e-06 derivatives 0.000495 [3643s]
+lbfgs 450: monitor 0.02332 price 0.00371 pde 9.65e-07 boundary 4.4e-13 price 9.05e-06 derivatives 0.000469 [4117s]
+lbfgs 500: monitor 0.02304 price 0.00362 pde 9.54e-07 boundary 4.86e-13 price 8.46e-06 derivatives 0.000447 [4599s]
+lbfgs 550: monitor 0.02267 price 0.00347 pde 9.41e-07 boundary 5.08e-13 price 7.97e-06 derivatives 0.000427 [5100s]
+lbfgs 600: monitor 0.02245 price 0.00345 pde 9.41e-07 boundary 5.6e-13 price 7.73e-06 derivatives 0.000411 [5574s]
+lbfgs 650: monitor 0.02222 price 0.00334 pde 9.35e-07 boundary 5.82e-13 price 7.05e-06 derivatives 0.000393 [6040s]
+lbfgs 700: monitor 0.02204 price 0.00323 pde 9.62e-07 boundary 6.14e-13 price 6.89e-06 derivatives 0.000377 [6512s]
+lbfgs 750: monitor 0.02165 price 0.0031 pde 9.67e-07 boundary 6.34e-13 price 6.58e-06 derivatives 0.000362 [6995s]
+lbfgs 800: monitor 0.02146 price 0.00305 pde 9.59e-07 boundary 6.76e-13 price 6.25e-06 derivatives 0.00035 [7477s]
+lbfgs 850: monitor 0.02134 price 0.00302 pde 9.38e-07 boundary 6.43e-13 price 5.85e-06 derivatives 0.000338 [7942s]
+lbfgs 900: monitor 0.0211 price 0.00297 pde 9.24e-07 boundary 6.28e-13 price 5.69e-06 derivatives 0.000326 [8415s]
+lbfgs 950: monitor 0.02086 price 0.0029 pde 9.23e-07 boundary 5.92e-13 price 5.49e-06 derivatives 0.000317 [8897s]
+lbfgs 1000: monitor 0.02063 price 0.00282 pde 9.19e-07 boundary 5.66e-13 price 5.32e-06 derivatives 0.000307 [9344s]
+validation: score 0.02039 price RMSE 0.0367
+short_validation: score 0.005578 price RMSE 0.00174

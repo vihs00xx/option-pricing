@@ -1,0 +1,122 @@
+D5_similarity_seed0: Boundary-layer coordinate in the trunk: tanh(z / (3 sigma_ref sqrt(tau))) with sigma_ref = 0.3, so the trunk still sees coordinates only
+note: 23 other training run(s) active; this run's seconds are not an idle-machine training time
+parameters: 34433
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\experiments\neural\train.py", line 123, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\experiments\neural\train.py", line 94, in main
+    record = trainer.run(seed, resume)
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\neural\training.py", line 479, in run
+    adam_seconds = self.adam(seed, resume_path)
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\neural\training.py", line 395, in adam
+    total.backward()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\.venv\Lib\site-packages\torch\_tensor.py", line 647, in backward
+    torch.autograd.backward(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        self, gradient, retain_graph, create_graph, inputs=inputs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\LNMIIT\Documents\option-pricing\.venv\Lib\site-packages\torch\autograd\__init__.py", line 354, in backward
+    _engine_run_backward(
+    ~~~~~~~~~~~~~~~~~~~~^
+        tensors,
+        ^^^^^^^^
+    ...<5 lines>...
+        accumulate_grad=True,
+        ^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\LNMIIT\Documents\option-pricing\.venv\Lib\site-packages\torch\autograd\graph.py", line 829, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        t_outputs, *args, **kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )  # Calls into the C++ engine to run the backward pass
+    ^
+KeyboardInterrupt
+D5_similarity_seed0: Boundary-layer coordinate in the trunk: tanh(z / (3 sigma_ref sqrt(tau))) with sigma_ref = 0.3, so the trunk still sees coordinates only
+note: 23 other training run(s) active; this run's seconds are not an idle-machine training time
+parameters: 34433
+adam 500: monitor 0.2326 price 0.0161 pde 0.000186 boundary 1.99e-05 zero_variance 0.000183 variance_cap 0.000854 price 0.00036 derivatives 0.00151 [1687s]
+adam 1000: monitor 0.1939 price 0.0114 pde 0.000169 boundary 1.63e-05 zero_variance 0.000182 variance_cap 0.000716 price 0.000159 derivatives 0.00173 [3260s]
+adam 1500: monitor 0.1646 price 0.0128 pde 0.00016 boundary 1.57e-05 zero_variance 0.00011 variance_cap 0.000623 price 0.0002 derivatives 0.000959 [4834s]
+adam 2000: monitor 0.1533 price 0.00889 pde 0.000151 boundary 9.57e-06 zero_variance 0.00012 variance_cap 0.000608 price 0.000191 derivatives 0.00124 [6408s]
+adam 2500: monitor 0.1466 price 0.00858 pde 0.000137 boundary 1.53e-05 zero_variance 0.00014 variance_cap 0.000616 price 0.000102 derivatives 0.00111 [7978s]
+adam 3000: monitor 0.1464 price 0.00841 pde 0.000178 boundary 1.25e-05 zero_variance 0.000126 variance_cap 0.00053 price 7.08e-05 derivatives 0.000553 [9551s]
+adam 3500: monitor 0.139 price 0.0094 pde 0.000186 boundary 1.6e-05 zero_variance 9.7e-05 variance_cap 0.000458 price 0.000134 derivatives 0.000619 [11126s]
+adam 4000: monitor 0.1352 price 0.00703 pde 0.000166 boundary 9.98e-06 zero_variance 7.87e-05 variance_cap 0.000371 price 8.49e-05 derivatives 0.00106 [12707s]
+adam 4500: monitor 0.1322 price 0.00785 pde 0.00017 boundary 1.33e-05 zero_variance 7.13e-05 variance_cap 0.000301 price 6.22e-05 derivatives 0.000483 [14306s]
+adam 5000: monitor 0.1381 price 0.00723 pde 0.000172 boundary 6.85e-06 zero_variance 8.67e-05 variance_cap 0.000314 price 6.36e-05 derivatives 0.000512 [15911s]
+adam 5500: monitor 0.1309 price 0.0073 pde 0.000156 boundary 1.11e-05 zero_variance 8.08e-05 variance_cap 0.000311 price 7.4e-05 derivatives 0.000431 [17537s]
+adam 6000: monitor 0.1286 price 0.00603 pde 0.000178 boundary 1.12e-05 zero_variance 9.07e-05 variance_cap 0.000211 price 5.79e-05 derivatives 0.000538 [19247s]
+D5_similarity_seed0: Boundary-layer coordinate in the trunk: tanh(z / (3 sigma_ref sqrt(tau))) with sigma_ref = 0.3, so the trunk still sees coordinates only
+note: 19 other training run(s) active; this run's seconds are not an idle-machine training time
+parameters: 34433
+resumed after step 6000
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\experiments\neural\train.py", line 123, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\experiments\neural\train.py", line 94, in main
+    record = trainer.run(seed, resume)
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\neural\training.py", line 479, in run
+    adam_seconds = self.adam(seed, resume_path)
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\neural\training.py", line 395, in adam
+    total.backward()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\.venv\Lib\site-packages\torch\_tensor.py", line 647, in backward
+    torch.autograd.backward(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        self, gradient, retain_graph, create_graph, inputs=inputs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\LNMIIT\Documents\option-pricing\.venv\Lib\site-packages\torch\autograd\__init__.py", line 354, in backward
+    _engine_run_backward(
+    ~~~~~~~~~~~~~~~~~~~~^
+        tensors,
+        ^^^^^^^^
+    ...<5 lines>...
+        accumulate_grad=True,
+        ^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\LNMIIT\Documents\option-pricing\.venv\Lib\site-packages\torch\autograd\graph.py", line 829, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        t_outputs, *args, **kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )  # Calls into the C++ engine to run the backward pass
+    ^
+KeyboardInterrupt
+D5_similarity_seed0: Boundary-layer coordinate in the trunk: tanh(z / (3 sigma_ref sqrt(tau))) with sigma_ref = 0.3, so the trunk still sees coordinates only
+note: 29 other training run(s) active; this run's seconds are not an idle-machine training time
+parameters: 34433
+resumed after step 6000
+adam 6500: monitor 0.1325 price 0.00652 pde 0.000193 boundary 7.24e-06 zero_variance 8.69e-05 variance_cap 0.000271 price 5.11e-05 derivatives 0.000338 [21023s]
+adam 7000: monitor 0.1274 price 0.00706 pde 0.000162 boundary 7.65e-06 zero_variance 5.24e-05 variance_cap 0.000193 price 5.08e-05 derivatives 0.000445 [22831s]
+adam 7500: monitor 0.1255 price 0.00652 pde 0.000122 boundary 6.55e-06 zero_variance 6.11e-05 variance_cap 0.000163 price 4.61e-05 derivatives 0.000668 [24636s]
+adam 8000: monitor 0.1258 price 0.00651 pde 0.000144 boundary 6.32e-06 zero_variance 6.53e-05 variance_cap 0.000223 price 4.79e-05 derivatives 0.000388 [26446s]
+adam 8500: monitor 0.1243 price 0.0061 pde 0.000166 boundary 6.79e-06 zero_variance 6.61e-05 variance_cap 0.000142 price 4.64e-05 derivatives 0.000326 [28278s]
+adam 9000: monitor 0.1249 price 0.00616 pde 0.000136 boundary 6.2e-06 zero_variance 4.57e-05 variance_cap 0.000202 price 4.03e-05 derivatives 0.000444 [30104s]
+adam 9500: monitor 0.1217 price 0.00597 pde 0.00015 boundary 9.34e-06 zero_variance 7.88e-05 variance_cap 0.000152 price 4.31e-05 derivatives 0.000371 [31937s]
+adam 10000: monitor 0.1219 price 0.00607 pde 0.000116 boundary 6.56e-06 zero_variance 6.35e-05 variance_cap 0.000183 price 4.19e-05 derivatives 0.000501 [33768s]
+adam 10500: monitor 0.1213 price 0.00605 pde 0.000132 boundary 7.51e-06 zero_variance 5.78e-05 variance_cap 0.000174 price 3.5e-05 derivatives 0.000413 [35606s]
+adam 11000: monitor 0.1216 price 0.00587 pde 0.000176 boundary 6.31e-06 zero_variance 7.07e-05 variance_cap 0.000134 price 4.06e-05 derivatives 0.000408 [37423s]
+adam 11500: monitor 0.1215 price 0.00586 pde 0.000157 boundary 7.28e-06 zero_variance 5.19e-05 variance_cap 0.000199 price 4.83e-05 derivatives 0.000353 [39047s]
+adam 12000: monitor 0.1212 price 0.00623 pde 0.000138 boundary 7e-06 zero_variance 4.62e-05 variance_cap 0.000137 price 4.53e-05 derivatives 0.000438 [40670s]
+adam 12500: monitor 0.1207 price 0.00618 pde 0.000144 boundary 6.66e-06 zero_variance 4.38e-05 variance_cap 0.000137 price 3.01e-05 derivatives 0.000291 [42292s]
+adam 13000: monitor 0.1203 price 0.00569 pde 0.000119 boundary 6.51e-06 zero_variance 6e-05 variance_cap 0.000167 price 2.89e-05 derivatives 0.000325 [43920s]
+adam 13500: monitor 0.1198 price 0.00601 pde 0.000128 boundary 7.46e-06 zero_variance 5.83e-05 variance_cap 0.00017 price 3.3e-05 derivatives 0.000326 [45551s]
+adam 14000: monitor 0.1196 price 0.00566 pde 0.000157 boundary 5.63e-06 zero_variance 5.52e-05 variance_cap 0.000103 price 3.16e-05 derivatives 0.00038 [47185s]
+adam 14500: monitor 0.1202 price 0.00588 pde 0.000147 boundary 5.99e-06 zero_variance 7.15e-05 variance_cap 0.000134 price 3.37e-05 derivatives 0.00033 [48802s]
+adam 15000: monitor 0.1188 price 0.00571 pde 0.000133 boundary 6.13e-06 zero_variance 5.13e-05 variance_cap 0.00014 price 3.23e-05 derivatives 0.000511 [50429s]
+validation: score 0.122 price RMSE 0.107
+short_validation: score 0.3189 price RMSE 0.0153

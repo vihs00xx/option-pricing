@@ -1,0 +1,15 @@
+D10_permutation_seed0: Stock-permutation augmentation: every labelled draw (price and derivative labels) is presented under a random relabelling of the four stocks, under which the price is unchanged; otherwise as D8, from a fresh start, one seed
+note: 17 other training run(s) active; this run's seconds are not an idle-machine training time
+parameters: 34433
+adam 500: monitor 0.04446 price 0.0104 pde 2e-06 boundary 1.44e-10 price 9.84e-05 derivatives 0.00274 [1573s]
+adam 1000: monitor 0.03875 price 0.0082 pde 1.74e-06 boundary 4.87e-14 price 0.000102 derivatives 0.00215 [3203s]
+adam 1500: monitor 0.03725 price 0.00989 pde 2.17e-06 boundary 8.72e-14 price 9.9e-05 derivatives 0.00209 [4772s]
+adam 2000: monitor 0.03564 price 0.00734 pde 1.96e-06 boundary 3.64e-19 price 7.4e-05 derivatives 0.00206 [6344s]
+adam 2500: monitor 0.03484 price 0.00718 pde 1.98e-06 boundary 1e-15 price 8.29e-05 derivatives 0.00187 [7909s]
+adam 3000: monitor 0.03329 price 0.00672 pde 1.99e-06 boundary 5.41e-18 price 6.31e-05 derivatives 0.00147 [9485s]
+adam 3500: monitor 0.03209 price 0.00681 pde 2.22e-06 boundary 7.75e-13 price 3.98e-05 derivatives 0.00124 [11053s]
+adam 4000: monitor 0.03124 price 0.00648 pde 1.44e-06 boundary 8.71e-17 price 5.97e-05 derivatives 0.00139 [12622s]
+adam 4500: monitor 0.02975 price 0.0059 pde 1.77e-06 boundary 3.21e-12 price 4.61e-05 derivatives 0.00144 [14219s]
+adam 5000: monitor 0.02909 price 0.00597 pde 1.86e-06 boundary 1.27e-15 price 3.53e-05 derivatives 0.00108 [15819s]
+adam 5500: monitor 0.02832 price 0.00568 pde 1.69e-06 boundary 2.52e-16 price 4.65e-05 derivatives 0.00112 [17443s]
+adam 6000: monitor 0.02775 price 0.0058 pde 1.48e-06 boundary 4.93e-14 price 4.72e-05 derivatives 0.00102 [19144s]
