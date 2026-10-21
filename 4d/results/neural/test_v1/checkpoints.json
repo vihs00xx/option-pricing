@@ -1,5 +1,6 @@
 {
   "results/neural/pinn_deeponet_v1/ladder/D0_vanilla_seed0.pt": "866ba0c6622b2cc8784c1981c37e16b27eeacc275011af3190cc3a5894feef62",
+  "results/neural/pinn_deeponet_v1/ladder/D10_permutation_seed0.pt": "b91f32d4081a9f79464f5120abaf1ac27c144f84cac4d9e8ac16eaa745e1482b",
   "results/neural/pinn_deeponet_v1/ladder/D1_reduced_seed0.pt": "6f388e6ad5fcb943927ba51c80e561939d131e79f77df4b54276bee7d42acca2",
   "results/neural/pinn_deeponet_v1/ladder/D2_hard_payoff_seed0.pt": "e2e900b4b9ac067eae16a1f2fb5b9bd63c52dd74f5624bb0b65716e053bbd488",
   "results/neural/pinn_deeponet_v1/ladder/D3_differential_seed0.pt": "4c9758c8c5182622d1b26203ad987a6c90f1c39307d372a0fe827ff32c1c1632",
@@ -12,7 +13,13 @@
   "results/neural/pinn_deeponet_v1/ladder/D8_envelope_seed3.pt": "c34800499c366cb60171745381e84705c41bfa071e5ada0003b35dade352ea00",
   "results/neural/pinn_deeponet_v1/ladder/D9_ensemble_seed0.pt": "eafb6b1dd429e844bb35233e71086e8dcf718850905611c1147c59fc9502080c",
   "results/neural/pinn_deeponet_v1/ladder/P0_vanilla_seed0.pt": "5c2b62cb529d5798ee2a6034a15d3aacb87ce122858dd5a9b7972e396c7ab8f6",
+  "results/neural/pinn_deeponet_v1/ladder/P10_anchored_seed0.pt": "ca24d258b512e5ec21e30fd597838dd51d234b9b4fe406f2cac8915b94f88429",
+  "results/neural/pinn_deeponet_v1/ladder/P11_permutation_seed0.pt": "edf4595571eca06cd2f06d4adf6403974932bce43f9f9a076e474d6db0664dbe",
   "results/neural/pinn_deeponet_v1/ladder/P1_reduced_seed0.pt": "3697400c060b3678638c375ed3ca362008fe07d0b74c9ec27c4158adf3190234",
+  "results/neural/pinn_deeponet_v1/ladder/P2_hard_payoff_seed0.pt": "38003ba04b7a98b65a6479a9eaf223ee71be6009c8358267bb73fc1c1d90bf69",
   "results/neural/pinn_deeponet_v1/ladder/P4_adaptive_seed0.pt": "c1e885de1993e89c34f4ba625a972d92b5be97d9f60b7b5899c4315c14bb72da",
-  "results/neural/pinn_deeponet_v1/ladder/P5_similarity_seed0.pt": "ca5e8364d735a36fea56b741d1aabc770aec06c41a6a32993ec951876eb0f0cc"
+  "results/neural/pinn_deeponet_v1/ladder/P5_similarity_seed0.pt": "ca5e8364d735a36fea56b741d1aabc770aec06c41a6a32993ec951876eb0f0cc",
+  "results/neural/pinn_deeponet_v1/ladder/P6_lbfgs_seed0.pt": "49b3f342b12317653523eb582b14cf63f39f66cdd77d011903cd16c83bffe7ef",
+  "results/neural/pinn_deeponet_v1/ladder/P7_nncg_seed0.pt": "5dfca6312211d71a8238d02f9e0685df7fada3ce998b56fb6e4e64b48a3689de",
+  "results/neural/pinn_deeponet_v1/ladder/P9_envelope_seed0.pt": "c7dfecff668cddbc7cd3c4ce294ad8e22a21d3891dc01ae0482eb3a2fadd78f7"
 }
