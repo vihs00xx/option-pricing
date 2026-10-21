@@ -1,0 +1,26 @@
+D6_lbfgs_seed0: Quasi-Newton polish: full-batch L-BFGS warm-started from D5 on 4,096 labelled contracts and 4,096 collocation points
+note: 21 other training run(s) active; this run's seconds are not an idle-machine training time
+parameters: 34433
+start 0: monitor 0.1188 price 0.00571  [0s]
+lbfgs 50: monitor 0.1255 price 0.00581 pde 0.000118 boundary 5.6e-06 zero_variance 2.98e-05 variance_cap 0.000104 price 3.53e-05 derivatives 0.00031 [243s]
+lbfgs 100: monitor 0.1303 price 0.00569 pde 0.000111 boundary 5.16e-06 zero_variance 2.45e-05 variance_cap 8.49e-05 price 3.26e-05 derivatives 0.000281 [511s]
+lbfgs 150: monitor 0.1346 price 0.00604 pde 9.82e-05 boundary 5.23e-06 zero_variance 2.22e-05 variance_cap 7.02e-05 price 3.41e-05 derivatives 0.000253 [772s]
+lbfgs 200: monitor 0.1366 price 0.00606 pde 8.81e-05 boundary 5.66e-06 zero_variance 1.83e-05 variance_cap 6.17e-05 price 3.25e-05 derivatives 0.000234 [1027s]
+lbfgs 250: monitor 0.1353 price 0.00606 pde 8.05e-05 boundary 5.43e-06 zero_variance 1.7e-05 variance_cap 5.11e-05 price 3.26e-05 derivatives 0.000217 [1281s]
+lbfgs 300: monitor 0.136 price 0.00591 pde 7.65e-05 boundary 5.09e-06 zero_variance 1.62e-05 variance_cap 4.27e-05 price 3.1e-05 derivatives 0.000204 [1537s]
+lbfgs 350: monitor 0.1345 price 0.00582 pde 7.13e-05 boundary 4.54e-06 zero_variance 1.42e-05 variance_cap 3.69e-05 price 2.95e-05 derivatives 0.000192 [1792s]
+lbfgs 400: monitor 0.1348 price 0.00588 pde 6.61e-05 boundary 4.35e-06 zero_variance 1.36e-05 variance_cap 3.27e-05 price 2.86e-05 derivatives 0.000181 [2053s]
+lbfgs 450: monitor 0.1316 price 0.00564 pde 6.37e-05 boundary 3.97e-06 zero_variance 1.26e-05 variance_cap 2.82e-05 price 2.69e-05 derivatives 0.000172 [2324s]
+lbfgs 500: monitor 0.1303 price 0.00545 pde 5.78e-05 boundary 3.96e-06 zero_variance 1.13e-05 variance_cap 2.55e-05 price 2.63e-05 derivatives 0.000162 [2587s]
+lbfgs 550: monitor 0.1294 price 0.00538 pde 5.31e-05 boundary 3.82e-06 zero_variance 1.07e-05 variance_cap 2.25e-05 price 2.54e-05 derivatives 0.000153 [2839s]
+lbfgs 600: monitor 0.1271 price 0.00541 pde 4.85e-05 boundary 3.39e-06 zero_variance 1.02e-05 variance_cap 2.07e-05 price 2.39e-05 derivatives 0.000145 [3111s]
+lbfgs 650: monitor 0.127 price 0.0054 pde 4.6e-05 boundary 3.36e-06 zero_variance 9.57e-06 variance_cap 1.8e-05 price 2.32e-05 derivatives 0.000139 [3386s]
+lbfgs 700: monitor 0.1277 price 0.00534 pde 4.27e-05 boundary 3.35e-06 zero_variance 8.68e-06 variance_cap 1.63e-05 price 2.27e-05 derivatives 0.000132 [3669s]
+lbfgs 750: monitor 0.1271 price 0.00524 pde 4.06e-05 boundary 3.43e-06 zero_variance 7.91e-06 variance_cap 1.52e-05 price 2.23e-05 derivatives 0.000126 [3937s]
+lbfgs 800: monitor 0.1266 price 0.0053 pde 3.85e-05 boundary 3.26e-06 zero_variance 7.46e-06 variance_cap 1.36e-05 price 2.15e-05 derivatives 0.000121 [4219s]
+lbfgs 850: monitor 0.1274 price 0.00538 pde 3.64e-05 boundary 3.08e-06 zero_variance 7.1e-06 variance_cap 1.23e-05 price 2.08e-05 derivatives 0.000116 [4495s]
+lbfgs 900: monitor 0.1271 price 0.00532 pde 3.49e-05 boundary 2.95e-06 zero_variance 6.52e-06 variance_cap 1.14e-05 price 1.98e-05 derivatives 0.000112 [4776s]
+lbfgs 950: monitor 0.1273 price 0.0056 pde 3.27e-05 boundary 2.64e-06 zero_variance 6.21e-06 variance_cap 1.08e-05 price 1.92e-05 derivatives 0.000107 [5064s]
+lbfgs 1000: monitor 0.1272 price 0.00557 pde 3.09e-05 boundary 2.57e-06 zero_variance 5.93e-06 variance_cap 1.03e-05 price 1.87e-05 derivatives 0.000103 [5374s]
+validation: score 0.122 price RMSE 0.107
+short_validation: score 0.3189 price RMSE 0.0153

@@ -1,0 +1,779 @@
+{
+  "level": "P6_lbfgs",
+  "family": "pinn",
+  "seed": 0,
+  "technique": "Quasi-Newton polish: full-batch L-BFGS (strong Wolfe line search) warm-started from P5 on 16,384 RAD-selected collocation points",
+  "settings": {
+    "model": {
+      "layout": "reduced",
+      "output": "levy",
+      "width": 64,
+      "depth": 4,
+      "similarity": "levy"
+    },
+    "loss": {
+      "pde": 1.0,
+      "terminal": 0.0,
+      "boundary": 1.0
+    },
+    "sampling": {
+      "focus": 0.7,
+      "focus_z": [
+        -0.6,
+        0.55
+      ],
+      "tau_power": 2.0,
+      "weight": "time",
+      "rad": {
+        "size": 32768,
+        "pool_factor": 4,
+        "k": 1.0,
+        "c": 1.0,
+        "every": 1000
+      }
+    },
+    "batch": {
+      "collocation": 4096,
+      "terminal": 1024,
+      "boundary": 512
+    },
+    "optimizer": {
+      "adam_steps": 0,
+      "learning_rate": 0.002,
+      "final_learning_rate": 2e-05,
+      "check_every": 500,
+      "lbfgs_iterations": 3000,
+      "lbfgs_chunk": 50,
+      "lbfgs_history": 50,
+      "lbfgs_batch": {
+        "collocation": 16384,
+        "boundary": 2048
+      }
+    },
+    "family": "pinn",
+    "technique": "Quasi-Newton polish: full-batch L-BFGS (strong Wolfe line search) warm-started from P5 on 16,384 RAD-selected collocation points",
+    "computational_domain": {
+      "z": [
+        -3.0,
+        2.5
+      ],
+      "share_floor": 0.01,
+      "note": "Spatial extent of the PDE problem in z = log basket forward moneyness and the forward shares s_i >= share_floor (the simplex), like a grid solver's far boundary. The training domain maps into z in [-0.52, 0.46] and shares of at least about 0.04. sigma, the correlation matrices (entries in [-0.5, 0.9], smallest eigenvalue >= 0.05) and the maturity cap are the protocol's training domain; tau starts at 0 because the PDE starts at the payoff."
+    },
+    "warm_start": "P5_similarity"
+  },
+  "source_sha256": {
+    "src/neural/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/neural/coordinates.py": "e7fef60b480b625a0b6d4dfbb65946346397d390f08e9cb2f3d2cc729c0f11e7",
+    "src/neural/deeponet.py": "a83222460641d6ef4b99ab1d6e364e6260476ca03558d31c574b56887a49d1b1",
+    "src/neural/monte_carlo.py": "9f1c1d8768e31b95cfe2d8eb8539849ee44dc622f835ea726de058b38ee4244c",
+    "src/neural/networks.py": "e1ff20083e05a94044e5fb2429cd4c75eda1e96cd8b041557692771bc6c452f5",
+    "src/neural/nys_newton_cg.py": "ed35565688cda8e0733d2506babe5cc8abd49f87caa90208f9d83f2094fff6d3",
+    "src/neural/pde.py": "1bc47a5c6f776f58eb926ffecf5c378bcbf30fd4ace598237134abd653db4039",
+    "src/neural/pinn.py": "93e9373b1f161bca1a22087a87e9070828e6f47b05b21d844055a441f32e9c91",
+    "src/neural/reference.py": "6cd04a636e3994dd633fe03dbdda1562674cb8b931f287363087f2093995493f",
+    "src/neural/training.py": "eda985726bbdb5d6b070b9c9dcb01694b602603039e33b58b97c09b548f0b5ed",
+    "experiments/neural/train.py": "7f4336c5631c657ed737026955718b874aebef349075f35953c370de8c8d6cb1",
+    "experiments/neural/common.py": "48c04578807cfb9ee9951e26e716d75c7e344cbebfb24474d816b0493281f0fc",
+    "experiments/config/neural/study.json": "5e86969facdce5726a82705eb074599f1cf935ba6123be2f96e8a8532aebc261",
+    "experiments/config/neural/pinn_ladder.json": "4a613ffb8d67b6246138635a5c9495f5cb65267351a87b6f7c50fceea206a445",
+    "experiments/config/neural/deeponet_ladder.json": "dd12b836f3bc01e3f6a4da89e684a611dec7310430a4e1344e1bbef42fc19a32"
+  },
+  "parameters": 13633,
+  "scores": {
+    "validation": {
+      "score": 0.05180261367844143,
+      "ratios": {
+        "price": 0.0092014668728265,
+        "delta_1": 0.011886001193455198,
+        "delta_2": 0.011223473747334093,
+        "delta_3": 0.012464925602579197,
+        "delta_4": 0.012563132547407754,
+        "gamma_11": 0.040733992991353565,
+        "gamma_12": 0.034846804596795,
+        "gamma_13": 0.037277008754369664,
+        "gamma_14": 0.04094113764804236,
+        "gamma_22": 0.035039617809331736,
+        "gamma_23": 0.03421002506256098,
+        "gamma_24": 0.03373855496673353,
+        "gamma_33": 0.036373089650736753,
+        "gamma_34": 0.037255589822398495,
+        "gamma_44": 0.04425888831027405,
+        "vega_1": 0.08362539649886445,
+        "vega_2": 0.08753495747426834,
+        "vega_3": 0.07578065999623912,
+        "vega_4": 0.09165853126524046,
+        "theta": 0.021650457544688508,
+        "rho": 0.01201827430206511,
+        "correlation_12": 0.10161480265232113,
+        "correlation_13": 0.10120590779300391,
+        "correlation_14": 0.09774630004847655,
+        "correlation_23": 0.10127284700790669,
+        "correlation_24": 0.09098184190512759,
+        "correlation_34": 0.10156688325351784
+      },
+      "rmse": {
+        "price": 0.11898200545728936,
+        "delta_1": 0.0019173046639886864,
+        "delta_2": 0.001900687427628744,
+        "delta_3": 0.0020182956373766044,
+        "delta_4": 0.002006818638435473,
+        "gamma_11": 8.706368533895474e-05,
+        "gamma_12": 4.5481816516184825e-05,
+        "gamma_13": 4.888445394445379e-05,
+        "gamma_14": 5.294625761505625e-05,
+        "gamma_22": 7.581261752907433e-05,
+        "gamma_23": 4.531679882635871e-05,
+        "gamma_24": 4.419905621701985e-05,
+        "gamma_33": 7.873551398377282e-05,
+        "gamma_34": 4.8628400809923055e-05,
+        "gamma_44": 9.562318614338078e-05,
+        "vega_1": 0.5887030540872904,
+        "vega_2": 0.6172513869820846,
+        "vega_3": 0.5358645500688352,
+        "vega_4": 0.6483736807962458,
+        "theta": 0.11979996826869871,
+        "rho": 0.7669614194186078,
+        "correlation_12": 0.12500429249412312,
+        "correlation_13": 0.12484227014101829,
+        "correlation_14": 0.12041941476805292,
+        "correlation_23": 0.12507452002542988,
+        "correlation_24": 0.11277314850975255,
+        "correlation_34": 0.12466291086265587
+      },
+      "seconds": 0.7199084000021685
+    },
+    "short_validation": {
+      "score": 0.014169607045210727,
+      "ratios": {
+        "price": 0.000628865502309996,
+        "delta_1": 0.0012940974601187167,
+        "delta_2": 0.0011615173928358168,
+        "delta_3": 0.0013158813190626134,
+        "delta_4": 0.0014138935151114067,
+        "gamma_11": 0.00885624913113534,
+        "gamma_12": 0.0103384912387004,
+        "gamma_13": 0.010036374682919314,
+        "gamma_14": 0.01009605403542189,
+        "gamma_22": 0.009503836386207807,
+        "gamma_23": 0.009126920076783904,
+        "gamma_24": 0.00967873036382497,
+        "gamma_33": 0.008915691246312415,
+        "gamma_34": 0.010344901675501584,
+        "gamma_44": 0.010090634371979192,
+        "vega_1": 0.027340435120089934,
+        "vega_2": 0.028909618201293338,
+        "vega_3": 0.02694891440201997,
+        "vega_4": 0.028392937403772675,
+        "theta": 0.011376298202925976,
+        "rho": 0.0016141935748610124,
+        "correlation_12": 0.025305215276379397,
+        "correlation_13": 0.024441734878068864,
+        "correlation_14": 0.02645672764910194,
+        "correlation_23": 0.025425513113074973,
+        "correlation_24": 0.02354049326512197,
+        "correlation_34": 0.030025170735754152
+      },
+      "rmse": {
+        "price": 0.005359724019858134,
+        "delta_1": 0.0002656920713204155,
+        "delta_2": 0.00025970612182241794,
+        "delta_3": 0.0002696160123543027,
+        "delta_4": 0.0002898773815006515,
+        "gamma_11": 5.388719932264127e-05,
+        "gamma_12": 3.936654444895416e-05,
+        "gamma_13": 3.8177132728357206e-05,
+        "gamma_14": 3.87873917172298e-05,
+        "gamma_22": 5.612497672748948e-05,
+        "gamma_23": 3.559434362798426e-05,
+        "gamma_24": 3.744625052620211e-05,
+        "gamma_33": 5.261328568747667e-05,
+        "gamma_34": 4.008907104073983e-05,
+        "gamma_44": 6.142969783771965e-05,
+        "vega_1": 0.018879607911793942,
+        "vega_2": 0.019730672153297726,
+        "vega_3": 0.019141717696307854,
+        "vega_4": 0.01996321553887615,
+        "theta": 0.18492594953569863,
+        "rho": 0.003679955210021745,
+        "correlation_12": 0.003378001136262409,
+        "correlation_13": 0.0032941004602483137,
+        "correlation_14": 0.003524753739037814,
+        "correlation_23": 0.003397327042783795,
+        "correlation_24": 0.0031414109192805404,
+        "correlation_34": 0.0040358419806856855
+      },
+      "seconds": 0.7146899999934249
+    }
+  },
+  "environment": {
+    "python": "3.13.16",
+    "torch": "2.8.0+cpu",
+    "numpy": "2.1.0",
+    "threads": 2,
+    "processor": "Intel64 Family 6 Model 151 Stepping 2, GenuineIntel"
+  },
+  "machine_load": {
+    "start": {
+      "other_training_runs": 23,
+      "cpu_percent": 61.8
+    },
+    "end": {
+      "other_training_runs": 21,
+      "cpu_percent": 55.7
+    }
+  },
+  "adam_seconds": 0.0,
+  "total_seconds": 26334.321199600003,
+  "best_monitor": 0.05384527938911,
+  "best_step": "lbfgs 2300",
+  "history": [
+    {
+      "stage": "start",
+      "step": 0,
+      "seconds": 0.0,
+      "monitor": 0.05955380317756875,
+      "price_ratio": 0.012323380408954102
+    },
+    {
+      "stage": "lbfgs",
+      "step": 50,
+      "seconds": 471.0,
+      "monitor": 0.06097665567339704,
+      "price_ratio": 0.013138323525532293,
+      "pde": 5.777080328233095e-06,
+      "boundary": 3.4839837068558766e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 100,
+      "seconds": 967.9,
+      "monitor": 0.062264308555025544,
+      "price_ratio": 0.013959009071468806,
+      "pde": 5.555365103869333e-06,
+      "boundary": 3.1265725149802316e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 150,
+      "seconds": 1450.8,
+      "monitor": 0.062431120413061605,
+      "price_ratio": 0.013668160688357734,
+      "pde": 5.350094414849732e-06,
+      "boundary": 3.020638382116199e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 200,
+      "seconds": 1974.9,
+      "monitor": 0.06366387426616404,
+      "price_ratio": 0.014125561625092074,
+      "pde": 5.125729310554022e-06,
+      "boundary": 2.971888547557607e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 250,
+      "seconds": 2550.0,
+      "monitor": 0.06433081687706452,
+      "price_ratio": 0.014081392875446203,
+      "pde": 4.905582421587038e-06,
+      "boundary": 2.870394175945429e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 300,
+      "seconds": 3072.2,
+      "monitor": 0.06336129288217404,
+      "price_ratio": 0.013979113174222164,
+      "pde": 4.716920824738126e-06,
+      "boundary": 2.7549080729255613e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 350,
+      "seconds": 3492.7,
+      "monitor": 0.06354070116425475,
+      "price_ratio": 0.013709765555546295,
+      "pde": 4.536488033396288e-06,
+      "boundary": 2.637239540819276e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 400,
+      "seconds": 3940.0,
+      "monitor": 0.06453878219503394,
+      "price_ratio": 0.013870405278237586,
+      "pde": 4.3689022949730645e-06,
+      "boundary": 2.466884849862651e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 450,
+      "seconds": 4363.7,
+      "monitor": 0.06346157446983593,
+      "price_ratio": 0.013746683758926891,
+      "pde": 4.217753811652927e-06,
+      "boundary": 2.296384198472775e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 500,
+      "seconds": 4760.0,
+      "monitor": 0.06303341475759155,
+      "price_ratio": 0.013508000883939077,
+      "pde": 4.056172654002811e-06,
+      "boundary": 2.159159224744582e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 550,
+      "seconds": 5167.7,
+      "monitor": 0.06201493528223546,
+      "price_ratio": 0.012874809409112101,
+      "pde": 3.946692026479164e-06,
+      "boundary": 1.977797353656836e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 600,
+      "seconds": 5580.0,
+      "monitor": 0.0613211027601312,
+      "price_ratio": 0.012300346109343956,
+      "pde": 3.792552950180593e-06,
+      "boundary": 2.166103905826073e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 650,
+      "seconds": 5981.4,
+      "monitor": 0.05995580422311505,
+      "price_ratio": 0.01231243118456345,
+      "pde": 3.6707089820041175e-06,
+      "boundary": 2.1026648183719692e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 700,
+      "seconds": 6390.5,
+      "monitor": 0.059232789496477645,
+      "price_ratio": 0.011857271985200223,
+      "pde": 3.5846155030175666e-06,
+      "boundary": 1.9421378852638134e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 750,
+      "seconds": 6838.9,
+      "monitor": 0.05924485055331698,
+      "price_ratio": 0.011736378758365699,
+      "pde": 3.4649309488229633e-06,
+      "boundary": 1.7662598881510424e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 800,
+      "seconds": 7268.6,
+      "monitor": 0.05897861820856395,
+      "price_ratio": 0.011761753530986355,
+      "pde": 3.3589546423127093e-06,
+      "boundary": 1.7611609712387168e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 850,
+      "seconds": 7687.6,
+      "monitor": 0.06028127251310035,
+      "price_ratio": 0.011602339621835687,
+      "pde": 3.2455213471268048e-06,
+      "boundary": 1.7906871145518435e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 900,
+      "seconds": 8167.2,
+      "monitor": 0.06022317159602419,
+      "price_ratio": 0.011532369985357482,
+      "pde": 3.145339376725098e-06,
+      "boundary": 1.7102238206707491e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 950,
+      "seconds": 8638.7,
+      "monitor": 0.06010463034507559,
+      "price_ratio": 0.011431313955910098,
+      "pde": 3.044740206412146e-06,
+      "boundary": 1.4923102794858356e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1000,
+      "seconds": 9120.8,
+      "monitor": 0.060412505799909075,
+      "price_ratio": 0.011031863491265233,
+      "pde": 2.933704799774557e-06,
+      "boundary": 1.4657959245230192e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1050,
+      "seconds": 9553.7,
+      "monitor": 0.05943909452582799,
+      "price_ratio": 0.010850329386552915,
+      "pde": 2.8518638321807474e-06,
+      "boundary": 1.4212042607981932e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1100,
+      "seconds": 10017.9,
+      "monitor": 0.05970150626196259,
+      "price_ratio": 0.01076099002698113,
+      "pde": 2.7591210282330103e-06,
+      "boundary": 1.485918789994686e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1150,
+      "seconds": 10476.5,
+      "monitor": 0.06064472381651008,
+      "price_ratio": 0.010969128727860534,
+      "pde": 2.6734840515740687e-06,
+      "boundary": 1.3816097995019274e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1200,
+      "seconds": 10924.5,
+      "monitor": 0.06046253997577691,
+      "price_ratio": 0.01105693283978154,
+      "pde": 2.604615677919237e-06,
+      "boundary": 1.2459754247042134e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1250,
+      "seconds": 11374.3,
+      "monitor": 0.05999392819835957,
+      "price_ratio": 0.010925569283173333,
+      "pde": 2.523563439021654e-06,
+      "boundary": 1.193873778788344e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1300,
+      "seconds": 11815.8,
+      "monitor": 0.05927837251997151,
+      "price_ratio": 0.01063392279036065,
+      "pde": 2.44782537880742e-06,
+      "boundary": 1.1112333901305444e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1350,
+      "seconds": 12264.9,
+      "monitor": 0.05768135789080987,
+      "price_ratio": 0.01077129506279771,
+      "pde": 2.3720212378623204e-06,
+      "boundary": 1.153764332836271e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1400,
+      "seconds": 12691.3,
+      "monitor": 0.05649234732534168,
+      "price_ratio": 0.010474622189764062,
+      "pde": 2.2814524929561233e-06,
+      "boundary": 1.113681218599332e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1450,
+      "seconds": 13137.3,
+      "monitor": 0.05676904167918795,
+      "price_ratio": 0.010141163932260935,
+      "pde": 2.214392196290879e-06,
+      "boundary": 1.0533163721954815e-07
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1500,
+      "seconds": 13574.3,
+      "monitor": 0.05685375161245285,
+      "price_ratio": 0.01017552917437871,
+      "pde": 2.158904605157197e-06,
+      "boundary": 9.330697530689305e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1550,
+      "seconds": 13957.9,
+      "monitor": 0.0567082156475102,
+      "price_ratio": 0.010449579001634127,
+      "pde": 2.109616827395079e-06,
+      "boundary": 8.938556991409697e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1600,
+      "seconds": 14335.3,
+      "monitor": 0.056157960724161786,
+      "price_ratio": 0.00996279767094725,
+      "pde": 2.068880776674108e-06,
+      "boundary": 8.418931054653734e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1650,
+      "seconds": 14717.2,
+      "monitor": 0.05564617305513863,
+      "price_ratio": 0.009990380291006807,
+      "pde": 2.0155132539859846e-06,
+      "boundary": 8.514597830566016e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1700,
+      "seconds": 15107.3,
+      "monitor": 0.05559488492817415,
+      "price_ratio": 0.009970184399555111,
+      "pde": 1.970520951367778e-06,
+      "boundary": 8.50831537670451e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1750,
+      "seconds": 15466.4,
+      "monitor": 0.05523243214186593,
+      "price_ratio": 0.009818889537140116,
+      "pde": 1.9289664887782463e-06,
+      "boundary": 8.415782805656887e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1800,
+      "seconds": 15834.8,
+      "monitor": 0.05535006053806234,
+      "price_ratio": 0.009815869069359301,
+      "pde": 1.888252161995391e-06,
+      "boundary": 8.40692355128607e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1850,
+      "seconds": 16229.2,
+      "monitor": 0.05490280442734082,
+      "price_ratio": 0.009539253671945228,
+      "pde": 1.8380714474182146e-06,
+      "boundary": 8.404166277259598e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1900,
+      "seconds": 16604.8,
+      "monitor": 0.05552656115665756,
+      "price_ratio": 0.009812654320145223,
+      "pde": 1.8073969355598204e-06,
+      "boundary": 7.55265492263213e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 1950,
+      "seconds": 17001.2,
+      "monitor": 0.055489028291131906,
+      "price_ratio": 0.009781542427664464,
+      "pde": 1.7699807995051259e-06,
+      "boundary": 6.565717438614219e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2000,
+      "seconds": 17378.1,
+      "monitor": 0.05517243666747103,
+      "price_ratio": 0.009625092777802161,
+      "pde": 1.7248203743734903e-06,
+      "boundary": 6.893549245221672e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2050,
+      "seconds": 17752.0,
+      "monitor": 0.055064451384419184,
+      "price_ratio": 0.009974097005525005,
+      "pde": 1.6837305773354883e-06,
+      "boundary": 6.570167023330273e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2100,
+      "seconds": 18152.6,
+      "monitor": 0.05522251012704933,
+      "price_ratio": 0.009796041338600441,
+      "pde": 1.6475921406529777e-06,
+      "boundary": 6.333370040136291e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2150,
+      "seconds": 18554.5,
+      "monitor": 0.05483203969100745,
+      "price_ratio": 0.00977036000835979,
+      "pde": 1.6260776086524293e-06,
+      "boundary": 6.204262689765888e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2200,
+      "seconds": 18978.4,
+      "monitor": 0.054738219702744034,
+      "price_ratio": 0.009945251044731679,
+      "pde": 1.5910153588451264e-06,
+      "boundary": 5.770860715108309e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2250,
+      "seconds": 19395.6,
+      "monitor": 0.054177510755095325,
+      "price_ratio": 0.009818193293933115,
+      "pde": 1.5491231577009354e-06,
+      "boundary": 5.707532610681901e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2300,
+      "seconds": 19797.1,
+      "monitor": 0.05384527938911,
+      "price_ratio": 0.009886823583788344,
+      "pde": 1.5172737479147744e-06,
+      "boundary": 5.1703219420592447e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2350,
+      "seconds": 20226.2,
+      "monitor": 0.05408361558170368,
+      "price_ratio": 0.009708616564591994,
+      "pde": 1.4854846396693403e-06,
+      "boundary": 5.0763756886649187e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2400,
+      "seconds": 20711.8,
+      "monitor": 0.05410799063315056,
+      "price_ratio": 0.009706198799775608,
+      "pde": 1.4848840199624737e-06,
+      "boundary": 5.075957621658849e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2450,
+      "seconds": 21179.7,
+      "monitor": 0.05411547704006244,
+      "price_ratio": 0.009707323907005018,
+      "pde": 1.484549326559257e-06,
+      "boundary": 5.065282224872781e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2500,
+      "seconds": 21645.7,
+      "monitor": 0.05411994410197578,
+      "price_ratio": 0.009706893150310664,
+      "pde": 1.4842031091279929e-06,
+      "boundary": 5.0627370805148266e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2550,
+      "seconds": 22112.2,
+      "monitor": 0.054119363802093895,
+      "price_ratio": 0.009707586813766144,
+      "pde": 1.4839715693749567e-06,
+      "boundary": 5.052864341009713e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2600,
+      "seconds": 22576.5,
+      "monitor": 0.054120002097666466,
+      "price_ratio": 0.009706593830206429,
+      "pde": 1.4836904864399e-06,
+      "boundary": 5.050805362797725e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2650,
+      "seconds": 23040.6,
+      "monitor": 0.05411778261680992,
+      "price_ratio": 0.009706719640627231,
+      "pde": 1.4834989121542338e-06,
+      "boundary": 5.041938714997166e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2700,
+      "seconds": 23507.0,
+      "monitor": 0.05411750065697706,
+      "price_ratio": 0.009705410103102231,
+      "pde": 1.4832515441990958e-06,
+      "boundary": 5.040339501300497e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2750,
+      "seconds": 23971.2,
+      "monitor": 0.05411493580052008,
+      "price_ratio": 0.009705277404509324,
+      "pde": 1.4830830540055485e-06,
+      "boundary": 5.032228195342847e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2800,
+      "seconds": 24437.0,
+      "monitor": 0.05411441342239501,
+      "price_ratio": 0.009703872951331686,
+      "pde": 1.4828578423332503e-06,
+      "boundary": 5.030938497233057e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2850,
+      "seconds": 24903.9,
+      "monitor": 0.05411182184747571,
+      "price_ratio": 0.009703657405195104,
+      "pde": 1.482704922769409e-06,
+      "boundary": 5.023398676568269e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2900,
+      "seconds": 25367.8,
+      "monitor": 0.0541112593195218,
+      "price_ratio": 0.009702266819079448,
+      "pde": 1.4824958470023044e-06,
+      "boundary": 5.022321408815407e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 2950,
+      "seconds": 25835.6,
+      "monitor": 0.05410873665301902,
+      "price_ratio": 0.009702051523154643,
+      "pde": 1.4823543003430109e-06,
+      "boundary": 5.015232889130554e-08
+    },
+    {
+      "stage": "lbfgs",
+      "step": 3000,
+      "seconds": 26303.9,
+      "monitor": 0.05410820817203898,
+      "price_ratio": 0.009700720873285027,
+      "pde": 1.4821576578010435e-06,
+      "boundary": 5.014310345395526e-08
+    }
+  ]
+}
