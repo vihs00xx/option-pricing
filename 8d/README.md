@@ -1,10 +1,12 @@
-# Eight-stock baskets: code for the lab PC
+# Eight-stock Black–Scholes baskets
 
 PINN and DeepONet pricers for European arithmetic basket options on eight correlated stocks under
 Black-Scholes, with price and all 82 Greeks (8 Deltas, 36 Gammas, 8 Vegas, theta, rho and 28
 correlation sensitivities). It follows the four-stock study in `../4d` step for step: the same
-general-d pricing engine and neural code, the same ladder levels and the same scripts. Nothing has
-been run at full size yet: no test set is sealed and no network is trained.
+general-d pricing engine and neural code, the same ladder levels and the same scripts.
+
+**Status.** The code and tests are complete. The test set has not been sealed yet, and no network
+has been trained.
 
 ## What changes from four stocks
 
@@ -27,7 +29,7 @@ been run at full size yet: no test set is sealed and no network is trained.
   extrapolation, 19 anchors); its seed is 20261017. Cases above the error target are flagged,
   not replaced.
 
-## Run order on the lab PC (from this folder)
+## Reproduce (from this folder)
 
 ```bash
 pip install -r requirements.txt
@@ -45,7 +47,7 @@ networks' validation errors, raise `reference_rule.evaluation.points` in
 rebuilds them). A single level runs with `python -m experiments.neural.train P2_hard_payoff
 --threads 8`; an interrupted level resumes from its last check.
 
-## Expected cost (measured on the laptop, 4 threads; scale for the lab PC)
+## Computational cost (measured with 4 CPU threads)
 
 | Step | Cost |
 |---|---|
@@ -56,7 +58,7 @@ rebuilds them). A single level runs with `python -m experiments.neural.train P2_
 | Differential DeepONet step (1,024 contracts) | about 0.9 s: about 3.6 hours per level |
 
 The full ladders are several days of CPU time, dominated by the PINN levels and their L-BFGS
-stages. Run `run_ladders` with `--only` to do the DeepONet ladder first if time is short.
+stages. `run_ladders --only` selects which levels to train, for example the DeepONet ladder alone.
 
 ## Layout
 
