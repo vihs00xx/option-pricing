@@ -393,5 +393,5 @@
     "Every reference carries a standard error and a time-step bias check; report method errors next to them, and do not read differences below about three reference standard errors as differences.",
     "Once any method is evaluated here, the cases are observed; later model changes need a new test set."
   ],
-  "laptop_edition": "Laptop edition (18 Oct 2026, for the CSE Tech Day poster): the build was cut to fit a laptop before anything was sealed. Points per replicate stop at 16,384 (65,536 for the lab PC) and the cross-checks run at 4,096."
+  "reduced_build": "Reduced build, fixed before anything was sealed. Points per replicate stop at 16,384 (65,536 in the full protocol) and the cross-checks run at 4,096."
 }
