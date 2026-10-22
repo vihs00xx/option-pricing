@@ -15,6 +15,11 @@ evidence is hash-pinned to paths relative to that folder. Higher dimensions
 |---|---|---|
 | [`1d/`](1d/README.md) | Frozen | Analytical Black–Scholes, conditional RQMC, Crank–Nicolson, anchored PINN and parity DeepONet; the shared comparison and the paper |
 | [`2d/`](2d/README.md) | Active | Two-stock basket options |
+| `4d/` | Active | Four-stock basket options: Phase 0 check, sealed test set, ladder code |
+| [`8d/`](8d/README.md) | Code ready | Eight-stock basket options, RQMC references; for the lab PC |
+| [`heston/`](heston/README.md) | Done | One-stock Heston: classical pricers against PINN and DeepONet |
+| [`heston_2d/`](heston_2d/README.md) | Code ready | Two-stock Heston baskets; for the lab PC |
+| [`heston_4d/`](heston_4d/README.md) | Code ready | Four-stock Heston baskets; for the lab PC |
 
 Tag `1d-v1.0` marks the 1D study at its original repository-root paths,
 before this split.

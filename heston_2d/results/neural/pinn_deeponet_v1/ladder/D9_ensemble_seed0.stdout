@@ -1,0 +1,2 @@
+validation: score 0.1095 price RMSE 0.0911
+short_validation: score 0.2064 price RMSE 0.009

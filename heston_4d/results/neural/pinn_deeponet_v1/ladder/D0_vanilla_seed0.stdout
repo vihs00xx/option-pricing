@@ -1,0 +1,319 @@
+D0_vanilla_seed0: Textbook DeepONet: branch on the raw contract parameters plus a put flag, trunk on (S_i/K, v0_i, tau); simulated price labels; Adam
+note: 3 other training run(s) active; this run's seconds are not an idle-machine training time
+parameters: 36353
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from multiprocessing.spawn import spawn_main; spawn_main(parent_pid=30668, pipe_handle=1488)
+                                                  ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+  File "C:\Python313\Lib\multiprocessing\spawn.py", line 131, in _main
+    prepare(preparation_data)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\multiprocessing\spawn.py", line 244, in prepare
+    _fixup_main_from_name(data['init_main_from_name'])
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\multiprocessing\spawn.py", line 268, in _fixup_main_from_name
+    main_content = runpy.run_module(mod_name,
+                                    run_name="__mp_main__",
+                                    alter_sys=True)
+  File "<frozen runpy>", line 226, in run_module
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\experiments\neural\train.py", line 22, in <module>
+    from experiments.neural.common import (CACHE, LADDER, SETTINGS_FILES, STOCKS, checkpoint_path, domain,
+                                           evaluation_set, keep_full_speed, level_settings, load_settings,
+                                           machine_load, training_data)
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\experiments\neural\common.py", line 14, in <module>
+    from src.neural import coordinates, reference
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\src\neural\coordinates.py", line 33, in <module>
+    from scipy.stats import qmc
+  File "C:\tools\Manim\Lib\site-packages\scipy\stats\__init__.py", line 624, in <module>
+    from ._stats_py import *
+  File "C:\tools\Manim\Lib\site-packages\scipy\stats\_stats_py.py", line 41, in <module>
+    from scipy.optimize import milp, LinearConstraint
+  File "C:\tools\Manim\Lib\site-packages\scipy\optimize\__init__.py", line 424, in <module>
+    from ._root import *
+  File "C:\tools\Manim\Lib\site-packages\scipy\optimize\_root.py", line 15, in <module>
+    from ._minpack_py import _root_hybr, leastsq
+  File "C:\tools\Manim\Lib\site-packages\scipy\optimize\_minpack_py.py", line 13, in <module>
+    from ._lsq import least_squares
+  File "C:\tools\Manim\Lib\site-packages\scipy\optimize\_lsq\__init__.py", line 3, in <module>
+    from .lsq_linear import lsq_linear
+  File "C:\tools\Manim\Lib\site-packages\scipy\optimize\_lsq\lsq_linear.py", line 10, in <module>
+    from .trf_linear import trf_linear
+  File "C:\tools\Manim\Lib\site-packages\scipy\optimize\_lsq\trf_linear.py", line 9, in <module>
+    from .givens_elimination import givens_elimination
+ImportError: DLL load failed while importing givens_elimination: The paging file is too small for this operation to complete.
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from multiprocessing.spawn import spawn_main; spawn_main(parent_pid=30668, pipe_handle=1652)
+                                                  ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+  File "C:\Python313\Lib\multiprocessing\spawn.py", line 131, in _main
+    prepare(preparation_data)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\multiprocessing\spawn.py", line 244, in prepare
+    _fixup_main_from_name(data['init_main_from_name'])
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\multiprocessing\spawn.py", line 268, in _fixup_main_from_name
+    main_content = runpy.run_module(mod_name,
+                                    run_name="__mp_main__",
+                                    alter_sys=True)
+  File "<frozen runpy>", line 226, in run_module
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\experiments\neural\train.py", line 22, in <module>
+    from experiments.neural.common import (CACHE, LADDER, SETTINGS_FILES, STOCKS, checkpoint_path, domain,
+                                           evaluation_set, keep_full_speed, level_settings, load_settings,
+                                           machine_load, training_data)
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\experiments\neural\common.py", line 14, in <module>
+    from src.neural import coordinates, reference
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\src\neural\coordinates.py", line 33, in <module>
+    from scipy.stats import qmc
+  File "C:\tools\Manim\Lib\site-packages\scipy\stats\__init__.py", line 624, in <module>
+    from ._stats_py import *
+  File "C:\tools\Manim\Lib\site-packages\scipy\stats\_stats_py.py", line 38, in <module>
+    from scipy import sparse
+  File "C:\tools\Manim\Lib\site-packages\scipy\__init__.py", line 146, in __getattr__
+    return _importlib.import_module(f'scipy.{name}')
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\tools\Manim\Lib\site-packages\scipy\sparse\__init__.py", line 315, in <module>
+    from . import csgraph
+  File "C:\tools\Manim\Lib\site-packages\scipy\sparse\csgraph\__init__.py", line 187, in <module>
+    from ._laplacian import laplacian
+  File "C:\tools\Manim\Lib\site-packages\scipy\sparse\csgraph\_laplacian.py", line 7, in <module>
+    from scipy.sparse.linalg import LinearOperator
+  File "C:\tools\Manim\Lib\site-packages\scipy\sparse\linalg\__init__.py", line 131, in <module>
+    from ._isolve import *
+  File "C:\tools\Manim\Lib\site-packages\scipy\sparse\linalg\_isolve\__init__.py", line 4, in <module>
+    from .iterative import *
+  File "C:\tools\Manim\Lib\site-packages\scipy\sparse\linalg\_isolve\iterative.py", line 5, in <module>
+    from scipy.linalg import get_lapack_funcs
+  File "C:\tools\Manim\Lib\site-packages\scipy\linalg\__init__.py", line 207, in <module>
+    from ._decomp_lu import *
+  File "C:\tools\Manim\Lib\site-packages\scipy\linalg\_decomp_lu.py", line 12, in <module>
+    from ._decomp_lu_cython import lu_dispatcher
+ImportError: DLL load failed while importing _decomp_lu_cython: The paging file is too small for this operation to complete.
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from multiprocessing.spawn import spawn_main; spawn_main(parent_pid=30668, pipe_handle=1668)
+                                                  ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+  File "C:\Python313\Lib\multiprocessing\spawn.py", line 131, in _main
+    prepare(preparation_data)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\multiprocessing\spawn.py", line 244, in prepare
+    _fixup_main_from_name(data['init_main_from_name'])
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\multiprocessing\spawn.py", line 268, in _fixup_main_from_name
+    main_content = runpy.run_module(mod_name,
+                                    run_name="__mp_main__",
+                                    alter_sys=True)
+  File "<frozen runpy>", line 226, in run_module
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\experiments\neural\train.py", line 22, in <module>
+    from experiments.neural.common import (CACHE, LADDER, SETTINGS_FILES, STOCKS, checkpoint_path, domain,
+                                           evaluation_set, keep_full_speed, level_settings, load_settings,
+                                           machine_load, training_data)
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\experiments\neural\common.py", line 14, in <module>
+    from src.neural import coordinates, reference
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\src\neural\coordinates.py", line 33, in <module>
+    from scipy.stats import qmc
+  File "C:\tools\Manim\Lib\site-packages\scipy\stats\__init__.py", line 624, in <module>
+    from ._stats_py import *
+  File "C:\tools\Manim\Lib\site-packages\scipy\stats\_stats_py.py", line 38, in <module>
+    from scipy import sparse
+  File "C:\tools\Manim\Lib\site-packages\scipy\__init__.py", line 146, in __getattr__
+    return _importlib.import_module(f'scipy.{name}')
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\tools\Manim\Lib\site-packages\scipy\sparse\__init__.py", line 315, in <module>
+    from . import csgraph
+  File "C:\tools\Manim\Lib\site-packages\scipy\sparse\csgraph\__init__.py", line 187, in <module>
+    from ._laplacian import laplacian
+  File "C:\tools\Manim\Lib\site-packages\scipy\sparse\csgraph\_laplacian.py", line 7, in <module>
+    from scipy.sparse.linalg import LinearOperator
+  File "C:\tools\Manim\Lib\site-packages\scipy\sparse\linalg\__init__.py", line 131, in <module>
+    from ._isolve import *
+  File "C:\tools\Manim\Lib\site-packages\scipy\sparse\linalg\_isolve\__init__.py", line 4, in <module>
+    from .iterative import *
+  File "C:\tools\Manim\Lib\site-packages\scipy\sparse\linalg\_isolve\iterative.py", line 5, in <module>
+    from scipy.linalg import get_lapack_funcs
+  File "C:\tools\Manim\Lib\site-packages\scipy\linalg\__init__.py", line 203, in <module>
+    from ._misc import *
+  File "C:\tools\Manim\Lib\site-packages\scipy\linalg\_misc.py", line 4, in <module>
+    from .lapack import get_lapack_funcs
+  File "C:\tools\Manim\Lib\site-packages\scipy\linalg\lapack.py", line 850, in <module>
+    from scipy.linalg import _flapack
+ImportError: DLL load failed while importing _flapack: The paging file is too small for this operation to complete.
+Traceback (most recent call last):
+  File "_sobol.pyx", line 70, in scipy.stats._sobol.get_poly_vinit
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 1.46 MiB for an array with shape (21201, 18) and data type uint32
+Exception ignored in: 'scipy.stats._sobol._initialize_v'
+Traceback (most recent call last):
+  File "_sobol.pyx", line 70, in scipy.stats._sobol.get_poly_vinit
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 1.46 MiB for an array with shape (21201, 18) and data type uint32
+Traceback (most recent call last):
+  File "_sobol.pyx", line 70, in scipy.stats._sobol.get_poly_vinit
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 1.46 MiB for an array with shape (21201, 18) and data type uint32
+Exception ignored in: 'scipy.stats._sobol._initialize_v'
+Traceback (most recent call last):
+  File "_sobol.pyx", line 70, in scipy.stats._sobol.get_poly_vinit
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 1.46 MiB for an array with shape (21201, 18) and data type uint32
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from multiprocessing.spawn import spawn_main; spawn_main(parent_pid=30668, pipe_handle=1508)
+                                                  ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+  File "C:\Python313\Lib\multiprocessing\spawn.py", line 131, in _main
+    prepare(preparation_data)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\multiprocessing\spawn.py", line 244, in prepare
+    _fixup_main_from_name(data['init_main_from_name'])
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\multiprocessing\spawn.py", line 268, in _fixup_main_from_name
+    main_content = runpy.run_module(mod_name,
+                                    run_name="__mp_main__",
+                                    alter_sys=True)
+  File "<frozen runpy>", line 226, in run_module
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\experiments\neural\train.py", line 22, in <module>
+    from experiments.neural.common import (CACHE, LADDER, SETTINGS_FILES, STOCKS, checkpoint_path, domain,
+                                           evaluation_set, keep_full_speed, level_settings, load_settings,
+                                           machine_load, training_data)
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\experiments\neural\common.py", line 14, in <module>
+    from src.neural import coordinates, reference
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\src\neural\coordinates.py", line 33, in <module>
+    from scipy.stats import qmc
+  File "C:\tools\Manim\Lib\site-packages\scipy\stats\__init__.py", line 624, in <module>
+    from ._stats_py import *
+  File "C:\tools\Manim\Lib\site-packages\scipy\stats\_stats_py.py", line 39, in <module>
+    from scipy.spatial import distance_matrix
+  File "C:\tools\Manim\Lib\site-packages\scipy\spatial\__init__.py", line 110, in <module>
+    from ._kdtree import *
+  File "C:\tools\Manim\Lib\site-packages\scipy\spatial\_kdtree.py", line 4, in <module>
+    from ._ckdtree import cKDTree, cKDTreeNode  # type: ignore[import-not-found]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ImportError: DLL load failed while importing _ckdtree: The paging file is too small for this operation to complete.
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from multiprocessing.spawn import spawn_main; spawn_main(parent_pid=30668, pipe_handle=1700)
+                                                  ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+  File "C:\Python313\Lib\multiprocessing\spawn.py", line 131, in _main
+    prepare(preparation_data)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\multiprocessing\spawn.py", line 244, in prepare
+    _fixup_main_from_name(data['init_main_from_name'])
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\multiprocessing\spawn.py", line 268, in _fixup_main_from_name
+    main_content = runpy.run_module(mod_name,
+                                    run_name="__mp_main__",
+                                    alter_sys=True)
+  File "<frozen runpy>", line 226, in run_module
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\experiments\neural\train.py", line 22, in <module>
+    from experiments.neural.common import (CACHE, LADDER, SETTINGS_FILES, STOCKS, checkpoint_path, domain,
+                                           evaluation_set, keep_full_speed, level_settings, load_settings,
+                                           machine_load, training_data)
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\experiments\neural\common.py", line 14, in <module>
+    from src.neural import coordinates, reference
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\src\neural\coordinates.py", line 33, in <module>
+    from scipy.stats import qmc
+  File "C:\tools\Manim\Lib\site-packages\scipy\stats\__init__.py", line 624, in <module>
+    from ._stats_py import *
+  File "C:\tools\Manim\Lib\site-packages\scipy\stats\_stats_py.py", line 38, in <module>
+    from scipy import sparse
+  File "C:\tools\Manim\Lib\site-packages\scipy\__init__.py", line 146, in __getattr__
+    return _importlib.import_module(f'scipy.{name}')
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\tools\Manim\Lib\site-packages\scipy\sparse\__init__.py", line 315, in <module>
+    from . import csgraph
+  File "C:\tools\Manim\Lib\site-packages\scipy\sparse\csgraph\__init__.py", line 187, in <module>
+    from ._laplacian import laplacian
+  File "C:\tools\Manim\Lib\site-packages\scipy\sparse\csgraph\_laplacian.py", line 7, in <module>
+    from scipy.sparse.linalg import LinearOperator
+  File "C:\tools\Manim\Lib\site-packages\scipy\sparse\linalg\__init__.py", line 131, in <module>
+    from ._isolve import *
+  File "C:\tools\Manim\Lib\site-packages\scipy\sparse\linalg\_isolve\__init__.py", line 4, in <module>
+    from .iterative import *
+  File "C:\tools\Manim\Lib\site-packages\scipy\sparse\linalg\_isolve\iterative.py", line 5, in <module>
+    from scipy.linalg import get_lapack_funcs
+  File "C:\tools\Manim\Lib\site-packages\scipy\linalg\__init__.py", line 215, in <module>
+    from ._matfuncs import *
+  File "C:\tools\Manim\Lib\site-packages\scipy\linalg\_matfuncs.py", line 18, in <module>
+    from ._matfuncs_sqrtm import sqrtm
+  File "C:\tools\Manim\Lib\site-packages\scipy\linalg\_matfuncs_sqrtm.py", line 25, in <module>
+    from ._matfuncs_sqrtm_triu import within_block_loop  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ImportError: DLL load failed while importing _matfuncs_sqrtm_triu: The paging file is too small for this operation to complete.
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Python313\Lib\multiprocessing\pool.py", line 125, in worker
+    result = (True, func(*args, **kwds))
+                    ~~~~^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\multiprocessing\pool.py", line 48, in mapstar
+    return list(map(*args))
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\src\neural\reference.py", line 60, in _estimate
+    e = heston_estimate(c, settings["points"], settings["replicates"], seed, dt=settings["dt"],
+                        greeks=settings.get("greeks", True), sampler=settings.get("sampler", "sobol"))
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\src\heston_basket\engine.py", line 320, in heston_estimate
+    U, increments = draw_normals(n_points, d, steps, int(child.generate_state(1)[0]), sampler)
+                    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\src\heston_basket\engine.py", line 71, in draw_normals
+    u = qmc.Sobol(d=dims, scramble=True, seed=seed).random_base2(int(n_points).bit_length() - 1)
+  File "C:\tools\Manim\Lib\site-packages\scipy\stats\_qmc.py", line 1912, in random_base2
+    return self.random(n)
+           ~~~~~~~~~~~^^^
+  File "C:\tools\Manim\Lib\site-packages\scipy\stats\_qmc.py", line 993, in random
+    sample = self._random(n, workers=workers)
+  File "C:\tools\Manim\Lib\site-packages\scipy\stats\_qmc.py", line 1841, in _random
+    sample: np.ndarray = np.empty((n, self.d), dtype=np.float64)
+                         ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 1.62 MiB for an array with shape (1024, 207) and data type float64
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\experiments\neural\train.py", line 123, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\experiments\neural\train.py", line 93, in main
+    trainer = Trainer(model, settings, box, strike, evaluation_set("monitor"), data, log)
+                                                    ~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\experiments\neural\common.py", line 165, in evaluation_set
+    return _cached(f"{kind}_{count}_{seed}", identity, build)
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\experiments\neural\common.py", line 138, in _cached
+    value = dict(build(), identity=identity)
+                 ~~~~~^^
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\experiments\neural\common.py", line 161, in build
+    values, errors = reference_values(STOCKS, x, put, rule, normals, workers)
+                     ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\src\neural\reference.py", line 76, in reference_values
+    rows = pool.map(_estimate, tasks, chunksize=max(1, len(tasks)//(8*workers)))
+  File "C:\Python313\Lib\multiprocessing\pool.py", line 367, in map
+    return self._map_async(func, iterable, mapstar, chunksize).get()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Python313\Lib\multiprocessing\pool.py", line 774, in get
+    raise self._value
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 1.62 MiB for an array with shape (1024, 207) and data type float64

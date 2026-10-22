@@ -1,0 +1,327 @@
+D1_reduced_seed0: Exact reduction: branch on the Heston parameters and both correlations, trunk on (z, s, v, tau); put-call parity
+note: 3 other training run(s) active; this run's seconds are not an idle-machine training time
+parameters: 34369
+adam 500: monitor 0.7404 price 0.0992 price 0.0123 [5s]
+adam 1000: monitor 0.499 price 0.0479 price 0.0022 [9s]
+adam 1500: monitor 0.4442 price 0.034 price 0.00152 [14s]
+adam 2000: monitor 0.4134 price 0.03 price 0.00116 [18s]
+adam 2500: monitor 0.3987 price 0.0309 price 0.00131 [23s]
+adam 3000: monitor 0.3816 price 0.0265 price 0.000829 [27s]
+adam 3500: monitor 0.3716 price 0.0247 price 0.000878 [32s]
+adam 4000: monitor 0.3579 price 0.0307 price 0.00102 [36s]
+adam 4500: monitor 0.3514 price 0.025 price 0.000643 [40s]
+adam 5000: monitor 0.3409 price 0.0235 price 0.000652 [45s]
+adam 5500: monitor 0.3343 price 0.0223 price 0.000629 [49s]
+adam 6000: monitor 0.3295 price 0.0217 price 0.000586 [53s]
+adam 6500: monitor 0.3246 price 0.021 price 0.000502 [57s]
+adam 7000: monitor 0.3194 price 0.0201 price 0.000449 [61s]
+adam 7500: monitor 0.317 price 0.0196 price 0.000452 [65s]
+adam 8000: monitor 0.3151 price 0.0183 price 0.000466 [70s]
+adam 8500: monitor 0.3087 price 0.0187 price 0.000434 [74s]
+adam 9000: monitor 0.3066 price 0.0178 price 0.000411 [78s]
+adam 9500: monitor 0.3023 price 0.0178 price 0.000358 [82s]
+adam 10000: monitor 0.3023 price 0.0179 price 0.000399 [86s]
+adam 10500: monitor 0.2991 price 0.0172 price 0.000367 [90s]
+adam 11000: monitor 0.2951 price 0.0173 price 0.00034 [94s]
+adam 11500: monitor 0.2948 price 0.0166 price 0.000357 [98s]
+adam 12000: monitor 0.2946 price 0.0169 price 0.000309 [102s]
+adam 12500: monitor 0.2923 price 0.0167 price 0.000315 [106s]
+adam 13000: monitor 0.2914 price 0.0163 price 0.000328 [111s]
+adam 13500: monitor 0.2896 price 0.0166 price 0.000301 [115s]
+adam 14000: monitor 0.2895 price 0.0163 price 0.000343 [119s]
+adam 14500: monitor 0.2881 price 0.0162 price 0.000301 [124s]
+adam 15000: monitor 0.2872 price 0.0162 price 0.000299 [128s]
+Process SpawnPoolWorker-6:
+Process SpawnPoolWorker-7:
+Process SpawnPoolWorker-8:
+Process SpawnPoolWorker-5:
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\process.py", line 313, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\pool.py", line 125, in worker
+    result = (True, func(*args, **kwds))
+                    ~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\pool.py", line 48, in mapstar
+    return list(map(*args))
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\neural\reference.py", line 60, in _estimate
+    e = heston_estimate(c, settings["points"], settings["replicates"], seed, dt=settings["dt"],
+                        greeks=settings.get("greeks", True), sampler=settings.get("sampler", "sobol"))
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 321, in heston_estimate
+    replicates.append(path_values(c, U, increments, greeks, bump_scale).mean(axis=0))
+                      ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 281, in path_values
+    upper, lower = paths.value(up, field, index), paths.value(down, field, index)
+                   ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 247, in value
+    d_i, r_i = variance_paths(*own, dt, self.z[:, [index]])
+               ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 118, in variance_paths
+    tail = ndtr(-zk)
+KeyboardInterrupt
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\process.py", line 313, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\pool.py", line 125, in worker
+    result = (True, func(*args, **kwds))
+                    ~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\pool.py", line 48, in mapstar
+    return list(map(*args))
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\neural\reference.py", line 60, in _estimate
+    e = heston_estimate(c, settings["points"], settings["replicates"], seed, dt=settings["dt"],
+                        greeks=settings.get("greeks", True), sampler=settings.get("sampler", "sobol"))
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 321, in heston_estimate
+    replicates.append(path_values(c, U, increments, greeks, bump_scale).mean(axis=0))
+                      ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 281, in path_values
+    upper, lower = paths.value(up, field, index), paths.value(down, field, index)
+                                                  ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 247, in value
+    d_i, r_i = variance_paths(*own, dt, self.z[:, [index]])
+               ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 110, in variance_paths
+    inv = 2 / np.minimum(psi, PSI_C)
+              ~~~~~~~~~~^^^^^^^^^^^^
+KeyboardInterrupt
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\process.py", line 313, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\pool.py", line 125, in worker
+    result = (True, func(*args, **kwds))
+                    ~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\pool.py", line 48, in mapstar
+    return list(map(*args))
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\neural\reference.py", line 60, in _estimate
+    e = heston_estimate(c, settings["points"], settings["replicates"], seed, dt=settings["dt"],
+                        greeks=settings.get("greeks", True), sampler=settings.get("sampler", "sobol"))
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 321, in heston_estimate
+    replicates.append(path_values(c, U, increments, greeks, bump_scale).mean(axis=0))
+                      ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 281, in path_values
+    upper, lower = paths.value(up, field, index), paths.value(down, field, index)
+                   ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 247, in value
+    d_i, r_i = variance_paths(*own, dt, self.z[:, [index]])
+               ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 114, in variance_paths
+    psi_e = np.maximum(psi, 1.0)
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\process.py", line 313, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\pool.py", line 125, in worker
+    result = (True, func(*args, **kwds))
+                    ~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\pool.py", line 48, in mapstar
+    return list(map(*args))
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\neural\reference.py", line 60, in _estimate
+    e = heston_estimate(c, settings["points"], settings["replicates"], seed, dt=settings["dt"],
+                        greeks=settings.get("greeks", True), sampler=settings.get("sampler", "sobol"))
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 321, in heston_estimate
+    replicates.append(path_values(c, U, increments, greeks, bump_scale).mean(axis=0))
+                      ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 281, in path_values
+    upper, lower = paths.value(up, field, index), paths.value(down, field, index)
+                                                  ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 257, in value
+    return gaussian_basket(log_f, A, Sigma, self.U, c.sign, derivatives)
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 194, in gaussian_basket
+    t = np.sqrt(np.diagonal(Sigma, axis1=-2, axis2=-1))
+                ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\.venv\Lib\site-packages\numpy\_core\fromnumeric.py", line 1700, in _diagonal_dispatcher
+    def _diagonal_dispatcher(a, offset=None, axis1=None, axis2=None):
+    
+KeyboardInterrupt
+Process SpawnPoolWorker-12:
+Process SpawnPoolWorker-11:
+Process SpawnPoolWorker-9:
+Process SpawnPoolWorker-10:
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\process.py", line 313, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\pool.py", line 125, in worker
+    result = (True, func(*args, **kwds))
+                    ~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\pool.py", line 48, in mapstar
+    return list(map(*args))
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\neural\reference.py", line 60, in _estimate
+    e = heston_estimate(c, settings["points"], settings["replicates"], seed, dt=settings["dt"],
+                        greeks=settings.get("greeks", True), sampler=settings.get("sampler", "sobol"))
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 321, in heston_estimate
+    replicates.append(path_values(c, U, increments, greeks, bump_scale).mean(axis=0))
+                      ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 281, in path_values
+    upper, lower = paths.value(up, field, index), paths.value(down, field, index)
+                                                  ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 247, in value
+    d_i, r_i = variance_paths(*own, dt, self.z[:, [index]])
+               ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 118, in variance_paths
+    tail = ndtr(-zk)
+KeyboardInterrupt
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\process.py", line 313, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\pool.py", line 125, in worker
+    result = (True, func(*args, **kwds))
+                    ~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\pool.py", line 48, in mapstar
+    return list(map(*args))
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\neural\reference.py", line 60, in _estimate
+    e = heston_estimate(c, settings["points"], settings["replicates"], seed, dt=settings["dt"],
+                        greeks=settings.get("greeks", True), sampler=settings.get("sampler", "sobol"))
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 321, in heston_estimate
+    replicates.append(path_values(c, U, increments, greeks, bump_scale).mean(axis=0))
+                      ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 281, in path_values
+    upper, lower = paths.value(up, field, index), paths.value(down, field, index)
+                                                  ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 247, in value
+    d_i, r_i = variance_paths(*own, dt, self.z[:, [index]])
+               ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 127, in variance_paths
+    np.log(p + beta * (1 - p) / np.where(fine_e, beta - A_coef, 1.0)))
+                                ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\.venv\Lib\site-packages\numpy\_core\multiarray.py", line 363, in where
+    @array_function_from_c_func_and_dispatcher(_multiarray_umath.where)
+    
+KeyboardInterrupt
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\process.py", line 313, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\pool.py", line 125, in worker
+    result = (True, func(*args, **kwds))
+                    ~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\pool.py", line 48, in mapstar
+    return list(map(*args))
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\neural\reference.py", line 60, in _estimate
+    e = heston_estimate(c, settings["points"], settings["replicates"], seed, dt=settings["dt"],
+                        greeks=settings.get("greeks", True), sampler=settings.get("sampler", "sobol"))
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 321, in heston_estimate
+    replicates.append(path_values(c, U, increments, greeks, bump_scale).mean(axis=0))
+                      ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 281, in path_values
+    upper, lower = paths.value(up, field, index), paths.value(down, field, index)
+                                                  ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 254, in value
+    A, Sigma = moments(drift, root, c.leverage, c.residual_correlation_matrix(), dt)
+               ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 142, in moments
+    K = np.einsum("...it,...jt->...ij", root, root * weights) * dt
+        ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\.venv\Lib\site-packages\numpy\_core\einsumfunc.py", line 1429, in einsum
+    return c_einsum(*operands, **kwargs)
+KeyboardInterrupt
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\process.py", line 313, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\pool.py", line 125, in worker
+    result = (True, func(*args, **kwds))
+                    ~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\AppData\Local\Python\pythoncore-3.13-64\Lib\multiprocessing\pool.py", line 48, in mapstar
+    return list(map(*args))
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\neural\reference.py", line 60, in _estimate
+    e = heston_estimate(c, settings["points"], settings["replicates"], seed, dt=settings["dt"],
+                        greeks=settings.get("greeks", True), sampler=settings.get("sampler", "sobol"))
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 321, in heston_estimate
+    replicates.append(path_values(c, U, increments, greeks, bump_scale).mean(axis=0))
+                      ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 281, in path_values
+    upper, lower = paths.value(up, field, index), paths.value(down, field, index)
+                   ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 254, in value
+    A, Sigma = moments(drift, root, c.leverage, c.residual_correlation_matrix(), dt)
+               ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\src\heston_basket\engine.py", line 142, in moments
+    K = np.einsum("...it,...jt->...ij", root, root * weights) * dt
+        ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\.venv\Lib\site-packages\numpy\_core\einsumfunc.py", line 1049, in _einsum_dispatcher
+    def _einsum_dispatcher(*operands, out=None, optimize=None, **kwargs):
+    
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\experiments\neural\train.py", line 123, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\experiments\neural\train.py", line 76, in main
+    raise RuntimeError(f"{resume} was written under different settings or code; "
+                       "delete it (and its .json) to start this level afresh")
+RuntimeError: C:\Users\LNMIIT\Documents\option-pricing\heston_2d\artifacts\neural\resume\D1_reduced_seed0.pt was written under different settings or code; delete it (and its .json) to start this level afresh
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\experiments\neural\train.py", line 123, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\LNMIIT\Documents\option-pricing\heston_2d\experiments\neural\train.py", line 76, in main
+    raise RuntimeError(f"{resume} was written under different settings or code; "
+                       "delete it (and its .json) to start this level afresh")
+RuntimeError: C:\Users\LNMIIT\Documents\option-pricing\heston_2d\artifacts\neural\resume\D1_reduced_seed0.pt was written under different settings or code; delete it (and its .json) to start this level afresh
+D1_reduced_seed0: Exact reduction: branch on the Heston parameters and both correlations, trunk on (z, s, v, tau); put-call parity
+note: 23 other training run(s) active; this run's seconds are not an idle-machine training time
+parameters: 34369
+adam 500: monitor 0.7404 price 0.0992 price 0.0123 [20s]
+adam 1000: monitor 0.499 price 0.0479 price 0.0022 [39s]
+adam 1500: monitor 0.4442 price 0.034 price 0.00152 [58s]
+adam 2000: monitor 0.4134 price 0.03 price 0.00116 [77s]
+adam 2500: monitor 0.3987 price 0.0309 price 0.00131 [96s]
+adam 3000: monitor 0.3816 price 0.0265 price 0.000829 [115s]
+adam 3500: monitor 0.3716 price 0.0247 price 0.000878 [134s]
+adam 4000: monitor 0.3579 price 0.0307 price 0.00102 [153s]
+adam 4500: monitor 0.3514 price 0.025 price 0.000643 [172s]
+adam 5000: monitor 0.3409 price 0.0235 price 0.000652 [192s]
+adam 5500: monitor 0.3343 price 0.0223 price 0.000629 [210s]
+adam 6000: monitor 0.3295 price 0.0217 price 0.000586 [229s]
+adam 6500: monitor 0.3246 price 0.021 price 0.000502 [248s]
+adam 7000: monitor 0.3194 price 0.0201 price 0.000449 [267s]
+adam 7500: monitor 0.317 price 0.0196 price 0.000452 [286s]
+adam 8000: monitor 0.3151 price 0.0183 price 0.000466 [305s]
+adam 8500: monitor 0.3087 price 0.0187 price 0.000434 [324s]
+adam 9000: monitor 0.3066 price 0.0178 price 0.000411 [343s]
+adam 9500: monitor 0.3023 price 0.0178 price 0.000358 [362s]
+adam 10000: monitor 0.3023 price 0.0179 price 0.000399 [383s]
+adam 10500: monitor 0.2991 price 0.0172 price 0.000367 [402s]
+adam 11000: monitor 0.2951 price 0.0173 price 0.00034 [421s]
+adam 11500: monitor 0.2948 price 0.0166 price 0.000357 [440s]
+adam 12000: monitor 0.2946 price 0.0169 price 0.000309 [459s]
+adam 12500: monitor 0.2923 price 0.0167 price 0.000315 [478s]
+adam 13000: monitor 0.2914 price 0.0163 price 0.000328 [497s]
+adam 13500: monitor 0.2896 price 0.0166 price 0.000301 [516s]
+adam 14000: monitor 0.2895 price 0.0163 price 0.000343 [535s]
+adam 14500: monitor 0.2881 price 0.0162 price 0.000301 [554s]
+adam 15000: monitor 0.2872 price 0.0162 price 0.000299 [573s]
+validation: score 0.3067 price RMSE 0.32
+short_validation: score 7.208 price RMSE 1.03

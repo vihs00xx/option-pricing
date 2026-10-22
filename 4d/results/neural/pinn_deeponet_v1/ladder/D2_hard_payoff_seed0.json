@@ -1,0 +1,457 @@
+{
+  "level": "D2_hard_payoff",
+  "family": "deeponet",
+  "seed": 0,
+  "technique": "Hard terminal condition: c = Levy + tau * <branch, trunk(z, s, sqrt(tau))>",
+  "settings": {
+    "model": {
+      "layout": "reduced",
+      "output": "levy",
+      "width": 64,
+      "depth": 4,
+      "rank": 64
+    },
+    "loss": {
+      "price": 1.0
+    },
+    "sampling": {
+      "focus": 0.7,
+      "focus_z": [
+        -0.6,
+        0.55
+      ],
+      "tau_power": 1.0,
+      "weight": "none"
+    },
+    "data_contracts": 32768,
+    "batch": {
+      "data": 1024,
+      "collocation": 2048,
+      "boundary": 256
+    },
+    "optimizer": {
+      "adam_steps": 15000,
+      "learning_rate": 0.002,
+      "final_learning_rate": 2e-05,
+      "check_every": 500,
+      "lbfgs_iterations": 0
+    },
+    "family": "deeponet",
+    "technique": "Hard terminal condition: c = Levy + tau * <branch, trunk(z, s, sqrt(tau))>",
+    "computational_domain": {
+      "z": [
+        -3.0,
+        2.5
+      ],
+      "share_floor": 0.01,
+      "note": "Spatial extent of the PDE problem in z = log basket forward moneyness and the forward shares s_i >= share_floor (the simplex), like a grid solver's far boundary. The training domain maps into z in [-0.52, 0.46] and shares of at least about 0.04. sigma, the correlation matrices (entries in [-0.5, 0.9], smallest eigenvalue >= 0.05) and the maturity cap are the protocol's training domain; tau starts at 0 because the PDE starts at the payoff."
+    }
+  },
+  "source_sha256": {
+    "src/neural/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/neural/coordinates.py": "e7fef60b480b625a0b6d4dfbb65946346397d390f08e9cb2f3d2cc729c0f11e7",
+    "src/neural/deeponet.py": "a83222460641d6ef4b99ab1d6e364e6260476ca03558d31c574b56887a49d1b1",
+    "src/neural/monte_carlo.py": "9f1c1d8768e31b95cfe2d8eb8539849ee44dc622f835ea726de058b38ee4244c",
+    "src/neural/networks.py": "e1ff20083e05a94044e5fb2429cd4c75eda1e96cd8b041557692771bc6c452f5",
+    "src/neural/nys_newton_cg.py": "ed35565688cda8e0733d2506babe5cc8abd49f87caa90208f9d83f2094fff6d3",
+    "src/neural/pde.py": "1bc47a5c6f776f58eb926ffecf5c378bcbf30fd4ace598237134abd653db4039",
+    "src/neural/pinn.py": "93e9373b1f161bca1a22087a87e9070828e6f47b05b21d844055a441f32e9c91",
+    "src/neural/reference.py": "6cd04a636e3994dd633fe03dbdda1562674cb8b931f287363087f2093995493f",
+    "src/neural/training.py": "eda985726bbdb5d6b070b9c9dcb01694b602603039e33b58b97c09b548f0b5ed",
+    "experiments/neural/train.py": "7f4336c5631c657ed737026955718b874aebef349075f35953c370de8c8d6cb1",
+    "experiments/neural/common.py": "48c04578807cfb9ee9951e26e716d75c7e344cbebfb24474d816b0493281f0fc",
+    "experiments/config/neural/study.json": "5e86969facdce5726a82705eb074599f1cf935ba6123be2f96e8a8532aebc261",
+    "experiments/config/neural/pinn_ladder.json": "4a613ffb8d67b6246138635a5c9495f5cb65267351a87b6f7c50fceea206a445",
+    "experiments/config/neural/deeponet_ladder.json": "dd12b836f3bc01e3f6a4da89e684a611dec7310430a4e1344e1bbef42fc19a32"
+  },
+  "parameters": 34369,
+  "scores": {
+    "validation": {
+      "score": 0.05260954089911704,
+      "ratios": {
+        "price": 0.007898211048423424,
+        "delta_1": 0.017639894234137435,
+        "delta_2": 0.01597233947529239,
+        "delta_3": 0.016888255536038597,
+        "delta_4": 0.01702393484704766,
+        "gamma_11": 0.05234025519558918,
+        "gamma_12": 0.05277736172151587,
+        "gamma_13": 0.05172343770566176,
+        "gamma_14": 0.05251405338979161,
+        "gamma_22": 0.05285437333115899,
+        "gamma_23": 0.05308404371590184,
+        "gamma_24": 0.05186329058478254,
+        "gamma_33": 0.05301700603828855,
+        "gamma_34": 0.05159728758550476,
+        "gamma_44": 0.05210881293516704,
+        "vega_1": 0.07840874247959881,
+        "vega_2": 0.07825639285018755,
+        "vega_3": 0.080741303459852,
+        "vega_4": 0.07591907414772849,
+        "theta": 0.021226023184686138,
+        "rho": 0.019334602748500237,
+        "correlation_12": 0.08278247422255965,
+        "correlation_13": 0.0797816689780275,
+        "correlation_14": 0.07445032741768559,
+        "correlation_23": 0.07777232721840426,
+        "correlation_24": 0.07527120747961084,
+        "correlation_34": 0.07721090274501717
+      },
+      "rmse": {
+        "price": 0.10212991070386462,
+        "delta_1": 0.0028454524727796393,
+        "delta_2": 0.0027049045165466316,
+        "delta_3": 0.0027345123074168326,
+        "delta_4": 0.0027193814617211603,
+        "gamma_11": 0.00011187058214196306,
+        "gamma_12": 6.888465986482665e-05,
+        "gamma_13": 6.782926240225367e-05,
+        "gamma_14": 6.791268535547578e-05,
+        "gamma_22": 0.00011435708037394497,
+        "gamma_23": 7.031853749197664e-05,
+        "gamma_24": 6.794329213022531e-05,
+        "gamma_33": 0.00011476399889006635,
+        "gamma_34": 6.734811053519534e-05,
+        "gamma_44": 0.00011258327782836335,
+        "vega_1": 0.5519790410262566,
+        "vega_2": 0.5518237332918393,
+        "vega_3": 0.5709425366925034,
+        "vega_4": 0.5370359841940098,
+        "theta": 0.117451416384496,
+        "rho": 1.2338621997782657,
+        "correlation_12": 0.1018371767793585,
+        "correlation_13": 0.0984144590771086,
+        "correlation_14": 0.09171973622000389,
+        "correlation_23": 0.09605078543257646,
+        "correlation_24": 0.09329961761444783,
+        "correlation_34": 0.09476844792511525
+      },
+      "seconds": 0.22015479998663068
+    },
+    "short_validation": {
+      "score": 0.015671582480531694,
+      "ratios": {
+        "price": 0.0008031006307820894,
+        "delta_1": 0.0020906359467019893,
+        "delta_2": 0.0019442924409334634,
+        "delta_3": 0.00200501311335374,
+        "delta_4": 0.002036541499858425,
+        "gamma_11": 0.011475324162739635,
+        "gamma_12": 0.010921649609310654,
+        "gamma_13": 0.011392914490910585,
+        "gamma_14": 0.010969568578239218,
+        "gamma_22": 0.011386426723292329,
+        "gamma_23": 0.01071223189573643,
+        "gamma_24": 0.010807959694170324,
+        "gamma_33": 0.010924100082338703,
+        "gamma_34": 0.01072261277048405,
+        "gamma_44": 0.01011760108779629,
+        "vega_1": 0.03590301423045773,
+        "vega_2": 0.03629537776392298,
+        "vega_3": 0.03836515772183311,
+        "vega_4": 0.032525638408582656,
+        "theta": 0.014682017280788487,
+        "rho": 0.0025376952627744163,
+        "correlation_12": 0.024320756086801152,
+        "correlation_13": 0.022543118185958857,
+        "correlation_14": 0.024533719973311576,
+        "correlation_23": 0.022151899071506,
+        "correlation_24": 0.024686869173380088,
+        "correlation_34": 0.02627749108839079
+      },
+      "rmse": {
+        "price": 0.006844703239969033,
+        "delta_1": 0.0004292299553738499,
+        "delta_2": 0.0004347284445656575,
+        "delta_3": 0.0004108148907574836,
+        "delta_4": 0.0004175330822207312,
+        "gamma_11": 6.982336102938863e-05,
+        "gamma_12": 4.158707444577544e-05,
+        "gamma_13": 4.333724302088357e-05,
+        "gamma_14": 4.214329201491841e-05,
+        "gamma_22": 6.724262801719415e-05,
+        "gamma_23": 4.177694774487983e-05,
+        "gamma_24": 4.181515045585535e-05,
+        "gamma_33": 6.44653098264697e-05,
+        "gamma_34": 4.155279562649269e-05,
+        "gamma_44": 6.159386563364338e-05,
+        "vega_1": 0.024792393703512154,
+        "vega_2": 0.024771416708229608,
+        "vega_3": 0.027250634572152165,
+        "vega_4": 0.022868938174878912,
+        "theta": 0.23866164004482834,
+        "rho": 0.0057853066999714094,
+        "correlation_12": 0.003246585369801675,
+        "correlation_13": 0.0030382170644699513,
+        "correlation_14": 0.003268556956679109,
+        "correlation_23": 0.0029599105996387476,
+        "correlation_24": 0.003294391477302146,
+        "correlation_34": 0.0035320965404314728
+      },
+      "seconds": 0.2338044000789523
+    }
+  },
+  "environment": {
+    "python": "3.13.16",
+    "torch": "2.8.0+cpu",
+    "numpy": "2.1.0",
+    "threads": 8,
+    "processor": "Intel64 Family 6 Model 151 Stepping 2, GenuineIntel"
+  },
+  "machine_load": {
+    "start": {
+      "other_training_runs": 7,
+      "cpu_percent": 17.9
+    },
+    "end": {
+      "other_training_runs": 7,
+      "cpu_percent": 20.3
+    }
+  },
+  "adam_seconds": 133.99957059998997,
+  "total_seconds": 134.00060690008104,
+  "best_monitor": 0.052681998387746544,
+  "best_step": "adam 15000",
+  "history": [
+    {
+      "stage": "adam",
+      "step": 500,
+      "seconds": 4.5,
+      "monitor": 0.07918972975503832,
+      "price_ratio": 0.017375102675818526,
+      "price": 0.00027305117356936956
+    },
+    {
+      "stage": "adam",
+      "step": 1000,
+      "seconds": 9.0,
+      "monitor": 0.07546983448372167,
+      "price_ratio": 0.016088676566126874,
+      "price": 0.00024528044466548527
+    },
+    {
+      "stage": "adam",
+      "step": 1500,
+      "seconds": 13.4,
+      "monitor": 0.07051372729027264,
+      "price_ratio": 0.014923930711024892,
+      "price": 0.0002093139079279832
+    },
+    {
+      "stage": "adam",
+      "step": 2000,
+      "seconds": 17.9,
+      "monitor": 0.06708655067891657,
+      "price_ratio": 0.013603303668387776,
+      "price": 0.00016125019132706301
+    },
+    {
+      "stage": "adam",
+      "step": 2500,
+      "seconds": 22.3,
+      "monitor": 0.06248673533765477,
+      "price_ratio": 0.012477144928084044,
+      "price": 0.00016434780755582363
+    },
+    {
+      "stage": "adam",
+      "step": 3000,
+      "seconds": 26.8,
+      "monitor": 0.060981747343637295,
+      "price_ratio": 0.011387345988501246,
+      "price": 0.00012091211473251628
+    },
+    {
+      "stage": "adam",
+      "step": 3500,
+      "seconds": 31.3,
+      "monitor": 0.05936129529099182,
+      "price_ratio": 0.010953915492212852,
+      "price": 9.223164540544815e-05
+    },
+    {
+      "stage": "adam",
+      "step": 4000,
+      "seconds": 35.8,
+      "monitor": 0.05825145061776881,
+      "price_ratio": 0.010478686855931792,
+      "price": 0.00011278298141471143
+    },
+    {
+      "stage": "adam",
+      "step": 4500,
+      "seconds": 40.3,
+      "monitor": 0.05722286417876514,
+      "price_ratio": 0.01018270113043215,
+      "price": 0.00010746595000033307
+    },
+    {
+      "stage": "adam",
+      "step": 5000,
+      "seconds": 44.7,
+      "monitor": 0.05645452379130769,
+      "price_ratio": 0.010004070994070914,
+      "price": 0.00010716714122303702
+    },
+    {
+      "stage": "adam",
+      "step": 5500,
+      "seconds": 49.2,
+      "monitor": 0.05617369010282968,
+      "price_ratio": 0.009749463219943282,
+      "price": 0.00010066162070874064
+    },
+    {
+      "stage": "adam",
+      "step": 6000,
+      "seconds": 53.7,
+      "monitor": 0.055619993528571686,
+      "price_ratio": 0.009457335437470484,
+      "price": 8.931553433784945e-05
+    },
+    {
+      "stage": "adam",
+      "step": 6500,
+      "seconds": 58.2,
+      "monitor": 0.05571963888236924,
+      "price_ratio": 0.009601039419765934,
+      "price": 0.00010928153893452942
+    },
+    {
+      "stage": "adam",
+      "step": 7000,
+      "seconds": 62.6,
+      "monitor": 0.05500986759725426,
+      "price_ratio": 0.009381589442626953,
+      "price": 9.820906435335069e-05
+    },
+    {
+      "stage": "adam",
+      "step": 7500,
+      "seconds": 67.1,
+      "monitor": 0.0549412164765764,
+      "price_ratio": 0.009598408948332455,
+      "price": 0.0001068683698254672
+    },
+    {
+      "stage": "adam",
+      "step": 8000,
+      "seconds": 71.6,
+      "monitor": 0.05453598047415298,
+      "price_ratio": 0.009279011649264004,
+      "price": 9.233224213861539e-05
+    },
+    {
+      "stage": "adam",
+      "step": 8500,
+      "seconds": 76.0,
+      "monitor": 0.05417044058251252,
+      "price_ratio": 0.009126550170032204,
+      "price": 7.757737143995335e-05
+    },
+    {
+      "stage": "adam",
+      "step": 9000,
+      "seconds": 80.5,
+      "monitor": 0.05378599298387443,
+      "price_ratio": 0.00904832193571836,
+      "price": 9.289173680794327e-05
+    },
+    {
+      "stage": "adam",
+      "step": 9500,
+      "seconds": 84.9,
+      "monitor": 0.0538968985789418,
+      "price_ratio": 0.008962948892525668,
+      "price": 8.63241853020337e-05
+    },
+    {
+      "stage": "adam",
+      "step": 10000,
+      "seconds": 89.4,
+      "monitor": 0.05355536828359654,
+      "price_ratio": 0.008967708245462887,
+      "price": 8.471354378005103e-05
+    },
+    {
+      "stage": "adam",
+      "step": 10500,
+      "seconds": 93.8,
+      "monitor": 0.0533928288972672,
+      "price_ratio": 0.00875640550153611,
+      "price": 7.07085690254935e-05
+    },
+    {
+      "stage": "adam",
+      "step": 11000,
+      "seconds": 98.3,
+      "monitor": 0.05322432614475915,
+      "price_ratio": 0.008791452726953114,
+      "price": 8.01369707119276e-05
+    },
+    {
+      "stage": "adam",
+      "step": 11500,
+      "seconds": 102.8,
+      "monitor": 0.053452688285294536,
+      "price_ratio": 0.008827144124510126,
+      "price": 8.1531929695672e-05
+    },
+    {
+      "stage": "adam",
+      "step": 12000,
+      "seconds": 107.2,
+      "monitor": 0.05304582336852951,
+      "price_ratio": 0.008713205352920047,
+      "price": 8.529150457552544e-05
+    },
+    {
+      "stage": "adam",
+      "step": 12500,
+      "seconds": 111.7,
+      "monitor": 0.0529591599917675,
+      "price_ratio": 0.008565597417456343,
+      "price": 7.032195550403186e-05
+    },
+    {
+      "stage": "adam",
+      "step": 13000,
+      "seconds": 116.1,
+      "monitor": 0.052865446007569476,
+      "price_ratio": 0.008644923970734476,
+      "price": 6.87743832280534e-05
+    },
+    {
+      "stage": "adam",
+      "step": 13500,
+      "seconds": 120.5,
+      "monitor": 0.052852829043809696,
+      "price_ratio": 0.008622406070361546,
+      "price": 8.114281373092276e-05
+    },
+    {
+      "stage": "adam",
+      "step": 14000,
+      "seconds": 125.1,
+      "monitor": 0.052810537610334704,
+      "price_ratio": 0.008544847903999949,
+      "price": 6.90053406087649e-05
+    },
+    {
+      "stage": "adam",
+      "step": 14500,
+      "seconds": 129.5,
+      "monitor": 0.05277150844020676,
+      "price_ratio": 0.008492977453578219,
+      "price": 5.983537090331943e-05
+    },
+    {
+      "stage": "adam",
+      "step": 15000,
+      "seconds": 133.9,
+      "monitor": 0.052681998387746544,
+      "price_ratio": 0.008360080697642054,
+      "price": 7.752119246958331e-05
+    }
+  ]
+}

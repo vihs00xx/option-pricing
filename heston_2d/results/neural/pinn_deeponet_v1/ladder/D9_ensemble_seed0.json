@@ -1,0 +1,201 @@
+{
+  "level": "D9_ensemble",
+  "family": "deeponet",
+  "seed": 0,
+  "technique": "Ensemble: average of four independently seeded D8 trainings (seeds 0-3); Greeks are member averages",
+  "settings": {
+    "model": {
+      "layout": "reduced",
+      "output": "levy_envelope",
+      "width": 64,
+      "depth": 4,
+      "rank": 64,
+      "v_input": "sqrt",
+      "similarity": 0.3
+    },
+    "loss": {
+      "price": 1.0,
+      "derivatives": 1.0,
+      "pde": 1.0,
+      "boundary": 1.0,
+      "zero_variance": 1.0,
+      "variance_cap": 1.0
+    },
+    "sampling": {
+      "focus": 0.7,
+      "focus_z": [
+        -0.6,
+        0.55
+      ],
+      "tau_power": 2.0,
+      "v_power": 2.0,
+      "weight": "time"
+    },
+    "data_contracts": 32768,
+    "batch": {
+      "data": 1024,
+      "collocation": 2048,
+      "boundary": 256,
+      "zero_variance": 256,
+      "variance_cap": 128
+    },
+    "optimizer": {
+      "adam_steps": 15000,
+      "learning_rate": 0.002,
+      "final_learning_rate": 2e-05,
+      "check_every": 500,
+      "lbfgs_iterations": 1000,
+      "lbfgs_chunk": 50,
+      "lbfgs_history": 50,
+      "lbfgs_batch": {
+        "data": 4096,
+        "collocation": 4096,
+        "boundary": 512,
+        "zero_variance": 512,
+        "variance_cap": 256
+      }
+    },
+    "family": "deeponet",
+    "technique": "Ensemble: average of four independently seeded D8 trainings (seeds 0-3); Greeks are member averages",
+    "computational_domain": {
+      "z": [
+        -3.0,
+        2.5
+      ],
+      "share_floor": 0.01,
+      "v": [
+        0.0,
+        1.5
+      ],
+      "note": "Spatial extent of the PDE problem in z = log basket forward moneyness, the forward shares s_i >= share_floor and each variance v_i in [0, v_hi], like a grid solver's far boundaries. The Heston parameters, the correlations and the maturity cap are the protocol's training domain; tau starts at 0 because the PDE starts at the payoff. Initial variances of the domain lie in [0.01, 0.36]; v_hi = 1.5 leaves room for the variance to wander, with c_v = 0 imposed there from P4 and D4 on."
+    },
+    "warm_start": null,
+    "members_of": "D8_envelope",
+    "seeds": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "members": {
+    "results/neural/pinn_deeponet_v1/ladder/D8_envelope_seed0.pt": "d2d434fa596edf306ac91e04028a5503ff2fd68e9a283823230f638e0e2161fa",
+    "results/neural/pinn_deeponet_v1/ladder/D8_envelope_seed1.pt": "78c8f5ec6c1ae509c56c9f5ba0da732ae1d3e00d3e2e300ca3c7243361421a6d",
+    "results/neural/pinn_deeponet_v1/ladder/D8_envelope_seed2.pt": "657675ff62351aff529c828c5fe13fac5e7cd56e49cbdf88665831fc7bdc5997",
+    "results/neural/pinn_deeponet_v1/ladder/D8_envelope_seed3.pt": "767e6a11e66e0ad5c7013a17619d39c212a97686f5c30f4deca41fe6b8e41363"
+  },
+  "parameters": 137732,
+  "scores": {
+    "validation": {
+      "score": 0.10951809067963433,
+      "ratios": {
+        "price": 0.004772484411907694,
+        "delta_1": 0.007116783291079655,
+        "delta_2": 0.006319440217967929,
+        "gamma_11": 0.039797220483880215,
+        "gamma_12": 0.032402945702572045,
+        "gamma_22": 0.07017311611727103,
+        "theta": 0.018091540161829345,
+        "rho": 0.006765291791395086,
+        "vega_1": 0.05503706167833796,
+        "vega_2": 0.051447529303830515,
+        "d_kappa_1": 0.1437765024254389,
+        "d_kappa_2": 0.10055001335428194,
+        "d_theta_1": 0.07032039617306042,
+        "d_theta_2": 0.06447169677857575,
+        "d_xi_1": 0.2817365589721969,
+        "d_xi_2": 0.26842001213165767,
+        "d_leverage_1": 0.24006138127099155,
+        "d_leverage_2": 0.2527962286234295,
+        "correlation_12": 0.054862399969085845,
+        "vol_correlation_12": 0.42144321073389684
+      },
+      "rmse": {
+        "price": 0.09107360042325142,
+        "delta_1": 0.002285949165990254,
+        "delta_2": 0.002231406231793755,
+        "gamma_11": 0.00020937336599821373,
+        "gamma_12": 9.343985492297176e-05,
+        "gamma_22": 0.00041674421151362994,
+        "theta": 0.13660459574708764,
+        "rho": 0.44634122880688737,
+        "vega_1": 0.4527348406941481,
+        "vega_2": 0.42892594603754897,
+        "d_kappa_1": 0.07389299078117556,
+        "d_kappa_2": 0.049555526124702355,
+        "d_theta_1": 1.0793098525965543,
+        "d_theta_2": 0.9972130569368598,
+        "d_xi_1": 0.2113588535313863,
+        "d_xi_2": 0.1930268637365441,
+        "d_leverage_1": 0.13817110084857592,
+        "d_leverage_2": 0.14813483102645872,
+        "correlation_12": 0.17187080651956654,
+        "vol_correlation_12": 0.08098892350159925
+      },
+      "seconds": 1.1453774999972666
+    },
+    "short_validation": {
+      "score": 0.20639673276974008,
+      "ratios": {
+        "price": 0.0018046135524167738,
+        "delta_1": 0.0025127764154256795,
+        "delta_2": 0.004495881943014103,
+        "gamma_11": 0.01087343959714808,
+        "gamma_12": 0.011400088465982379,
+        "gamma_22": 0.011502875563431233,
+        "theta": 0.01439654083101765,
+        "rho": 0.0037672871953008877,
+        "vega_1": 0.02108753803635458,
+        "vega_2": 0.02205729088713703,
+        "d_kappa_1": 0.453283066712179,
+        "d_kappa_2": 0.3616725231211642,
+        "d_theta_1": 0.21618201966369743,
+        "d_theta_2": 0.21340595669128107,
+        "d_xi_1": 0.7301498702922613,
+        "d_xi_2": 0.7094088642229411,
+        "d_leverage_1": 0.4134124085643113,
+        "d_leverage_2": 0.41139868884422437,
+        "correlation_12": 0.018604368284786694,
+        "vol_correlation_12": 0.4965185565107265
+      },
+      "rmse": {
+        "price": 0.008997210237794897,
+        "delta_1": 0.0007543162683672287,
+        "delta_2": 0.0008092574797154866,
+        "gamma_11": 0.0001492467016650606,
+        "gamma_12": 9.290853090589548e-05,
+        "gamma_22": 0.00016227853267611214,
+        "theta": 0.34429842819079537,
+        "rho": 0.005037872908083207,
+        "vega_1": 0.0439337584001861,
+        "vega_2": 0.04498713549612031,
+        "d_kappa_1": 0.0026484214872832096,
+        "d_kappa_2": 0.0017995969217447063,
+        "d_theta_1": 0.02458314873070937,
+        "d_theta_2": 0.023039645230064555,
+        "d_xi_1": 0.017085768701967596,
+        "d_xi_2": 0.01589825527457026,
+        "d_leverage_1": 0.012294109520631495,
+        "d_leverage_2": 0.012144665450068657,
+        "correlation_12": 0.006629433669909173,
+        "vol_correlation_12": 0.004425550659938941
+      },
+      "seconds": 1.186845899996115
+    }
+  },
+  "member_scores": [
+    0.1212894143947469,
+    0.12559075641081682,
+    0.12375693974798045,
+    0.12644826792355002
+  ],
+  "environment": {
+    "python": "3.13.16",
+    "torch": "2.8.0+cpu",
+    "numpy": "2.1.0",
+    "threads": 2,
+    "processor": "Intel64 Family 6 Model 151 Stepping 2, GenuineIntel"
+  },
+  "total_seconds": 197828.08209890008,
+  "history": []
+}

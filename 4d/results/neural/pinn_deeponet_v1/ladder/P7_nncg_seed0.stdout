@@ -1,0 +1,11 @@
+P7_nncg_seed0: Second-order refinement: Nystrom-preconditioned Newton-CG (Rathore et al., 2024; from the 1D study) warm-started from P6
+note: 21 other training run(s) active; this run's seconds are not an idle-machine training time
+parameters: 13633
+start 0: monitor 0.05385 price 0.00989  [0s]
+nncg 5: monitor 0.05345 price 0.0102 pde 2.1e-06 boundary 1.01e-07 [446s]
+nncg 10: monitor 0.05346 price 0.0106 pde 1.87e-06 boundary 5.38e-08 [894s]
+nncg 15: monitor 0.05363 price 0.0106 pde 1.73e-06 boundary 4.77e-08 [1309s]
+nncg 20: monitor 0.05365 price 0.0104 pde 1.62e-06 boundary 8.24e-08 [1689s]
+nncg stopped at step 22: line_search_failed
+validation: score 0.05112 price RMSE 0.115
+short_validation: score 0.01324 price RMSE 0.0044

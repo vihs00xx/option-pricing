@@ -1,0 +1,43 @@
+{
+  "study_id": "eight_stock_pinn_deeponet_v1",
+  "purpose": "PINN and DeepONet pricers for eight-stock arithmetic basket options, each built as a ladder: every level adds one technique to the configuration below it, and every level is scored on the same validation contracts. Level names and techniques are those of the four-stock ladders, so the two studies compare level by level.",
+  "protocol": "experiments/config/protocol/eight_stock_test_v1.json",
+  "seeds": {
+    "training": 0,
+    "data": 8801,
+    "anchors": 8802,
+    "monitor": 8811,
+    "validation": 8821,
+    "short_validation": 8822,
+    "development": 8851,
+    "reference_rule": 8861
+  },
+  "monitor_contracts": 512,
+  "validation_contracts": 4096,
+  "short_validation_tau": [
+    0.005,
+    0.05
+  ],
+  "selection_rule": "Within each family the level with the lowest validation score is selected. Score = mean over price and the 82 Greeks of RMSE / RMS(reference) on the 4,096 validation contracts drawn from the protocol's training domain. A level within 1% of the best score yields to the earlier level.",
+  "computational_domain": {
+    "z": [
+      -3.0,
+      2.5
+    ],
+    "share_floor": 0.004,
+    "note": "Spatial extent of the PDE problem in z = log basket forward moneyness and the forward shares s_i >= share_floor (the simplex), like a grid solver's far boundary. The training domain maps into z in [-0.52, 0.46] and shares of at least about 0.016 (weight floor 0.04 times the smallest forward ratio). sigma, the factor-model correlation matrices and the maturity cap are the protocol's training domain; tau starts at 0 because the PDE starts at the payoff."
+  },
+  "reference_rule": {
+    "labels": {
+      "kind": "sobol",
+      "points": 4096,
+      "control": true
+    },
+    "evaluation": {
+      "kind": "sobol",
+      "points": 32768,
+      "control": true
+    },
+    "note": "Rules of the torch reference (src/neural/reference.py): one scrambled Sobol net over the seven residual factors with the geometric control, seeded by seeds.reference_rule (labels) and seeds.reference_rule + 1 (evaluation), so the monitor and validation references do not share the labels' rule error. Tensor Gauss-Hermite, the four-stock choice, needs 32^7 points. Phase 0 (experiments/reference/rule_check.py) measures each rule's error on the development contracts; check it before training and raise the points if the evaluation rule's error is not well below the networks' errors."
+  }
+}

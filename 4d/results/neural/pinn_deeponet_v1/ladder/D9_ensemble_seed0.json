@@ -1,0 +1,217 @@
+{
+  "level": "D9_ensemble",
+  "family": "deeponet",
+  "seed": 0,
+  "technique": "Ensemble: average of four independently seeded D8 trainings (seeds 0-3); Greeks are member averages",
+  "settings": {
+    "model": {
+      "layout": "reduced",
+      "output": "levy_envelope",
+      "width": 64,
+      "depth": 4,
+      "rank": 64,
+      "similarity": 0.35
+    },
+    "loss": {
+      "price": 1.0,
+      "derivatives": 1.0,
+      "pde": 1.0,
+      "boundary": 1.0
+    },
+    "sampling": {
+      "focus": 0.7,
+      "focus_z": [
+        -0.6,
+        0.55
+      ],
+      "tau_power": 2.0,
+      "weight": "time"
+    },
+    "data_contracts": 32768,
+    "batch": {
+      "data": 1024,
+      "collocation": 2048,
+      "boundary": 256
+    },
+    "optimizer": {
+      "adam_steps": 15000,
+      "learning_rate": 0.002,
+      "final_learning_rate": 2e-05,
+      "check_every": 500,
+      "lbfgs_iterations": 1000,
+      "lbfgs_chunk": 50,
+      "lbfgs_history": 50,
+      "lbfgs_batch": {
+        "data": 4096,
+        "collocation": 4096,
+        "boundary": 512
+      }
+    },
+    "family": "deeponet",
+    "technique": "Ensemble: average of four independently seeded D8 trainings (seeds 0-3); Greeks are member averages",
+    "computational_domain": {
+      "z": [
+        -3.0,
+        2.5
+      ],
+      "share_floor": 0.01,
+      "note": "Spatial extent of the PDE problem in z = log basket forward moneyness and the forward shares s_i >= share_floor (the simplex), like a grid solver's far boundary. The training domain maps into z in [-0.52, 0.46] and shares of at least about 0.04. sigma, the correlation matrices (entries in [-0.5, 0.9], smallest eigenvalue >= 0.05) and the maturity cap are the protocol's training domain; tau starts at 0 because the PDE starts at the payoff."
+    },
+    "warm_start": null,
+    "members_of": "D8_envelope",
+    "seeds": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "members": {
+    "results/neural/pinn_deeponet_v1/ladder/D8_envelope_seed0.pt": "49c8490844ab5100b537a298eb5ebff297630bba67e443251aa4b551404546d5",
+    "results/neural/pinn_deeponet_v1/ladder/D8_envelope_seed1.pt": "0ed8310f2540d677ed470b23303085edc84d5dd5898eb660274b8c27de78b982",
+    "results/neural/pinn_deeponet_v1/ladder/D8_envelope_seed2.pt": "7c33723f45c5175bb80d7530ab272fc4efbe5f6b919fc7a4aea673dfbc2d1597",
+    "results/neural/pinn_deeponet_v1/ladder/D8_envelope_seed3.pt": "c34800499c366cb60171745381e84705c41bfa071e5ada0003b35dade352ea00"
+  },
+  "parameters": 137732,
+  "scores": {
+    "validation": {
+      "score": 0.017450769220081323,
+      "ratios": {
+        "price": 0.0023076392099875298,
+        "delta_1": 0.004690888310292121,
+        "delta_2": 0.004177993018940841,
+        "delta_3": 0.004707039145542603,
+        "delta_4": 0.005262481987871115,
+        "gamma_11": 0.017321208013438102,
+        "gamma_12": 0.013814281252420442,
+        "gamma_13": 0.012931498924757171,
+        "gamma_14": 0.01443232312823242,
+        "gamma_22": 0.016646669072721127,
+        "gamma_23": 0.013613697055177013,
+        "gamma_24": 0.013282050246044862,
+        "gamma_33": 0.015250916600327529,
+        "gamma_34": 0.013856761157011056,
+        "gamma_44": 0.019358356835883075,
+        "vega_1": 0.028592756812090614,
+        "vega_2": 0.02755567204766104,
+        "vega_3": 0.029304728772307175,
+        "vega_4": 0.029438799714356912,
+        "theta": 0.006346598552233771,
+        "rho": 0.004315770204239145,
+        "correlation_12": 0.02784964971459024,
+        "correlation_13": 0.02797277672951842,
+        "correlation_14": 0.030188922318652063,
+        "correlation_23": 0.02701178502993002,
+        "correlation_24": 0.029973255610928364,
+        "correlation_34": 0.03096624947704101
+      },
+      "rmse": {
+        "price": 0.029839540246244422,
+        "delta_1": 0.0007566768578590915,
+        "delta_2": 0.0007075401950049335,
+        "delta_3": 0.0007621542940010641,
+        "delta_4": 0.0008406221058194447,
+        "gamma_11": 3.70218604518507e-05,
+        "gamma_12": 1.803030758474037e-05,
+        "gamma_13": 1.695815422813249e-05,
+        "gamma_14": 1.8664295674931404e-05,
+        "gamma_22": 3.601716098647556e-05,
+        "gamma_23": 1.8033578449716137e-05,
+        "gamma_24": 1.7400095708931783e-05,
+        "gamma_33": 3.301310855857192e-05,
+        "gamma_34": 1.808673916270656e-05,
+        "gamma_44": 4.1824542590644504e-05,
+        "vega_1": 0.20128625949512227,
+        "vega_2": 0.1943083915433684,
+        "vega_3": 0.20722127913957158,
+        "vega_4": 0.20824404084968715,
+        "theta": 0.03511807099699398,
+        "rho": 0.27541635001283205,
+        "correlation_12": 0.03426002578278873,
+        "correlation_13": 0.03450574205809687,
+        "correlation_14": 0.03719150859201194,
+        "correlation_23": 0.03336023571436498,
+        "correlation_24": 0.0371522309897476,
+        "correlation_34": 0.03800788873939795
+      },
+      "seconds": 2.866450599998643
+    },
+    "short_validation": {
+      "score": 0.004839339649346142,
+      "ratios": {
+        "price": 0.00016762657941456438,
+        "delta_1": 0.0004858985496562384,
+        "delta_2": 0.00043410556175550356,
+        "delta_3": 0.0004448280536057648,
+        "delta_4": 0.00048218525891083515,
+        "gamma_11": 0.0032116078120805478,
+        "gamma_12": 0.0032291507664982304,
+        "gamma_13": 0.002877367596640683,
+        "gamma_14": 0.002856563857459076,
+        "gamma_22": 0.0033962702532480543,
+        "gamma_23": 0.002783803779077878,
+        "gamma_24": 0.0029023194380475197,
+        "gamma_33": 0.0027260714693815302,
+        "gamma_34": 0.0029190508377717798,
+        "gamma_44": 0.002895033798545047,
+        "vega_1": 0.009917918252636864,
+        "vega_2": 0.010136237867516391,
+        "vega_3": 0.010057003357575311,
+        "vega_4": 0.010516896248239187,
+        "theta": 0.00336776634926047,
+        "rho": 0.0005641789804723169,
+        "correlation_12": 0.00838703024756687,
+        "correlation_13": 0.007887484123703341,
+        "correlation_14": 0.00985370056700634,
+        "correlation_23": 0.008407559739324957,
+        "correlation_24": 0.010293599004799777,
+        "correlation_34": 0.009460912182150744
+      },
+      "rmse": {
+        "price": 0.0014286555722244408,
+        "delta_1": 9.976017733464104e-05,
+        "delta_2": 9.70625774529405e-05,
+        "delta_3": 9.114254018131978e-05,
+        "delta_4": 9.88579399773774e-05,
+        "gamma_11": 1.954151783143775e-05,
+        "gamma_12": 1.2295847067691345e-05,
+        "gamma_13": 1.0945151821820308e-05,
+        "gamma_14": 1.0974452089480737e-05,
+        "gamma_22": 2.005669933464319e-05,
+        "gamma_23": 1.0856638107024506e-05,
+        "gamma_24": 1.1228846832059442e-05,
+        "gamma_33": 1.6087095555532196e-05,
+        "gamma_34": 1.1312049169504556e-05,
+        "gamma_44": 1.762436779678164e-05,
+        "vega_1": 0.006848698899214614,
+        "vega_2": 0.006917932462451558,
+        "vega_3": 0.007143453582942743,
+        "vega_4": 0.007394482071999351,
+        "theta": 0.05474429193418868,
+        "rho": 0.0012861861247047913,
+        "correlation_12": 0.0011195873023294692,
+        "correlation_13": 0.0010630245852722093,
+        "correlation_14": 0.001312780188750727,
+        "correlation_23": 0.0011234082057341222,
+        "correlation_24": 0.0013736510933814445,
+        "correlation_34": 0.0012716912385392816
+      },
+      "seconds": 2.7983591000011074
+    }
+  },
+  "member_scores": [
+    0.020311042098483667,
+    0.02052641906727949,
+    0.020391159687260036,
+    0.02022461910667259
+  ],
+  "environment": {
+    "python": "3.13.16",
+    "torch": "2.8.0+cpu",
+    "numpy": "2.1.0",
+    "threads": 2,
+    "processor": "Intel64 Family 6 Model 151 Stepping 2, GenuineIntel"
+  },
+  "total_seconds": 217873.86295119982,
+  "history": []
+}

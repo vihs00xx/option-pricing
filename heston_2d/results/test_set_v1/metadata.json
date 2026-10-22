@@ -1,0 +1,430 @@
+{
+  "created_at": "2026-10-19T08:45:37.459580+00:00",
+  "settings": {
+    "protocol_id": "heston_two_stock_test_v1",
+    "stocks": 2,
+    "purpose": "Final assessment of two-stock Heston basket pricing methods, neural and classical. No training, tuning or model selection may use these cases or their references.",
+    "model": "Each stock has its own Heston variance (v0, kappa, theta, xi) and leverage rho_i = corr(dW_i, dZ_i). The variance drivers Z have correlation C (vol_correlation); W_i = rho_i Z_i + sqrt(1 - rho_i^2) Y_i with Y independent of Z and correlation P, so the stock correlation is R = (rho rho') o C + (rbar rbar') o P (src/heston_basket/model.py). The Feller condition is not imposed.",
+    "conventions": "Strike fixed at 100. Time in years; rates, dividend yields and variances are decimals. Vega is d/dv0 per stock; the Heston-parameter and correlation sensitivities are per unit change; theta is calendar time per year; rho per unit rate.",
+    "strike": 100.0,
+    "seed": 20261018,
+    "training_domain": {
+      "moneyness_1": [
+        0.7,
+        1.3
+      ],
+      "moneyness_2": [
+        0.7,
+        1.3
+      ],
+      "tau": [
+        0.05,
+        2.0
+      ],
+      "rate": [
+        -0.02,
+        0.1
+      ],
+      "dividend_1": [
+        0.0,
+        0.06
+      ],
+      "dividend_2": [
+        0.0,
+        0.06
+      ],
+      "v0_1": [
+        0.01,
+        0.36
+      ],
+      "v0_2": [
+        0.01,
+        0.36
+      ],
+      "kappa_1": [
+        0.5,
+        5.0
+      ],
+      "kappa_2": [
+        0.5,
+        5.0
+      ],
+      "theta_1": [
+        0.01,
+        0.36
+      ],
+      "theta_2": [
+        0.01,
+        0.36
+      ],
+      "xi_1": [
+        0.1,
+        1.0
+      ],
+      "xi_2": [
+        0.1,
+        1.0
+      ],
+      "leverage_1": [
+        -0.9,
+        0.3
+      ],
+      "leverage_2": [
+        -0.9,
+        0.3
+      ],
+      "weight": [
+        0.1,
+        0.9
+      ],
+      "vol_correlation": [
+        -0.2,
+        0.9
+      ],
+      "residual_correlation": [
+        -0.5,
+        0.9
+      ],
+      "correlation": [
+        -0.7,
+        0.95
+      ]
+    },
+    "domain_constraints": {
+      "weights": "On the simplex with every weight >= 0.1, uniform: w = 0.1 + 0.8 * D with D ~ Dirichlet(1, 1).",
+      "correlation": "The variance correlation C and the residual correlation P are drawn independently, each with entries uniform on its range and the smallest eigenvalue >= 0.05 (rejection); the stock correlation R follows from the leverages, so R is always valid. The R range above is the attainable range, used to scale network inputs.",
+      "min_eigenvalue": 0.05
+    },
+    "sampling": {
+      "box_parameters": [
+        "moneyness_1",
+        "moneyness_2",
+        "tau",
+        "rate",
+        "dividend_1",
+        "dividend_2",
+        "v0_1",
+        "v0_2",
+        "kappa_1",
+        "kappa_2",
+        "theta_1",
+        "theta_2",
+        "xi_1",
+        "xi_2",
+        "leverage_1",
+        "leverage_2"
+      ],
+      "latin_hypercube": "scipy.stats.qmc.LatinHypercube(d=17, seed=seed + split offset): columns 1-16 scale to the box parameters, column 17 is a uniform whose spacings (0, u, 1) are a uniform Dirichlet(1, 1) draw for the weights.",
+      "correlation_stream": "numpy.random.Generator(PCG64(seed + 100 + split offset)); per case, C's entries then P's entries uniform on their ranges in pair order, each matrix redrawn until its smallest eigenvalue >= 0.05.",
+      "split_offsets": {
+        "interpolation": 0,
+        "short_maturity": 1,
+        "extrapolation": 2
+      },
+      "options": "Calls and puts alternate within each split, starting with a call."
+    },
+    "splits": {
+      "interpolation": {
+        "count": 128,
+        "reason": "inside the training domain"
+      },
+      "short_maturity": {
+        "count": 32,
+        "tau": [
+          0.005,
+          0.05
+        ],
+        "reason": "remaining life below the training domain; tau = 0.005 + 0.045 * (the tau column's uniform)"
+      },
+      "extrapolation": {
+        "cases_per_value": 2,
+        "reason": "one parameter outside the training domain",
+        "stock_rotation": "Single-stock parameters move stock 1 and then stock 2 across the 2 cases of each value.",
+        "values": {
+          "moneyness": [
+            0.55,
+            1.45
+          ],
+          "tau": [
+            2.5,
+            3.0
+          ],
+          "v0": [
+            0.005,
+            0.49
+          ],
+          "kappa": [
+            0.25,
+            7.0
+          ],
+          "theta": [
+            0.005,
+            0.49
+          ],
+          "xi": [
+            0.05,
+            1.3
+          ],
+          "leverage": [
+            -0.95,
+            0.45
+          ],
+          "rate": [
+            -0.04,
+            0.14
+          ],
+          "dividend": [
+            0.09
+          ],
+          "weight": [
+            0.03,
+            0.97
+          ],
+          "vol_correlation": [
+            -0.5,
+            0.97
+          ],
+          "residual_correlation": [
+            -0.8,
+            0.97
+          ]
+        },
+        "notes": "A weight value goes to the affected stock and the other weight is 1 minus it. A correlation value fixes the pair's entry of C or of P (pair 1-2); R follows from the leverages as for every case."
+      },
+      "anchor": {
+        "reason": "hand-chosen regimes",
+        "defaults": {
+          "moneyness": 1.0,
+          "tau": 1.0,
+          "rate": 0.02,
+          "dividends": [
+            0.0,
+            0.01
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "v0": [
+            0.04,
+            0.09
+          ],
+          "kappa": [
+            2.0,
+            1.5
+          ],
+          "theta": [
+            0.04,
+            0.09
+          ],
+          "xi": [
+            0.5,
+            0.6
+          ],
+          "leverage": [
+            -0.7,
+            -0.5
+          ],
+          "vol_correlation": 0.4,
+          "residual_correlation": 0.4
+        },
+        "cases": [
+          {
+            "name": "atm_call",
+            "option": "call"
+          },
+          {
+            "name": "atm_put",
+            "option": "put"
+          },
+          {
+            "name": "itm_call",
+            "option": "call",
+            "moneyness": 1.15
+          },
+          {
+            "name": "otm_put",
+            "option": "put",
+            "moneyness": 1.15
+          },
+          {
+            "name": "short_atm_call",
+            "option": "call",
+            "tau": 0.02
+          },
+          {
+            "name": "feller_violation_call",
+            "option": "call",
+            "kappa": [
+              0.5,
+              0.6
+            ],
+            "theta": [
+              0.02,
+              0.03
+            ],
+            "xi": [
+              1.0,
+              0.9
+            ],
+            "v0": [
+              0.02,
+              0.03
+            ],
+            "note": "2 kappa theta / xi^2 = 0.02 and 0.04"
+          },
+          {
+            "name": "strong_leverage_put",
+            "option": "put",
+            "leverage": [
+              -0.9,
+              -0.9
+            ],
+            "xi": [
+              0.8,
+              0.8
+            ],
+            "moneyness": 1.1
+          },
+          {
+            "name": "near_black_scholes_call",
+            "option": "call",
+            "xi": [
+              0.1,
+              0.1
+            ],
+            "leverage": [
+              0.0,
+              0.0
+            ],
+            "vol_correlation": 0.0,
+            "note": "close to the two-stock Black-Scholes basket"
+          },
+          {
+            "name": "high_v0_short_call",
+            "option": "call",
+            "v0": [
+              0.36,
+              0.3
+            ],
+            "theta": [
+              0.09,
+              0.09
+            ],
+            "tau": 0.05
+          },
+          {
+            "name": "dispersed_variances_call",
+            "option": "call",
+            "v0": [
+              0.01,
+              0.36
+            ],
+            "theta": [
+              0.36,
+              0.01
+            ],
+            "kappa": [
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "name": "high_correlation_call",
+            "option": "call",
+            "vol_correlation": 0.9,
+            "residual_correlation": 0.9
+          },
+          {
+            "name": "negative_residual_correlation_call",
+            "option": "call",
+            "residual_correlation": -0.5,
+            "vol_correlation": 0.0
+          },
+          {
+            "name": "dominant_weight_call",
+            "option": "call",
+            "weights": [
+              0.9,
+              0.1
+            ]
+          },
+          {
+            "name": "long_slow_reversion_put",
+            "option": "put",
+            "kappa": [
+              0.5,
+              0.5
+            ],
+            "tau": 2.0
+          }
+        ]
+      }
+    },
+    "reference": {
+      "method": "Conditional QE simulation (src/heston_basket/engine.py): Andersen's QE scheme with martingale correction for each stock's variance, the variance normals correlated by C; given the variance paths the log returns are Gaussian and the basket option is the conditional estimator of src/pricing (one factor in closed form, the residual factor sampled). Replicated scrambled-Sobol RQMC with a Brownian bridge; analytic conditional Deltas and Gammas; central common-random-number bumps for theta, vega and the parameter and correlation sensitivities; rho = -tau V + tau sum_i S_i dV/dS_i.",
+      "replicates": 16,
+      "dt": 0.015625,
+      "points_ladder": [
+        4096,
+        16384
+      ],
+      "price_standard_error_target": 0.0005,
+      "acceptance": "Climb the points per replicate until the price standard error is at most the target (currency units, strike 100); keep the first level that meets it. A case still above the target at the last level keeps that level and is flagged; no case is replaced.",
+      "seeds": "Production run seed = protocol seed + 10000 + case index; cross-check run seed = protocol seed + 20000 + case index.",
+      "cross_checks": {
+        "independent_run": "A second estimate at the accepted level with its own seed; z = (second - reference) / sqrt(se_1^2 + se_2^2) per quantity; |z| > 5 is flagged for a look.",
+        "time_step": "The production seed with dt doubled (1/32): z = (coarse - reference) / sqrt(se_1^2 + se_2^2) measures the QE time-step bias (the doubled step has about twice the reference's bias).",
+        "bump_halving": "bump_scale 0.5 at the accepted level with the production seed (common random numbers); maximum relative change of the bumped quantities.",
+        "relative_floors": "Relative differences divide by max(|reference|, floor) with floor 1e-7 for Gammas and 1e-4 otherwise.",
+        "use": "Recorded only; never used to change a reference.",
+        "points": "Every cross-check runs at min(accepted points, 16384) per replicate; the z-scores use both runs' standard errors. The bump-halving change is measured against the production seed at the same points."
+      },
+      "check_points": 4096
+    },
+    "separation": {
+      "development_contracts": "experiments/config/reference/dev_contracts_v1.json",
+      "metric": "For a test case and a development contract, the largest over parameters of |difference| / domain width (moneyness, tau, rate, dividends, the Heston parameters, weights and the entries of C and R; widths from the training domain). The reported separation is the minimum over all pairs.",
+      "duplicates": "No test case may equal a development contract (same option and all contract fields within 1e-9)."
+    },
+    "rules": [
+      "Train, tune and select models only on data generated with other seeds; never on these cases or references.",
+      "Development and training data must use seeds other than 20261018 and its offsets and must keep a positive minimum distance from every test case under the separation metric; report that distance.",
+      "Before evaluating any model on these cases, freeze its checkpoint hash, settings and the evaluation protocol.",
+      "Report every method on every split; do not drop cases after seeing results.",
+      "Every reference carries a standard error and a time-step bias check; report method errors next to them, and do not read differences below about three reference standard errors as differences.",
+      "Once any method is evaluated here, the cases are observed; later model changes need a new test set."
+    ],
+    "laptop_edition": "Laptop edition (18 Oct 2026, for the CSE Tech Day poster): the build was cut to fit a laptop before anything was sealed. Points per replicate stop at 16,384 (65,536 for the lab PC) and the cross-checks run at 4,096."
+  },
+  "source_sha256": {
+    "experiments/config/protocol/heston_two_stock_test_v1.json": "eaf44b2d0d190ecea2152c60c56e1d228cb9b27531f838034e30539dd2f78ccc",
+    "experiments/records.py": "18ecc57efc02a8c5457250380862334599eeb4d688cf0062ceacca1e2ebb7704",
+    "experiments/test_set/freeze_test_set.py": "3480cc88ca79b03d95b96483393f955f97cabdae7f64099fbf825b4f10c6e1bb",
+    "src/heston_basket/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/heston_basket/engine.py": "fb33f1b1293966dca3922acccb913d766003bd83bf223379233f3545981d222d",
+    "src/heston_basket/model.py": "30c89030f637c8a82d2c8381a555923e316d0dde94e249a433ee82b4870f6f17",
+    "src/neural/coordinates.py": "98ce7d4c738cb6f5709028aa39fb372ce6020d7d77062a612e4659244d68be75"
+  },
+  "environment": {
+    "python": "3.13.16",
+    "numpy": "2.1.0",
+    "scipy": "1.15.3",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "outputs_sha256": {
+    "cases.csv": "8c9801676ad063a147fafa5aaa68c39cd90dd917d886ecaea181f9fb75d0bbde",
+    "cases.json": "13fa952601a558923416c88615680db756af42fdb40c9a6621032e81f405982f",
+    "protocol.json": "e26fc8fe3dae5c7e92d4f481edef95e0cf819f645b9131cbaeeae578da287aa3",
+    "protocol.sha256": "8a6327a0d7b0ef594343237c0fec0fd6cade4230ecb0b81fbb43221c10cc520b",
+    "reference_checks.csv": "aec65bd1a736e49b0f96324a0e934fba010a9592b0d6ea87008c877aeeac3162",
+    "reference_standard_errors.csv": "3a122f5857b67214feca6067bc47a2deca88304306417ddf864be744834f9d5d",
+    "references.csv": "1bd8cc789e80df15ac7f482b8a0d1a1672406ca79fe37437f22178ae1233573d",
+    "report.md": "be629c524f611a39ddeae82ff38e5e04494643761f611190455e776c259f35d3"
+  },
+  "provenance_sha256": {
+    "experiments/config/reference/dev_contracts_v1.json": "a5568ce7557613a6ad63c7e0ec4a22ac281761f58475d0d166f9dd2daa269cbb"
+  },
+  "reference_build_seconds": 5452.109153800178,
+  "workers": "8 processes, BLAS on one thread"
+}

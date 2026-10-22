@@ -1,0 +1,126 @@
+{
+  "protocol_id": "eight_stock_test_v1",
+  "purpose": "Final assessment of eight-stock pricing methods, neural and classical. No training, tuning or model selection may use these cases or their references.",
+  "conventions": "Strike fixed at 100. Time in years; rates, dividend yields and volatilities are decimals. Vega and correlation sensitivities per unit decimal change; theta is calendar time per year; rho per unit rate.",
+  "strike": 100.0,
+  "seed": 20261017,
+  "training_domain": {
+    "moneyness_1": [0.7, 1.3],
+    "moneyness_2": [0.7, 1.3],
+    "moneyness_3": [0.7, 1.3],
+    "moneyness_4": [0.7, 1.3],
+    "moneyness_5": [0.7, 1.3],
+    "moneyness_6": [0.7, 1.3],
+    "moneyness_7": [0.7, 1.3],
+    "moneyness_8": [0.7, 1.3],
+    "tau": [0.05, 2.0],
+    "volatility_1": [0.1, 0.6],
+    "volatility_2": [0.1, 0.6],
+    "volatility_3": [0.1, 0.6],
+    "volatility_4": [0.1, 0.6],
+    "volatility_5": [0.1, 0.6],
+    "volatility_6": [0.1, 0.6],
+    "volatility_7": [0.1, 0.6],
+    "volatility_8": [0.1, 0.6],
+    "rate": [-0.02, 0.10],
+    "dividend_1": [0.0, 0.06],
+    "dividend_2": [0.0, 0.06],
+    "dividend_3": [0.0, 0.06],
+    "dividend_4": [0.0, 0.06],
+    "dividend_5": [0.0, 0.06],
+    "dividend_6": [0.0, 0.06],
+    "dividend_7": [0.0, 0.06],
+    "dividend_8": [0.0, 0.06],
+    "weight": [0.04, 0.72],
+    "correlation": [-0.5, 0.95]
+  },
+  "domain_constraints": {
+    "weights": "On the simplex with every weight >= 0.04, uniform: w = 0.04 + 0.68 * D with D ~ Dirichlet(1, ..., 1) (eight ones).",
+    "correlation": "Three-factor matrices R = B B' + diag(1 - |b_i|^2): each stock's loadings b_i = (market, style 1, style 2) with market uniform on [0.2, 0.9] and each style loading uniform on [-0.5, 0.5], a row redrawn while |b_i|^2 > 0.95. Every entry then lies in [-0.46, 0.95] and the smallest eigenvalue is at least 0.05. Uniform entries with rejection, as in the four-stock protocol, accept about 1 draw in 20,000 for eight stocks, and the matrices they accept are untypical of stock correlations.",
+    "min_eigenvalue": 0.05,
+    "correlation_model": {"market": [0.2, 0.9], "style": [-0.5, 0.5], "styles": 2, "max_communality": 0.95}
+  },
+  "sampling": {
+    "box_parameters": ["moneyness_1", "moneyness_2", "moneyness_3", "moneyness_4", "moneyness_5", "moneyness_6", "moneyness_7", "moneyness_8", "tau", "volatility_1", "volatility_2", "volatility_3", "volatility_4", "volatility_5", "volatility_6", "volatility_7", "volatility_8", "rate", "dividend_1", "dividend_2", "dividend_3", "dividend_4", "dividend_5", "dividend_6", "dividend_7", "dividend_8"],
+    "latin_hypercube": "scipy.stats.qmc.LatinHypercube(d=33, seed=seed + split offset): columns 1-26 scale to the box parameters, columns 27-33 are seven uniforms whose sorted spacings (0, u(1), ..., u(7), 1) are a uniform Dirichlet(1, ..., 1) draw for the weights.",
+    "correlation_stream": "numpy.random.Generator(PCG64(seed + 100 + split offset)); per case, stock by stock, three uniforms (market, style 1, style 2) scaled to their ranges, the stock's three redrawn while |b_i|^2 > 0.95.",
+    "split_offsets": {"interpolation": 0, "short_maturity": 1, "extrapolation": 2},
+    "options": "Calls and puts alternate within each split, starting with a call.",
+    "replacement_draws": "No case is replaced: RQMC always returns an estimate, and a case above the error target is kept and flagged."
+  },
+  "splits": {
+    "interpolation": {"count": 128, "reason": "inside the training domain"},
+    "short_maturity": {"count": 32, "tau": [0.005, 0.05], "reason": "remaining life below the training domain; tau = 0.005 + 0.045 * (the tau column's uniform)"},
+    "extrapolation": {
+      "cases_per_value": 4,
+      "reason": "one parameter outside the training domain",
+      "stock_rotation": "For the v-th value of a group (v = 0, 1), case k (0-3) moves stock 2k + v + 1, so the two values of a group move all eight stocks.",
+      "correlation_pairs": [[1, 2], [3, 4], [5, 6], [7, 8], [1, 5], [2, 6], [3, 7], [4, 8]],
+      "correlation_min_eigenvalue": 0.01,
+      "values": {
+        "moneyness": [0.55, 1.45],
+        "tau": [2.5, 3.0],
+        "volatility": [0.05, 0.75],
+        "rate": [-0.04, 0.14],
+        "dividend": [0.09],
+        "weight": [0.01, 0.8],
+        "correlation": [-0.7, 0.98]
+      },
+      "notes": "A weight value goes to the affected stock and the other weights are rescaled proportionally to sum to 1. A correlation value fixes the pair listed for that case (pairs 1-4 for the first value, 5-8 for the second). The other loading rows are a domain draw; with u the unit direction of the pair's first row and u2 the unit vector of the second row's component orthogonal to u, the pair's rows become sqrt(h) u and sqrt(h) (a u + sqrt(1 - a^2) u2) with communality h = max(0.95, |value|) and a = value / h, so the pair's entry is the value and the matrix stays a factor matrix. The smallest eigenvalue is checked to be >= 0.01."
+    },
+    "anchor": {
+      "reason": "hand-chosen regimes",
+      "defaults": {"moneyness": 1.0, "tau": 1.0, "volatilities": [0.2, 0.3, 0.4, 0.25, 0.35, 0.15, 0.45, 0.3], "dividends": [0.01, 0.02, 0.0, 0.03, 0.01, 0.02, 0.0, 0.03], "weights": [0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125], "rate": 0.03, "correlation": 0.4},
+      "cases": [
+        {"name": "atm_call", "option": "call"},
+        {"name": "atm_put", "option": "put"},
+        {"name": "itm_call", "option": "call", "moneyness": 1.15},
+        {"name": "otm_call", "option": "call", "moneyness": 0.85},
+        {"name": "itm_put", "option": "put", "moneyness": 0.85},
+        {"name": "otm_put", "option": "put", "moneyness": 1.15},
+        {"name": "short_atm_call", "option": "call", "tau": 0.02},
+        {"name": "short_atm_put", "option": "put", "tau": 0.02},
+        {"name": "high_volatility_call", "option": "call", "volatilities": [0.55, 0.6, 0.5, 0.6, 0.55, 0.6, 0.5, 0.6], "tau": 2.0},
+        {"name": "high_equicorrelation_put", "option": "put", "correlation": 0.85},
+        {"name": "two_sector_call", "option": "call", "correlation": "sectors", "sectors": {"within": 0.8, "across": 0.1, "groups": [[1, 2, 3, 4], [5, 6, 7, 8]]}},
+        {"name": "four_sector_call", "option": "call", "correlation": "sectors", "sectors": {"within": 0.7, "across": 0.2, "groups": [[1, 2], [3, 4], [5, 6], [7, 8]]}},
+        {"name": "negative_equicorrelation_call", "option": "call", "correlation": -0.135, "note": "close to the smallest equicorrelation -1/7 for which eight stocks stay valid; smallest eigenvalue 1 - 7 * 0.135 = 0.055"},
+        {"name": "low_eigenvalue_call", "option": "call", "correlation": "circle", "circle": {"scale": 0.95, "step_degrees": 12}, "note": "0.95 * cos(a_i - a_j) + 0.05 * I with angles 0, 12, ..., 84 degrees: all entries positive, smallest eigenvalue 0.05"},
+        {"name": "dominant_weight_call", "option": "call", "weights": [0.51, 0.07, 0.07, 0.07, 0.07, 0.07, 0.07, 0.07]},
+        {"name": "volatility_dispersion_call", "option": "call", "volatilities": [0.1, 0.6, 0.1, 0.6, 0.1, 0.6, 0.1, 0.6]},
+        {"name": "negative_rate_put", "option": "put", "rate": -0.02, "dividends": [0.04, 0.02, 0.03, 0.01, 0.04, 0.02, 0.03, 0.01]},
+        {"name": "high_dividend_call", "option": "call", "rate": 0.02, "dividends": [0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06]},
+        {"name": "deep_itm_short_put", "option": "put", "tau": 0.05, "moneyness": 0.75}
+      ]
+    }
+  },
+  "reference": {
+    "method": "Conditional estimator of src/pricing (one Gaussian factor in closed form, direction \"volatility\") with replicated scrambled-Sobol RQMC over the seven residual factors and the geometric control variate (rqmc_estimate); analytic conditional Deltas and spot Hessian; central common-random-number bumps for vega, theta, rho and correlation sensitivities. Tensor Gauss-Hermite, the four-stock reference, needs n^7 points and is not feasible.",
+    "direction": "volatility",
+    "replicates": 16,
+    "points_ladder": [16384, 65536, 262144],
+    "price_standard_error_target": 1e-4,
+    "acceptance": "Climb the points per replicate until the price standard error is at most the target (currency units, strike 100); keep the first level that meets it. A case still above the target at the last level keeps that level and is flagged; no case is replaced.",
+    "seeds": "Production run seed = protocol seed + 10000 + case index; cross-check run seed = protocol seed + 20000 + case index.",
+    "cross_checks": {
+      "independent_run": "A second rqmc_estimate at the accepted level with its own seed; z = (second - reference) / sqrt(se_1^2 + se_2^2) per quantity; |z| > 5 is flagged for a look.",
+      "equal_direction": "direction \"equal\" at the accepted level with the production seed; z against the reference as above.",
+      "bump_halving": "bump_scale 0.5 at the accepted level with the production seed (common random numbers); maximum relative change of the bumped quantities.",
+      "relative_floors": "Relative differences divide by max(|reference|, floor) with floor 1e-7 for Gammas and 1e-4 otherwise.",
+      "use": "Recorded only; never used to change a reference."
+    }
+  },
+  "separation": {
+    "development_contracts": "experiments/config/reference/dev_contracts_v1.json",
+    "metric": "For a test case and a development contract, the largest over parameters of |difference| / domain width (moneyness, tau, volatility, rate, dividend, weight and the 28 correlations; widths from the training domain). The reported separation is the minimum over all pairs.",
+    "duplicates": "No test case may equal a development contract (same option and all contract fields within 1e-9)."
+  },
+  "rules": [
+    "Train, tune and select models only on data generated with other seeds; never on these cases or references.",
+    "Development and training data must use seeds other than 20261017 and its offsets and must keep a positive minimum distance from every test case under the separation metric; report that distance.",
+    "Before evaluating any model on these cases, freeze its checkpoint hash, settings and the evaluation protocol.",
+    "Report every method on every split; do not drop cases after seeing results.",
+    "Every reference carries a standard error; report method errors next to the reference error, and do not read differences below about three reference standard errors as differences.",
+    "Once any method is evaluated here, the cases are observed; later model changes need a new test set."
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "family": "pinn",
+  "defaults": {
+    "model": {"layout": "reduced", "output": "plain", "width": 64, "depth": 4},
+    "loss": {"pde": 1.0, "terminal": 1.0, "boundary": 1.0},
+    "sampling": {"focus": 0.7, "focus_z": [-0.6, 0.55], "tau_power": 1.0, "v_power": 1.0, "weight": "none"},
+    "batch": {"collocation": 4096, "terminal": 1024, "boundary": 512, "zero_variance": 512, "variance_cap": 256},
+    "optimizer": {"adam_steps": 15000, "learning_rate": 0.002, "final_learning_rate": 2e-05, "check_every": 500,
+                  "lbfgs_iterations": 0}
+  },
+  "levels": {
+    "P0_vanilla": {
+      "technique": "Textbook PINN: MLP on the raw contract inputs plus a put flag; Heston basket PDE residual in spots, variances and tau on the training box; soft payoff loss; Adam",
+      "model": {"layout": "raw"},
+      "loss": {"pde": 1.0, "terminal": 1.0, "boundary": 0.0}
+    },
+    "P1_reduced": {
+      "technique": "Exact reduction: forward log-moneyness z, forward shares, the variances, tau and the Heston parameters and correlations; driftless PDE; put-call parity; far z boundary at the Levy base"
+    },
+    "P2_hard_payoff": {
+      "technique": "Hard terminal condition: c = Levy + tau * N(z, s, v, sqrt(tau), parameters) with Levy at the expected integrated variances, so the payoff holds exactly and the network learns the correction",
+      "base": "P1_reduced",
+      "model": {"output": "levy"},
+      "loss": {"terminal": 0.0}
+    },
+    "P3_time_balanced": {
+      "technique": "Loss balancing: residual weighted by tau / tau_max against the 1/sqrt(tau) blow-up at the strike, with collocation tau = tau_max u^2",
+      "base": "P2_hard_payoff",
+      "sampling": {"weight": "time", "tau_power": 2.0}
+    },
+    "P4_variance_boundary": {
+      "technique": "Variance boundary (the one-stock Heston P4): the PDE residual with one stock's variance at v = 0, where it degenerates, and c_v = 0 with one stock's variance at v_hi = 1.5; collocation packed near v = 0 (v = v_hi u^2) and sqrt(v + 0.01) as the network input",
+      "base": "P3_time_balanced",
+      "model": {"v_input": "sqrt"},
+      "sampling": {"v_power": 2.0},
+      "loss": {"zero_variance": 1.0, "variance_cap": 1.0}
+    },
+    "P5_adaptive": {
+      "technique": "Residual-based adaptive sampling (RAD): every 1000 steps keep 32,768 of 131,072 candidates drawn with probability proportional to |residual| / mean + 1",
+      "base": "P4_variance_boundary",
+      "sampling": {"rad": {"size": 32768, "pool_factor": 4, "k": 1.0, "c": 1.0, "every": 1000}}
+    },
+    "P6_lbfgs": {
+      "technique": "Quasi-Newton polish: full-batch L-BFGS (strong Wolfe line search) warm-started from P5 on 16,384 RAD-selected collocation points",
+      "base": "P5_adaptive",
+      "warm_start": "P5_adaptive",
+      "optimizer": {"adam_steps": 0, "lbfgs_iterations": 3000, "lbfgs_chunk": 50, "lbfgs_history": 50,
+                    "lbfgs_batch": {"collocation": 16384, "boundary": 2048, "zero_variance": 2048, "variance_cap": 1024}}
+    },
+    "P9_envelope": {
+      "technique": "Enveloped correction: c = Levy + tau * phi(d_2) * N, which fades like the time value away from the strike; trained from a fresh start through the Adam and L-BFGS stages",
+      "base": "P6_lbfgs",
+      "warm_start": null,
+      "model": {"output": "levy_envelope"},
+      "optimizer": {"adam_steps": 15000}
+    },
+    "P10_anchored": {
+      "technique": "Anchored (hybrid) PINN, as in the 1D study: fine-tune P9 with the PDE residual plus simulated prices at 4,096 anchor contracts of the training domain (their own seed), then L-BFGS",
+      "base": "P9_envelope",
+      "warm_start": "P9_envelope",
+      "loss": {"price": 1.0},
+      "data_contracts": 4096,
+      "data_seed": "anchors",
+      "batch": {"data": 1024},
+      "optimizer": {"adam_steps": 5000, "learning_rate": 0.0002, "final_learning_rate": 2e-06, "lbfgs_iterations": 1000,
+                    "lbfgs_batch": {"collocation": 16384, "boundary": 2048, "zero_variance": 2048, "variance_cap": 1024, "data": 4096}}
+    },
+    "P11_permutation": {
+      "technique": "Stock-permutation augmentation: every anchor draw is presented under a random relabelling of the stocks (shares, variances, Heston parameters and both correlations moved together), under which the price is unchanged; otherwise as P10, fine-tuned from P9",
+      "base": "P10_anchored",
+      "warm_start": "P9_envelope",
+      "augment": "permutation"
+    }
+  }
+}
