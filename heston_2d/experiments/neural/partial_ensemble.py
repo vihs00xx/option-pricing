@@ -1,4 +1,4 @@
-"""Average whichever seeds of a level have finished, outside the ladder (for a deadline).
+"""Average whichever seeds of a level have finished, outside the ladder (for interim results).
 
 Usage: python -m experiments.neural.partial_ensemble --level D8_envelope --seeds 0 1 2 [--name D9_partial]
 
@@ -45,7 +45,7 @@ def main():
     save_model(model, out, dict(level=name, seed=0))
     summary = dict(level=name, members_of=args.level, seeds=args.seeds,
                    members={relative(p): digest(p) for p in paths}, scores=scores,
-                   note="Partial ensemble built outside the ladder for a deadline; the ladder's D9_ensemble uses all four seeds.")
+                   note="Partial ensemble built outside the ladder from the seeds finished so far; the ladder's D9_ensemble uses all four seeds.")
     out.with_suffix(".json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
     print(f"Saved {relative(out)}")
 

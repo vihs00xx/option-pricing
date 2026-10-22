@@ -2,8 +2,8 @@
 
 Run from 8d/: python -m experiments.test_set.freeze_test_set [--workers 8]
 The references are RQMC estimates with standard errors (see the protocol's "reference"),
-a few minutes per case and process at the middle points level, so give it every core of
-the lab PC. Per-case results go to artifacts/test_set_v1_build/cases.jsonl as they
+a few minutes per case and process at the middle points level, so give it every available
+core. Per-case results go to artifacts/test_set_v1_build/cases.jsonl as they
 finish, so an interrupted build resumes; the sealed folder is written only at the end.
 """
 

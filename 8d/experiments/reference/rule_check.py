@@ -17,7 +17,7 @@ Run from 8d/: python -m experiments.reference.rule_check [--workers 8]
 then python -m experiments.reference.make_report. Rows are appended to
 results/reference_check_v1/*.jsonl as they finish, so an interrupted run resumes.
 Check the report before training: the evaluation rule's error should be well below the
-networks' validation errors, and the test-set ladder's cost should fit the lab PC.
+networks' validation errors, and the test-set ladder's cost should fit the available compute.
 """
 
 from . import common  # noqa: F401  (pins BLAS threads before NumPy)

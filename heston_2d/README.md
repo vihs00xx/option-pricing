@@ -1,12 +1,12 @@
-# Two-stock Heston baskets: code for the lab PC
+# Two-stock Heston baskets
 
-PINN and DeepONet pricers for European arithmetic basket options on two stocks, each with its own
-Heston variance, with the price and every Greek: Deltas, Gammas, theta, rate rho, vega (d/dv0)
-and the sensitivities to every stock's kappa, theta, xi and leverage and to both correlations.
-It combines the four-stock study (`../4d`: reduced coordinates, Levy base, ladders, scripts) with
-the one-stock Heston study (`../heston`: QE simulation, variance boundary). `../heston_4d` is the
-same code with a four-stock protocol. Nothing has been run at full size yet: no test set is sealed
-and no network is trained.
+This study prices European arithmetic basket options on two stocks, each with its own Heston
+variance, with PINNs and DeepONets. Each model returns the price and all 19 Greeks: Deltas, Gammas,
+theta, rate rho, vega (d/dv0), the sensitivities to each stock's kappa, theta, xi and leverage, and
+the sensitivities to both correlations. The study combines the reduced coordinates, Levy base and
+ablation ladders of the four-stock study (`../4d`) with the QE simulation and variance boundary of
+the one-stock Heston study (`../heston`). `../heston_4d` runs the same code with a four-stock
+protocol, because the protocol alone sets the number of stocks.
 
 ## Model
 
@@ -27,33 +27,58 @@ one-stock Lewis reference in `../heston` and against the Black-Scholes basket as
 sealed test set uses replicated Sobol RQMC at QE step 1/64 with a standard error for every value,
 an independent second run, a doubled-step bias check and a bump-halving check.
 
-## Run order on the lab PC (from this folder)
+## Test set
+
+The [sealed test set](results/test_set_v1/report.md) has 220 cases: 128 interpolation, 32 short
+maturity (tau 0.005 to 0.05), 46 one-parameter extrapolation and 14 anchor regimes. The Feller
+condition is not imposed. Each case's points per replicate rise from 4,096 to 16,384 until the price
+standard error is at most 5e-4 (strike 100). Cases still above that target are flagged, not replaced.
+An independent second run gives RMS z = 1.04 over all 4,400 values.
+
+## Results
+
+The score is the mean over the price and every Greek of RMSE / RMS(reference). The noise floor is
+the same ratio for the references' own standard errors (0.0045). Below it, no method can be told
+apart from the reference.
+
+| Method | Score | Price RMSE | Seconds per contract |
+|---|---:|---:|---:|
+| QE-RQMC, 8 x 1,024 Sobol paths | 0.028 | 0.0078 | 1.6 |
+| QE Monte Carlo, 8 x 1,024 paths | 0.082 | 0.100 | 1.5 |
+| DeepONet `D9_ensemble` (four seeds) | 0.112 | 0.110 | 5.5e-4 |
+| PINN `P11_permutation` | 0.139 | 0.116 | 1.1e-4 |
+| PINN `P10_anchored` | 0.144 | 0.137 | 1.0e-4 |
+| DeepONet `D0_vanilla` | 0.540 | 2.59 | 7.1e-5 |
+| PINN `P0_vanilla` | 0.698 | 5.40 | 3.2e-5 |
+
+- **Ablations.** The ladders reduce the score by a factor of about 5 compared with the textbook
+  networks. As with four Black–Scholes stocks, the hard payoff constraint gives the largest single
+  gain. For the PINN, L-BFGS refinement (`P6`) and anchoring (`P10`) also give large gains.
+- **Against simulation.** The networks are about 3,000 to 15,000 times faster per contract than
+  the simulation baselines. Their price error is similar to that of QE Monte Carlo with 8,192 paths,
+  but their Greek errors are larger, so their overall score is worse.
+- **By split.** Interpolation is the best split for the networks (0.094 for `D9`). Short maturities
+  and anchors are the hardest (0.20 and 0.18).
+
+The full table, with every level and the scores by split, is in
+[results/neural/test_v1/report.md](results/neural/test_v1/report.md).
+
+## Reproduce
+
+Run from this folder:
 
 ```bash
 pip install -r requirements.txt
-python -m pytest tests -q                                       # about 1 minute
+python -m pytest tests -q
 python -m experiments.reference.reference_check --workers 8     # Phase 0, development contracts only
 python -m experiments.reference.reference_check --report        # results/reference_check_v1/report.md
 python -m experiments.test_set.freeze_test_set --workers 8      # seals results/test_set_v1
 python -m experiments.verify results/test_set_v1
 python -m experiments.neural.run_ladders --threads 8            # every ladder level, one at a time
+python -m experiments.evaluate_test
 ```
 
-Read the Phase 0 report before sealing the test set: the time-step table should show the QE bias at
-1/64 below the price standard-error target, and the points ladder how long each case takes. Before
-training, check that the evaluation references' noise floor (recorded in every level's summary) is
-well below the networks' errors; raise `reference.evaluation` in `experiments/config/neural/study.json`
-if not.
-
-## Expected cost (measured on the laptop, 4 threads; scale for the lab PC)
-
-| Step | Cost |
-|---|---|
-| Test-set reference | about 100 s per run of 16 x 16,384 paths with every Greek; a case climbs to at most 65,536 points and adds three check runs, so about 10 to 30 minutes per case and process |
-| Training labels | 0.017 s per contract: about 9 minutes for 32,768 contracts |
-| Monitor and validation references | 2.4 s per contract: about 40 minutes for 1,024 contracts on one process, spread over every core |
-| PINN Adam step (P5) | 0.8 s: about 3 hours per 15,000-step level |
-| Differential DeepONet step (D3) / physics-informed (D4) | 0.13 s / 0.6 s: 0.5 / 2.7 hours per level |
+An interrupted level resumes from its last check.
 
 ## Layout
 

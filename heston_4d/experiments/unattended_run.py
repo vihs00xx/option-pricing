@@ -1,9 +1,9 @@
 """Run this folder's whole study on one machine, unattended: training and the references side by side.
 
-Usage (from this folder): python -m experiments.laptop_run --levels D0_vanilla,D1_reduced,... --stop-at 2026-10-19T10:00
+Usage (from this folder): python -m experiments.unattended_run --levels D0_vanilla,D1_reduced,... --stop-at 2026-10-19T10:00
     [--threads 6] [--workers 3] [--phase0-limit 10]
 
-Two chains run at once and log to artifacts/laptop_run.log:
+Two chains run at once and log to artifacts/unattended_run.log:
 
 1. the training ladders (run_ladders with --only in the given priority order, one level at a time,
    no new level after --stop-at);
@@ -11,7 +11,7 @@ Two chains run at once and log to artifacts/laptop_run.log:
    report, then the test-set build and its verification.
 
 While it runs, the process asks Windows not to idle-sleep (SetThreadExecutionState; the
-request ends with the process and changes no setting). A closed lid still sleeps.
+request ends with the process and changes no setting).
 """
 
 import argparse
@@ -22,7 +22,7 @@ from datetime import datetime
 
 from experiments.records import ROOT
 
-LOG = ROOT/"artifacts"/"laptop_run.log"
+LOG = ROOT/"artifacts"/"unattended_run.log"
 _lock = threading.Lock()
 
 
@@ -45,7 +45,7 @@ def stay_awake():
 def chain(name, commands):
     for args in commands:
         log(f"{name}: start {' '.join(args)}")
-        out = (ROOT/"artifacts"/f"laptop_{name}.out").open("a", encoding="utf-8")
+        out = (ROOT/"artifacts"/f"unattended_{name}.out").open("a", encoding="utf-8")
         code = subprocess.call([sys.executable, *args], cwd=ROOT, stdout=out, stderr=subprocess.STDOUT)
         log(f"{name}: exit {code} {' '.join(args)}")
         if code != 0:

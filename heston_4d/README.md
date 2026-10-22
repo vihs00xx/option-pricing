@@ -1,12 +1,14 @@
-# Four-stock Heston baskets: code for the lab PC
+# Four-stock Heston baskets
 
-PINN and DeepONet pricers for European arithmetic basket options on four stocks, each with its own
-Heston variance, with the price and every Greek: Deltas, Gammas, theta, rate rho, vega (d/dv0)
-and the sensitivities to every stock's kappa, theta, xi and leverage and to both correlations.
-It combines the four-stock study (`../4d`: reduced coordinates, Levy base, ladders, scripts) with
-the one-stock Heston study (`../heston`: QE simulation, variance boundary). `../heston_2d` is the
-same code with a two-stock protocol; the number of stocks is set by the protocol alone. Nothing has been run at full size yet: no test set is sealed
-and no network is trained.
+This study prices European arithmetic basket options on four stocks, each with its own Heston
+variance, with PINNs and DeepONets. Each model returns the price and every Greek: Deltas, Gammas,
+theta, rate rho, vega (d/dv0), the sensitivities to each stock's kappa, theta, xi and leverage, and
+the sensitivities to both correlation matrices. It uses the same code as `../heston_2d` with a
+four-stock protocol.
+
+**Status.** The Phase 0 reference check is complete
+([report](results/reference_check_v1/report.md)). The test-set build and the ladder training are in
+progress, and results will be added here when the test set is sealed and scored.
 
 ## Model
 
@@ -27,16 +29,24 @@ one-stock Lewis reference in `../heston` and against the Black-Scholes basket as
 sealed test set uses replicated Sobol RQMC at QE step 1/64 with a standard error for every value,
 an independent second run, a doubled-step bias check and a bump-halving check.
 
-## Run order on the lab PC (from this folder)
+## Test set
+
+The four-stock test set has 266 cases: 128 interpolation, 32 short maturity, 92 one-parameter
+extrapolation and 14 anchor regimes. Its seed is 20261019.
+
+## Reproduce
+
+Run from this folder:
 
 ```bash
 pip install -r requirements.txt
-python -m pytest tests -q                                       # about 2 minutes
+python -m pytest tests -q
 python -m experiments.reference.reference_check --workers 8     # Phase 0, development contracts only
 python -m experiments.reference.reference_check --report        # results/reference_check_v1/report.md
 python -m experiments.test_set.freeze_test_set --workers 8      # seals results/test_set_v1
 python -m experiments.verify results/test_set_v1
 python -m experiments.neural.run_ladders --threads 8            # every ladder level, one at a time
+python -m experiments.evaluate_test
 ```
 
 Read the Phase 0 report before sealing the test set: the time-step table should show the QE bias at
@@ -45,7 +55,7 @@ training, check that the evaluation references' noise floor (recorded in every l
 well below the networks' errors; raise `reference.evaluation` in `experiments/config/neural/study.json`
 if not.
 
-## Expected cost (measured on the laptop, 4 threads; scale for the lab PC)
+## Computational cost (measured with 4 CPU threads)
 
 | Step | Cost |
 |---|---|
@@ -54,9 +64,6 @@ if not.
 | Monitor and validation references | 9 s per contract: about 2.5 hours for 1,024 contracts on one process, spread over every core |
 | PINN Adam step (P5) | 1.9 s: about 8 hours per 15,000-step level |
 | Differential DeepONet step (D3) / physics-informed (D4) | 0.35 s / 1.9 s: 1.4 / 8 hours per level |
-
-The four-stock test set has 266 cases (128 interpolation, 32 short maturity, 92 extrapolation,
-14 anchors); its seed is 20261019.
 
 ## Layout
 

@@ -26,7 +26,7 @@ Neural times are in batches of 4,096 contracts. On the 128 cases inside the
 training domain the price RMSE is 0.015 for the PINN and 0.0088 for the
 DeepONet, both below plain Monte Carlo with 1,000,000 paths (0.020); most of
 the neural error above comes from correlations and volatilities outside the
-training domain. Training took hours on a laptop CPU, so the networks pay off
+training domain. Training took hours of CPU time, so the networks pay off
 only when many contracts are priced; ADI is the most accurate but works for two
 stocks only. Full ladders, splits, Greek validation and
 limits are in the [neural study report](results/neural/pinn_deeponet_v1/report.md).
