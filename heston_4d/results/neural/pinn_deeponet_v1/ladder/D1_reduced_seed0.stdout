@@ -1,0 +1,66 @@
+D1_reduced_seed0: Exact reduction: branch on the Heston parameters and both correlations, trunk on (z, s, v, tau); put-call parity
+note: 3 other training run(s) active; this run's seconds are not an idle-machine training time
+parameters: 35777
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Python313\Lib\multiprocessing\pool.py", line 125, in worker
+    result = (True, func(*args, **kwds))
+                    ~~~~^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\multiprocessing\pool.py", line 48, in mapstar
+    return list(map(*args))
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\src\neural\reference.py", line 60, in _estimate
+    e = heston_estimate(c, settings["points"], settings["replicates"], seed, dt=settings["dt"],
+                        greeks=settings.get("greeks", True), sampler=settings.get("sampler", "sobol"))
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\src\heston_basket\engine.py", line 321, in heston_estimate
+    replicates.append(path_values(c, U, increments, greeks, bump_scale).mean(axis=0))
+                      ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\src\heston_basket\engine.py", line 279, in path_values
+    for name, field, index, step in parameter_bumps(c, bump_scale):
+                                    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\src\heston_basket\model.py", line 216, in parameter_bumps
+    if _valid(c.bumped(field, step, index)) and _valid(c.bumped(field, -step, index)):
+                                                       ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\src\heston_basket\model.py", line 149, in bumped
+    return self.changed(**{name: tuple(values)})
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\src\heston_basket\model.py", line 135, in changed
+    return replace(self, **kwargs)
+  File "C:\Python313\Lib\dataclasses.py", line 1596, in replace
+    return _replace(obj, **changes)
+  File "C:\Python313\Lib\dataclasses.py", line 1630, in _replace
+    return self.__class__(**changes)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "<string>", line 17, in __init__
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\src\heston_basket\model.py", line 103, in __post_init__
+    raise ValueError(f"{name} must be positive definite")
+ValueError: residual correlation P must be positive definite
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\experiments\neural\train.py", line 123, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\experiments\neural\train.py", line 93, in main
+    trainer = Trainer(model, settings, box, strike, evaluation_set("monitor"), data, log)
+                                                    ~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\experiments\neural\common.py", line 165, in evaluation_set
+    return _cached(f"{kind}_{count}_{seed}", identity, build)
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\experiments\neural\common.py", line 138, in _cached
+    value = dict(build(), identity=identity)
+                 ~~~~~^^
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\experiments\neural\common.py", line 161, in build
+    values, errors = reference_values(STOCKS, x, put, rule, normals, workers)
+                     ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shiva\Documents\MySpace\option-pricing\heston_4d\src\neural\reference.py", line 76, in reference_values
+    rows = pool.map(_estimate, tasks, chunksize=max(1, len(tasks)//(8*workers)))
+  File "C:\Python313\Lib\multiprocessing\pool.py", line 367, in map
+    return self._map_async(func, iterable, mapstar, chunksize).get()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Python313\Lib\multiprocessing\pool.py", line 774, in get
+    raise self._value
+ValueError: residual correlation P must be positive definite
