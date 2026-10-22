@@ -2,7 +2,7 @@
 
 Run from this folder: python -m experiments.test_set.freeze_test_set [--workers 8]
 The references are conditional QE-RQMC estimates with standard errors (see the protocol's
-"reference"); give the build every core of the lab PC. Per-case results go to
+"reference"); give the build every available core. Per-case results go to
 artifacts/test_set_v1_build/cases.jsonl as they finish, so an interrupted build resumes;
 the sealed folder is written only at the end. The number of stocks is the protocol's.
 """

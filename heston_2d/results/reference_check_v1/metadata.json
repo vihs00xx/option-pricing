@@ -395,11 +395,11 @@
       "Every reference carries a standard error and a time-step bias check; report method errors next to them, and do not read differences below about three reference standard errors as differences.",
       "Once any method is evaluated here, the cases are observed; later model changes need a new test set."
     ],
-    "laptop_edition": "Laptop edition (18 Oct 2026, for the CSE Tech Day poster): the build was cut to fit a laptop before anything was sealed. Points per replicate stop at 16,384 (65,536 for the lab PC) and the cross-checks run at 4,096."
+    "reduced_build": "Reduced build, fixed before anything was sealed. Points per replicate stop at 16,384 (65,536 in the full protocol) and the cross-checks run at 4,096."
   },
   "source_sha256": {
     "experiments/config/neural/study.json": "e858bf0c3a653e270e648e0c34599e595a30463c73c8787c811e1b4dbe0d4ce2",
-    "experiments/config/protocol/heston_two_stock_test_v1.json": "eaf44b2d0d190ecea2152c60c56e1d228cb9b27531f838034e30539dd2f78ccc",
+    "experiments/config/protocol/heston_two_stock_test_v1.json": "61cd233f98e4e7a6da5c8f683157c3d4c82609dad6b2e458ab43b0ec4c27f760",
     "experiments/config/reference/dev_contracts_v1.json": "a5568ce7557613a6ad63c7e0ec4a22ac281761f58475d0d166f9dd2daa269cbb",
     "experiments/reference/reference_check.py": "f0b0bec8f2c7e5f80e79761fa66c3bea0e38718387b2ddf38c48b1ce97758e51",
     "src/heston_basket/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",

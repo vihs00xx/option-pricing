@@ -509,11 +509,11 @@
       "Every reference carries a standard error and a time-step bias check; report method errors next to them, and do not read differences below about three reference standard errors as differences.",
       "Once any method is evaluated here, the cases are observed; later model changes need a new test set."
     ],
-    "laptop_edition": "Laptop edition (18 Oct 2026, for the CSE Tech Day poster): the build was cut to fit a laptop before anything was sealed. Points per replicate are 4,096 (16,384 for the lab PC), and the split sizes are 64 interpolation cases and 2 extrapolation cases per value (128 and 4 for the lab PC)."
+    "reduced_build": "Reduced build, fixed before anything was sealed. Points per replicate are 4,096 (16,384 in the full protocol), and the split sizes are 64 interpolation cases and 2 extrapolation cases per value (128 and 4 in the full protocol)."
   },
   "source_sha256": {
     "experiments/config/neural/study.json": "94702744936d99f1b2a459d09fff868ec5d4fa3b103799462aff6c0e70739127",
-    "experiments/config/protocol/heston_four_stock_test_v1.json": "68db0ce9228979be7103f6da73b108ffdb112ef74e3fc777731c52d841f2b18f",
+    "experiments/config/protocol/heston_four_stock_test_v1.json": "ce3cbaea711dc17092d5ffa28c50e99fa03bfb3b8b4ace0f6af3fc7a1a21219d",
     "experiments/config/reference/dev_contracts_v1.json": "41f56e3c6a8eb354375959c178c05beb6ab2c121fb84c8c1f3b7aa3f44241a59",
     "experiments/reference/reference_check.py": "f0b0bec8f2c7e5f80e79761fa66c3bea0e38718387b2ddf38c48b1ce97758e51",
     "src/heston_basket/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",

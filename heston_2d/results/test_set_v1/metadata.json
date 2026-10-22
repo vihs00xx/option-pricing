@@ -395,12 +395,12 @@
       "Every reference carries a standard error and a time-step bias check; report method errors next to them, and do not read differences below about three reference standard errors as differences.",
       "Once any method is evaluated here, the cases are observed; later model changes need a new test set."
     ],
-    "laptop_edition": "Laptop edition (18 Oct 2026, for the CSE Tech Day poster): the build was cut to fit a laptop before anything was sealed. Points per replicate stop at 16,384 (65,536 for the lab PC) and the cross-checks run at 4,096."
+    "reduced_build": "Reduced build, fixed before anything was sealed. Points per replicate stop at 16,384 (65,536 in the full protocol) and the cross-checks run at 4,096."
   },
   "source_sha256": {
-    "experiments/config/protocol/heston_two_stock_test_v1.json": "eaf44b2d0d190ecea2152c60c56e1d228cb9b27531f838034e30539dd2f78ccc",
+    "experiments/config/protocol/heston_two_stock_test_v1.json": "61cd233f98e4e7a6da5c8f683157c3d4c82609dad6b2e458ab43b0ec4c27f760",
     "experiments/records.py": "18ecc57efc02a8c5457250380862334599eeb4d688cf0062ceacca1e2ebb7704",
-    "experiments/test_set/freeze_test_set.py": "3480cc88ca79b03d95b96483393f955f97cabdae7f64099fbf825b4f10c6e1bb",
+    "experiments/test_set/freeze_test_set.py": "01a8b526e8988d6749ed3a533fbb48417d32d804951eb463a0e0eeb406da82cc",
     "src/heston_basket/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "src/heston_basket/engine.py": "fb33f1b1293966dca3922acccb913d766003bd83bf223379233f3545981d222d",
     "src/heston_basket/model.py": "30c89030f637c8a82d2c8381a555923e316d0dde94e249a433ee82b4870f6f17",
@@ -415,8 +415,8 @@
   "outputs_sha256": {
     "cases.csv": "8c9801676ad063a147fafa5aaa68c39cd90dd917d886ecaea181f9fb75d0bbde",
     "cases.json": "13fa952601a558923416c88615680db756af42fdb40c9a6621032e81f405982f",
-    "protocol.json": "e26fc8fe3dae5c7e92d4f481edef95e0cf819f645b9131cbaeeae578da287aa3",
-    "protocol.sha256": "8a6327a0d7b0ef594343237c0fec0fd6cade4230ecb0b81fbb43221c10cc520b",
+    "protocol.json": "3136980ee8d336faf97bda30ab9de1a55a048aff13abeef01231fd750cf68d09",
+    "protocol.sha256": "2caf23446f228a2f57f839de5733a9fb64036cd2ecce7765f712a7f70d5b8add",
     "reference_checks.csv": "aec65bd1a736e49b0f96324a0e934fba010a9592b0d6ea87008c877aeeac3162",
     "reference_standard_errors.csv": "3a122f5857b67214feca6067bc47a2deca88304306417ddf864be744834f9d5d",
     "references.csv": "1bd8cc789e80df15ac7f482b8a0d1a1672406ca79fe37437f22178ae1233573d",

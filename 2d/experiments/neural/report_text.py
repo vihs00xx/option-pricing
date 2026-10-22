@@ -359,7 +359,7 @@ Run from the `2d/` folder (Windows, Python 3.13.3, NumPy 2.1.0, SciPy 1.15.3, Py
     python -m experiments.neural.verify_results     # hashes, then re-evaluates the frozen pricers
     python -m pytest tests -q
 
-To retrain (hours on a laptop CPU; each level resumes if interrupted), in ladder order:
+To retrain (hours of CPU time; each level resumes if interrupted), in ladder order:
 
     python -m experiments.neural.train P0_vanilla    # likewise every P* and D* level
     python -m experiments.neural.train D8_envelope --seed 1    # and seeds 2 and 3
